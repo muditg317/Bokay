@@ -42,7 +42,7 @@ Sign off: 5am oof
 ## TODO
 1. Research language architecture/creation
 
-## Language Status
+## Language Status/Changes
 - Name: Bokay
   - Suggestion from Adithya :)
 - Base compiler: C++

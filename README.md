@@ -11,4 +11,9 @@ The name is just funny because I love saying 🅱️okay.
 ## Language Plans
 - [ ] None yet! (Check out the devlogs)
 
-
+## Language Design
+- Name: Bokay
+- Base compiler: C++
+  - Compiled with make
+- Self-hosted
+- Typing: static
