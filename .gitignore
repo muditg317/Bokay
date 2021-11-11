@@ -1,0 +1,14 @@
+# related to compile.cpp
+*.o
+*.out
+compile
+
+# VS Code
+.vscode
+
+# devlogs
+devlogs/000 - DevLog Template.md
+
+# misc.
+test
+*.bokay

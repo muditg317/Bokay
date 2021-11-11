@@ -1,0 +1,8 @@
+# compilation
+obj
+bokay
+
+**/*.o
+**/*.out
+**/*.dot
+**/*.s
