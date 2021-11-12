@@ -7,10 +7,12 @@ Sign off: 5am hopefully
 </div>
 
 ## Goals
-- Start on the compiler - define its usage
-  - Learn/implement file i/o
-- Research language writing
-- Convert to cmake with CMakeLists
+- [ ] Start on the compiler - define its usage
+  - Not done at all, kicked until later
+- [x] Learn/implement file i/o
+- [ ] Research language writing
+  - Also kicked until later
+- [x] Convert to cmake with CMakeLists
 
 ## Struggles
 - I don't understand CMake, so I'll stick with `make` with Makefile.
@@ -34,10 +36,17 @@ Sign off: 5am hopefully
 ### CMakeLists.txt Learnings
 - Install vcpkg to install packages automatically
   - add the toolchain file to the CMakeList configuration args
+- add_test can take in generator params for a target executable
 
+## Log
+- `Makefile` has been replaced by a series of `CMakeLists.txt`
+  - Notes and learnings are detailed above.
+- Rudimentary testing workflow has been made that can be run on any engine
+  - `test-engine.cpp` is universal
+  - `tests/CMakeLists.txt` provides engine targets to the tester
 
 ## TODO
-1. Work on/debug CTest workflow
+1. Add test case files to the tester (yay TDD!)
 
 ## Language Status/Changes
 - None today!
@@ -61,3 +70,4 @@ Sign off: 5am hopefully
 - Ay I think most of the `CMakeLists.txt` stuff is working!
 - Trying to get testing working and I'm sad
   - Might be working with the `engine-tests.hpp`, but working out kinks/reliability with output checking
+- The tests work and can accept an engine target as param! lez go!
