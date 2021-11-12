@@ -1,7 +1,5 @@
-# related to compile.cpp
-*.o
-*.out
-compile
+# related to main.cpp and compilation
+build
 
 # VS Code
 .vscode
