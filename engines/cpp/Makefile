@@ -20,7 +20,7 @@ CFLAGS += -Werror # Make all warnings into errors
 CFLAGS += -O0 # Optimize even more. GCC performs nearly all supported optimizations that do not involve a space-speed tradeoff.
 CFLAGS += -g # Generate debugging information
 
-CFLAGS += -I$(INC) # Add header files to include path for c compilation
+CFLAGS += $(patsubst %,-I%,$(INC)) # Add header files to include path for c compilation
 
 LDFLAGS +=
 
@@ -43,6 +43,7 @@ $(EXECUTABLE): $(OBJECTS) | $(BIN)
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
 $(OBJ)/%.o: $(SRC)/%.cpp | $(OBJ)
+	clang-tidy $< -fix -fix-errors -- $(CFLAGS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(BIN) $(OBJ):
