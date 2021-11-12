@@ -10,6 +10,7 @@ if(EXISTS "${LOC_PATH}")
 endif()
 
 ### Configure testing
+set_property(GLOBAL PROPERTY CTEST_TARGETS_ADDED 1)
 include(CTest)
 enable_testing()
 
@@ -49,7 +50,7 @@ endfunction()
 ##################################################
 # Add various inclusions `include([lib])`
 # FetchContent added in CMake 3.11, downloads during the configure step
-include(FetchContent)
+# include(FetchContent)
 # End inclusions
 ##################################################
 

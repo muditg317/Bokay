@@ -3,26 +3,44 @@
 November 11th, 2021
 
 Sign on: 3pm\
-Sign off: --
+Sign off: 5am hopefully
 </div>
 
 ## Goals
 - Start on the compiler - define its usage
   - Learn/implement file i/o
 - Research language writing
+- Convert to cmake with CMakeLists
 
 ## Struggles
 - I don't understand CMake, so I'll stick with `make` with Makefile.
+  - find_package(Boost)
+- Getting the testing to work is hard
+  - Trying to avoid the double coding (one set of test cases that can be run on either engine)
 
 ## Notes
-### None
-- none yet
+### Chat with Pulkit
+- Flex and Bison are great for the task
+  - flex - lexer
+  - bison - build abstract syntax tree
+  - Won't do these since they remove some of the exciting parts of development.
+- `clang` is a great alternative to `gcc`
+- Using `cmake` might be wise compared to `make`/Makefile
+### Desired Testing Workflow
+- Compile C++ engine
+- Test C++ engine on `ROOT/tests`
+- Compile Bokay engine with C++ compiler
+- Test Bokay engine on `ROOT/tests`
+### CMakeLists.txt Learnings
+- Install vcpkg to install packages automatically
+  - add the toolchain file to the CMakeList configuration args
+
 
 ## TODO
-1. 
+1. Work on/debug CTest workflow
 
 ## Language Status/Changes
-- 
+- None today!
 
 ## Unorganized thoughts as they came
 - Hm, maybe I should use cmake not make
@@ -40,3 +58,6 @@ Sign off: --
   - Test Bokay engine on `ROOT/tests`
 - Trouble with find_package(Boost)
   - It's working, I give up on fixing the cmake warning
+- Ay I think most of the `CMakeLists.txt` stuff is working!
+- Trying to get testing working and I'm sad
+  - Might be working with the `engine-tests.hpp`, but working out kinks/reliability with output checking
