@@ -1,9 +1,9 @@
-# DevLog 000 - Adding Tests
+# DevLog 003 - Adding Tests
 <div align="right">
 November 12th, 2021
 
-Sign on: 2pm\
-Sign off: XXpm/am
+Sign on: 2:30pm\
+Sign off: 11:30pm
 </div>
 
 ## Goals
@@ -17,14 +17,14 @@ Sign off: XXpm/am
 ### No major stuff
 
 ## Log
-- 
-
-## TODO
-1. Numbered list
-
-## Language Status/Changes
 - Test running with file i/o works with `ProgramOutput` to store the compilation and execution output.
 - Tests can be updated with `--update` on `test-engine`.
+
+## TODO
+1. Start researching language design and start working on `engines/cpp`.
+
+## Language Status/Changes
+- None today!
 
 ## Unorganized thoughts as they came
 - `tests` folder will have a series of `.bokay` files in it
