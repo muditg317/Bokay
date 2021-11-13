@@ -8,39 +8,63 @@
 #include <string>
 #include <fmt/format.h>
 #include <array>
+#include <fstream>
 
-std::string engine = ""; // Some user variable you want to be able to set
+#include <boost/filesystem.hpp>
 
-std::string exec(std::string cmd) {
-    std::array<char, 128> buffer;
-    std::string result;
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
-    if (!pipe) {
-        throw std::runtime_error("popen() failed!");
-    }
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
-    }
-    return result;
+#include "test-utils.hpp"
+
+#include "test-cases.hpp"
+
+TestingOptions options;
+
+ProgramOutput runEngineOn(std::string testName) {
+  std::string compileOut = engineCompile(options, "", testName);
+  std::cout << "compiled! -- \n" << compileOut << std::endl;
+  std::string runOut = runProgram(options, "", testName, "");
+  std::cout << "run! -- \n" << runOut << std::endl;
+  return ProgramOutput{compileOut, runOut};
 }
 
-TEST_CASE("run engine", "[main]") {
-  std::string execResult = exec(engine);
-  std::string expected = fmt::format("1 args:\t{}\t\n", engine);
-  REQUIRE_THAT(execResult, Catch::Matchers::Equals(expected));
+void updateTest(std::string testName) {
+  ProgramOutput testOutput = runEngineOn(testName);
+  boost::filesystem::path expectedOutputPath(testOutputFile(options, testName));
+  std::cout << "write test output to file: " << expectedOutputPath << std::endl;
+  testOutput.writeOutputFile(expectedOutputPath);
 }
+
+#define ENGINE_TEST(testCase)                                                           \
+TEST_CASE(#testCase ".bokay", "[main]") {                                               \
+  ProgramOutput actual = runEngineOn(#testCase);                                         \
+  boost::filesystem::path expectedOutputPath(testOutputFile(options, #testCase));       \
+  std::cout << "checking expected output from: " << expectedOutputPath << std::endl;    \
+  REQUIRE(boost::filesystem::exists(expectedOutputPath));                               \
+  std::cout << "Expected output exists! " << std::endl;                                 \
+  ProgramOutput expected(expectedOutputPath);                                            \
+}
+ALL_TESTS
+#undef ENGINE_TEST
+
+#define ENGINE_TEST(testCase) #testCase,
+std::string allCases[] = { ALL_TESTS };
+#undef ENGINE_TEST
 
 int main( int argc, char* argv[] ) {
   Catch::Session session; // There must be exactly one instance
   
-  
   // Build a new parser on top of Catch's
-  // using namespace Catch::clara;
+  // available options: ghjkmnpquyz 
   auto cli 
     = session.cli() // Get Catch's composite command line parser
-    | Catch::clara::Opt( engine, "engine" ) // bind variable to a new option, with a hint string
-        ["-n"]["--engine"]    // the option names it will respond to
-        ("which engine should be used?");        // description string for the help output
+    | Catch::clara::Opt( options.enginePath, "engine" )
+        ["--engine"]
+        ("which engine should be used?")
+    | Catch::clara::Opt( options.testDir, "testDir" )
+        ["--test-dir"]
+        ("where are the tests saved?")
+    | Catch::clara::Opt( options.update, "update" )
+        ["--update"]
+        ("which test (or all) should be updated?");
         
   // Now pass the new composite back to Catch so it uses that
   session.cli( cli );
@@ -50,13 +74,29 @@ int main( int argc, char* argv[] ) {
   if( returnCode != 0 ) // Indicates a command line error
       return returnCode;
 
-  // if set on the command line then 'height' is now set at this point
-  if(!engine.compare("")) {
-    std::cout << "engine must be set! " << std::endl;
+  // ensure that engine and testDir are configured
+  if ( !options.validate() ) {
     return 1;
-  } else {
-    std::cout << "Testing engine: " << engine << std::endl;
   }
+
+  if (options.anyUpdates) {
+    std::cout << "Run updates! " << options.update << std::endl;
+    for(const auto& testName : allCases) {
+      if (options.updateAll || options.update.find(testName) != std::string::npos) {
+        std::cout << "Update test: " << testName << std::endl;
+        updateTest(testName);
+      } else {
+        std::cout << "Don't update test: " << testName << std::endl;
+      }
+    }
+    return 0;
+  }
+
+  std::cout << "Running test cases: ";
+  for(const auto& testName : allCases) {
+    std::cout << testName << ", ";
+  }
+  std::cout << std::endl;
 
   return session.run();
 }

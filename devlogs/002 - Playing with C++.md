@@ -1,4 +1,4 @@
-# DevLog 000 - Template
+# DevLog 002 - Playing with C++
 <div align="right">
 November 11th, 2021
 

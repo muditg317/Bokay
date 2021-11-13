@@ -11,5 +11,6 @@ Testing
 devlogs/000 - DevLog Template.md
 
 # misc.
-test
-*.bokay
+./test
+./test*.*
+./*.bokay

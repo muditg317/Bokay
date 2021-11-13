@@ -22,7 +22,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.clang-tidy")
   find_program(CLANG_TIDY_EXECUTABLE "clang-tidy" DOC "Path to clang-tidy executable")
   if(CLANG_TIDY_EXECUTABLE MATCHES "CLANG_TIDY_EXECUTABLE")
     unset(CLANG_TIDY_EXECUTABLE)
-    indented_message(WARNING "WARNING: .clang-tidy file found for project ${PROJECT_NAME}, yet clang-tidy not on PATH so disabling lint pass")
+    message(WARNING "   WARNING: .clang-tidy file found for project ${PROJECT_NAME}, yet clang-tidy not on PATH so disabling lint pass")
   endif()
 endif()
 
@@ -40,7 +40,7 @@ function(SET_CLANG_TIDY TARGET_FOR_CLANG_TIDY)
                 CXX_CLANG_TIDY ${CLANG_TIDY_EXECUTABLE}
             )
         endif()
-        indented_message(STATUS "clang-tidy set")
+        message(STATUS "    clang-tidy set")
     endif()
 endfunction()
 # End clang-tidy setup
