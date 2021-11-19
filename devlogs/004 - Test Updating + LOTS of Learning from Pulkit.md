@@ -1,4 +1,4 @@
-# DevLog 004 - Refining Test Updating (short day)
+# DevLog 004 - Test Updating + LOTS of Learning from Pulkit
 <div align="right">
 November 18th, 2021
 
@@ -12,7 +12,9 @@ Also 2 to 3am
   - Useful to automatically put full paths in the update command
 
 ## Struggles
-- Nothing serious today!
+- Making the tests abstract will be hard.
+  - Avoiding the full-paths is kinda just unavoidable and hard to solve.
+  - It's not something to stress about since I'm likely to be the only dev on this project, but it's a good thing to think about.
 
 ## Notes
 ### Conversations with Pulkit
