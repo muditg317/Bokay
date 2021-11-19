@@ -1,4 +1,4 @@
-5 args:	build/engines/cpp/bokay-cpp	compile	tests/compiles.bokay	-o	tests/build/compiles	
+5 args:	/mnt/c/Users/mudit/Main_Drive/_Personal-Projects/Bokay/build/engines/cpp/bokay-cpp	compile	/mnt/c/Users/mudit/Main_Drive/_Personal-Projects/Bokay/tests/compiles.bokay	-o	/mnt/c/Users/mudit/Main_Drive/_Personal-Projects/Bokay/tests/build/compiles	
 // The program should compile
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================

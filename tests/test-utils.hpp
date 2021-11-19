@@ -1,6 +1,5 @@
 #ifndef TEST_UTILS_H
 #define TEST_UTILS_H
-#define CATCH_CONFIG_IMPL_ONLY
 
 #include <string>
 #include <vector>
@@ -19,8 +18,12 @@ class TestingOptions {
     std::string testOutputDir;
     std::string buildDir;
     std::string update;
+    std::string updateCompilation;
+    std::string updateExecution;
     bool anyUpdates;
     bool updateAll;
+    bool updateAllCompilation;
+    bool updateAllExecution;
     bool validate();
 };
 
@@ -30,6 +33,8 @@ class ProgramOutput {
     ProgramOutput(std::string, std::string);
     std::string getCompilationOutput();
     std::string getExecutionOutput();
+    void setCompilationOutput(std::string);
+    void setExecutionOutput(std::string);
     void writeOutputFile(boost::filesystem::path);
   private:
     std::string compilationOutput;

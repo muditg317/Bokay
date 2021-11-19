@@ -18,7 +18,7 @@ find_package(Boost REQUIRED COMPONENTS filesystem)
 add_executable(test-engine test-engine.cpp)
 
 ########################################## build testing libs
-add_library(test-utils test-utils.cpp test-utils.hpp test-cases.hpp)
+add_library(test-utils test-utils.cpp test-utils.hpp)
 target_link_libraries(test-utils PRIVATE fmt::fmt Boost::filesystem)
 
 

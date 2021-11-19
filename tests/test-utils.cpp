@@ -99,6 +99,14 @@ std::string ProgramOutput::getExecutionOutput() {
   return executionOutput;
 }
 
+void ProgramOutput::setCompilationOutput(std::string newOutput) {
+  compilationOutput = newOutput;
+}
+
+void ProgramOutput::setExecutionOutput(std::string newOutput) {
+  executionOutput = newOutput;
+}
+
 void ProgramOutput::writeOutputFile(boost::filesystem::path testOutputFilePath) {
   constexpr auto read_size = std::size_t{4096};
   std::ofstream stream(testOutputFilePath.c_str());
@@ -127,11 +135,21 @@ bool TestingOptions::validate() {
   }
   testOutputDir = testDir;
   buildDir = fmt::format("{}/build", testDir);
-  if(update.compare("")) {
+  if(update.compare("") || updateCompilation.compare("") || updateExecution.compare("")) {
     anyUpdates = true;
-    if(!update.compare("all")) {
+    if(!updateCompilation.compare("all")) {
+      std::cout << "update compilation for all test cases!" << std::endl;
+      updateAllCompilation = true;
+    }
+    if(!updateExecution.compare("all")) {
+      std::cout << "update execution for all test cases!" << std::endl;
+      updateAllExecution = true;
+    }
+    if(!update.compare("all") || (updateAllCompilation && updateAllExecution)) {
       std::cout << "update all test cases!" << std::endl;
       updateAll = true;
+      updateAllCompilation = true;
+      updateAllExecution = true;
     }
   }
   return true;
