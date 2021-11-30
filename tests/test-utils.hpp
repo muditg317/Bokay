@@ -3,13 +3,14 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <fmt/format.h>
 #include <boost/filesystem.hpp>
 
 #define TEST_OUTPUT_EXT "bokay.test"
 #define UNIQUE_TEXT_SECRET "#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&"
-#define COMPILE_RUN_DELIM "\n=================" UNIQUE_TEXT_SECRET "==================\n"
-#define PROGRAM_NOT_FOUND_TEXT "PROGRAM NOT FOUND -- SECRET: " UNIQUE_TEXT_SECRET
+#define OUTPUT_DELIM "\n=================" UNIQUE_TEXT_SECRET "==================\n"
+#define NOT_FOUND_TEXT(prefix) prefix " FILE NOT FOUND -- SECRET: " UNIQUE_TEXT_SECRET
 
 class TestingOptions {
   public:
@@ -19,34 +20,61 @@ class TestingOptions {
     std::string buildDir;
     std::string update;
     std::string updateCompilation;
+    std::string updateIntermediates;
     std::string updateExecution;
     bool anyUpdates;
     bool updateAll;
     bool updateAllCompilation;
+    bool updateAllIntermediates;
     bool updateAllExecution;
     bool validate();
 };
 
+#define OUTPUTS_WITH_EXT \
+X(LEXED_TOKEN_FILE, "tok", "Lexed tokens") \
+X(PARSE_TREE_FILE, "ptree", "Parse tree") \
+X(AST_FILE, "ast", "AST") \
+X(BLOCKS_CONT_FLOW_FILE, "blk", "Blocks w/ control flow") \
+
+#define ALL_OUTPUT_TYPES \
+X(COMPILATION_CONSOLE_OUT, "", "Compilation output") \
+OUTPUTS_WITH_EXT \
+X(EXECUTION_OUT, "", "Execution output")
+
+
+#define X(type, extension, name) type,
+enum OutputType : size_t {
+  ALL_OUTPUT_TYPES
+  COUNT_OUTPUT_TYPES
+};
+#undef X
+
+#define X(type, extension, name) extension,
+static std::string outputFileExtensions[COUNT_OUTPUT_TYPES] = {ALL_OUTPUT_TYPES};
+#undef X
+
+#define X(type, extension, name) name,
+static std::string outputFileNames[COUNT_OUTPUT_TYPES] = {ALL_OUTPUT_TYPES};
+#undef X
+
+
 class ProgramOutput {
   public:
     ProgramOutput(boost::filesystem::path);
-    ProgramOutput(std::string, std::string);
-    std::string getCompilationOutput();
-    std::string getExecutionOutput();
-    void setCompilationOutput(std::string);
-    void setExecutionOutput(std::string);
+    ProgramOutput() {};
+    std::string getOutput(OutputType);
+    void setOutput(OutputType, std::string);
+    void setFromFile(OutputType, std::string);
     void writeOutputFile(boost::filesystem::path);
   private:
-    std::string compilationOutput;
-    std::string executionOutput;
+    std::map<OutputType, std::string> outputs;
 };
 
 std::vector<std::string> splitByDelim(std::string strToSplit);
 
-std::string exec(std::string);
+std::string execShellCommand(std::string);
 
-enum EngineCommand { RUN,COMPILE };
-extern const char *EngineCommands[];
+std::string readFile(boost::filesystem::path);
 
 std::string engineCompile(TestingOptions options, std::string engineArgs, std::string fileToCompile);
 

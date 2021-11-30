@@ -1,5 +1,13 @@
-5 args:	/mnt/c/Users/mudit/Main_Drive/_Personal-Projects/Bokay/build/engines/cpp/bokay-cpp	compile	/mnt/c/Users/mudit/Main_Drive/_Personal-Projects/Bokay/tests/compiles.bokay	-o	/mnt/c/Users/mudit/Main_Drive/_Personal-Projects/Bokay/tests/build/compiles	
-// The program should compile
+6 args:	build/engines/cpp/bokay-cpp	tests/compiles.bokay	-t	tests/build	-o	tests/build/compiles	
+run command: tests/compiles.bokay
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-PROGRAM NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+Lexed tokens(tests/build/compiles.tok)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Parse tree(tests/build/compiles.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+AST(tests/build/compiles.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Blocks w/ control flow(tests/build/compiles.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+executable FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

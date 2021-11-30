@@ -27,10 +27,13 @@ target_link_libraries(test-engine PRIVATE Catch2::Catch2 fmt::fmt Boost::filesys
 
 add_dependencies(test-engine bokay-cpp)
 
+# make paths to executables not be full paths (more cross-platformy)
+string(REPLACE ${Bokay_SOURCE_DIR}/ "" Bokay-Engine-CPP-Dir ${Bokay-Engine-C++_BINARY_DIR})
+string(REPLACE ${Bokay_SOURCE_DIR}/ "" Bokay-Test-Dir ${Bokay-Engine-Tester_SOURCE_DIR})
+
 # If you register a test, then ctest and make test will run it.
 # You can also run examples and check the output, as well.
 add_test(NAME C++-Engine
-         COMMAND test-engine --engine $<TARGET_FILE:bokay-cpp>
-                             --test-dir ${Bokay-Engine-Tester_SOURCE_DIR})
-
-# set_tests_properties(C++-Engine PROPERTIES FIXTURES_REQUIRED bokay-cpp)
+         COMMAND test-engine --engine ${Bokay-Engine-CPP-Dir}/$<TARGET_FILE_NAME:bokay-cpp>
+                             --test-dir ${Bokay-Test-Dir}
+         WORKING_DIRECTORY ${Bokay_SOURCE_DIR})

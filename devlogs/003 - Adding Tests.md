@@ -7,7 +7,7 @@ Sign off: 11:30pm
 </div>
 
 ## Goals
-- Finish testing setup
+- [x] Finish testing setup
   - ways to run tests, update test output, etc
 
 ## Struggles

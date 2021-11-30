@@ -17,31 +17,52 @@
 TestingOptions options;
 
 ProgramOutput runEngineOn(std::string testName) {
+  ProgramOutput output;
+
   std::string compileOut = engineCompile(options, "", testName);
-  std::cout << "compiled! -- \n" << compileOut << std::endl;
-  std::string runOut = runProgram(options, "", testName, "");
-  std::cout << "run! -- \n" << runOut << std::endl;
-  return ProgramOutput{compileOut, runOut};
+  // std::cout << "compiled! -- \n" << compileOut << std::endl;
+  output.setOutput(COMPILATION_CONSOLE_OUT, compileOut);
+
+  #define X(type, extension, name) output.setFromFile(type, fmt::format("{}/{}.{}", options.buildDir, testName, extension));
+  OUTPUTS_WITH_EXT
+  #undef X
+
+  std::string executionOut = runProgram(options, "", testName, "");
+  // std::cout << "run! -- \n" << executionOut << std::endl;
+  output.setOutput(EXECUTION_OUT, executionOut);
+
+  return output;
 }
 
-void updateTest(std::string testName, bool updateCompilation, bool updateExecution) {
+void updateTest(std::string testName, bool updateCompilation, bool updateIntermediates, bool updateExecution) {
   boost::filesystem::path expectedOutputPath(testOutputFile(options, testName));
   bool hasExistingOutput = boost::filesystem::exists(expectedOutputPath);
-  ProgramOutput existingOutput("","");
-  if (hasExistingOutput) {
+  ProgramOutput existingOutput;
+  if (hasExistingOutput && !(updateCompilation && updateIntermediates && updateExecution)) {
     existingOutput = ProgramOutput(expectedOutputPath);
   }
   ProgramOutput testOutput = runEngineOn(testName);
   std::cout << "write test output to file: " << expectedOutputPath << std::endl;
   if (hasExistingOutput && !updateCompilation) {
-    testOutput.setCompilationOutput(existingOutput.getCompilationOutput());
+    testOutput.setOutput(COMPILATION_CONSOLE_OUT, existingOutput.getOutput(COMPILATION_CONSOLE_OUT));
+  }
+  if (hasExistingOutput && !updateIntermediates) {
+    static_assert(COMPILATION_CONSOLE_OUT == 0, "Compilation output must be the 0th output!");
+    static_assert(EXECUTION_OUT == (COUNT_OUTPUT_TYPES-1), "Execution output must be the last output!");
+    for (uint8_t i = COMPILATION_CONSOLE_OUT+1; i < EXECUTION_OUT; i++) {
+      testOutput.setOutput(static_cast<OutputType>(i), existingOutput.getOutput(static_cast<OutputType>(i)));
+    }
   }
   if (hasExistingOutput && !updateExecution) {
-    testOutput.setExecutionOutput(existingOutput.getExecutionOutput());
+    testOutput.setOutput(EXECUTION_OUT, existingOutput.getOutput(EXECUTION_OUT));
   }
   testOutput.writeOutputFile(expectedOutputPath);
 }
 
+/* use this to fail all tests
+REQUIRE(false);}\
+  //
+*/
 
 #define ENGINE_TEST(testCase)                                                           \
 TEST_CASE(#testCase ".bokay", "[main]") {                                               \
@@ -51,8 +72,12 @@ TEST_CASE(#testCase ".bokay", "[main]") {                                       
   REQUIRE(boost::filesystem::exists(expectedOutputPath));                               \
   std::cout << "Expected output exists! " << std::endl;                                 \
   ProgramOutput expected(expectedOutputPath);                                           \
-  REQUIRE_THAT(actual.getCompilationOutput(), Catch::Matchers::Equals(expected.getCompilationOutput(), Catch::CaseSensitive::Yes)); \
-  REQUIRE_THAT(actual.getExecutionOutput(), Catch::Matchers::Equals(expected.getExecutionOutput(), Catch::CaseSensitive::Yes)); \
+  for (uint8_t i = 0; i < COUNT_OUTPUT_TYPES; i++) {                                        \
+    REQUIRE_THAT(actual.getOutput(static_cast<OutputType>(i)),                          \
+        Catch::Matchers::Equals(                                                        \
+            expected.getOutput(static_cast<OutputType>(i)),                             \
+            Catch::CaseSensitive::Yes));                                                \
+  }                                                                                     \
 }
 
 #define TEST_AS_STRING_WITH_COMMA(testCase) #testCase,
@@ -87,6 +112,9 @@ int main( int argc, char* argv[] ) {
     | Catch::clara::Opt( options.updateCompilation, "updateCompilation" )
         ["--update-comp"]
         ("which test (or all) should have compilation updated?")
+    | Catch::clara::Opt( options.updateIntermediates, "updateIntermediates" )
+        ["--update-intm"]
+        ("which test (or all) should have intermediates updated?")
     | Catch::clara::Opt( options.updateExecution, "updateExecution" )
         ["--update-exec"]
         ("which test (or all) should have execution updated?");
@@ -108,16 +136,18 @@ int main( int argc, char* argv[] ) {
     std::cout << "Run updates! " << options.update << std::endl;
     for(const auto& testName : allCases) {
       bool updateComp = options.updateAll || options.updateAllCompilation || options.updateCompilation.find(testName) != std::string::npos;
+      bool updateIntm = options.updateAll || options.updateAllIntermediates || options.updateIntermediates.find(testName) != std::string::npos;
       bool updateExec = options.updateAll || options.updateAllExecution || options.updateExecution.find(testName) != std::string::npos;
-      bool doUpdate = updateComp || updateExec;
+      bool doUpdate = updateComp || updateIntm || updateExec;
       if (options.updateAll || options.update.find(testName) != std::string::npos) {
         updateComp = true;
+        updateIntm = true;
         updateExec = true;
         doUpdate = true;
       }
       if (doUpdate) {
-        std::cout << "Update test: " << testName << (updateComp ? "\tcompilation" : "") << (updateExec ? "\texecution" : "") << std::endl;
-        updateTest(testName, updateComp, updateExec);
+        std::cout << "Update test: " << testName << " -- " << (updateComp ? "\tcompilation" : "") << (updateIntm ? "\tintermediates" : "") << (updateExec ? "\texecution" : "") << std::endl;
+        updateTest(testName, updateComp, updateIntm, updateExec);
       } else {
         std::cout << "Don't update test: " << testName << std::endl;
       }
@@ -127,7 +157,7 @@ int main( int argc, char* argv[] ) {
 
   std::cout << "Running test cases: ";
   for(const auto& testName : allCases) {
-    std::cout << testName << ", ";
+    std::cout << testName << "\t,\t";
   }
   std::cout << std::endl;
 

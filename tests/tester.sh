@@ -1,7 +1,7 @@
 set -e
 
-Bokay="$(realpath ..)/Bokay"
+# Bokay="$(realpath ..)/Bokay"
 
 # use full paths
 # echo $@
-$Bokay/build/tests/test-engine --engine $Bokay/build/engines/cpp/bokay-cpp --test-dir $Bokay/tests $@
+build/tests/test-engine --engine build/engines/cpp/bokay-cpp --test-dir tests $@

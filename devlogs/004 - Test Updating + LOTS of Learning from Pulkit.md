@@ -8,7 +8,7 @@ Also 2 to 3am
 </div>
 
 ## Goals
-- Create a script for updating tests
+- [x] Create a script for updating tests
   - Useful to automatically put full paths in the update command
 
 ## Struggles

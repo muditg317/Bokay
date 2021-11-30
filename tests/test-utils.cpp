@@ -1,30 +1,34 @@
+#include "test-utils.hpp"
+
 #include <cstdio>
 #include <iostream>
 #include <sstream>
 #include <memory>
 #include <stdexcept>
 #include <string>
-#include <fmt/format.h>
 #include <array>
 #include <fstream>
-#include "test-utils.hpp"
+
+#include <fmt/format.h>
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
 
 std::vector<std::string> splitByDelim(std::string strToSplit, std::string delim) {
   size_t pos_start = 0, pos_end, delim_len = delim.length();
   std::string token;
   std::vector<std::string> res;
 
-  while ((pos_end = strToSplit.find (delim, pos_start)) != std::string::npos) {
-    token = strToSplit.substr (pos_start, pos_end - pos_start);
+  while ((pos_end = strToSplit.find(delim, pos_start)) != std::string::npos) {
+    token = strToSplit.substr(pos_start, pos_end - pos_start);
     pos_start = pos_end + delim_len;
-    res.push_back (token);
+    res.push_back(token);
   }
 
-  res.push_back (strToSplit.substr (pos_start));
+  res.push_back(strToSplit.substr(pos_start));
   return res;
 }
 
-std::string exec(std::string cmd) {
+std::string execShellCommand(std::string cmd) {
     std::array<char, 128> buffer;
     std::string result;
     std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
@@ -37,18 +41,25 @@ std::string exec(std::string cmd) {
     return result;
 }
 
-const char *EngineCommands[] = {"run","compile"};
+std::string readFile(boost::filesystem::path filePath) {
+  assert(boost::filesystem::exists(filePath) && "File must exist to be read! Check before calling this method!");
+  boost::filesystem::fstream fileStream(filePath);
+  std::stringstream buffer;
+  buffer << fileStream.rdbuf();
+  return buffer.str();
+}
 
 std::string engineCompile(TestingOptions options, std::string engineArgs, std::string fileToCompile) {
   // std::cout << "compile file: " << fmt::format("{}/{}.bokay", options.testDir, fileToCompile) << std::endl;
   std::string compilationCommand = fmt::format(
-    "{} {} {} {}/{}.bokay -o {}/{}",
-    options.enginePath, EngineCommands[COMPILE], engineArgs,
-    options.testDir, fileToCompile,
-    options.buildDir, fileToCompile
+    "{} {} {}/{}.bokay -t {} -o {}/{}",
+    options.enginePath, engineArgs, // "{} {}"
+    options.testDir, fileToCompile, // "{}/{}.bokay"
+    options.buildDir,               // "-t {}"
+    options.buildDir, fileToCompile // "-o {}/{}"
   );
   // std::cout << "compile command: " << compilationCommand << std::endl;
-  std::string compilationOutput = exec(compilationCommand);
+  std::string compilationOutput = execShellCommand(compilationCommand);
   // std::cout << "compilation output: " << compilationOutput << std::endl;
   return compilationOutput;
 }
@@ -56,19 +67,19 @@ std::string engineCompile(TestingOptions options, std::string engineArgs, std::s
 std::string runProgram(TestingOptions options, std::string engineArgs, std::string fileToRun, std::string runArgs) {
   boost::filesystem::path programPath(builtTestFile(options, fileToRun));
   if (!boost::filesystem::exists(programPath)) {
-    return PROGRAM_NOT_FOUND_TEXT;
+    return NOT_FOUND_TEXT("executable");
   }
   std::string executionCommand = fmt::format(
     "{} {}",
     programPath.c_str(),
     runArgs);
   // std::cout << "execute command: " << executionCommand << std::endl;
-  std::string executionOutput = exec(executionCommand);
+  std::string executionOutput = execShellCommand(executionCommand);
   // std::cout << "execute output: " << executionOutput << std::endl;
   return executionOutput;
 }
 
-ProgramOutput::ProgramOutput(boost::filesystem::path testOutputFilePath) {
+ProgramOutput::ProgramOutput(boost::filesystem::path testOutputFilePath) : ProgramOutput::ProgramOutput() {
   constexpr auto read_size = std::size_t{4096};
   std::ifstream stream(testOutputFilePath.c_str());
   stream.exceptions(std::ios_base::badbit);
@@ -81,30 +92,29 @@ ProgramOutput::ProgramOutput(boost::filesystem::path testOutputFilePath) {
   out.append(buf, 0, stream.gcount());
   stream.close();
 
-  auto bothOutputs = splitByDelim(out, COMPILE_RUN_DELIM);
-  compilationOutput = bothOutputs.at(0);
-  executionOutput = bothOutputs.at(1);
+  auto allOutputs = splitByDelim(out, OUTPUT_DELIM);
+  assert(allOutputs.size() == COUNT_OUTPUT_TYPES && "Output file does not have correct number of output sections!");
+  for (uint8_t i = 0; i < COUNT_OUTPUT_TYPES; i++) {
+    outputs.insert(std::pair<OutputType, std::string>(static_cast<OutputType>(i), allOutputs.at(i)));
+  }
 }
 
-ProgramOutput::ProgramOutput(std::string _compilationOutput, std::string _executionOutput) {
-  compilationOutput = _compilationOutput;
-  executionOutput = _executionOutput;
+
+std::string ProgramOutput::getOutput(OutputType type) {
+  return outputs[type];
 }
 
-std::string ProgramOutput::getCompilationOutput() {
-  return compilationOutput;
+void ProgramOutput::setOutput(OutputType type, std::string newOutput) {
+  outputs[type] = newOutput;
 }
 
-std::string ProgramOutput::getExecutionOutput() {
-  return executionOutput;
-}
-
-void ProgramOutput::setCompilationOutput(std::string newOutput) {
-  compilationOutput = newOutput;
-}
-
-void ProgramOutput::setExecutionOutput(std::string newOutput) {
-  executionOutput = newOutput;
+void ProgramOutput::setFromFile(OutputType type, std::string outputPathString) {
+  boost::filesystem::path outputPath(outputPathString);
+  if (!boost::filesystem::exists(outputPath)) {
+    outputs[type] = fmt::format("{}({}) {}", outputFileNames[type], outputPathString, NOT_FOUND_TEXT(""));
+    return;
+  }
+  outputs[type] = readFile(outputPath);
 }
 
 void ProgramOutput::writeOutputFile(boost::filesystem::path testOutputFilePath) {
@@ -112,11 +122,16 @@ void ProgramOutput::writeOutputFile(boost::filesystem::path testOutputFilePath) 
   std::ofstream stream(testOutputFilePath.c_str());
   stream.exceptions(std::ios_base::badbit);
 
-  std::string fullOutput = fmt::format("{}{}{}", compilationOutput, COMPILE_RUN_DELIM, executionOutput);
+  std::string mainOutput = fmt::format("{}{}{}", getOutput(COMPILATION_CONSOLE_OUT), OUTPUT_DELIM, getOutput(EXECUTION_OUT));
+  std::cout << "Write to file ==============================\n" << mainOutput << "\n===========================" << std::endl;
 
-  std::cout << "Write to file ==============================\n" << fullOutput << "\n===========================" << std::endl;
-
-  stream << fullOutput;
+  // stream << fullOutput;
+  for (uint8_t i = 0; i < COUNT_OUTPUT_TYPES; i++) {
+    stream << getOutput(static_cast<OutputType>(i));
+    if (i < COUNT_OUTPUT_TYPES - 1) {
+      stream << OUTPUT_DELIM;
+    }
+  }
   stream.close();
 }
 
@@ -135,20 +150,25 @@ bool TestingOptions::validate() {
   }
   testOutputDir = testDir;
   buildDir = fmt::format("{}/build", testDir);
-  if(update.compare("") || updateCompilation.compare("") || updateExecution.compare("")) {
+  if(update.compare("") || updateCompilation.compare("") || updateIntermediates.compare("") || updateExecution.compare("")) {
     anyUpdates = true;
     if(!updateCompilation.compare("all")) {
       std::cout << "update compilation for all test cases!" << std::endl;
       updateAllCompilation = true;
     }
+    if(!updateIntermediates.compare("all")) {
+      std::cout << "update intermediates for all test cases!" << std::endl;
+      updateAllIntermediates = true;
+    }
     if(!updateExecution.compare("all")) {
       std::cout << "update execution for all test cases!" << std::endl;
       updateAllExecution = true;
     }
-    if(!update.compare("all") || (updateAllCompilation && updateAllExecution)) {
+    if(!update.compare("all") || (updateAllCompilation && updateAllIntermediates && updateAllExecution)) {
       std::cout << "update all test cases!" << std::endl;
       updateAll = true;
       updateAllCompilation = true;
+      updateAllIntermediates = true;
       updateAllExecution = true;
     }
   }
