@@ -14,3 +14,5 @@ devlogs/000 - DevLog Template.md
 ./test
 ./test*.*
 ./*.bokay
+
+bokay-cpp

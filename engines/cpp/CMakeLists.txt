@@ -41,3 +41,6 @@ set_clang_tidy(bokay-cpp)
 
 target_link_libraries(bokay-cpp PRIVATE Boost::program_options LibBokayFile)
 
+add_custom_command(TARGET bokay-cpp
+                   POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:bokay-cpp> ${Bokay_SOURCE_DIR})
