@@ -13,7 +13,7 @@ Sign off: XXpm/am
     - [x] AST conversion
   - [x] Intermediate repr/blocks
   - [ ] Machine specific compilation?
-- [ ] Setup command line parsing in the c++ engine
+- [x] Setup command line parsing in the c++ engine
 
 ## Struggles
 - Nothing serious today!
@@ -27,15 +27,19 @@ Sign off: XXpm/am
 
 ## Log
 - Create infrastructure for testing each of the subcomponents of the compilation process
+- Branch off for feature development (add compiler flags and stuff)
+  - Create sub libraries within the CPP engine for various steps
+- Add compiler flags and arguments to C++ engine for Bokay
 
 ## TODO
-1. Research more things
+1. Start work on the compiler itself
+2. Research more things
    1. 3-op assembly
    2. How to create a "main" entry point for the executable
 
 ## Language Status/Changes
 - Will be C-style
-  - Objects are hard!
+  - Objects are hard
   - Imperative/functional seems to be way easier from the blocks/control-flow aspect
 
 ## Unorganized thoughts as they came

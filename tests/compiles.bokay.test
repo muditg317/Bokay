@@ -1,5 +1,6 @@
-6 args:	build/engines/cpp/bokay-cpp	tests/compiles.bokay	-t	tests/build	-o	tests/build/compiles	
-run command: tests/compiles.bokay
+Input source file: tests/compiles.bokay
+Output path: tests/build/compiles
+Temp file output to: tests/build
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 Lexed tokens(tests/build/compiles.tok)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

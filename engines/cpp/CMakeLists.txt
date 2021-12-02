@@ -9,7 +9,7 @@ project(
 # set(Boost_USE_STATIC_LIBS OFF)
 # set(Boost_USE_MULTITHREADED ON)
 # set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost QUIET REQUIRED COMPONENTS program_options)
+find_package(Boost QUIET REQUIRED COMPONENTS program_options filesystem)
 message(STATUS "Boost::program_options version: ${Boost_VERSION}")
 
 # This is needed if your Boost version is newer than your CMake version
@@ -26,20 +26,31 @@ message(STATUS "Boost::program_options version: ${Boost_VERSION}")
 
 set(Bokay-Engine-C++_INCLUDE_DIR "${Bokay-Engine-C++_SOURCE_DIR}/include")
 
-file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${Bokay-Engine-C++_INCLUDE_DIR}/*.hpp")
+# file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${Bokay-Engine-C++_INCLUDE_DIR}/*.hpp")
 
-message(STATUS ${HEADER_LIST})
+# message(STATUS ${HEADER_LIST})
 
-add_library(LibBokayFile src/bokay-file.cpp include/bokay-file.hpp)
+# add_library(LibBokayFile src/bokay-file.cpp include/bokay-file.hpp)
+add_library(LibArgsParser src/args-parser.cpp include/args-parser.hpp)
+add_library(LibCompiler src/compiler.cpp include/compiler.hpp)
 
-# We need this directory, and users of our library will need it too
-target_include_directories(LibBokayFile PUBLIC ${Bokay-Engine-C++_INCLUDE_DIR})
+# We need this directory, and users of our library will not need it too
+# target_include_directories(LibBokayFile PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
+target_include_directories(LibArgsParser PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
+target_include_directories(LibCompiler PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
+
+target_link_libraries(LibArgsParser PRIVATE Boost::program_options)
+target_link_libraries(LibCompiler PRIVATE Boost::filesystem)
 
 
-add_executable(bokay-cpp src/main.cpp)
+add_executable(bokay-cpp main.cpp)
 set_clang_tidy(bokay-cpp)
 
-target_link_libraries(bokay-cpp PRIVATE Boost::program_options LibBokayFile)
+target_include_directories(bokay-cpp PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
+target_link_libraries(bokay-cpp PRIVATE
+        # LibBokayFile
+        LibArgsParser
+        LibCompiler)
 
 add_custom_command(TARGET bokay-cpp
                    POST_BUILD
