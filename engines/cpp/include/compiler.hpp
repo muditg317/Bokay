@@ -5,7 +5,7 @@
 
 #include <string>
 
-// #include <boost/filesystem/path.hpp>
+#include <boost/filesystem/path.hpp>
 // #include <boost/filesystem.hpp>
 
 enum CompilerResult : size_t {
@@ -19,9 +19,10 @@ class Compiler {
     CompilerResult run(void);
   private:
     bool validate_options(void);
-    // boost::filesystem::path sourceFile;
-    // boost::filesystem::path tempFileDir;
-    // boost::filesystem::path outputPath;
+    boost::filesystem::path sourceFile;
+    boost::filesystem::path tempFileDir;
+    boost::filesystem::path outputPath;
+    std::string fileContents;
 };
 
 #endif

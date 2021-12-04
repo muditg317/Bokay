@@ -23,7 +23,9 @@
 typedef struct {
   std::string sourceFile;
   std::string tempFileDir;
+  bool outputTemps;
   std::string outputPath;
+  bool customOutputPath;
 } Options;
 
 enum ParseResult : size_t {

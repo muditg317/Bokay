@@ -3,7 +3,7 @@
 November 29th-30th, 2021\
 
 Sign on: 4pm\
-Sign off: XXpm/am
+<!-- Sign off: XXpm/am -->
 </div>
 
 ## Goals

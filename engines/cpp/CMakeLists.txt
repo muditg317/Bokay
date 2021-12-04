@@ -48,9 +48,10 @@ set_clang_tidy(bokay-cpp)
 
 target_include_directories(bokay-cpp PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_link_libraries(bokay-cpp PRIVATE
-        # LibBokayFile
-        LibArgsParser
-        LibCompiler)
+                                        Boost::boost
+                                        # LibBokayFile
+                                        LibArgsParser
+                                        LibCompiler)
 
 add_custom_command(TARGET bokay-cpp
                    POST_BUILD

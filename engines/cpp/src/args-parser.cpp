@@ -99,15 +99,18 @@ ParseResult parseCommandLine(int argc, char *argv[], Options &options) {
     }
     std::cout << "Input source file: " << options.sourceFile << std::endl;
 
-    if (!vm.count(OUTPUT)) {
-      std::cout << "No output path provided! -- using default..." << std::endl;
-      options.outputPath = options.sourceFile + ".out";
+    if ((options.customOutputPath = vm.count(OUTPUT))) {
+      std::cout << "Output path: " << options.outputPath << std::endl;
+    } else {
+      std::cout << "No output path provided." << std::endl;
+      // options.outputPath = options.sourceFile + ".out";
     }
-    std::cout << "Output path: " << options.outputPath<< std::endl;
 
-    if (vm.count(TEMP_FILE_DIR)) {
-      std::cout << "Temp file output to: " << options.tempFileDir<< std::endl;
+
+    if ((options.outputTemps = vm.count(TEMP_FILE_DIR))) {
+      std::cout << "Temp file output to: " << options.tempFileDir << std::endl;
     }
+
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
     return PARSING_FAILED;
