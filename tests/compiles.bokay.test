@@ -1,6 +1,9 @@
 Input source file: tests/compiles.bokay
 Output path: tests/build/compiles
 Temp file output to: tests/build
+File contains 1 lines.
+Line 1: // The program should compile
+Found token: //
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 Lexed tokens(tests/build/compiles.tok)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

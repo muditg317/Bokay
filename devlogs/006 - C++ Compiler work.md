@@ -20,10 +20,11 @@ Sign off: XXpm/am -->
 - Begin work on parsing for the input file
 
 ## TODO
-1. Numbered list
+1. Start designing my language
 
 ## Language Status/Changes
 - None today!
 
 ## Unorganized thoughts as they came
-- 
+- Boost::algorithm is a header-only library, so it has no "component" for find_package
+  - Instead of linking to Boost::algorithm, must use Boost::headers

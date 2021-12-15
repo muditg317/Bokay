@@ -9,7 +9,7 @@ project(
 # set(Boost_USE_STATIC_LIBS OFF)
 # set(Boost_USE_MULTITHREADED ON)
 # set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost QUIET REQUIRED COMPONENTS program_options filesystem)
+find_package(Boost QUIET REQUIRED COMPONENTS program_options filesystem) # algorithm is header-only
 message(STATUS "Boost::program_options version: ${Boost_VERSION}")
 
 # This is needed if your Boost version is newer than your CMake version
@@ -33,14 +33,17 @@ set(Bokay-Engine-C++_INCLUDE_DIR "${Bokay-Engine-C++_SOURCE_DIR}/include")
 # add_library(LibBokayFile src/bokay-file.cpp include/bokay-file.hpp)
 add_library(LibArgsParser src/args-parser.cpp include/args-parser.hpp)
 add_library(LibCompiler src/compiler.cpp include/compiler.hpp)
+add_library(LibLexer src/lexer.cpp include/lexer.hpp)
 
 # We need this directory, and users of our library will not need it too
 # target_include_directories(LibBokayFile PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_include_directories(LibArgsParser PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_include_directories(LibCompiler PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
+target_include_directories(LibLexer PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 
 target_link_libraries(LibArgsParser PRIVATE Boost::program_options)
 target_link_libraries(LibCompiler PRIVATE Boost::filesystem)
+target_link_libraries(LibLexer PRIVATE Boost::headers)
 
 
 add_executable(bokay-cpp main.cpp)
@@ -51,7 +54,8 @@ target_link_libraries(bokay-cpp PRIVATE
                                         Boost::boost
                                         # LibBokayFile
                                         LibArgsParser
-                                        LibCompiler)
+                                        LibCompiler
+                                        LibLexer)
 
 add_custom_command(TARGET bokay-cpp
                    POST_BUILD

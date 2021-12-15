@@ -1,5 +1,6 @@
 #include "compiler.hpp"
 #include "args-parser.hpp"
+#include "lexer.hpp"
 
 #include <iostream>
 #include <string>
@@ -17,9 +18,8 @@ static std::string readFile(boost::filesystem::path filePath) {
 }
 
 Compiler::Compiler(Options &options) :
-    sourceFile(options.sourceFile)
-    // tempFileDir(options.tempFileDir),
-    // outputPath(options.outputPath) 
+    sourceFile(options.sourceFile),
+    lexer(options)
 {
   // validate(options);
   if (options.outputTemps) {
@@ -67,7 +67,7 @@ bool Compiler::validate_options(void) {
 
 CompilerResult Compiler::run(void) {
   if (!validate_options()) {
-    return INVALID_OPTIONS;
+    return INVALID_COMPILATION_OPTIONS;
   }
 
   fileContents = readFile(sourceFile);
@@ -77,8 +77,15 @@ CompilerResult Compiler::run(void) {
   int ind = fileContents.find('\n');
   std::cout << "Line 1: " << fileContents.substr(0, ind != std::string::npos ? ind : fileContents.size()) << std::endl;
 
-  
+  std::vector<Token> tokens;
+  LexerResult result = lexer.run(fileContents, tokens);
+  if (result != LEXING_SUCCESS) {
+    return FAILED_LEXING;
+  }
 
+  std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
+    std::cout << "Found token: " << tok.getContents() << std::endl;
+  });
 
   return COMPILATION_SUCCESS;
 }

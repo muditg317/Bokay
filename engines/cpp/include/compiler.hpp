@@ -2,6 +2,7 @@
 #define COMPILER_HPP
 
 #include "args-parser.hpp"
+#include "lexer.hpp"
 
 #include <string>
 
@@ -10,7 +11,8 @@
 
 enum CompilerResult : size_t {
   COMPILATION_SUCCESS,
-  INVALID_OPTIONS,
+  INVALID_COMPILATION_OPTIONS,
+  FAILED_LEXING,
 };
 
 class Compiler {
@@ -18,6 +20,7 @@ class Compiler {
     Compiler(Options &options);
     CompilerResult run(void);
   private:
+    Lexer lexer;
     bool validate_options(void);
     boost::filesystem::path sourceFile;
     boost::filesystem::path tempFileDir;
