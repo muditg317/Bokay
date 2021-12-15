@@ -14,6 +14,7 @@ The name is just funny because I love saying 🅱️okay.
 ## Language Design
 - Name: Bokay
 - Base compiler: C++
-  - Compiled with make
+  - Build process: CMake
 - Self-hosted
 - Typing: static
+- General: C-style features
