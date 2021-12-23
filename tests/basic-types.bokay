@@ -1,0 +1,4 @@
+// this test checks that simple integer and floating point types can be compiled
+
+u8 a_byte = 5;
+s64 signed = -100;

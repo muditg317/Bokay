@@ -18,6 +18,7 @@ Sign off: XXpm/am -->
 ## Log
 - Add validation to input/output paths for compilation
 - Begin work on parsing for the input file
+- Create Compiler and Lexer objects that represent steps in process
 
 ## TODO
 1. Start designing my language
