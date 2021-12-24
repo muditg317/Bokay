@@ -10,14 +10,15 @@ import WholeLib, {oneMethod, SomeClass, anotherMethod} from "./export-stuff.boka
 // types:
 //  integers: (u|s)(8|16|32|64)   
 //  floating: (f)(32|64)          -- no 128 because usually implemented in software anyways
-//  arrays  : {base type}[{literal number}]
+//  arrays  : {base type} variable_name[{literal number}]
 
 // declarations:
 //  {type} {name};
+//  {base type} variable_name[{literal number}]; // for arrays
 //  {type} {name} = {expression of correct type};
 u8 a_byte = 5;
 s64 signed = -100;
-u16[3] arr; // global space will default to 0'd out memory
+u16 arr[3]; // global space will default to 0'd out memory
 arr[1] = 70531;
 
 // special assignments:
@@ -39,8 +40,8 @@ struct_var.unsigned16 = 1452;
 struct_var.number = -23441;
 u64 union my_union {
   f32 height;
-  u32[2] chunks;
-  u16[4] small_chunks;
+  u32 chunks[2];
+  u16 small_chunks[4];
 };
 my_union union_var = 100; // simply has to be assignable to one of the components or the base type
 u64 a_number = union_var; // automatically assumes base type when not specified

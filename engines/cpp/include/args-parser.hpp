@@ -28,10 +28,10 @@ typedef struct {
   bool customOutputPath;
 } Options;
 
-enum ParseResult : size_t {
-  EXIT_COMPILATION = 0,
-  PARSING_FAILED = 1,
-  PARSING_SUCCESS = 0
+enum class ParseResult {
+  PARSING_SUCCESS,
+  EXIT_COMPILATION,
+  INVALID_ARGUMENTS,
 };
 
 ParseResult parseCommandLine(int argc, char *argv[], Options &options);

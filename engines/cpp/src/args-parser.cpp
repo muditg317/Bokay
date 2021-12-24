@@ -76,7 +76,7 @@ ParseResult parseCommandLine(int argc, char *argv[], Options &options) {
       std::ifstream ifs(configFile.c_str());
       if (!ifs) {
         std::cout << "can not open config file: " << configFile << std::endl;
-        return EXIT_COMPILATION;
+        return ParseResult::EXIT_COMPILATION;
       } else {
         po::store(po::parse_config_file(ifs, config_file_options), vm);
         po::notify(vm);
@@ -85,17 +85,17 @@ ParseResult parseCommandLine(int argc, char *argv[], Options &options) {
 
     if (vm.count(HELP)) {
       std::cout << visible<< std::endl;
-      return EXIT_COMPILATION;
+      return ParseResult::EXIT_COMPILATION;
     }
 
     if (vm.count(VERSION)) {
       std::cout << "Bokay CPP Compiler, version 0.0.1\n";
-      return EXIT_COMPILATION;
+      return ParseResult::EXIT_COMPILATION;
     }
 
     if (!vm.count(INPUT_FILE)) {
       std::cout << "Must provide a file to be compiled!" << std::endl;
-      return PARSING_FAILED;
+      return ParseResult::INVALID_ARGUMENTS;
     }
     std::cout << "Input source file: " << options.sourceFile << std::endl;
 
@@ -113,7 +113,7 @@ ParseResult parseCommandLine(int argc, char *argv[], Options &options) {
 
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
-    return PARSING_FAILED;
+    return ParseResult::INVALID_ARGUMENTS;
   }
-  return PARSING_SUCCESS;
+  return ParseResult::PARSING_SUCCESS;
 }

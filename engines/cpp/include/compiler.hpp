@@ -9,7 +9,7 @@
 #include <boost/filesystem/path.hpp>
 // #include <boost/filesystem.hpp>
 
-enum CompilerResult : size_t {
+enum class CompilerResult {
   COMPILATION_SUCCESS,
   INVALID_COMPILATION_OPTIONS,
   FAILED_LEXING,

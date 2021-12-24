@@ -67,7 +67,7 @@ bool Compiler::validate_options(void) {
 
 CompilerResult Compiler::run(void) {
   if (!validate_options()) {
-    return INVALID_COMPILATION_OPTIONS;
+    return CompilerResult::INVALID_COMPILATION_OPTIONS;
   }
 
   fileContents = readFile(sourceFile);
@@ -79,13 +79,13 @@ CompilerResult Compiler::run(void) {
 
   std::vector<Token> tokens;
   LexerResult result = lexer.run(fileContents, tokens);
-  if (result != LEXING_SUCCESS) {
-    return FAILED_LEXING;
+  if (result != LexerResult::LEXING_SUCCESS) {
+    return CompilerResult::FAILED_LEXING;
   }
 
   std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
     std::cout << "Found token: " << tok.getContents() << std::endl;
   });
 
-  return COMPILATION_SUCCESS;
+  return CompilerResult::COMPILATION_SUCCESS;
 }
