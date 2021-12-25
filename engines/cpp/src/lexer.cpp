@@ -8,6 +8,8 @@
 
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
+#include <boost/filesystem.hpp>
+#include <fmt/format.h>
 
 const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::WORD, std::regex("(\\b[\\w_][\\w\\d_]*\\b)") },
@@ -55,54 +57,69 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::WHITESPACE, std::regex("(\\s+)") },
 };
 
-std::ostream& operator<< (std::ostream& out, const TokenType& type) {
+std::string typeToString(const TokenType& type) {
   switch(type) {
-    case TokenType::WORD: out << "WORD"; break;
-    case TokenType::SEMICOLON: out << "SEMICOLON"; break;
-    case TokenType::KW_IMPORT: out << "KW_IMPORT"; break;
-    case TokenType::COMMA: out << "COMMA"; break;
-    case TokenType::KW_FROM: out << "KW_FROM"; break;
-    case TokenType::IMPORT_SOURCE: out << "IMPORT_SOURCE"; break;
-    case TokenType::COLON: out << "COLON"; break;
-    case TokenType::BASE_TYPE: out << "BASE_TYPE"; break;
-    case TokenType::DECIMAL_LITERAL: out << "DECIMAL_LITERAL"; break;
-    case TokenType::FLOATING_POINT_LITERAL: out << "FLOATING_POINT_LITERAL"; break;
-    case TokenType::OPEN_BRACKET: out << "OPEN_BRACKET"; break;
-    case TokenType::CLOSE_BRACKET: out << "CLOSE_BRACKET"; break;
-    case TokenType::EQUALS: out << "EQUALS"; break;
-    case TokenType::PLUS: out << "PLUS"; break;
-    case TokenType::MINUS: out << "MINUS"; break;
-    case TokenType::MULT: out << "MULT"; break;
-    case TokenType::DIV: out << "DIV"; break;
-    case TokenType::MOD: out << "MOD"; break;
-    case TokenType::PLUS_EQ: out << "PLUS_EQ"; break;
-    case TokenType::MINUS_EQ: out << "MINUS_EQ"; break;
-    case TokenType::MULT_EQ: out << "MULT_EQ"; break;
-    case TokenType::DIV_EQ: out << "DIV_EQ"; break;
-    case TokenType::MOD_EQ: out << "MOD_EQ"; break;
-    case TokenType::KW_STRUCT: out << "KW_STRUCT"; break;
-    case TokenType::KW_UNION: out << "KW_UNION"; break;
-    case TokenType::PERIOD: out << "PERIOD"; break;
-    case TokenType::OPEN_BRACE: out << "OPEN_BRACE"; break;
-    case TokenType::CLOSE_BRACE: out << "CLOSE_BRACE"; break;
-    case TokenType::LINE_COMMENT: out << "LINE_COMMENT"; break;
-    case TokenType::OPEN_BLK_CMT: out << "OPEN_BLK_CMT"; break;
-    case TokenType::CLOSE_BLK_CMT: out << "CLOSE_BLK_CMT"; break;
-    case TokenType::OPEN_PAREN: out << "OPEN_PAREN"; break;
-    case TokenType::CLOSE_PAREN: out << "CLOSE_PAREN"; break;
-    case TokenType::KW_RETURN: out << "KW_RETURN"; break;
-    case TokenType::KW_IF: out << "KW_IF"; break;
-    case TokenType::KW_WHILE: out << "KW_WHILE"; break;
-    case TokenType::DOUBLE_EQ: out << "DOUBLE_EQ"; break;
-    case TokenType::TRIPLE_EQ: out << "TRIPLE_EQ"; break;
-    case TokenType::LSS: out << "LSS"; break;
-    case TokenType::GTR: out << "GTR"; break;
-    case TokenType::LEQ: out << "LEQ"; break;
-    case TokenType::GEQ: out << "GEQ"; break;
-    case TokenType::WHITESPACE: out << "WHITESPACE"; break;
-    default: out << "FATAL ERROR: UNKNOWN TOKEN TYPE: " << static_cast<int>(type) << std::endl; throw new std::runtime_error("no stringification for token type!");
+    case TokenType::WORD: return "WORD";
+    case TokenType::SEMICOLON: return "SEMICOLON";
+    case TokenType::KW_IMPORT: return "KW_IMPORT";
+    case TokenType::COMMA: return "COMMA";
+    case TokenType::KW_FROM: return "KW_FROM";
+    case TokenType::IMPORT_SOURCE: return "IMPORT_SOURCE";
+    case TokenType::COLON: return "COLON";
+    case TokenType::BASE_TYPE: return "BASE_TYPE";
+    case TokenType::DECIMAL_LITERAL: return "DECIMAL_LITERAL";
+    case TokenType::FLOATING_POINT_LITERAL: return "FLOATING_POINT_LITERAL";
+    case TokenType::OPEN_BRACKET: return "OPEN_BRACKET";
+    case TokenType::CLOSE_BRACKET: return "CLOSE_BRACKET";
+    case TokenType::EQUALS: return "EQUALS";
+    case TokenType::PLUS: return "PLUS";
+    case TokenType::MINUS: return "MINUS";
+    case TokenType::MULT: return "MULT";
+    case TokenType::DIV: return "DIV";
+    case TokenType::MOD: return "MOD";
+    case TokenType::PLUS_EQ: return "PLUS_EQ";
+    case TokenType::MINUS_EQ: return "MINUS_EQ";
+    case TokenType::MULT_EQ: return "MULT_EQ";
+    case TokenType::DIV_EQ: return "DIV_EQ";
+    case TokenType::MOD_EQ: return "MOD_EQ";
+    case TokenType::KW_STRUCT: return "KW_STRUCT";
+    case TokenType::KW_UNION: return "KW_UNION";
+    case TokenType::PERIOD: return "PERIOD";
+    case TokenType::OPEN_BRACE: return "OPEN_BRACE";
+    case TokenType::CLOSE_BRACE: return "CLOSE_BRACE";
+    case TokenType::LINE_COMMENT: return "LINE_COMMENT";
+    case TokenType::OPEN_BLK_CMT: return "OPEN_BLK_CMT";
+    case TokenType::CLOSE_BLK_CMT: return "CLOSE_BLK_CMT";
+    case TokenType::OPEN_PAREN: return "OPEN_PAREN";
+    case TokenType::CLOSE_PAREN: return "CLOSE_PAREN";
+    case TokenType::KW_RETURN: return "KW_RETURN";
+    case TokenType::KW_IF: return "KW_IF";
+    case TokenType::KW_WHILE: return "KW_WHILE";
+    case TokenType::DOUBLE_EQ: return "DOUBLE_EQ";
+    case TokenType::TRIPLE_EQ: return "TRIPLE_EQ";
+    case TokenType::LSS: return "LSS";
+    case TokenType::GTR: return "GTR";
+    case TokenType::LEQ: return "LEQ";
+    case TokenType::GEQ: return "GEQ";
+    case TokenType::WHITESPACE: return "WHITESPACE";
+    default: std::cout << "FATAL ERROR: UNKNOWN TOKEN TYPE: " << static_cast<int>(type) << std::endl; throw new std::runtime_error("no stringification for token type!");
   }
+}
+
+std::ostream& operator<< (std::ostream& out, const TokenType& type) {
+  out << typeToString(type);
   return out;
+}
+
+boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const Token& tok) {
+  ofs << fmt::format(
+    "{:>25} at "
+    "[Line: {: > 4d}, Column: {: > 3d}]: "
+    "`{}`",
+    typeToString(tok.getType()),
+    tok.getLine(), tok.getCol(),
+    tok.getEscapedContents());
+  return ofs;
 }
 
 //    (^[^\S\n]*\/\/[^\n]*)|(\/\*(\*(?!\/)|[^*]|[\n])*\*\/)
@@ -115,8 +132,6 @@ Lexer::Lexer(Options &options) {
   assert(tokenRegexMap.size() == TokenType::NUM_TOKEN_TYPES && "Must define regex for every token type!");
 }
 
-//
-
 bool Lexer::validateOptionsAndSource(std::string sourceCode) {
   if (sourceCode.empty()) {
     std::cout << "Cannot lex empty file!" << std::endl;
@@ -126,8 +141,9 @@ bool Lexer::validateOptionsAndSource(std::string sourceCode) {
 }
 
 std::string Lexer::preprocessSource(std::string processed) {
-  processed = std::regex_replace(processed, std::regex{"\\\\[^\\S\\n]*\\n"}, " "); // replace \\n with ` `
-  processed = std::regex_replace(processed, std::regex{"\\n+"}, "\n"); // replace multiple \n with single `\n`
+  // these would mess up line numbers! consider adding a token to account for this.
+  // processed = std::regex_replace(processed, std::regex{"\\\\[^\\S\\n]*\\n"}, " "); // replace \\n with ` `
+  // processed = std::regex_replace(processed, std::regex{"\\n+"}, "\n"); // replace multiple \n with single `\n`
   return processed;
 }
 
@@ -144,7 +160,7 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
   auto sourceEnd = processedSource.end();
 
   while (sourceBegin != sourceEnd) {
-    // std::cout << "Finding token for index: " << sourceBegin - processedSource.begin() << "\n\tSource: " << processedSource.substr(sourceBegin-processedSource.begin(), 10) << std::endl;
+    std::cout << "Finding token for index: " << sourceBegin - processedSource.begin() << "\n\tSource: " << processedSource.substr(sourceBegin-processedSource.begin(), 10) << std::endl;
     TokenType longestMatchType = TokenType::NUM_TOKEN_TYPES;
     lexing_match longestMatch;
     for (auto tokenRegex : tokenRegexMap) {
@@ -160,11 +176,11 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
         match_result, regex, // save result based on applied regex
         std::regex_constants::match_continuous); // ensure match starts at `sourceBegin`
       if (!hasMatch) { // no match_result found for this regex
-        // std::cout << "\tNo match for type: " << tokenRegex.first << std::endl;
+        std::cout << "\tNo match for type: " << tokenRegex.first << std::endl;
         continue;
       }
       lexing_match match = match_result[0];
-      // std::cout << "\tFound match! Type: " << tokenRegex.first << std::endl;
+      std::cout << "\tFound match! Type: " << tokenRegex.first << std::endl;
       size_t matchLen = match.length();
       if (tokenRegex.first == TokenType::NUM_TOKEN_TYPES) {
         std::cout << "Invalid token found!\n\tLocation: " << sourceBegin-processedSource.begin() << "\n\tToken: " << match.str() << "\n";
@@ -179,10 +195,26 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
       std::cout << "FATAL LEXING ERROR!\n";
       return LexerResult::INVALID_TOKENS;
     }
-    // std::cout << "Register token{" << longestMatchType << "}: `" << longestMatch.str() << "`" << std::endl;
-    resultTokens.push_back(Token{longestMatch.str(), longestMatchType});
+    std::cout << "Register token{" << longestMatchType << "}: `" << longestMatch.str() << "`" << std::endl;
+    resultTokens.push_back(Token{longestMatch.str(), longestMatchType, 0, 0});
     sourceBegin += longestMatch.length();
   }
 
   return LexerResult::LEXING_SUCCESS;
+}
+
+bool Lexer::writeTokens(std::vector<Token> &tokens, boost::filesystem::path filePath) {
+  if (!boost::filesystem::exists(filePath.parent_path())) {
+    std::cout << "Cannot write tokens to " << filePath << " because parent dir does not exist!" << std::endl;
+    return false;
+  }
+
+  boost::filesystem::ofstream tokenFile{filePath};
+
+  for (auto token : tokens) {
+    tokenFile << token << '\n';
+  }
+
+  tokenFile.close();
+  return true;
 }

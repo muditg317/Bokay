@@ -8,6 +8,7 @@
 
 #include <boost/filesystem.hpp>
 #include <boost/range/algorithm/count.hpp>
+#include <fmt/format.h>
 
 static std::string readFile(boost::filesystem::path filePath) {
   assert(boost::filesystem::exists(filePath) && "File must exist to be read! Check before calling this method!");
@@ -19,8 +20,10 @@ static std::string readFile(boost::filesystem::path filePath) {
 
 Compiler::Compiler(Options &options) :
     sourceFile(options.sourceFile),
+    outputTemps(options.outputTemps),
     lexer(options)
 {
+  sourceName = sourceFile.stem().string();
   // validate(options);
   if (options.outputTemps) {
     tempFileDir = boost::filesystem::path(options.tempFileDir);
@@ -84,9 +87,17 @@ CompilerResult Compiler::run(void) {
     return CompilerResult::FAILED_LEXING;
   }
 
-  std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
-    std::cout << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" << std::endl;
-  });
+  std::cout << "Found " << tokens.size() << " tokens!" << std::endl;
+
+  if (outputTemps) {
+    boost::filesystem::path tokenFile = tempFileDir / fmt::format("{}.tok", sourceName);
+    std::cout << "Writing tokens to temp file: " << tokenFile << std::endl;
+    lexer.writeTokens(tokens, tokenFile);
+  }
+
+  // std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
+  //   std::cout << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" << std::endl;
+  // });
 
   return CompilerResult::COMPILATION_SUCCESS;
 }

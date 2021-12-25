@@ -12,6 +12,9 @@ project(
 find_package(Boost QUIET REQUIRED COMPONENTS program_options filesystem) # algorithm is header-only
 message(STATUS "Boost::program_options version: ${Boost_VERSION}")
 
+# Adds fmt::fmt
+find_package(fmt CONFIG REQUIRED)
+
 # This is needed if your Boost version is newer than your CMake version
 # or if you have an old version of CMake (<3.5)
 # if(NOT TARGET Boost::program_options)
@@ -42,8 +45,8 @@ target_include_directories(LibCompiler PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_include_directories(LibLexer PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 
 target_link_libraries(LibArgsParser PRIVATE Boost::program_options)
-target_link_libraries(LibCompiler PRIVATE Boost::filesystem)
-target_link_libraries(LibLexer PRIVATE Boost::headers)
+target_link_libraries(LibCompiler PRIVATE Boost::filesystem fmt::fmt)
+target_link_libraries(LibLexer PRIVATE Boost::headers Boost::filesystem fmt::fmt)
 
 
 add_executable(bokay-cpp main.cpp)

@@ -22,6 +22,8 @@ class Compiler {
   private:
     Lexer lexer;
     bool validate_options(void);
+    bool outputTemps;
+    std::string sourceName;
     boost::filesystem::path sourceFile;
     boost::filesystem::path tempFileDir;
     boost::filesystem::path outputPath;

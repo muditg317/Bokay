@@ -86,7 +86,7 @@ std::string runProgram(TestingOptions options, std::string engineArgs, std::stri
 }
 
 std::string ShellCommandOutput::toString(void) {
-  return fmt::format("--STDOUT:\n{}\n--STDOUT-END\n--" UNIQUE_TEXT_SECRET "--\n--STDERR:\n{}\n--STDERR-END", stdOut, stdErr);
+  return fmt::format("--STDOUT:\n{}\n--STDOUT-END--" UNIQUE_TEXT_SECRET "--STDERR:\n{}\n--STDERR-END", stdOut, stdErr);
 }
 
 ProgramOutput::ProgramOutput(boost::filesystem::path testOutputFilePath) : ProgramOutput::ProgramOutput() {

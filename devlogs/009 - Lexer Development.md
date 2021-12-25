@@ -3,13 +3,14 @@
 December 24th, 2021
 
 Sign on: 7pm\
-Sign off: XXpm/am
+Sign off: 1am
 </div>
 
 ## Goals
 - [x] Fix the lexer to not parse larger items at a time
   - Cancelled based on research. Continue parsing strings, but allow comments to pass to parser.
 - [x] Finish the lexing implementation to return a stream of tokens
+  - Still needs bug fixing and improvements.
 
 ## Struggles
 - Nothing serious today!

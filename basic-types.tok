@@ -1,0 +1,48 @@
+LINE_COMMENT at []: //
+WHITESPACE at []:  
+WORD at []: this
+WHITESPACE at []:  
+WORD at []: test
+WHITESPACE at []:  
+WORD at []: checks
+WHITESPACE at []:  
+WORD at []: that
+WHITESPACE at []:  
+WORD at []: simple
+WHITESPACE at []:  
+WORD at []: integer
+WHITESPACE at []:  
+WORD at []: and
+WHITESPACE at []:  
+WORD at []: floating
+WHITESPACE at []:  
+WORD at []: point
+WHITESPACE at []:  
+WORD at []: types
+WHITESPACE at []:  
+WORD at []: can
+WHITESPACE at []:  
+WORD at []: be
+WHITESPACE at []:  
+WORD at []: compiled
+WHITESPACE at []: 
+
+WORD at []: u8
+WHITESPACE at []:  
+WORD at []: a_byte
+WHITESPACE at []:  
+EQUALS at []: =
+WHITESPACE at []:  
+WORD at []: 5
+SEMICOLON at []: ;
+WHITESPACE at []: 
+
+WORD at []: s64
+WHITESPACE at []:  
+WORD at []: signed
+WHITESPACE at []:  
+EQUALS at []: =
+WHITESPACE at []:  
+MINUS at []: -
+WORD at []: 100
+SEMICOLON at []: ;

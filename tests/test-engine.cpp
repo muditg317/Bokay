@@ -84,8 +84,8 @@ TEST_CASE(#testCase ".bokay", "[main]") {                                       
 
 #define ALL_TESTS     \
 TEST_MACRO(full-design) \
-// TEST_MACRO(basic-types) \
 // TEST_MACRO(one-comment) \
+// TEST_MACRO(basic-types) \
 
 
 #define TEST_MACRO(testCase) ENGINE_TEST(testCase)

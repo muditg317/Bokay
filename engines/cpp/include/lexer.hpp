@@ -8,6 +8,8 @@
 #include <vector>
 #include <regex>
 
+#include <boost/filesystem/path.hpp>
+#include <boost/filesystem/fstream.hpp>
 
 enum class LexerResult {
   LEXING_SUCCESS,
@@ -52,26 +54,41 @@ enum class TokenType : char {
   NUM_TOKEN_TYPES, // counter for enum types
 };
 
+std::string typeToString(const TokenType& type);
 std::ostream& operator<< (std::ostream& out, const TokenType& type);
 
 class Token {
   public:
-    Token(std::string str, TokenType tok_type): contents(str), type(tok_type) {};
-    std::string getContents(void) {
+    Token(std::string str, TokenType tok_type, int16_t lineNum, int16_t colNum): contents(str), type(tok_type), line(lineNum), col(colNum) {};
+    const std::string getContents(void) const {
       return contents;
     }
-    TokenType getType(void) {
+    const std::string getEscapedContents(void) const {
+      return type == TokenType::WHITESPACE ? std::regex_replace(contents, std::regex{"\\n"}, "\\n") : contents;
+    }
+    const TokenType getType(void) const {
       return type;
     }
+    const int16_t getLine(void) const {
+      return line;
+    }
+    const int16_t getCol(void) const {
+      return col;
+    }
   private:
-    std::string contents;
-    TokenType type;
+    const std::string contents;
+    const TokenType type;
+    const int16_t line;
+    const int16_t col;
 };
+
+boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const Token& tok);
 
 class Lexer {
   public:
     Lexer(Options &options);
     LexerResult run(std::string sourceCode, std::vector<Token> &resultTokens);
+    bool writeTokens(std::vector<Token> &tokens, boost::filesystem::path filePath);
   private:
     bool validateOptionsAndSource(std::string sourceCode);
     std::string preprocessSource(std::string sourceCode);
