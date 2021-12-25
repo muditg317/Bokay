@@ -28,17 +28,23 @@ std::vector<std::string> splitByDelim(std::string strToSplit, std::string delim)
   return res;
 }
 
-std::string execShellCommand(std::string cmd) {
+ShellCommandOutput execShellCommand(std::string cmd) {
     std::array<char, 128> buffer;
-    std::string result;
-    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
+    std::string stdOut;
+
+    boost::filesystem::path tmpStdErrPath{"./stderr.txt"};
+    std::string pipedCmd = fmt::format("{} 2> {}", cmd, tmpStdErrPath.c_str());
+
+    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(pipedCmd.c_str(), "r"), pclose);
     if (!pipe) {
         throw std::runtime_error("popen() failed!");
     }
     while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
+        stdOut += buffer.data();
     }
-    return result;
+    std::string stdErr = readFile(tmpStdErrPath);
+    boost::filesystem::remove(tmpStdErrPath);
+    return ShellCommandOutput{stdOut, stdErr};
 }
 
 std::string readFile(boost::filesystem::path filePath) {
@@ -59,9 +65,9 @@ std::string engineCompile(TestingOptions options, std::string engineArgs, std::s
     options.buildDir, fileToCompile // "-o {}/{}"
   );
   // std::cout << "compile command: " << compilationCommand << std::endl;
-  std::string compilationOutput = execShellCommand(compilationCommand);
+  ShellCommandOutput compilationOutput = execShellCommand(compilationCommand);
   // std::cout << "compilation output: " << compilationOutput << std::endl;
-  return compilationOutput;
+  return compilationOutput.toString();
 }
 
 std::string runProgram(TestingOptions options, std::string engineArgs, std::string fileToRun, std::string runArgs) {
@@ -74,9 +80,13 @@ std::string runProgram(TestingOptions options, std::string engineArgs, std::stri
     programPath.c_str(),
     runArgs);
   // std::cout << "execute command: " << executionCommand << std::endl;
-  std::string executionOutput = execShellCommand(executionCommand);
+  ShellCommandOutput executionOutput = execShellCommand(executionCommand);
   // std::cout << "execute output: " << executionOutput << std::endl;
-  return executionOutput;
+  return executionOutput.toString();
+}
+
+std::string ShellCommandOutput::toString(void) {
+  return fmt::format("--STDOUT:\n{}\n--STDOUT-END\n--" UNIQUE_TEXT_SECRET "--\n--STDERR:\n{}\n--STDERR-END", stdOut, stdErr);
 }
 
 ProgramOutput::ProgramOutput(boost::filesystem::path testOutputFilePath) : ProgramOutput::ProgramOutput() {

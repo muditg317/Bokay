@@ -80,11 +80,12 @@ CompilerResult Compiler::run(void) {
   std::vector<Token> tokens;
   LexerResult result = lexer.run(fileContents, tokens);
   if (result != LexerResult::LEXING_SUCCESS) {
+    std::cout << "Lexing has failed!\n";
     return CompilerResult::FAILED_LEXING;
   }
 
   std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
-    std::cout << "Found token: " << tok.getContents() << std::endl;
+    std::cout << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" << std::endl;
   });
 
   return CompilerResult::COMPILATION_SUCCESS;

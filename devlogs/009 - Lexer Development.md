@@ -14,16 +14,26 @@ Sign off: XXpm/am
 - Nothing serious today!
 
 ## Notes
-### No major stuff
+### Research on Lexing and Parsing
+- Lexers can remove comments
+- Lexers can/should? parse the strings
+- Using regex is a common practice for lexers
 
 ## Log
-- bulleted list
+- Update some regex values
+- Add regexes for start/end block comment
+- Make token types more generic (specificity will come from parser)
+- Add stderr capture to `execShellCommand`
+- Lexing tokens seems to be rouhgly working! Improvements to come later.
 
 ## TODO
-1. Numbered list
+1. Setup `glog` for more efficient logging
+2. Continue development on/refine the lexer.
 
 ## Language Status/Changes
 - None today!
 
 ## Unorganized thoughts as they came
-- 
+- Perhaps I'll disallow weirdly placed comments to avoid the issue with strings.
+- I think I need to start using a logging library for all the debugging work.
+  - `glog` by Google looks quite good: https://github.com/google/glog

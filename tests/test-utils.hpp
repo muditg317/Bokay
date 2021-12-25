@@ -57,6 +57,14 @@ static std::string outputFileExtensions[COUNT_OUTPUT_TYPES] = {ALL_OUTPUT_TYPES}
 static std::string outputFileNames[COUNT_OUTPUT_TYPES] = {ALL_OUTPUT_TYPES};
 #undef X
 
+class ShellCommandOutput {
+  public:
+    ShellCommandOutput(std::string out, std::string err): stdOut(out), stdErr(err) {};
+    std::string toString(void);
+  private:
+    std::string stdOut;
+    std::string stdErr;
+};
 
 class ProgramOutput {
   public:
@@ -72,10 +80,24 @@ class ProgramOutput {
 
 std::vector<std::string> splitByDelim(std::string strToSplit);
 
-std::string execShellCommand(std::string);
+/**
+ * @brief runs the provided string as a shell command
+ * 
+ * @param cmd the command to run in the shell
+ * @return ShellCommandOutput a custom format for the output of the command that includes stdout and stderr
+ */
+ShellCommandOutput execShellCommand(std::string cmd);
 
 std::string readFile(boost::filesystem::path);
 
+/**
+ * @brief runs the compiler engine with the provided options / arguments on the specified file
+ * 
+ * @param options testing options
+ * @param engineArgs compilation options
+ * @param fileToCompile the file to compile (usually a test case file)
+ * @return std::string the output of the compilation (concatenated stdout/stderr)
+ */
 std::string engineCompile(TestingOptions options, std::string engineArgs, std::string fileToCompile);
 
 std::string runProgram(TestingOptions options, std::string engineArgs, std::string fileToRun, std::string runArgs);

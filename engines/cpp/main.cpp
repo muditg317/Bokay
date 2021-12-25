@@ -3,13 +3,26 @@
 
 #include <exception>
 #include <iostream>
-
+// #define TESTING
+#ifdef TESTING
+#include <regex>
+#define REGEX "(a comment)"
+int main(int argc, char *argv[]) {
+  std::string comment = "// a comment";
+  std::cout << "the string: `" << comment << "`\n";
+  std::regex re{REGEX};
+  std::cout << "the regex: `" REGEX "`\n";
+  std::smatch match_result;
+  bool hasMatch = std::regex_search(comment.cbegin(), comment.cend(), match_result, re);
+  std::cout << "hasMatch: " << hasMatch << std::endl;
+}
+#else
 int main(int argc, char *argv[]) {
 
   Options options;
   ParseResult ret = parseCommandLine(argc, argv, options);
-  if (ret != PARSING_SUCCESS) {
-    return ret;
+  if (ret != ParseResult::PARSING_SUCCESS) {
+    return static_cast<int>(ret);
   }
 
   Compiler compiler(options);
@@ -17,10 +30,11 @@ int main(int argc, char *argv[]) {
   try {
     CompilerResult result = compiler.run();
     // if (result != COMPILATION_SUCCESS) {
-    return result;
+    return static_cast<int>(result);
     // }
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
     return 1;
   }
 }
+#endif

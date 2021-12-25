@@ -83,8 +83,10 @@ TEST_CASE(#testCase ".bokay", "[main]") {                                       
 #define TEST_AS_STRING_WITH_COMMA(testCase) #testCase,
 
 #define ALL_TESTS     \
-TEST_MACRO(basic-types) 
-// TEST_MACRO(full-design)
+TEST_MACRO(full-design) \
+// TEST_MACRO(basic-types) \
+// TEST_MACRO(one-comment) \
+
 
 #define TEST_MACRO(testCase) ENGINE_TEST(testCase)
 ALL_TESTS

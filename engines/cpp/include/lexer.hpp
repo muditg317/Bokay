@@ -3,6 +3,7 @@
 
 #include "args-parser.hpp"
 
+#include <iostream>
 #include <string>
 #include <vector>
 #include <regex>
@@ -14,14 +15,14 @@ enum class LexerResult {
   INVALID_TOKENS,
 };
 
-enum class TokenType : size_t {
-  NAME,
-  LINE_ENDING, // ;
+enum class TokenType : char {
+  WORD,
+  SEMICOLON, // ; -- used for line ending
   KW_IMPORT,
-  IMPORT_DELIM, // ,
+  COMMA, // , -- used for param separation and delimiting imports
   KW_FROM,
   IMPORT_SOURCE, // relative path as a string
-  LIB_ACCESSOR, // :: in `FullImportedLibrary::aMethodInLib`
+  COLON, // : -- used for :: in `FullImportedLibrary::aMethodInLib`
   BASE_TYPE, // integer or floating point types
   DECIMAL_LITERAL,
   // HEX_LITERAL,
@@ -34,19 +35,24 @@ enum class TokenType : size_t {
   PLUS,   MINUS,   MULT,   DIV,   MOD,
   PLUS_EQ,MINUS_EQ,MULT_EQ,DIV_EQ,MOD_EQ,
   KW_STRUCT,KW_UNION,
-  MEMBER_ACCESSOR, // . in `struct_var.member`
+  PERIOD, // . used for member access -- . in `struct_var.member`
   OPEN_BRACE,CLOSE_BRACE, // {}
-  // COMMENT_STARTER, // //
+  LINE_COMMENT, // // used for line comment starting
+  OPEN_BLK_CMT, // /*
+  CLOSE_BLK_CMT, // */
   OPEN_PAREN,CLOSE_PAREN, // ()
   KW_RETURN,
   KW_IF,
   KW_WHILE,
   DOUBLE_EQ, // ==
   TRIPLE_EQ, // ===
-  LESS_THAN,GREATER_THAN,
-  LESS_EQ,  GREATER_EQ,
+  LSS,GTR,
+  LEQ,GEQ,
+  WHITESPACE,
   NUM_TOKEN_TYPES, // counter for enum types
 };
+
+std::ostream& operator<< (std::ostream& out, const TokenType& type);
 
 class Token {
   public:
@@ -68,7 +74,7 @@ class Lexer {
     LexerResult run(std::string sourceCode, std::vector<Token> &resultTokens);
   private:
     bool validateOptionsAndSource(std::string sourceCode);
-    std::string stripCommentsAndWhitespace(std::string sourceCode);
+    std::string preprocessSource(std::string sourceCode);
 };
 
 #endif
