@@ -7,8 +7,9 @@ Sign off: XXpm/am
 </div>
 
 ## Goals
-- [ ] Fix the lexer to not parse larger items at a time
-- [ ] Finish the lexing implementation to return a stream of tokens
+- [x] Fix the lexer to not parse larger items at a time
+  - Cancelled based on research. Continue parsing strings, but allow comments to pass to parser.
+- [x] Finish the lexing implementation to return a stream of tokens
 
 ## Struggles
 - Nothing serious today!
