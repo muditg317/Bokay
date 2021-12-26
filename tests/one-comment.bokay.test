@@ -1,6 +1,23 @@
+--STDOUT:
+Input source file: tests/one-comment.bokay
+Output path: tests/build/one-comment
+Temp file output to: tests/build
+File contains 1 lines.
+Line 1: // hello world.
+Found 6 tokens!
+Writing tokens to temp file: "tests/build/one-comment.tok"
 
+--STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+
+--STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Lexed tokens(tests/build/one-comment.tok)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `hello`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `world`
+         PERIOD at [Line:    0, Column:   0]: `.`
+
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 Parse tree(tests/build/one-comment.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================

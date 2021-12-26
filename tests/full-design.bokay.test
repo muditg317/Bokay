@@ -1,17 +1,1186 @@
-Input source file: tests/compiles.bokay
-Output path: tests/build/compiles
+--STDOUT:
+Input source file: tests/full-design.bokay
+Output path: tests/build/full-design
 Temp file output to: tests/build
-File contains 1 lines.
-Line 1: // The program should compile
-Found token: //
+File contains 88 lines.
+Line 1: // The program should compile once all features are implemented.
+Found 1164 tokens!
+Writing tokens to temp file: "tests/build/full-design.tok"
+
+--STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+
+--STDERR-END
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `The`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `program`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `should`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `compile`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `once`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `all`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `features`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `are`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `implemented`
+         PERIOD at [Line:    0, Column:   0]: `.`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `imports`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+      KW_IMPORT at [Line:    0, Column:   0]: `import`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `WholeLib`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `oneMethod`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `SomeClass`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `anotherMethod`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+        KW_FROM at [Line:    0, Column:   0]: `from`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+  IMPORT_SOURCE at [Line:    0, Column:   0]: `"file/to/import.bokay"`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+           WORD at [Line:    0, Column:   0]: `should`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `be`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `similar`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `JS`
+            DIV at [Line:    0, Column:   0]: `/`
+           WORD at [Line:    0, Column:   0]: `TS`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `style`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+           WORD at [Line:    0, Column:   0]: `extracts`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `only`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `certain`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `symbols`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `into`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `the`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `current`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `context`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `or`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `all`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `symbols`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `under`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `the`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `WholeLib`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `namespace`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+           WORD at [Line:    0, Column:   0]: `access`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `with`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `WholeLib`
+          COLON at [Line:    0, Column:   0]: `:`
+          COLON at [Line:    0, Column:   0]: `:`
+           WORD at [Line:    0, Column:   0]: `oneMethod`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+         PERIOD at [Line:    0, Column:   0]: `.`
+         PERIOD at [Line:    0, Column:   0]: `.`
+         PERIOD at [Line:    0, Column:   0]: `.`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      KW_IMPORT at [Line:    0, Column:   0]: `import`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `WholeLib`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `oneMethod`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `SomeClass`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `anotherMethod`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+        KW_FROM at [Line:    0, Column:   0]: `from`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+  IMPORT_SOURCE at [Line:    0, Column:   0]: `"./export-stuff.bokay"`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `types`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+           WORD at [Line:    0, Column:   0]: `integers`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `u`
+           PIPE at [Line:    0, Column:   0]: `|`
+           WORD at [Line:    0, Column:   0]: `s`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `8`
+           PIPE at [Line:    0, Column:   0]: `|`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `16`
+           PIPE at [Line:    0, Column:   0]: `|`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `32`
+           PIPE at [Line:    0, Column:   0]: `|`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `64`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: `   \n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+           WORD at [Line:    0, Column:   0]: `floating`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `f`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `32`
+           PIPE at [Line:    0, Column:   0]: `|`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `64`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: `          `
+          MINUS at [Line:    0, Column:   0]: `-`
+          MINUS at [Line:    0, Column:   0]: `-`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `no`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `128`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `because`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `usually`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `implemented`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `in`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `software`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `anyways`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+           WORD at [Line:    0, Column:   0]: `arrays`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `base`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `variable_name`
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `literal`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `number`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `declarations`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `name`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `base`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `variable_name`
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `literal`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `number`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `for`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `arrays`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `name`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `expression`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `of`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `correct`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `u8`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `a_byte`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `5`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `s64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `signed`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `100`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `f32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+  FLOAT_LITERAL at [Line:    0, Column:   0]: `-1234.4352`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `u16`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `arr`
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `3`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `global`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `space`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `will`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `default`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `0`
+          APOST at [Line:    0, Column:   0]: `'`
+           WORD at [Line:    0, Column:   0]: `d`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `out`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `memory`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+           WORD at [Line:    0, Column:   0]: `arr`
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `1`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `70531`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `special`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `assignments`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+           WORD at [Line:    0, Column:   0]: `C`
+          MINUS at [Line:    0, Column:   0]: `-`
+           WORD at [Line:    0, Column:   0]: `style`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+        PLUS_EQ at [Line:    0, Column:   0]: `+=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+       MINUS_EQ at [Line:    0, Column:   0]: `-=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+        MULT_EQ at [Line:    0, Column:   0]: `*=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         DIV_EQ at [Line:    0, Column:   0]: `/=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `etc`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `special`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `types`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+           WORD at [Line:    0, Column:   0]: `structs`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `same`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `as`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `C`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+           WORD at [Line:    0, Column:   0]: `can`
+          APOST at [Line:    0, Column:   0]: `'`
+           WORD at [Line:    0, Column:   0]: `t`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `preinitialize`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `0`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `initialized`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+           WORD at [Line:    0, Column:   0]: `unions`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `base`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+       KW_UNION at [Line:    0, Column:   0]: `union`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `new_name`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `name`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+         PERIOD at [Line:    0, Column:   0]: `.`
+         PERIOD at [Line:    0, Column:   0]: `.`
+         PERIOD at [Line:    0, Column:   0]: `.`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+           WORD at [Line:    0, Column:   0]: `access`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `unions`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `with`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         PERIOD at [Line:    0, Column:   0]: `.`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+           WORD at [Line:    0, Column:   0]: `auto`
+          MINUS at [Line:    0, Column:   0]: `-`
+           WORD at [Line:    0, Column:   0]: `assume`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `base`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `of`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+       KW_UNION at [Line:    0, Column:   0]: `union`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          KW_IF at [Line:    0, Column:   0]: `if`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         PERIOD at [Line:    0, Column:   0]: `.`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `not`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `used`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `enables`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `using`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `u64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `as`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `u16`
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `4`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `or`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `something`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      KW_STRUCT at [Line:    0, Column:   0]: `struct`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `my_struct`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+      BASE_TYPE at [Line:    0, Column:   0]: `u16`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `unsigned16`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+      BASE_TYPE at [Line:    0, Column:   0]: `s32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `number`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+           WORD at [Line:    0, Column:   0]: `my_struct`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `struct_var`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `can`
+          APOST at [Line:    0, Column:   0]: `'`
+           WORD at [Line:    0, Column:   0]: `t`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `be`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `initialized`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `for`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `now`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `defaults`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `0`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `initialized`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+           WORD at [Line:    0, Column:   0]: `struct_var`
+         PERIOD at [Line:    0, Column:   0]: `.`
+           WORD at [Line:    0, Column:   0]: `unsigned16`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `1452`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+           WORD at [Line:    0, Column:   0]: `struct_var`
+         PERIOD at [Line:    0, Column:   0]: `.`
+           WORD at [Line:    0, Column:   0]: `number`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `23441`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `u64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+       KW_UNION at [Line:    0, Column:   0]: `union`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `my_union`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+      BASE_TYPE at [Line:    0, Column:   0]: `f32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `height`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+      BASE_TYPE at [Line:    0, Column:   0]: `u32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `chunks`
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `2`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+      BASE_TYPE at [Line:    0, Column:   0]: `u16`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `small_chunks`
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `4`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+           WORD at [Line:    0, Column:   0]: `my_union`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `union_var`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `100`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `simply`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `has`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `be`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `assignable`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `one`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `of`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `the`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `components`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `or`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `the`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `base`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `u64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `a_number`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `union_var`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `automatically`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `assumes`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `base`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `when`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `not`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `specified`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `f64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `big_float`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `union_var`
+         PERIOD at [Line:    0, Column:   0]: `.`
+           WORD at [Line:    0, Column:   0]: `height`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `must`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `specify`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `which`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `extract`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `with`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `since`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `multiple`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `options`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `are`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `assignable`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `f64`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `u32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `small_num`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `union_var`
+         PERIOD at [Line:    0, Column:   0]: `.`
+           WORD at [Line:    0, Column:   0]: `chunks`
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `0`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `must`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `specify`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `which`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `use`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `when`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `extracting`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `value`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `functions`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+      KW_RETURN at [Line:    0, Column:   0]: `return`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `function`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `name`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `type`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `name`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   OPEN_BRACKET at [Line:    0, Column:   0]: `[`
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `default`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `be`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `evaluated`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `at`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `each`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `call`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+  CLOSE_BRACKET at [Line:    0, Column:   0]: `]`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `contents`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+           WORD at [Line:    0, Column:   0]: `default`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `params`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `can`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `be`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `any`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `where`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `in`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `the`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `arg`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `list`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `skip`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `them`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `via`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `empty`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `commas`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          GRAVE at [Line:    0, Column:   0]: ```
+           WORD at [Line:    0, Column:   0]: `func`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `5`
+          COMMA at [Line:    0, Column:   0]: `,`
+          COMMA at [Line:    0, Column:   0]: `,`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `253`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+          GRAVE at [Line:    0, Column:   0]: ```
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `u32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `do_stuff`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+      BASE_TYPE at [Line:    0, Column:   0]: `u16`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `a`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `u32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `b`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+      KW_RETURN at [Line:    0, Column:   0]: `return`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `a`
+           PLUS at [Line:    0, Column:   0]: `+`
+           WORD at [Line:    0, Column:   0]: `b`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `u32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `res`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `do_stuff`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `a`
+          COMMA at [Line:    0, Column:   0]: `,`
+           WORD at [Line:    0, Column:   0]: `b`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `s64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `weird_defaults`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+      BASE_TYPE at [Line:    0, Column:   0]: `u16`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `a`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `5`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `u32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `b`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `s16`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `c`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `s32`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `d`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `100`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `s64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `e`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `8398`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      BASE_TYPE at [Line:    0, Column:   0]: `u8`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `f`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+      KW_RETURN at [Line:    0, Column:   0]: `return`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `a`
+           PLUS at [Line:    0, Column:   0]: `+`
+           WORD at [Line:    0, Column:   0]: `b`
+           PLUS at [Line:    0, Column:   0]: `+`
+           WORD at [Line:    0, Column:   0]: `c`
+           PLUS at [Line:    0, Column:   0]: `+`
+           WORD at [Line:    0, Column:   0]: `d`
+           PLUS at [Line:    0, Column:   0]: `+`
+           WORD at [Line:    0, Column:   0]: `e`
+           PLUS at [Line:    0, Column:   0]: `+`
+           WORD at [Line:    0, Column:   0]: `f`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `s64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `weird`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `weird_defaults`
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+          COMMA at [Line:    0, Column:   0]: `,`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `5`
+          COMMA at [Line:    0, Column:   0]: `,`
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `10`
+          COMMA at [Line:    0, Column:   0]: `,`
+          COMMA at [Line:    0, Column:   0]: `,`
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `234`
+          COMMA at [Line:    0, Column:   0]: `,`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `20`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `runs`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `with`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `abcdef`
+      DOUBLE_EQ at [Line:    0, Column:   0]: `==`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `5`
+          COMMA at [Line:    0, Column:   0]: `,`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `5`
+          COMMA at [Line:    0, Column:   0]: `,`
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `10`
+          COMMA at [Line:    0, Column:   0]: `,`
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `100`
+          COMMA at [Line:    0, Column:   0]: `,`
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `234`
+          COMMA at [Line:    0, Column:   0]: `,`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `20`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+          MINUS at [Line:    0, Column:   0]: `-`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `returns`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `314`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          KW_IF at [Line:    0, Column:   0]: `if`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `conditionals`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+          KW_IF at [Line:    0, Column:   0]: `if`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `condition`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `code`
+         PERIOD at [Line:    0, Column:   0]: `.`
+         PERIOD at [Line:    0, Column:   0]: `.`
+         PERIOD at [Line:    0, Column:   0]: `.`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+          KW_IF at [Line:    0, Column:   0]: `if`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `weird`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      DOUBLE_EQ at [Line:    0, Column:   0]: `==`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `314`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `checks`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `value`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `equals`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `for`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `structs`
+          COMMA at [Line:    0, Column:   0]: `,`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `will`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `iterate`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `using`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      DOUBLE_EQ at [Line:    0, Column:   0]: `==`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `over`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `entries`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+           WORD at [Line:    0, Column:   0]: `u18`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `cond_var`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `0`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+      BASE_TYPE at [Line:    0, Column:   0]: `s64`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `weird2`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `weird`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+          KW_IF at [Line:    0, Column:   0]: `if`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `weird`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+      TRIPLE_EQ at [Line:    0, Column:   0]: `===`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `weird2`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `checks`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `pointer`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `equals`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `similar`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `to`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `JS`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+           WORD at [Line:    0, Column:   0]: `u18`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `cond_var`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+         EQUALS at [Line:    0, Column:   0]: `=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `0`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+       KW_WHILE at [Line:    0, Column:   0]: `while`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `loops`
+          COLON at [Line:    0, Column:   0]: `:`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+       KW_WHILE at [Line:    0, Column:   0]: `while`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+           WORD at [Line:    0, Column:   0]: `condition`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `    `
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+           WORD at [Line:    0, Column:   0]: `code`
+         PERIOD at [Line:    0, Column:   0]: `.`
+         PERIOD at [Line:    0, Column:   0]: `.`
+         PERIOD at [Line:    0, Column:   0]: `.`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+   LINE_COMMENT at [Line:    0, Column:   0]: `//`
+     WHITESPACE at [Line:    0, Column:   0]: `  `
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+       KW_WHILE at [Line:    0, Column:   0]: `while`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_PAREN at [Line:    0, Column:   0]: `(`
+           WORD at [Line:    0, Column:   0]: `weird`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+            LSS at [Line:    0, Column:   0]: `<`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+          MINUS at [Line:    0, Column:   0]: `-`
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `300`
+    CLOSE_PAREN at [Line:    0, Column:   0]: `)`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+     OPEN_BRACE at [Line:    0, Column:   0]: `{`
+     WHITESPACE at [Line:    0, Column:   0]: `\n  `
+           WORD at [Line:    0, Column:   0]: `weird`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+        PLUS_EQ at [Line:    0, Column:   0]: `+=`
+     WHITESPACE at [Line:    0, Column:   0]: ` `
+DECIMAL_LITERAL at [Line:    0, Column:   0]: `1`
+      SEMICOLON at [Line:    0, Column:   0]: `;`
+     WHITESPACE at [Line:    0, Column:   0]: `\n`
+    CLOSE_BRACE at [Line:    0, Column:   0]: `}`
+     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Lexed tokens(tests/build/compiles.tok)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+Parse tree(tests/build/full-design.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Parse tree(tests/build/compiles.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+AST(tests/build/full-design.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-AST(tests/build/compiles.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
-=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Blocks w/ control flow(tests/build/compiles.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+Blocks w/ control flow(tests/build/full-design.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 executable FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

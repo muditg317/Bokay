@@ -11,6 +11,8 @@
 #include <boost/filesystem.hpp>
 #include <fmt/format.h>
 
+#define MAX_TYPE_STR_LEN "15"
+
 const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::WORD, std::regex("(\\b[\\w_][\\w\\d_]*\\b)") },
   { TokenType::SEMICOLON, std::regex("(;)") },
@@ -18,10 +20,10 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::COMMA, std::regex("(,)") },
   { TokenType::KW_FROM, std::regex("(\\bfrom\\b)") },
   { TokenType::IMPORT_SOURCE, std::regex("(\"(\\\\[^\\n]|[^\"\\\\\\n])*\")") }, // ("(\\[^\n]|[^"\\\n])*")
-  { TokenType::COLON, std::regex("(::)") },
+  { TokenType::COLON, std::regex("(:)") },
   { TokenType::BASE_TYPE, std::regex("(\\b((u|s)(8|16|32|64))|(f(32|64))\\b)") },
   { TokenType::DECIMAL_LITERAL, std::regex("(\\b-?\\d+\\b)") },
-  { TokenType::FLOATING_POINT_LITERAL, std::regex("(\\b(-?\\d+)f|-?\\d+\\.\\d+\\b)") },
+  { TokenType::FLOAT_LITERAL, std::regex("(\\b(-?\\d+)f|-?\\d+\\.\\d+\\b)") },
   { TokenType::OPEN_BRACKET, std::regex("(\\[)") },
   { TokenType::CLOSE_BRACKET, std::regex("(\\])") },
   { TokenType::EQUALS, std::regex("(=)") },
@@ -54,6 +56,13 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::GTR, std::regex("(>)") },
   { TokenType::LEQ, std::regex("(<=)") },
   { TokenType::GEQ, std::regex("(>=)") },
+  { TokenType::PIPE, std::regex("(\\|)") },
+  { TokenType::DOUBLE_PIPE, std::regex("(\\|\\|)") },
+  { TokenType::AMP, std::regex("(&)") },
+  { TokenType::DOUBLE_AMP, std::regex("(&&)") },
+  { TokenType::APOST, std::regex("(')") },
+  { TokenType::QUOTE, std::regex("(\")") },
+  { TokenType::GRAVE, std::regex("(`)") },
   { TokenType::WHITESPACE, std::regex("(\\s+)") },
 };
 
@@ -68,7 +77,7 @@ std::string typeToString(const TokenType& type) {
     case TokenType::COLON: return "COLON";
     case TokenType::BASE_TYPE: return "BASE_TYPE";
     case TokenType::DECIMAL_LITERAL: return "DECIMAL_LITERAL";
-    case TokenType::FLOATING_POINT_LITERAL: return "FLOATING_POINT_LITERAL";
+    case TokenType::FLOAT_LITERAL: return "FLOAT_LITERAL";
     case TokenType::OPEN_BRACKET: return "OPEN_BRACKET";
     case TokenType::CLOSE_BRACKET: return "CLOSE_BRACKET";
     case TokenType::EQUALS: return "EQUALS";
@@ -101,6 +110,13 @@ std::string typeToString(const TokenType& type) {
     case TokenType::GTR: return "GTR";
     case TokenType::LEQ: return "LEQ";
     case TokenType::GEQ: return "GEQ";
+    case TokenType::PIPE: return "PIPE";
+    case TokenType::DOUBLE_PIPE: return "DOUBLE_PIPE";
+    case TokenType::AMP: return "AMP";
+    case TokenType::DOUBLE_AMP: return "DOUBLE_AMP";
+    case TokenType::APOST: return "APOST";
+    case TokenType::QUOTE: return "QUOTE";
+    case TokenType::GRAVE: return "GRAVE";
     case TokenType::WHITESPACE: return "WHITESPACE";
     default: std::cout << "FATAL ERROR: UNKNOWN TOKEN TYPE: " << static_cast<int>(type) << std::endl; throw new std::runtime_error("no stringification for token type!");
   }
@@ -113,7 +129,7 @@ std::ostream& operator<< (std::ostream& out, const TokenType& type) {
 
 boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const Token& tok) {
   ofs << fmt::format(
-    "{:>25} at "
+    "{:>" MAX_TYPE_STR_LEN "} at "
     "[Line: {: > 4d}, Column: {: > 3d}]: "
     "`{}`",
     typeToString(tok.getType()),
@@ -160,7 +176,8 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
   auto sourceEnd = processedSource.end();
 
   while (sourceBegin != sourceEnd) {
-    std::cout << "Finding token for index: " << sourceBegin - processedSource.begin() << "\n\tSource: " << processedSource.substr(sourceBegin-processedSource.begin(), 10) << std::endl;
+    auto index = sourceBegin - processedSource.begin();
+    // std::cout << "Finding token for index: " << index << "\n\tSource: " << processedSource.substr(sourceBegin-processedSource.begin(), 10) << std::endl;
     TokenType longestMatchType = TokenType::NUM_TOKEN_TYPES;
     lexing_match longestMatch;
     for (auto tokenRegex : tokenRegexMap) {
@@ -176,26 +193,32 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
         match_result, regex, // save result based on applied regex
         std::regex_constants::match_continuous); // ensure match starts at `sourceBegin`
       if (!hasMatch) { // no match_result found for this regex
-        std::cout << "\tNo match for type: " << tokenRegex.first << std::endl;
+        // std::cout << "\tNo match for type: " << tokenRegex.first << std::endl;
         continue;
       }
       lexing_match match = match_result[0];
-      std::cout << "\tFound match! Type: " << tokenRegex.first << std::endl;
+      // std::cout << "\tFound match! Type: " << tokenRegex.first << std::endl;
       size_t matchLen = match.length();
       if (tokenRegex.first == TokenType::NUM_TOKEN_TYPES) {
         std::cout << "Invalid token found!\n\tLocation: " << sourceBegin-processedSource.begin() << "\n\tToken: " << match.str() << "\n";
         return LexerResult::INVALID_TOKENS;
       }
-      if (matchLen > longestMatch.length()) {
+      // TODO: must be >= because WORD is lowest priority since KW_* is more important than WORD
+      if (matchLen >= longestMatch.length()) {
         longestMatchType = tokenRegex.first;
         longestMatch = match;
       }
     }
     if (longestMatchType == TokenType::NUM_TOKEN_TYPES) {
       std::cout << "FATAL LEXING ERROR!\n";
+      std::cout <<
+        "Failed token parsing at index: " << index <<
+        "\n\tSource: " << processedSource.substr(index, 10) <<
+        "\n\t        ^" <<
+        std::endl;
       return LexerResult::INVALID_TOKENS;
     }
-    std::cout << "Register token{" << longestMatchType << "}: `" << longestMatch.str() << "`" << std::endl;
+    // std::cout << "Register token{" << longestMatchType << "}: `" << longestMatch.str() << "`" << std::endl;
     resultTokens.push_back(Token{longestMatch.str(), longestMatchType, 0, 0});
     sourceBegin += longestMatch.length();
   }

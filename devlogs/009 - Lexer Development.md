@@ -20,6 +20,10 @@ Sign off: 1am
 - Lexers can remove comments
 - Lexers can/should? parse the strings
 - Using regex is a common practice for lexers
+### Capturing stdout and stderr
+- Both outputs can be captured by using a tempfile.
+  - Direct the command's stderr to file. Then read that file. stdout is already captured via pipe.
+  - `cmd` --> `cmd 2> tmpstderr.txt`
 
 ## Log
 - Update some regex values

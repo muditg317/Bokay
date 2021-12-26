@@ -30,7 +30,7 @@ enum class TokenType : char {
   // HEX_LITERAL,
   // OCTAL_LITERAL,
   // BINARY_LITERAL,
-  FLOATING_POINT_LITERAL,
+  FLOAT_LITERAL,
   OPEN_BRACKET,CLOSE_BRACKET, // []
   // ARRAY_DECL, // the [5] in `u8 arr[5]` -- maybe just use open[ + num_lit + close]
   EQUALS,
@@ -50,6 +50,9 @@ enum class TokenType : char {
   TRIPLE_EQ, // ===
   LSS,GTR,
   LEQ,GEQ,
+  PIPE,DOUBLE_PIPE, // | ||
+  AMP,DOUBLE_AMP, // & &&
+  APOST,QUOTE,GRAVE, // ' " `
   WHITESPACE,
   NUM_TOKEN_TYPES, // counter for enum types
 };
