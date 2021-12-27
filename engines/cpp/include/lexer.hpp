@@ -23,7 +23,7 @@ enum class TokenType : char {
   KW_IMPORT,
   COMMA, // , -- used for param separation and delimiting imports
   KW_FROM,
-  IMPORT_SOURCE, // relative path as a string
+  STRING, // [string] -- used for relative path of imports
   COLON, // : -- used for :: in `FullImportedLibrary::aMethodInLib`
   BASE_TYPE, // integer or floating point types
   DECIMAL_LITERAL,
@@ -39,7 +39,7 @@ enum class TokenType : char {
   KW_STRUCT,KW_UNION,
   PERIOD, // . used for member access -- . in `struct_var.member`
   OPEN_BRACE,CLOSE_BRACE, // {}
-  LINE_COMMENT, // // used for line comment starting
+  DOUBLE_SLASH, // // used for line comment starting
   OPEN_BLK_CMT, // /*
   CLOSE_BLK_CMT, // */
   OPEN_PAREN,CLOSE_PAREN, // ()
@@ -54,6 +54,7 @@ enum class TokenType : char {
   AMP,DOUBLE_AMP, // & &&
   APOST,QUOTE,GRAVE, // ' " `
   WHITESPACE,
+  COMMENT,
   NUM_TOKEN_TYPES, // counter for enum types
 };
 
@@ -67,7 +68,7 @@ class Token {
       return contents;
     }
     const std::string getEscapedContents(void) const {
-      return type == TokenType::WHITESPACE ? std::regex_replace(contents, std::regex{"\\n"}, "\\n") : contents;
+      return type == TokenType::WHITESPACE || type == TokenType::COMMENT ? std::regex_replace(contents, std::regex{"\\n"}, "\\n") : contents;
     }
     const TokenType getType(void) const {
       return type;
@@ -86,6 +87,7 @@ class Token {
 };
 
 boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const Token& tok);
+std::ostream& operator<<(std::ostream& out, const Token& tok);
 
 class Lexer {
   public:

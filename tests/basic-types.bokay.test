@@ -4,59 +4,33 @@ Output path: tests/build/basic-types
 Temp file output to: tests/build
 File contains 4 lines.
 Line 1: // this test checks that simple integer and floating point types can be compiled
-Found 46 tokens!
+Found 20 tokens!
 Writing tokens to temp file: "tests/build/basic-types.tok"
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-   LINE_COMMENT at [Line:    0, Column:   0]: `//`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `this`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `test`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `checks`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `that`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `simple`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `integer`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `and`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `floating`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `point`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `types`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `can`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `be`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `compiled`
-     WHITESPACE at [Line:    0, Column:   0]: `\n\n`
-      BASE_TYPE at [Line:    0, Column:   0]: `u8`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `a_byte`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-         EQUALS at [Line:    0, Column:   0]: `=`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-DECIMAL_LITERAL at [Line:    0, Column:   0]: `5`
-      SEMICOLON at [Line:    0, Column:   0]: `;`
-     WHITESPACE at [Line:    0, Column:   0]: `\n`
-      BASE_TYPE at [Line:    0, Column:   0]: `s64`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `signed`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-         EQUALS at [Line:    0, Column:   0]: `=`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-          MINUS at [Line:    0, Column:   0]: `-`
-DECIMAL_LITERAL at [Line:    0, Column:   0]: `100`
-      SEMICOLON at [Line:    0, Column:   0]: `;`
+        COMMENT at [Line:    1, Column:   1]: `// this test checks that simple integer and floating point types can be compiled\n`
+     WHITESPACE at [Line:    2, Column:   1]: `\n`
+      BASE_TYPE at [Line:    3, Column:   1]: `u8`
+     WHITESPACE at [Line:    3, Column:   3]: ` `
+           WORD at [Line:    3, Column:   4]: `a_byte`
+     WHITESPACE at [Line:    3, Column:  10]: ` `
+         EQUALS at [Line:    3, Column:  11]: `=`
+     WHITESPACE at [Line:    3, Column:  12]: ` `
+DECIMAL_LITERAL at [Line:    3, Column:  13]: `5`
+      SEMICOLON at [Line:    3, Column:  14]: `;`
+     WHITESPACE at [Line:    3, Column:  15]: `\n`
+      BASE_TYPE at [Line:    4, Column:   1]: `s64`
+     WHITESPACE at [Line:    4, Column:   4]: ` `
+           WORD at [Line:    4, Column:   5]: `signed`
+     WHITESPACE at [Line:    4, Column:  11]: ` `
+         EQUALS at [Line:    4, Column:  12]: `=`
+     WHITESPACE at [Line:    4, Column:  13]: ` `
+          MINUS at [Line:    4, Column:  14]: `-`
+DECIMAL_LITERAL at [Line:    4, Column:  15]: `100`
+      SEMICOLON at [Line:    4, Column:  18]: `;`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 Parse tree(tests/build/basic-types.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

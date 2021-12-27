@@ -110,7 +110,7 @@ int main( int argc, char* argv[] ) {
         ["--test-dir"]
         ("where are the tests saved?")
     | Catch::clara::Opt( options.update, "update" )
-        ["--update"]
+        ["-u"]["--update"]
         ("which test (or all) should be updated?")
     | Catch::clara::Opt( options.updateCompilation, "updateCompilation" )
         ["--update-comp"]

@@ -5,7 +5,7 @@
 //    should be similar to JS/TS style
 //    extracts only certain symbols into the current context or all symbols under the WholeLib namespace
 //    access with WholeLib::oneMethod(...)
-import WholeLib, {oneMethod, SomeClass, anotherMethod} from "./export-stuff.bokay"
+import WholeLib, {oneMethod, SomeClass, anotherMethod} from "./export-stuff.bokay";
 
 // types:
 //  integers: (u|s)(8|16|32|64)   
@@ -85,3 +85,19 @@ while (weird < -300) {
   weird += 1;
 }
 
+
+// Comments:
+//  The collowing comments shoul be handled.
+//  The result should be `u8 newVar = 2345;` and `f64 big_float = 345.3245;`
+
+/* a simple comment */
+/* also /* a comment */
+/* a comment * with a silly character in it */
+/* a multi-line
+  comment
+*/
+/* two comments on one line */ u8 newVar = 2345; /* NOT one long comment */
+/* a comment with a silly character at the end **/
+
+f64 /* annoying comment */ big_float =/*kwfklre
+*/ 345.2345 /*rehehtr*/ ; // annoyingly commented

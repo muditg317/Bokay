@@ -4,19 +4,14 @@ Output path: tests/build/one-comment
 Temp file output to: tests/build
 File contains 1 lines.
 Line 1: // hello world.
-Found 6 tokens!
+Found 1 tokens!
 Writing tokens to temp file: "tests/build/one-comment.tok"
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-   LINE_COMMENT at [Line:    0, Column:   0]: `//`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `hello`
-     WHITESPACE at [Line:    0, Column:   0]: ` `
-           WORD at [Line:    0, Column:   0]: `world`
-         PERIOD at [Line:    0, Column:   0]: `.`
+        COMMENT at [Line:    1, Column:   1]: `// hello world.`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 Parse tree(tests/build/one-comment.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

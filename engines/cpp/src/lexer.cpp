@@ -19,7 +19,7 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::KW_IMPORT, std::regex("(\\bimport\\b)") },
   { TokenType::COMMA, std::regex("(,)") },
   { TokenType::KW_FROM, std::regex("(\\bfrom\\b)") },
-  { TokenType::IMPORT_SOURCE, std::regex("(\"(\\\\[^\\n]|[^\"\\\\\\n])*\")") }, // ("(\\[^\n]|[^"\\\n])*")
+  { TokenType::STRING, std::regex("(\"(\\\\[^\\n]|[^\"\\\\\\n])*\")") }, // ("(\\[^\n]|[^"\\\n])*")
   { TokenType::COLON, std::regex("(:)") },
   { TokenType::BASE_TYPE, std::regex("(\\b((u|s)(8|16|32|64))|(f(32|64))\\b)") },
   { TokenType::DECIMAL_LITERAL, std::regex("(\\b-?\\d+\\b)") },
@@ -42,7 +42,7 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::PERIOD, std::regex("(\\.)") },
   { TokenType::OPEN_BRACE, std::regex("(\\{)") },
   { TokenType::CLOSE_BRACE, std::regex("(\\})") },
-  { TokenType::LINE_COMMENT, std::regex("(//)") },
+  { TokenType::DOUBLE_SLASH, std::regex("(//)") },
   { TokenType::OPEN_BLK_CMT, std::regex("(/\\*)") },
   { TokenType::CLOSE_BLK_CMT, std::regex("(\\*/)") },
   { TokenType::OPEN_PAREN, std::regex("(\\()") },
@@ -63,7 +63,8 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::APOST, std::regex("(')") },
   { TokenType::QUOTE, std::regex("(\")") },
   { TokenType::GRAVE, std::regex("(`)") },
-  { TokenType::WHITESPACE, std::regex("(\\s+)") },
+  { TokenType::WHITESPACE, std::regex("([^\\S\\n]*\\n?)") },
+  { TokenType::COMMENT, std::regex("([^\\S\\n]*((\\/\\/[^\\n]*\\n?)|(\\/\\*(\\*(?!\\/)|[^*]|[\\n])*\\*\\/)))") },
 };
 
 std::string typeToString(const TokenType& type) {
@@ -73,7 +74,7 @@ std::string typeToString(const TokenType& type) {
     case TokenType::KW_IMPORT: return "KW_IMPORT";
     case TokenType::COMMA: return "COMMA";
     case TokenType::KW_FROM: return "KW_FROM";
-    case TokenType::IMPORT_SOURCE: return "IMPORT_SOURCE";
+    case TokenType::STRING: return "STRING";
     case TokenType::COLON: return "COLON";
     case TokenType::BASE_TYPE: return "BASE_TYPE";
     case TokenType::DECIMAL_LITERAL: return "DECIMAL_LITERAL";
@@ -96,7 +97,7 @@ std::string typeToString(const TokenType& type) {
     case TokenType::PERIOD: return "PERIOD";
     case TokenType::OPEN_BRACE: return "OPEN_BRACE";
     case TokenType::CLOSE_BRACE: return "CLOSE_BRACE";
-    case TokenType::LINE_COMMENT: return "LINE_COMMENT";
+    case TokenType::DOUBLE_SLASH: return "DOUBLE_SLASH";
     case TokenType::OPEN_BLK_CMT: return "OPEN_BLK_CMT";
     case TokenType::CLOSE_BLK_CMT: return "CLOSE_BLK_CMT";
     case TokenType::OPEN_PAREN: return "OPEN_PAREN";
@@ -118,6 +119,7 @@ std::string typeToString(const TokenType& type) {
     case TokenType::QUOTE: return "QUOTE";
     case TokenType::GRAVE: return "GRAVE";
     case TokenType::WHITESPACE: return "WHITESPACE";
+    case TokenType::COMMENT: return "COMMENT";
     default: std::cout << "FATAL ERROR: UNKNOWN TOKEN TYPE: " << static_cast<int>(type) << std::endl; throw new std::runtime_error("no stringification for token type!");
   }
 }
@@ -136,6 +138,17 @@ boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const 
     tok.getLine(), tok.getCol(),
     tok.getEscapedContents());
   return ofs;
+}
+
+std::ostream& operator<<(std::ostream& out, const Token& tok) {
+  out << fmt::format(
+    "{:>" MAX_TYPE_STR_LEN "} at "
+    "[Line: {: > 4d}, Column: {: > 3d}]: "
+    "`{}`",
+    typeToString(tok.getType()),
+    tok.getLine(), tok.getCol(),
+    tok.getEscapedContents());
+  return out;
 }
 
 //    (^[^\S\n]*\/\/[^\n]*)|(\/\*(\*(?!\/)|[^*]|[\n])*\*\/)
@@ -175,6 +188,10 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
   auto sourceBegin = processedSource.begin();
   auto sourceEnd = processedSource.end();
 
+  int16_t lineNum = 1;
+  int16_t colNum = 1;
+  std::match_results<std::string::iterator> match_result;
+
   while (sourceBegin != sourceEnd) {
     auto index = sourceBegin - processedSource.begin();
     // std::cout << "Finding token for index: " << index << "\n\tSource: " << processedSource.substr(sourceBegin-processedSource.begin(), 10) << std::endl;
@@ -186,7 +203,6 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
         std::cout << "\tNo matches found, collecting bad token..." << std::endl;
         regex = std::regex{"(^\\B+)"};
       }
-      std::match_results<std::string::iterator> match_result;
 
       bool hasMatch = std::regex_search(
         sourceBegin, sourceEnd, // match starting at beginning of unmatched portion
@@ -218,9 +234,29 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
         std::endl;
       return LexerResult::INVALID_TOKENS;
     }
-    // std::cout << "Register token{" << longestMatchType << "}: `" << longestMatch.str() << "`" << std::endl;
-    resultTokens.push_back(Token{longestMatch.str(), longestMatchType, 0, 0});
+
+    resultTokens.push_back(Token{longestMatch.str(), longestMatchType, lineNum, colNum});
+    // std::cout << "Register token: " << resultTokens.back() << std::endl;
     sourceBegin += longestMatch.length();
+
+    // update linenum and colnum based on captured token
+    bool linesAdded = false;
+    if (longestMatchType == TokenType::WHITESPACE || longestMatchType == TokenType::COMMENT) {
+      // std::smatch match_result;
+      std::regex_search(longestMatch.first, longestMatch.second, match_result, std::regex{"\\n"});
+      size_t extraLines = match_result.size();
+      if (extraLines) { // newlines found, add lineNum and update colNum
+        // std::cout << "New line found in whitespace/comment!\n";
+        // std::cout << "\t" << resultTokens.back() << std::endl;
+        // std::cout << "\t" << extraLines << std::endl;
+        linesAdded = true;
+        lineNum += extraLines;
+        colNum = 1 + longestMatch.second - match_result[extraLines-1].second; // end of match - end of last newline (start at 1)
+      }
+    }
+    if (!linesAdded) { // no new lines, increment colNum as needed
+      colNum += longestMatch.length();
+    }
   }
 
   return LexerResult::LEXING_SUCCESS;
