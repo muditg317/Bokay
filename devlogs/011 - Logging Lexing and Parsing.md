@@ -4,7 +4,7 @@ December 27th, 2021
 
 Sign on: 3pm\
 Sign off: 8pm\
-Also 12 to __am.
+Also 12 to 1:30am.
 </div>
 
 ## Goals
