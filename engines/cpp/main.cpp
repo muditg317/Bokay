@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
 
   google::InitGoogleLogging(argv[0], &CustomPrefix);
+  google::InstallFailureSignalHandler();
   FLAGS_logtostderr = true;
 
   Options options;

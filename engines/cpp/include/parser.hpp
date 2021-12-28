@@ -34,65 +34,73 @@ enum class ParseNodeType {
   // STRUCT_DEF, UNION_DEF,
   // CONDITIONALS, LOOPS,
   // FUNCTIONS
-  USELESS, // [whitespace] | [comment]
+  // USELESS, // [whitespace] | [comment]
   NUM_NODE_TYPES
 };
 
-struct ProductionBase {
-  protected:
-    ProductionBase() {};
-};
-
+#define PARSE_NODE_TYPE_INDEX 0
+#define TOKEN_TYPE_INDEX 1
 typedef std::variant<ParseNodeType, TokenType> RuleComponent;
-
-// std::__detal
+typedef std::variant<ParseNodeType, Token> ParseNode;
 
 /**
  * @brief represents a single production rule
  * @tparam T the lhs/head of the rule
  */
-template <ParseNodeType T>
-struct Production : ProductionBase {
+struct Production {
   /**
    * @brief the rhs/body of the rule
    */
   const std::vector<RuleComponent> components;
   Production(const std::vector<RuleComponent> _components): components(_components) {};
+  size_t length() const {return components.size();};
+  RuleComponent operator[](size_t n) const {return components[n];};
+  bool operator==(const Production other) const {return components == other.components;};
 };
 
-class ParsingTree {
-  RuleComponent root;
-  std::vector<ParsingTree> children;
+struct ParsingTree;
+typedef std::variant<ParseNode, ParsingTree> ParseTreeChild;
+
+struct ParsingTree {
+  ParseNode root;
+  std::vector<ParseTreeChild> children;
+  public:
+    ParsingTree(ParseNode rootType): root(rootType) {};
 };
 
-struct ParsingStateBase {
+struct ParsingState {
+  const ParseNodeType ruleType;
+  const Production currentProduction;
   uint8_t numMatchedComponents;
   const size_t matchOrigin;
   ParsingTree matchedTree;
-  ParsingStateBase() = delete;
-  protected:
-    ParsingStateBase(size_t _matchOrigin): numMatchedComponents(0), matchOrigin(_matchOrigin) {};
-};
-
-template<ParseNodeType T>
-struct ParsingState : ParsingStateBase {
-  Production<T> currentProduction;
-  ParsingState(Production<T> _currentProduction, size_t origin): ParsingStateBase(origin), currentProduction(_currentProduction) {};
+  ParsingState() = delete;
+  // protected:
+  ParsingState(ParseNodeType _ruleType, Production _currentProduction, size_t _matchOrigin): ruleType(_ruleType), currentProduction(_currentProduction), numMatchedComponents(0), matchOrigin(_matchOrigin), matchedTree(_ruleType) {};
+  bool isFullyMatched() {return numMatchedComponents == currentProduction.length();};
+  RuleComponent nextUnmatchedComponent() const {return currentProduction[numMatchedComponents];};
+  ParseNodeType nextUnmatchedAsNonTerminal() const {return std::get<ParseNodeType>(nextUnmatchedComponent());};
+  TokenType nextUnmatchedAsTerminal() const {return std::get<TokenType>(nextUnmatchedComponent());};
+  bool nextComponentIsTerminal() const {return nextUnmatchedComponent().index() == TOKEN_TYPE_INDEX;};
+  bool operator==(ParsingState other) const {return currentProduction == other.currentProduction && matchOrigin == other.matchOrigin;};
+  ParsingState advanced(ParseTreeChild) const;
 };
 
 struct ParsingStateSet {
-  std::deque<ParsingStateBase> states;
-  bool addState(ParsingStateBase); // checks for duplicates before adding the new state to the internal queue
+  std::deque<ParsingState> states;
+  bool addState(ParsingState); // checks for duplicates before adding the new state to the internal queue
+  size_t size() const {return states.size();};
 };
 
 
 class Parser {
   public:
     Parser(void);
-    ParserResult run(std::vector<Token> tokens);
+    ParserResult run(std::vector<Token> tokens) const;
   private:
-    std::vector<ParsingStateSet> stateSets;
-    bool prediction(ParsingStateBase &state, uint16_t tokInd); // run the predictor on this state
+    bool prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd) const; // run the predictor on this state
+    bool scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd, std::vector<Token> &tokens) const; // run the scanner on this state
+    bool completion(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd) const; // run the completer on this state
 };
 
 #endif
