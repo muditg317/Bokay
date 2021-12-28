@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16.0)
 project(Bokay   VERSION 0.1.0
                 DESCRIPTION "A custom language built from scratch"
                 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
 
 ### Require out-of-source builds
 file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)

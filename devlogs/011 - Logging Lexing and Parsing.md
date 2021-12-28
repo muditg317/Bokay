@@ -29,7 +29,19 @@ Also 12 to 1:30am.
   - Very very basic kinda-ish version of `printf`
   - https://www.cplusplus.com/reference/ios/left/
   - https://www.cplusplus.com/reference/iomanip/
-- 
+### Fixed but dynamic size container
+- I need fixed size containers, but it's not known until runtime
+  - Technically it is compile time, but it's a jagged array.
+- https://stackoverflow.com/questions/14895052/container-of-fixed-dynamic-size
+- `const std::vector<T>` works because the `const` makes it unable to change size and stuff
+### Arrow notation in function declaration
+- Functionally the same as normal syntax but mre powerful
+- Used to provide return type based on arguments
+- https://stackoverflow.com/questions/22514855/arrow-operator-in-function-heading/22515589
+```C++
+template <typename T1, typename T2>
+auto compose(T1 a, T2 b) -> decltype(a + b);
+```
 
 ## Log
 - Add regex to capture entire comments as single tokens
