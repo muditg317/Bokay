@@ -10,6 +10,7 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <boost/filesystem.hpp>
 #include <fmt/format.h>
+#include <glog/logging.h>
 
 #define MAX_TYPE_STR_LEN "15"
 
@@ -120,7 +121,7 @@ std::string typeToString(const TokenType& type) {
     case TokenType::GRAVE: return "GRAVE";
     case TokenType::WHITESPACE: return "WHITESPACE";
     case TokenType::COMMENT: return "COMMENT";
-    default: std::cout << "FATAL ERROR: UNKNOWN TOKEN TYPE: " << static_cast<int>(type) << std::endl; throw new std::runtime_error("no stringification for token type!");
+    default: LOG(ERROR) << "FATAL ERROR: UNKNOWN TOKEN TYPE: " << static_cast<int>(type) ; throw new std::runtime_error("no stringification for token type!");
   }
 }
 
@@ -163,7 +164,7 @@ Lexer::Lexer(Options &options) {
 
 bool Lexer::validateOptionsAndSource(std::string sourceCode) {
   if (sourceCode.empty()) {
-    std::cout << "Cannot lex empty file!" << std::endl;
+    LOG(ERROR) << "Cannot lex empty file!" ;
     return false;
   }
   return true;
@@ -194,13 +195,13 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
 
   while (sourceBegin != sourceEnd) {
     auto index = sourceBegin - processedSource.begin();
-    // std::cout << "Finding token for index: " << index << "\n\tSource: " << processedSource.substr(sourceBegin-processedSource.begin(), 10) << std::endl;
+    DLOG(INFO) << "Finding token for index: " << index << "\n\tSource: " << processedSource.substr(sourceBegin-processedSource.begin(), 10) ;
     TokenType longestMatchType = TokenType::NUM_TOKEN_TYPES;
     lexing_match longestMatch;
     for (auto tokenRegex : tokenRegexMap) {
       auto regex = tokenRegex.second;
       if (tokenRegex.first == TokenType::NUM_TOKEN_TYPES) {
-        std::cout << "\tNo matches found, collecting bad token..." << std::endl;
+        LOG(WARNING) << "\tNo matches found, collecting bad token..." ;
         regex = std::regex{"(^\\B+)"};
       }
 
@@ -209,14 +210,14 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
         match_result, regex, // save result based on applied regex
         std::regex_constants::match_continuous); // ensure match starts at `sourceBegin`
       if (!hasMatch) { // no match_result found for this regex
-        // std::cout << "\tNo match for type: " << tokenRegex.first << std::endl;
+        DLOG(INFO) << "\tNo match for type: " << tokenRegex.first ;
         continue;
       }
       lexing_match match = match_result[0];
-      // std::cout << "\tFound match! Type: " << tokenRegex.first << std::endl;
+      DLOG(INFO) << "\tFound match! Type: " << tokenRegex.first ;
       size_t matchLen = match.length();
       if (tokenRegex.first == TokenType::NUM_TOKEN_TYPES) {
-        std::cout << "Invalid token found!\n\tLocation: " << sourceBegin-processedSource.begin() << "\n\tToken: " << match.str() << "\n";
+        LOG(ERROR) << "Invalid token found!\n\tLocation: [Line: " << lineNum << ", Column: " << colNum << "]\n\tToken: " << match.str() << "\n";
         return LexerResult::INVALID_TOKENS;
       }
       // TODO: must be >= because WORD is lowest priority since KW_* is more important than WORD
@@ -226,17 +227,16 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
       }
     }
     if (longestMatchType == TokenType::NUM_TOKEN_TYPES) {
-      std::cout << "FATAL LEXING ERROR!\n";
-      std::cout <<
+      LOG(ERROR) << "FATAL LEXING ERROR!\n";
+      LOG(ERROR) <<
         "Failed token parsing at index: " << index <<
         "\n\tSource: " << processedSource.substr(index, 10) <<
-        "\n\t        ^" <<
-        std::endl;
+        "\n\t        ^";
       return LexerResult::INVALID_TOKENS;
     }
 
     resultTokens.push_back(Token{longestMatch.str(), longestMatchType, lineNum, colNum});
-    // std::cout << "Register token: " << resultTokens.back() << std::endl;
+    DLOG(INFO) << "Register token: " << resultTokens.back() ;
     sourceBegin += longestMatch.length();
 
     // update linenum and colnum based on captured token
@@ -246,9 +246,9 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
       std::regex_search(longestMatch.first, longestMatch.second, match_result, std::regex{"\\n"});
       size_t extraLines = match_result.size();
       if (extraLines) { // newlines found, add lineNum and update colNum
-        // std::cout << "New line found in whitespace/comment!\n";
-        // std::cout << "\t" << resultTokens.back() << std::endl;
-        // std::cout << "\t" << extraLines << std::endl;
+        DLOG(INFO) << "New line found in whitespace/comment!\n";
+        DLOG(INFO) << "\t" << resultTokens.back() ;
+        DLOG(INFO) << "\t" << extraLines ;
         linesAdded = true;
         lineNum += extraLines;
         colNum = 1 + longestMatch.second - match_result[extraLines-1].second; // end of match - end of last newline (start at 1)
@@ -264,7 +264,7 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
 
 bool Lexer::writeTokens(std::vector<Token> &tokens, boost::filesystem::path filePath) {
   if (!boost::filesystem::exists(filePath.parent_path())) {
-    std::cout << "Cannot write tokens to " << filePath << " because parent dir does not exist!" << std::endl;
+    LOG(ERROR) << "Cannot write tokens to " << filePath << " because parent dir does not exist!" ;
     return false;
   }
 

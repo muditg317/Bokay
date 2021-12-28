@@ -10,10 +10,15 @@ project(
 # set(Boost_USE_MULTITHREADED ON)
 # set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost QUIET REQUIRED COMPONENTS program_options filesystem) # algorithm is header-only
-message(STATUS "Boost::program_options version: ${Boost_VERSION}")
+message(STATUS "Boost::boost version: ${Boost_VERSION}")
 
 # Adds fmt::fmt
 find_package(fmt CONFIG REQUIRED)
+message(STATUS "fmt::fmt version: ${fmt_VERSION}")
+
+# Adds glog::glog
+find_package(glog CONFIG REQUIRED)
+message(STATUS "glog::glog version: ${glog_VERSION}")
 
 # This is needed if your Boost version is newer than your CMake version
 # or if you have an old version of CMake (<3.5)
@@ -30,32 +35,30 @@ find_package(fmt CONFIG REQUIRED)
 set(Bokay-Engine-C++_INCLUDE_DIR "${Bokay-Engine-C++_SOURCE_DIR}/include")
 
 # file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${Bokay-Engine-C++_INCLUDE_DIR}/*.hpp")
-
 # message(STATUS ${HEADER_LIST})
 
-# add_library(LibBokayFile src/bokay-file.cpp include/bokay-file.hpp)
 add_library(LibArgsParser src/args-parser.cpp include/args-parser.hpp)
 add_library(LibCompiler src/compiler.cpp include/compiler.hpp)
 add_library(LibLexer src/lexer.cpp include/lexer.hpp)
 
 # We need this directory, and users of our library will not need it too
-# target_include_directories(LibBokayFile PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_include_directories(LibArgsParser PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_include_directories(LibCompiler PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_include_directories(LibLexer PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 
-target_link_libraries(LibArgsParser PRIVATE Boost::program_options)
-target_link_libraries(LibCompiler PRIVATE Boost::filesystem fmt::fmt)
-target_link_libraries(LibLexer PRIVATE Boost::headers Boost::filesystem fmt::fmt)
+target_link_libraries(LibArgsParser PRIVATE Boost::program_options glog::glog)
+target_link_libraries(LibCompiler PRIVATE Boost::filesystem fmt::fmt glog::glog)
+target_link_libraries(LibLexer PRIVATE Boost::headers Boost::filesystem fmt::fmt glog::glog)
 
 
 add_executable(bokay-cpp main.cpp)
 set_clang_tidy(bokay-cpp)
+# target_link_options(bokay-cpp PRIVATE "-v")
 
 target_include_directories(bokay-cpp PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_link_libraries(bokay-cpp PRIVATE
                                         Boost::boost
-                                        # LibBokayFile
+                                        glog::glog
                                         LibArgsParser
                                         LibCompiler
                                         LibLexer)

@@ -64,10 +64,6 @@ endfunction()
 
 add_subdirectory(engines)   # look in hello subdirectory for CMakeLists.txt to process
 
-add_executable(bokay main.cpp)
-set_clang_tidy(bokay)
-
-
 
 # Testing only available if this is the main app
 # Emergency override MODERN_CMAKE_BUILD_TESTING provided as well

@@ -4,18 +4,18 @@
 #include <string>
 
 // argument labels =====================
-#define HELP "help"
-#define HELP_ALIAS "h"
-#define VERSION "version"
-#define VERSION_ALIAS "v"
-#define CONFIG "config"
-#define CONFIG_ALIAS "c"
-#define TEMP_FILE_DIR "temp-file-dir"
-#define TEMP_FILE_DIR_ALIAS "t"
-#define OUTPUT "output"
-#define OUTPUT_ALIAS "o"
-#define INPUT_FILE "input-file"
-#define INPUT_FILE_ALIAS "i"
+#define ARG_HELP "help"
+#define ARG_HELP_ALIAS "h"
+#define ARG_VERSION "version"
+#define ARG_VERSION_ALIAS "v"
+#define ARG_CONFIG "config"
+#define ARG_CONFIG_ALIAS "c"
+#define ARG_TEMP_FILE_DIR "temp-file-dir"
+#define ARG_TEMP_FILE_DIR_ALIAS "t"
+#define ARG_OUTPUT "output"
+#define ARG_OUTPUT_ALIAS "o"
+#define ARG_INPUT_FILE "input-file"
+#define ARG_INPUT_FILE_ALIAS "i"
 
 #define OPT_W_ALIAS(name) name "," name##_ALIAS
 // argument labels =====================

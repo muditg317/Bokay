@@ -9,6 +9,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/range/algorithm/count.hpp>
 #include <fmt/format.h>
+#include <glog/logging.h>
 
 static std::string readFile(boost::filesystem::path filePath) {
   assert(boost::filesystem::exists(filePath) && "File must exist to be read! Check before calling this method!");
@@ -34,7 +35,7 @@ Compiler::Compiler(Options &options) :
     outputPath = boost::filesystem::path(sourceFile);
     // if (outputPath.has_extension()) {
     outputPath.replace_extension(boost::filesystem::path("out"));
-    std::cout << "Using default output path... " << outputPath << std::endl;
+    LOG(INFO) << "Using default output path... " << outputPath ;
     // } else {
     //   outputPath.extension
     // }
@@ -43,26 +44,26 @@ Compiler::Compiler(Options &options) :
 
 bool Compiler::validate_options(void) {
   if (!boost::filesystem::exists(sourceFile)) { // doesn't exist
-    std::cout << "Source file (" << sourceFile << ") does not exist!" << std::endl;
+    LOG(ERROR) << "Source file (" << sourceFile << ") does not exist!" ;
     return false;
   }
   if (!boost::filesystem::exists(tempFileDir)) { // doesn't exist
-    std::cout << "Directory for temp files doesn't exist! Creating..." << std::endl;
+    LOG(WARNING) << "Directory for temp files doesn't exist! Creating..." ;
     bool created = boost::filesystem::create_directories(tempFileDir);
     if (!created) return false;
-    std::cout << tempFileDir << " created!" << std::endl;
+    LOG(INFO) << tempFileDir << " created!" ;
   } else { // temp dir exist
     if (!boost::filesystem::is_directory(tempFileDir)) { // exists but not a dir
-      std::cout << tempFileDir << " already exists as a file! Exiting..." << std::endl;
+      LOG(ERROR) << tempFileDir << " already exists as a file! Exiting..." ;
       return false;
     }
   }
   auto outputParent = outputPath.parent_path();
   if (!boost::filesystem::exists(outputParent)) { // parent of outputPath needs to be created
-    std::cout << "Creating parent directory for output executable..." << std::endl;
+    LOG(WARNING) << "Creating parent directory for output executable..." ;
     bool created = boost::filesystem::create_directories(outputParent);
     if (!created) return false;
-    std::cout << outputParent << " created!" << std::endl;
+    LOG(INFO) << "\tDone: " << outputParent << " created!" ;
     return false;
   }
   return true;
@@ -76,28 +77,28 @@ CompilerResult Compiler::run(void) {
   fileContents = readFile(sourceFile);
 
   int lines = boost::range::count(fileContents, '\n') + 1;
-  std::cout << "File contains " << lines << " lines." << std::endl;
+  DLOG(INFO) << "File contains " << lines << " lines." ;
   int ind = fileContents.find('\n');
-  std::cout << "Line 1: " << fileContents.substr(0, ind != std::string::npos ? ind : fileContents.size()) << std::endl;
+  DLOG(INFO) << "Line 1: " << fileContents.substr(0, ind != std::string::npos ? ind : fileContents.size()) ;
 
   std::vector<Token> tokens;
   LexerResult result = lexer.run(fileContents, tokens);
   if (result != LexerResult::LEXING_SUCCESS) {
-    std::cout << "Lexing has failed!\n";
+    LOG(ERROR) << "Lexing has failed! Code: " << static_cast<int>(result);
     return CompilerResult::FAILED_LEXING;
   }
 
-  std::cout << "Found " << tokens.size() << " tokens!" << std::endl;
+  DLOG(INFO) << "Found " << tokens.size() << " tokens!" ;
 
   if (outputTemps) {
     boost::filesystem::path tokenFile = tempFileDir / fmt::format("{}.tok", sourceName);
-    std::cout << "Writing tokens to temp file: " << tokenFile << std::endl;
+    LOG(INFO) << "Writing tokens to temp file: " << tokenFile ;
     lexer.writeTokens(tokens, tokenFile);
   }
 
-  // std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
-  //   std::cout << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" << std::endl;
-  // });
+  std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
+    DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" ;
+  });
 
   return CompilerResult::COMPILATION_SUCCESS;
 }
