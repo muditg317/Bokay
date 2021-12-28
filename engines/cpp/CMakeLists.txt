@@ -40,15 +40,18 @@ set(Bokay-Engine-C++_INCLUDE_DIR "${Bokay-Engine-C++_SOURCE_DIR}/include")
 add_library(LibArgsParser src/args-parser.cpp include/args-parser.hpp)
 add_library(LibCompiler src/compiler.cpp include/compiler.hpp)
 add_library(LibLexer src/lexer.cpp include/lexer.hpp)
+add_library(LibParser src/parser.cpp include/parser.hpp)
 
 # We need this directory, and users of our library will not need it too
 target_include_directories(LibArgsParser PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_include_directories(LibCompiler PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_include_directories(LibLexer PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
+target_include_directories(LibParser PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 
 target_link_libraries(LibArgsParser PRIVATE Boost::program_options glog::glog)
 target_link_libraries(LibCompiler PRIVATE Boost::filesystem fmt::fmt glog::glog)
 target_link_libraries(LibLexer PRIVATE Boost::headers Boost::filesystem fmt::fmt glog::glog)
+target_link_libraries(LibParser PRIVATE glog::glog)
 
 
 add_executable(bokay-cpp main.cpp)
@@ -61,7 +64,8 @@ target_link_libraries(bokay-cpp PRIVATE
                                         glog::glog
                                         LibArgsParser
                                         LibCompiler
-                                        LibLexer)
+                                        LibLexer
+                                        LibParser)
 
 add_custom_command(TARGET bokay-cpp
                    POST_BUILD

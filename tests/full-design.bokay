@@ -18,7 +18,7 @@ import WholeLib, {oneMethod, SomeClass, anotherMethod} from "./export-stuff.boka
 //  {type} {name} = {expression of correct type};
 u8 a_byte = 5;
 s64 signed = -100;
-f32 = -1234.4352;
+f32 a_float = -1234.4352;
 u16 arr[3]; // global space will default to 0'd out memory
 arr[1] = 70531;
 
