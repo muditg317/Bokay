@@ -158,7 +158,7 @@ std::ostream& operator<<(std::ostream& out, const Token& tok) {
 //    (\s(?!(?<="((\\[^\n]|[^"\\\n])*))((\\[^\n]|[^"\\\n])*)"))
 // const std::regex NON_STRING_SPACE_REGEX
 
-Lexer::Lexer(Options &options) {
+Lexer::Lexer(void) {
   assert(tokenRegexMap.size() == TokenType::NUM_TOKEN_TYPES && "Must define regex for every token type!");
 }
 

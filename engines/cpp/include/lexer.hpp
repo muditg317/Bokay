@@ -91,7 +91,7 @@ std::ostream& operator<<(std::ostream& out, const Token& tok);
 
 class Lexer {
   public:
-    Lexer(Options &options);
+    Lexer(void);
     LexerResult run(std::string sourceCode, std::vector<Token> &resultTokens);
     bool writeTokens(std::vector<Token> &tokens, boost::filesystem::path filePath);
   private:

@@ -1,6 +1,7 @@
 #include "compiler.hpp"
 #include "args-parser.hpp"
 #include "lexer.hpp"
+#include "parser.hpp"
 
 #include <iostream>
 #include <string>
@@ -21,8 +22,7 @@ static std::string readFile(boost::filesystem::path filePath) {
 
 Compiler::Compiler(Options &options) :
     sourceFile(options.sourceFile),
-    outputTemps(options.outputTemps),
-    lexer(options)
+    outputTemps(options.outputTemps)
 {
   sourceName = sourceFile.stem().string();
   // validate(options);
@@ -82,9 +82,9 @@ CompilerResult Compiler::run(void) {
   DLOG(INFO) << "Line 1: " << fileContents.substr(0, ind != std::string::npos ? ind : fileContents.size()) ;
 
   std::vector<Token> tokens;
-  LexerResult result = lexer.run(fileContents, tokens);
-  if (result != LexerResult::LEXING_SUCCESS) {
-    LOG(ERROR) << "Lexing has failed! Code: " << static_cast<int>(result);
+  LexerResult lexerResult = lexer.run(fileContents, tokens);
+  if (lexerResult != LexerResult::LEXING_SUCCESS) {
+    LOG(ERROR) << "Lexing has failed! Code: " << static_cast<int>(lexerResult);
     return CompilerResult::FAILED_LEXING;
   }
 
@@ -99,6 +99,12 @@ CompilerResult Compiler::run(void) {
   std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
     DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" ;
   });
+
+  ParserResult parserResult = parser.run(tokens);
+  if (parserResult != ParserResult::PARSING_SUCCESS) {
+    LOG(ERROR) << "Parsing has failed! Code: " << static_cast<int>(parserResult);
+    return CompilerResult::FAILED_PARSING;
+  }
 
   return CompilerResult::COMPILATION_SUCCESS;
 }

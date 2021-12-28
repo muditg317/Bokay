@@ -1,7 +1,10 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
 
-#include <array>
+#include "lexer.hpp"
+
+#include <algorithm>
+#include <vector>
 
 enum class ParserResult {
   PARSING_SUCCESS,
@@ -10,6 +13,14 @@ enum class ParserResult {
 };
 
 enum class ParseNodeType {
+  KW_IMPORT,
+  KW_FROM,
+  KW_STRUCT,
+  KW_UNION,
+  KW_RETURN,
+  KW_IF,
+  KW_WHILE,
+  STRING,
   IMPORT_STATEMENT, // import WholeLib, {method, otherField} from "./lib.bokay";
   LIB_ACCESSOR, // ::
   ID, // variable
@@ -22,35 +33,32 @@ enum class ParseNodeType {
   STATEMENT, // [anything];
   // STRUCT_DEF, UNION_DEF,
   // CONDITIONALS, LOOPS,
+  // FUNCTIONS
   USELESS, // [whitespace] | [comment]
-  NUM_NODE_COUNT
+  NUM_NODE_TYPES
 };
 
 class GrammarRuleUnion;
-class GrammarRuleConcatenation;
 
-class GrammarRule {
+class GrammarRuleConcatenation {
   public:
-    GrammarRule(ParseNodeType type);
-    GrammarRule(std::array<std::array<ParseNodeType> ruleInfo): rule(std::) {};
+    GrammarRuleConcatenation(const std::vector<GrammarRuleUnion> &_components): components(_components) {};
   private:
-    GrammarRuleUnion rule;
+    const std::vector<GrammarRuleUnion> components;
 };
 
 class GrammarRuleUnion {
   public:
-    GrammarRuleUnion(GrammarRuleConcatenation &rule): options(std::array<GrammarRuleConcatenation>{rule}) {};
-    GrammarRuleUnion(std::array<GrammarRuleConcatenation> &ruleOptions): options(ruleOptions) {};
+    GrammarRuleUnion(const std::vector<GrammarRuleConcatenation> &_options): options(_options) {};
   private:
-    std::array<GrammarRuleConcatenation> options;
+    const std::vector<GrammarRuleConcatenation> options;
 };
 
-class GrammarRuleConcatentation {
+
+class Parser {
   public:
-    GrammarRuleConcatenation(ParseNodeType &node): parseNodes(std::array{node}) {};
-    GrammarRuleConcatenation(std::array<ParseNodeType> &nodeSeries): parseNodes(nodeSeries) {};
-  private:
-    std::array<ParseNodeType> parseNodes;
+    Parser(void);
+    ParserResult run(std::vector<Token> tokens);
 };
 
 #endif

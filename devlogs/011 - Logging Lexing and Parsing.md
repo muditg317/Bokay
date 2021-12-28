@@ -17,6 +17,8 @@ Also 12 to __am.
 - Implementing custom prefixes was a bit annoying.
   - `vcpkg` has some features/options functionality that allowed me to activate the `"WITH_CUSTOM_PREFIXES"` options.
   - This then enables the `CustomPrefix` function handler.
+- Making the parser rules semi-dynamic to have either `Token` values or other `ParseNodeType` values
+  - Tomorrow problem!
 
 ## Notes
 ### Logging
@@ -36,11 +38,13 @@ Also 12 to __am.
   - Unfortunetely, it logs to stderr, not stdout. oh well
 - Use custom prefixes for GLOG logs
 - Created baseline infrastructure (very subject to change) for the parser implementation
+  - This setup will have to drastically change to account for the above eplained "struggle".
 
 ## TODO
 1. Start work on parser.
    1. Started today!
 2. Make my devlogs more detailed in the future.
+3. Restructure parser things.
 
 ## Language Status/Changes
 - None today!

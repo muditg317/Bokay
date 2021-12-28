@@ -3,6 +3,7 @@
 
 #include "args-parser.hpp"
 #include "lexer.hpp"
+#include "parser.hpp"
 
 #include <string>
 
@@ -13,6 +14,7 @@ enum class CompilerResult {
   COMPILATION_SUCCESS,
   INVALID_COMPILATION_OPTIONS,
   FAILED_LEXING,
+  FAILED_PARSING,
 };
 
 class Compiler {
@@ -21,6 +23,7 @@ class Compiler {
     CompilerResult run(void);
   private:
     Lexer lexer;
+    Parser parser;
     bool validate_options(void);
     bool outputTemps;
     std::string sourceName;
