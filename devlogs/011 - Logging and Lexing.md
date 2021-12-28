@@ -1,9 +1,9 @@
-# DevLog 010 - More Lexing
+# DevLog 010 - Logging and Lexing
 <div align="right">
 December 27th, 2021
 
 Sign on: 3pm\
-Sign off: __pm
+Sign off: 8pm
 </div>
 
 ## Goals
