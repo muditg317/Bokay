@@ -32,7 +32,11 @@ Sign off: XXpm/am
   - Dynamic cast uses RTTI (run-time type info) to perform a runtime check on cast validity.
 
 ## Log
-- bulleted list
+- Did a bunch of research about parsing
+- Created new structure for parser
+  - Uses Earley parsing algo
+- Implement tree building as the match states are built up
+- Create all the grammar rules (subject to change)
 
 ## TODO
 1. Numbered list

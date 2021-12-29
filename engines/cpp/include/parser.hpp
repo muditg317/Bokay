@@ -23,14 +23,17 @@ enum class ParseNodeType {
   IMPORT_STATEMENT, // import WholeLib, {method, otherField} from "./lib.bokay";
   LIB_ACCESSOR, // ::
   ID, // variable
-  EXPRESSION, // [stuff] operator [stuff]
+  TERM, // ( [expression] )  | [var_use] | [func call]
+  VARIABLE_USE, // [id] | [var_use][arr_access]
+  ARRAY_ACCESS, // [ [expression] ]
+  EXPRESSION, // [expression] [operator] [term] | [term]
   OPERATOR, // +-*/%
   DECLARATION, // [base type] [variable_use]
-  VARIABLE_USE, // [id] | [var_use][arr_access]
-  ARRAY_ACCESS, // [ expression ]
+  LHS, // [decl] | [var_use]
   ASSIGNMENT, // [LHS] equals [expression]
   STATEMENTS, // [statements] [statement] | [statement]
-  STATEMENT, // [anything];
+  STATEMENT_BODY, // [anything]
+  STATEMENT, // [stmt_body] ;
   // STRUCT_DEF, UNION_DEF,
   // CONDITIONALS, LOOPS,
   // FUNCTIONS

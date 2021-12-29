@@ -15,7 +15,16 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     Production{ {
       ParseNodeType::IMPORT_GROUP,
       ParseNodeType::STATEMENTS,
-    } }
+    } },
+  } },
+  { ParseNodeType::IMPORT_GROUP, {
+    Production{ {
+      ParseNodeType::IMPORT_GROUP,
+      ParseNodeType::IMPORT_STATEMENT,
+    } },
+    Production{ {
+      ParseNodeType::IMPORT_STATEMENT,
+    } },
   } },
   { ParseNodeType::IMPORT_STATEMENT, {
     Production{ {
@@ -23,7 +32,115 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       ParseNodeType::ID,
       TokenType::KW_FROM,
       TokenType::STRING,
-    } }
+    } },
+  } },
+  { ParseNodeType::LIB_ACCESSOR, {
+    Production{ {
+      TokenType::COLON,
+      TokenType::COLON,
+    } },
+  } },
+  { ParseNodeType::ID, {
+    Production{ {
+      TokenType::WORD,
+    } },
+  } },
+  { ParseNodeType::TERM, {
+    Production{ {
+      TokenType::OPEN_PAREN,
+      ParseNodeType::EXPRESSION,
+      TokenType::CLOSE_PAREN,
+    } },
+    Production{ {
+      ParseNodeType::VARIABLE_USE,
+    } },
+    // Production{ {
+    //   TokenType::FUNCTION_CALL,
+    // } },
+  } },
+  { ParseNodeType::VARIABLE_USE, {
+    Production{ {
+      ParseNodeType::VARIABLE_USE,
+      ParseNodeType::ARRAY_ACCESS,
+    } },
+    Production{ {
+      TokenType::ID,
+    } },
+  } },
+  { ParseNodeType::ARRAY_ACCESS, {
+    Production{ {
+      TokenType::OPEN_BRACKET,
+      ParseNodeType::EXPRESSION,
+      TokenType::CLOSE_BRACKET,
+    } },
+  } },
+  { ParseNodeType::EXPRESSION, {
+    Production{ {
+      ParseNodeType::EXPRESSION,
+      ParseNodeType::OPERATOR,
+      ParseNodeType::TERM,
+    } },
+    Production{ {
+      ParseNodeType::TERM,
+    } },
+  } },
+  { ParseNodeType::OPERATOR, {
+    Production{ {
+      TokenType::PLUS,
+    } },
+    Production{ {
+      TokenType::MINUS,
+    } },
+    Production{ {
+      TokenType::MULT,
+    } },
+    Production{ {
+      TokenType::DIV,
+    } },
+  } },
+  { ParseNodeType::DECLARATION, {
+    Production{ {
+      TokenType::BASE_TYPE,
+      ParseNodeType::VARIABLE_USE,
+    } },
+  } },
+  { ParseNodeType::LHS, {
+    Production{ {
+      ParseNodeType::DECLARATION,
+    } },
+    Production{ {
+      ParseNodeType::VARIABLE_USE,
+    } },
+  } },
+  { ParseNodeType::ASSIGNMENT, {
+    Production{ {
+      ParseNodeType::LHS,
+      TokenType::EQUALS,
+      ParseNodeType::EXPRESSION,
+    } },
+  } },
+  { ParseNodeType::STATEMENTS, {
+    Production{ {
+      ParseNodeType::STATEMENTS,
+      ParseNodeType::STATEMENT,
+    } },
+    Production{ {
+      ParseNodeType::STATEMENT,
+    } },
+  } },
+  { ParseNodeType::STATEMENT_BODY, {
+    Production{ {
+      ParseNodeType::DECLARATION,
+    } },
+    Production{ {
+      ParseNodeType::ASSIGNMENT,
+    } },
+  } },
+  { ParseNodeType::STATEMENT, {
+    Production{ {
+      ParseNodeType::STATEMENT_BODY,
+      TokenType::SEMICOLON,
+    } },
   } },
 };
 
