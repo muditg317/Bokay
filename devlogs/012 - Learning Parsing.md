@@ -4,12 +4,12 @@ December 28th, 2021
 
 Sign on: 1pm\
 Sign off: 8pm\
-Also 10pm to __am
+Also 10pm to 2am
 </div>
 
 ## Goals
 - [x] Learn about parsers and techniques
-- [ ] Start writing a parser
+- [x] Start writing a parser
 
 ## Struggles
 - Nothing serious today!
@@ -41,9 +41,12 @@ Also 10pm to __am
 - Create stringifications for node types and production rules
 - Fully debug parsing on `basic-types`
 - Add structure for output temps of parse tree (`.ptree`)
+- Print leaves of parse tree
 
 ## TODO
-1. Numbered list
+1. Improve parse tree printing/output
+   1. Write to file
+2. Fix `ParsingTree` to `ParseTree` functionality for "returning" the parsed tree from the parser
 
 ## Language Status/Changes
 - None today!

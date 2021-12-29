@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <map>
+// #include <pair>
 #include <typeinfo>
 #include <vector>
 
@@ -325,20 +326,27 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree &resultTree) co
   // if reached: parsing finished successfully!
   LOG(INFO) << "Parsing succeeded! Printing tree...";
   ParsingTree finalTree = successfulParseState->matchedTree;
-  std::deque<ParseTreeChild> treeNodeQueue{};
-  treeNodeQueue.push_front(finalTree);
+  std::deque<std::pair<ParseTreeChild,size_t>> treeNodeQueue{}; // node,depth queue
+  treeNodeQueue.push_front(std::make_pair(finalTree, 0));
   while (!treeNodeQueue.empty()) {
-    ParseTreeChild node = treeNodeQueue.front();
+    ParseTreeChild node = treeNodeQueue.front().first;
+    size_t depth = treeNodeQueue.front().second;
     treeNodeQueue.pop_front();
     if (node.index() == 0) { // node is a leaf
-      LOG(INFO) << "Leaf: " << std::get<ParseNode>(node);
+      LOG(INFO) << "Leaf (d" << depth << "): " << std::get<ParseNode>(node);
       continue;
     }
     ParsingTree subtree = std::get<ParsingTree>(node);
-    // LOG(INFO) << "(sub)root: " << subtree.root;
-    // LOG(INFO) << subtree.children.size() << " children";
-    for (auto child : subtree.children) {
-      treeNodeQueue.push_front(child);
+
+    if (subtree.children.size() == 1 && subtree.children[0].index() == 0) {
+      LOG(INFO) << "Pseudo-leaf (d" << depth << "): " << subtree.root;
+    } else {
+      DLOG(INFO) << "(sub)root: " << subtree.root;
+      DLOG(INFO) << subtree.children.size() << " children";
+      for (std::vector<ParseTreeChild>::reverse_iterator i = subtree.children.rbegin(); 
+          i != subtree.children.rend(); ++i ) {
+        treeNodeQueue.push_front(std::make_pair(*i, depth+1));
+      }
     }
   }
   // resultTree = ParseTree{finalTree};
