@@ -79,16 +79,20 @@ struct ParsingTree {
   ParseNode root;
   std::vector<ParseTreeChild> children;
   public:
+    ParsingTree(): root(Token{"",TokenType::NUM_TOKEN_TYPES,-1,-1}) {};
     ParsingTree(ParseNode rootType): root(rootType) {};
+    std::string toTabbedString(void) const;
+    // ParsingTree &operator=(const ParsingTree &) = default;
 };
 
-struct ParseTree {
-  ParseNode root;
-  std::vector<ParseTreeChild> children;
-  public:
-    ParseTree() {};
-    void setFrom(ParsingTree &tree);
-};
+// struct ParseTree {
+//   ParseNode root;
+//   std::vector<ParseTreeChild> children;
+//   public:
+//     ParseTree() {};
+//     void setFrom(ParsingTree &tree);
+// };
+typedef ParsingTree ParseTree;
 
 
 struct ParsingState {
@@ -119,7 +123,7 @@ struct ParsingStateSet {
 class Parser {
   public:
     Parser(void);
-    ParserResult run(std::vector<Token> tokens, ParseTree &resultTree) const;
+    ParserResult run(std::vector<Token> tokens, ParseTree *&resultTree) const;
     bool writeTree(ParseTree &ptree, boost::filesystem::path filePath);
   private:
     bool prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd) const; // run the predictor on this state

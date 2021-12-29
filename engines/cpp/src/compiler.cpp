@@ -100,8 +100,8 @@ CompilerResult Compiler::run(void) {
     DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" ;
   });
 
-  ParseTree ptree;
-  ParserResult parserResult = parser.run(tokens, ptree);
+  ParseTree *ptreePtr = nullptr;
+  ParserResult parserResult = parser.run(tokens, ptreePtr);
   if (parserResult != ParserResult::PARSING_SUCCESS) {
     LOG(ERROR) << "Parsing has failed! Code: " << static_cast<int>(parserResult);
     return CompilerResult::FAILED_PARSING;
@@ -112,7 +112,7 @@ CompilerResult Compiler::run(void) {
   if (outputTemps) {
     boost::filesystem::path ptreeFile = tempFileDir / fmt::format("{}.ptree", sourceName);
     LOG(INFO) << "Writing parse tree to temp file: " << ptreeFile;
-    parser.writeTree(ptree, ptreeFile);
+    parser.writeTree(*ptreePtr, ptreeFile);
   }
 
   return CompilerResult::COMPILATION_SUCCESS;

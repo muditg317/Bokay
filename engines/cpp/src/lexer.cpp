@@ -130,25 +130,29 @@ std::ostream& operator<< (std::ostream& out, const TokenType& type) {
   return out;
 }
 
-boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const Token& tok) {
-  ofs << fmt::format(
+std::string Token::toShortString() const {
+  return fmt::format(
+    "{}(`{}`)",
+    typeToString(getType()),
+    getEscapedContents());
+}
+std::string Token::toString() const {
+  return fmt::format(
     "{:>" MAX_TYPE_STR_LEN "} at "
     "[Line: {: > 4d}, Column: {: > 3d}]: "
     "`{}`",
-    typeToString(tok.getType()),
-    tok.getLine(), tok.getCol(),
-    tok.getEscapedContents());
+    typeToString(getType()),
+    getLine(), getCol(),
+    getEscapedContents());
+}
+
+boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const Token& tok) {
+  ofs << tok.toString();
   return ofs;
 }
 
 std::ostream& operator<<(std::ostream& out, const Token& tok) {
-  out << fmt::format(
-    "{:>" MAX_TYPE_STR_LEN "} at "
-    "[Line: {: > 4d}, Column: {: > 3d}]: "
-    "`{}`",
-    typeToString(tok.getType()),
-    tok.getLine(), tok.getCol(),
-    tok.getEscapedContents());
+  out << tok.toString();
   return out;
 }
 

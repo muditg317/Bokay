@@ -224,16 +224,48 @@ std::ostream& operator<< (std::ostream& out, const Production& production) {
 }
 
 std::ostream& operator<< (std::ostream& out, const ParseNode& node) {
-  out << "ParseNode{";
   if (node.index() == PARSE_NODE_TYPE_INDEX) {
-    out << std::get<ParseNodeType>(node);
+    out << "ParseNode{" << std::get<ParseNodeType>(node);
   } else {
-    out << std::get<Token>(node);
+    out << "Token{" << std::get<Token>(node).toShortString();
   }
   out << "}";
   return out;
 }
 
+
+std::string ParsingTree::toTabbedString(void) const {
+  std::ostringstream oss{"\n"};
+  std::deque<std::pair<ParseTreeChild,size_t>> treeNodeQueue{}; // node,depth queue
+  treeNodeQueue.push_front(std::make_pair(*this, 0));
+  while (!treeNodeQueue.empty()) {
+    ParseTreeChild node = treeNodeQueue.front().first;
+    size_t depth = treeNodeQueue.front().second;
+    treeNodeQueue.pop_front();
+    if (node.index() == 0) { // node is a leaf
+      oss << std::string(depth, '\t') << std::get<ParseNode>(node) << '\n';
+      continue;
+    }
+    ParsingTree subtree = std::get<ParsingTree>(node);
+
+    if (subtree.children.size() == 1 && subtree.children[0].index() == 0) {
+      oss << std::string(depth, '\t') << subtree.root << " - " << std::get<ParseNode>(subtree.children[0])<< '\n';
+    } else {
+      oss << std::string(depth, '\t') << subtree.root << '\n';
+      for (std::vector<ParseTreeChild>::reverse_iterator i = subtree.children.rbegin(); 
+          i != subtree.children.rend(); ++i ) {
+        treeNodeQueue.push_front(std::make_pair(*i, depth+1));
+      }
+    }
+  }
+  return oss.str();
+}
+
+// ParsingTree &ParsingTree::operator=(const ParsingTree &tree) {
+//   tree.root = root;
+//   tree.children = children;
+//   return tree;
+// }
 
 Parser::Parser(void) {
   CHECK(grammarRuleMap.size() == static_cast<int>(ParseNodeType::NUM_NODE_TYPES)) << "Must define rule for every parse node type!";
@@ -250,9 +282,14 @@ void filterTokens(std::vector<Token> &rawTokens, std::vector<Token> &outTokens) 
   });
 }
 
-ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree &resultTree) const {
+ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree *&resultTree) const {
   std::vector<Token> tokens;
   filterTokens(rawTokens, tokens);
+
+  if (tokens.size() == 0) {
+    LOG(ERROR) << "Source has no usefull tokens!";
+    return ParserResult::FAILED_RECOGNITION;
+  }
 
   DLOG(INFO) << "Begin parsing with " << tokens.size() << " tokens";
   std::ostringstream oss;
@@ -324,7 +361,7 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree &resultTree) co
   }
 
   // if reached: parsing finished successfully!
-  LOG(INFO) << "Parsing succeeded! Printing tree...";
+  DLOG(INFO) << "Parsing succeeded! Printing tree...";
   ParsingTree finalTree = successfulParseState->matchedTree;
   std::deque<std::pair<ParseTreeChild,size_t>> treeNodeQueue{}; // node,depth queue
   treeNodeQueue.push_front(std::make_pair(finalTree, 0));
@@ -333,14 +370,17 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree &resultTree) co
     size_t depth = treeNodeQueue.front().second;
     treeNodeQueue.pop_front();
     if (node.index() == 0) { // node is a leaf
-      LOG(INFO) << "Leaf (d" << depth << "): " << std::get<ParseNode>(node);
+      DLOG(INFO) << "Leaf        (d=" << depth << "):\t" << std::get<ParseNode>(node);
+      // LOG(INFO) << std::string(depth, '\t') << std::get<ParseNode>(node);
       continue;
     }
     ParsingTree subtree = std::get<ParsingTree>(node);
 
     if (subtree.children.size() == 1 && subtree.children[0].index() == 0) {
-      LOG(INFO) << "Pseudo-leaf (d" << depth << "): " << subtree.root;
+      DLOG(INFO) << "Pseudo-leaf (d=" << depth << "):\t" << subtree.root << " - " << std::get<ParseNode>(subtree.children[0]);
+      // LOG(INFO) << std::string(depth, '\t') << subtree.root << " - " << std::get<ParseNode>(subtree.children[0]);
     } else {
+      // LOG(INFO) << std::string(depth, '\t') << subtree.root;
       DLOG(INFO) << "(sub)root: " << subtree.root;
       DLOG(INFO) << subtree.children.size() << " children";
       for (std::vector<ParseTreeChild>::reverse_iterator i = subtree.children.rbegin(); 
@@ -349,8 +389,19 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree &resultTree) co
       }
     }
   }
-  // resultTree = ParseTree{finalTree};
-  resultTree.setFrom(finalTree);
+  resultTree = new ParseTree(finalTree.root);
+
+  // resultTree = ParseTree{finalTree.root};
+  // if (finalTree.root.index() == PARSE_NODE_TYPE_INDEX) { // ParseNodeType
+  //   resultTree.root = std::get<ParseNodeType>(finalTree.root);
+  // } else {
+  //   Token &resultRoot = std::get<Token>(resultTree.root);
+  //   resultRoot = std::get<Token>(finalTree.root);
+  //   // root = Token{std::get<Token>(tree.root)};
+  // }
+  for (auto child : finalTree.children) {
+    resultTree->children.push_back(child);
+  }
 
   return ParserResult::PARSING_SUCCESS;
 }
@@ -428,16 +479,16 @@ ParsingState ParsingState::advanced(ParseTreeChild recognizedChild) const {
   return newState;
 }
 
-void ParseTree::setFrom(ParsingTree &tree) {
-  if (tree.root.index() == PARSE_NODE_TYPE_INDEX) { // ParseNodeType
-    root = std::get<ParseNodeType>(tree.root);
-  } else {
-    // root = Token{std::get<Token>(tree.root)};
-  }
-  std::for_each(tree.children.begin(), tree.children.end(), [this](ParseTreeChild child) {
-    this->children.push_back(child);
-  });
-};
+// void ParseTree::setFrom(ParsingTree &tree) {
+//   if (tree.root.index() == PARSE_NODE_TYPE_INDEX) { // ParseNodeType
+//     root = std::get<ParseNodeType>(tree.root);
+//   } else {
+//     // root = Token{std::get<Token>(tree.root)};
+//   }
+//   std::for_each(tree.children.begin(), tree.children.end(), [this](ParseTreeChild child) {
+//     this->children.push_back(child);
+//   });
+// };
 
 bool Parser::writeTree(ParseTree &ptree, boost::filesystem::path filePath) {
   if (!boost::filesystem::exists(filePath.parent_path())) {
@@ -446,6 +497,8 @@ bool Parser::writeTree(ParseTree &ptree, boost::filesystem::path filePath) {
   }
 
   boost::filesystem::ofstream ptreeFile{filePath};
+
+  ptreeFile << ptree.toTabbedString();
 
   // for (auto token : tokens) {
   //   ptreeFile << token << '\n';

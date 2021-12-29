@@ -1,13 +1,11 @@
 --STDOUT:
-Input source file: tests/basic-types.bokay
-Output path: tests/build/basic-types
-Temp file output to: tests/build
-File contains 4 lines.
-Line 1: // this test checks that simple integer and floating point types can be compiled
-Found 20 tokens!
-Writing tokens to temp file: "tests/build/basic-types.tok"
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp: 102] INFO    - Input source file: tests/basic-types.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/basic-types
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/basic-types.tok"
+[    compiler.cpp: 114] INFO    - Writing parse tree to temp file: "tests/build/basic-types.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -33,7 +31,40 @@ DECIMAL_LITERAL at [Line:    4, Column:  15]: `100`
       SEMICOLON at [Line:    4, Column:  18]: `;`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Parse tree(tests/build/basic-types.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+ParseNode{SOURCE}
+	ParseNode{SOURCE_BODY}
+		ParseNode{STATEMENTS}
+			ParseNode{STATEMENTS}
+				ParseNode{STATEMENT}
+					ParseNode{STATEMENT_BODY}
+						ParseNode{ASSIGNMENT}
+							ParseNode{LHS}
+								ParseNode{DECLARATION}
+									Token{BASE_TYPE(`u8`)}
+									ParseNode{VARIABLE_USE}
+										ParseNode{ID} - Token{WORD(`a_byte`)}
+							Token{EQUALS(`=`)}
+							ParseNode{EXPRESSION}
+								ParseNode{TERM}
+									ParseNode{LITERAL}
+										ParseNode{RAW_LITERAL} - Token{DECIMAL_LITERAL(`5`)}
+					Token{SEMICOLON(`;`)}
+			ParseNode{STATEMENT}
+				ParseNode{STATEMENT_BODY}
+					ParseNode{ASSIGNMENT}
+						ParseNode{LHS}
+							ParseNode{DECLARATION}
+								Token{BASE_TYPE(`s64`)}
+								ParseNode{VARIABLE_USE}
+									ParseNode{ID} - Token{WORD(`signed`)}
+						Token{EQUALS(`=`)}
+						ParseNode{EXPRESSION}
+							ParseNode{TERM}
+								ParseNode{LITERAL}
+									Token{MINUS(`-`)}
+									ParseNode{RAW_LITERAL} - Token{DECIMAL_LITERAL(`100`)}
+				Token{SEMICOLON(`;`)}
+
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/basic-types.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================

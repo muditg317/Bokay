@@ -1,13 +1,12 @@
 --STDOUT:
-Input source file: tests/one-comment.bokay
-Output path: tests/build/one-comment
-Temp file output to: tests/build
-File contains 1 lines.
-Line 1: // hello world.
-Found 1 tokens!
-Writing tokens to temp file: "tests/build/one-comment.tok"
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp: 102] INFO    - Input source file: tests/one-comment.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/one-comment
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/one-comment.tok"
+[      parser.cpp: 290] ERROR   - Source has no usefull tokens!
+[    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
