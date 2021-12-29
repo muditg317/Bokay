@@ -8,10 +8,13 @@
 #include <vector>
 #include <variant>
 
+#include <boost/filesystem/path.hpp>
+
+
 enum class ParserResult {
   PARSING_SUCCESS,
   INVALID_TOKEN_FOUND,
-  // INVALID_SYNTAX,
+  FAILED_RECOGNITION,
 };
 
 enum class ParseNodeType {
@@ -19,10 +22,13 @@ enum class ParseNodeType {
   // KW_IMPORT,KW_FROM,
   // STRING,
   SOURCE, // [imports] [statements]
+  SOURCE_BODY, // [imports] [statements]
   IMPORT_GROUP, // [import_group] [import_stmnt] | [import_stmnt]
   IMPORT_STATEMENT, // import WholeLib, {method, otherField} from "./lib.bokay";
   LIB_ACCESSOR, // ::
   ID, // variable
+  LITERAL, // [raw_lit] | [minus] [raw_lit]
+  RAW_LITERAL, // decimal | float
   TERM, // ( [expression] )  | [var_use] | [func call]
   VARIABLE_USE, // [id] | [var_use][arr_access]
   ARRAY_ACCESS, // [ [expression] ]
@@ -40,11 +46,15 @@ enum class ParseNodeType {
   // USELESS, // [whitespace] | [comment]
   NUM_NODE_TYPES
 };
+std::string typeToString(const ParseNodeType& type);
+std::ostream& operator<< (std::ostream& out, const ParseNodeType& type);
 
 #define PARSE_NODE_TYPE_INDEX 0
 #define TOKEN_TYPE_INDEX 1
 typedef std::variant<ParseNodeType, TokenType> RuleComponent;
 typedef std::variant<ParseNodeType, Token> ParseNode;
+
+std::ostream& operator<< (std::ostream& out, const ParseNode& node);
 
 /**
  * @brief represents a single production rule
@@ -60,6 +70,7 @@ struct Production {
   RuleComponent operator[](size_t n) const {return components[n];};
   bool operator==(const Production other) const {return components == other.components;};
 };
+std::ostream& operator<< (std::ostream& out, const Production& production);
 
 struct ParsingTree;
 typedef std::variant<ParseNode, ParsingTree> ParseTreeChild;
@@ -71,10 +82,19 @@ struct ParsingTree {
     ParsingTree(ParseNode rootType): root(rootType) {};
 };
 
+struct ParseTree {
+  ParseNode root;
+  std::vector<ParseTreeChild> children;
+  public:
+    ParseTree() {};
+    void setFrom(ParsingTree &tree);
+};
+
+
 struct ParsingState {
   const ParseNodeType ruleType;
   const Production currentProduction;
-  uint8_t numMatchedComponents;
+  size_t numMatchedComponents;
   const size_t matchOrigin;
   ParsingTree matchedTree;
   ParsingState() = delete;
@@ -85,7 +105,7 @@ struct ParsingState {
   ParseNodeType nextUnmatchedAsNonTerminal() const {return std::get<ParseNodeType>(nextUnmatchedComponent());};
   TokenType nextUnmatchedAsTerminal() const {return std::get<TokenType>(nextUnmatchedComponent());};
   bool nextComponentIsTerminal() const {return nextUnmatchedComponent().index() == TOKEN_TYPE_INDEX;};
-  bool operator==(ParsingState other) const {return currentProduction == other.currentProduction && matchOrigin == other.matchOrigin;};
+  bool operator==(ParsingState other) const {return ruleType == other.ruleType && currentProduction == other.currentProduction && matchOrigin == other.matchOrigin;};
   ParsingState advanced(ParseTreeChild) const;
 };
 
@@ -99,11 +119,12 @@ struct ParsingStateSet {
 class Parser {
   public:
     Parser(void);
-    ParserResult run(std::vector<Token> tokens) const;
+    ParserResult run(std::vector<Token> tokens, ParseTree &resultTree) const;
+    bool writeTree(ParseTree &ptree, boost::filesystem::path filePath);
   private:
-    bool prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd) const; // run the predictor on this state
-    bool scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd, std::vector<Token> &tokens) const; // run the scanner on this state
-    bool completion(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd) const; // run the completer on this state
+    bool prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd) const; // run the predictor on this state
+    bool scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd, std::vector<Token> &tokens) const; // run the scanner on this state
+    bool completion(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd) const; // run the completer on this state
 };
 
 #endif

@@ -64,7 +64,7 @@ std::string engineCompile(TestingOptions options, std::string engineArgs, std::s
     options.buildDir,               // "-t {}"
     options.buildDir, fileToCompile // "-o {}/{}"
   );
-  // std::cout << "compile command: " << compilationCommand << std::endl;
+  std::cout << "compile command: " << compilationCommand << std::endl;
   ShellCommandOutput compilationOutput = execShellCommand(compilationCommand);
   // std::cout << "compilation output: " << compilationOutput << std::endl;
   return compilationOutput.toString();

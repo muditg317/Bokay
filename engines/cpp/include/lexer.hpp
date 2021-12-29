@@ -64,6 +64,7 @@ std::ostream& operator<< (std::ostream& out, const TokenType& type);
 class Token {
   public:
     Token(std::string str, TokenType tok_type, int16_t lineNum, int16_t colNum): contents(str), type(tok_type), line(lineNum), col(colNum) {};
+    Token(const Token &token): contents(token.contents), type(token.type), line(token.line), col(token.col) {};
     const std::string getContents(void) const {
       return contents;
     }

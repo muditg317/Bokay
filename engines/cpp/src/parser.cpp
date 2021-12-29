@@ -6,14 +6,22 @@
 #include <typeinfo>
 #include <vector>
 
+#include <boost/filesystem.hpp>
 #include <glog/logging.h>
-
 
 
 const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMap {
   { ParseNodeType::SOURCE, {
     Production{ {
+      ParseNodeType::SOURCE_BODY,
+    } },
+  } },
+  { ParseNodeType::SOURCE_BODY, {
+    Production{ {
       ParseNodeType::IMPORT_GROUP,
+      ParseNodeType::STATEMENTS,
+    } },
+    Production{ {
       ParseNodeType::STATEMENTS,
     } },
   } },
@@ -45,6 +53,23 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       TokenType::WORD,
     } },
   } },
+  { ParseNodeType::LITERAL, {
+    Production{ {
+      ParseNodeType::RAW_LITERAL,
+    } },
+    Production{ {
+      TokenType::MINUS,
+      ParseNodeType::RAW_LITERAL,
+    } },
+  } },
+  { ParseNodeType::RAW_LITERAL, {
+    Production{ {
+      TokenType::DECIMAL_LITERAL,
+    } },
+    Production{ {
+      TokenType::FLOAT_LITERAL,
+    } },
+  } },
   { ParseNodeType::TERM, {
     Production{ {
       TokenType::OPEN_PAREN,
@@ -53,6 +78,9 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     } },
     Production{ {
       ParseNodeType::VARIABLE_USE,
+    } },
+    Production{ {
+      ParseNodeType::LITERAL,
     } },
     // Production{ {
     //   TokenType::FUNCTION_CALL,
@@ -64,7 +92,7 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       ParseNodeType::ARRAY_ACCESS,
     } },
     Production{ {
-      TokenType::ID,
+      ParseNodeType::ID,
     } },
   } },
   { ParseNodeType::ARRAY_ACCESS, {
@@ -151,36 +179,101 @@ inline Production getRule(ParseNodeType type, int i = 0) {
   return grammarRuleMap.at(type)[i];
 }
 
+std::string typeToString(const ParseNodeType& type) {
+  switch(type) {
+    case ParseNodeType::SOURCE: return "SOURCE";
+    case ParseNodeType::SOURCE_BODY: return "SOURCE_BODY";
+    case ParseNodeType::IMPORT_GROUP: return "IMPORT_GROUP";
+    case ParseNodeType::IMPORT_STATEMENT: return "IMPORT_STATEMENT";
+    case ParseNodeType::LIB_ACCESSOR: return "LIB_ACCESSOR";
+    case ParseNodeType::ID: return "ID";
+    case ParseNodeType::LITERAL: return "LITERAL";
+    case ParseNodeType::RAW_LITERAL: return "RAW_LITERAL";
+    case ParseNodeType::TERM: return "TERM";
+    case ParseNodeType::VARIABLE_USE: return "VARIABLE_USE";
+    case ParseNodeType::ARRAY_ACCESS: return "ARRAY_ACCESS";
+    case ParseNodeType::EXPRESSION: return "EXPRESSION";
+    case ParseNodeType::OPERATOR: return "OPERATOR";
+    case ParseNodeType::DECLARATION: return "DECLARATION";
+    case ParseNodeType::LHS: return "LHS";
+    case ParseNodeType::ASSIGNMENT: return "ASSIGNMENT";
+    case ParseNodeType::STATEMENTS: return "STATEMENTS";
+    case ParseNodeType::STATEMENT_BODY: return "STATEMENT_BODY";
+    case ParseNodeType::STATEMENT: return "STATEMENT";
+    default: LOG(ERROR) << "FATAL ERROR: UNKNOWN PARSE NODE TYPE: " << static_cast<int>(type) ; throw new std::runtime_error("no stringification for parse node type!");
+  }
+}
+std::ostream& operator<< (std::ostream& out, const ParseNodeType& type) {
+  out << typeToString(type);
+  return out;
+}
+
+std::ostream& operator<< (std::ostream& out, const Production& production) {
+  std::for_each(production.components.begin(), production.components.end(), [&out, &production](RuleComponent component) {
+    if (component.index() == PARSE_NODE_TYPE_INDEX) {
+      out << std::get<ParseNodeType>(component);
+    } else {
+      out << std::get<TokenType>(component);
+    }
+    // if (component != production.components.end().operator*()) {
+      out << " ";//+ ";
+    // }
+  });
+  return out;
+}
+
+std::ostream& operator<< (std::ostream& out, const ParseNode& node) {
+  out << "ParseNode{";
+  if (node.index() == PARSE_NODE_TYPE_INDEX) {
+    out << std::get<ParseNodeType>(node);
+  } else {
+    out << std::get<Token>(node);
+  }
+  out << "}";
+  return out;
+}
+
+
 Parser::Parser(void) {
-  // CHECK()
-  // LOG(INFO) << "grammar rules size: " << grammarRuleMap.size();
-  // LOG(INFO) << "num parse types: " << static_cast<int>(ParseNodeType::NUM_NODE_TYPES);
   CHECK(grammarRuleMap.size() == static_cast<int>(ParseNodeType::NUM_NODE_TYPES)) << "Must define rule for every parse node type!";
 }
 
 bool uselessToken(Token tok) {
   return tok.getType() == TokenType::WHITESPACE || tok.getType() == TokenType::COMMENT;
 }
-std::vector<Token> &filteredTokens(std::vector<Token> &rawTokens) {
-  // std::vector<Token> *tokens = new std::vector<Token>();
-  // std::remove_copy_if(rawTokens.begin(), rawTokens.end(), tokens->front(), uselessToken);
-  // return *tokens;
-  return rawTokens;
+void filterTokens(std::vector<Token> &rawTokens, std::vector<Token> &outTokens) {
+  std::for_each(rawTokens.begin(), rawTokens.end(), [&outTokens](Token rawTok) {
+    if (!uselessToken(rawTok)) {
+      outTokens.push_back(rawTok);
+    }
+  });
 }
 
-ParserResult Parser::run(std::vector<Token> rawTokens) const {
-  std::vector<Token> tokens = filteredTokens(rawTokens);
+ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree &resultTree) const {
+  std::vector<Token> tokens;
+  filterTokens(rawTokens, tokens);
+
+  DLOG(INFO) << "Begin parsing with " << tokens.size() << " tokens";
+  std::ostringstream oss;
+  std::for_each(tokens.begin(), tokens.end(), [&oss](Token tok) {
+    oss << tok.getType() << ", ";
+  });
+  DLOG(INFO) << "Tokens: " << oss.str();
 
   // One stateSet per gap between tokens (and beginning+end)
   std::vector<ParsingStateSet> stateSets{tokens.size() + 1};
   // stateSets.clear();
   stateSets[0].states.push_back(ParsingState{ParseNodeType::SOURCE, getRule(ParseNodeType::SOURCE), 0});
 
-  for (uint16_t tokenIndex = 0, tokensSize = tokens.size(); tokenIndex <= tokensSize; tokenIndex++) {
+  for (size_t tokenIndex = 0, tokensSize = tokens.size(); tokenIndex <= tokensSize; tokenIndex++) {
+    DLOG(INFO) << "Parse for tokenIndex=" << tokenIndex;
+    DLOG_IF(INFO, tokenIndex < tokensSize) << "" << tokens[tokenIndex];
+    DLOG_IF(INFO, tokenIndex == tokensSize) << "\tfinal stateSet";
     bool stateChanged = false;
-    for (uint16_t stateIndex = 0; stateIndex < stateSets[tokenIndex].size(); stateIndex++) {
-    // for (auto &state : stateSets[tokenIndex].states) {
+    for (size_t stateIndex = 0; stateIndex < stateSets[tokenIndex].size(); stateIndex++) {
+      DLOG(INFO) << "Parse for stateIndex=" << stateIndex << "(tokInd=" << tokenIndex << ")";
       auto &state = stateSets[tokenIndex].states[stateIndex];
+      DLOG(INFO) << "\t" << state.ruleType << "[" << state.matchOrigin << "] - " << state.currentProduction;
       if (state.isFullyMatched()) { // the rule has been full matched
         stateChanged |= completion(stateSets, state, tokenIndex);
         continue;
@@ -197,33 +290,106 @@ ParserResult Parser::run(std::vector<Token> rawTokens) const {
     }
   }
 
+  DLOG(INFO) << "Parsed statesSets (" << stateSets.size() << " sets) ---";
+  for (size_t i = 0; i < stateSets.size(); i++) {
+    auto set = stateSets[i];
+    if (set.size() == 0) continue;
+    DLOG(INFO) << "Set " << i << " is not empty!";
+    DLOG(INFO) << "\tSet size: " << set.size() << "|";
+    auto &last = set.states.front();
+    DLOG(INFO) << "\tnum: " << last.numMatchedComponents << "|";
+    DLOG(INFO) << "\torigin: " << last.matchOrigin << "|";
+    DLOG(INFO) << "\trule: " << last.ruleType;
+    DLOG(INFO) << "----";
+  }
+
+  ParsingState *successfulParseState = nullptr;
+
+  DLOG(INFO) << "Last state states:";
+  for (size_t i = 0; i < stateSets.back().size(); i++) {
+    auto &state = stateSets.back().states[i];
+    DLOG(INFO) << "\t" << state.ruleType << "[" << state.matchOrigin << "] - " << state.currentProduction;
+    DLOG(INFO) << "\t\tCompleted: " << state.numMatchedComponents << "/" << state.currentProduction.length();
+    DLOG(INFO) << "\t----";
+    if (state.ruleType == ParseNodeType::SOURCE && state.isFullyMatched()) {
+      successfulParseState = &state;
+    }
+  }
+
+  if (!successfulParseState) {
+    LOG(ERROR) << "Parsing failed to recognize source from grammar!";
+    // TODO: provide info about longest match seen or something
+    return ParserResult::FAILED_RECOGNITION;
+  }
+
+  // if reached: parsing finished successfully!
+  LOG(INFO) << "Parsing succeeded! Printing tree...";
+  ParsingTree finalTree = successfulParseState->matchedTree;
+  std::deque<ParseTreeChild> treeNodeQueue{};
+  treeNodeQueue.push_front(finalTree);
+  while (!treeNodeQueue.empty()) {
+    ParseTreeChild node = treeNodeQueue.front();
+    treeNodeQueue.pop_front();
+    if (node.index() == 0) { // node is a leaf
+      LOG(INFO) << "Leaf: " << std::get<ParseNode>(node);
+      continue;
+    }
+    ParsingTree subtree = std::get<ParsingTree>(node);
+    // LOG(INFO) << "(sub)root: " << subtree.root;
+    // LOG(INFO) << subtree.children.size() << " children";
+    for (auto child : subtree.children) {
+      treeNodeQueue.push_front(child);
+    }
+  }
+  // resultTree = ParseTree{finalTree};
+  resultTree.setFrom(finalTree);
+
   return ParserResult::PARSING_SUCCESS;
 }
 
-bool Parser::prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd) const {
+bool Parser::prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd) const {
+  DLOG(INFO) << "PREDICTION " << state.ruleType;
+  // DLOG(INFO) << "\t\tfrom index=" << tokInd;
+  // DLOG(INFO) << "\t\ton potential " << state.ruleType;
+  // DLOG(INFO) << "\t\toriginating from " << state.matchOrigin;
   ParseNodeType nextExpectedNonTerminal = state.nextUnmatchedAsNonTerminal();
+  DLOG(INFO) << "\tExpecting " << nextExpectedNonTerminal;
   bool added = false;
   for (Production rule : getRules(nextExpectedNonTerminal)) {
-    added |= stateSets[tokInd].addState(ParsingState{nextExpectedNonTerminal, rule, tokInd});
+    bool newRule = stateSets[tokInd].addState(ParsingState{nextExpectedNonTerminal, rule, tokInd});
+    added |= newRule;
+    DLOG_IF(INFO, newRule) << "\t\tAdd rule: " << rule;
   }
+  DLOG_IF(INFO, !added) << "\t\tNo rules added";
   return added;
 }
 
-bool Parser::scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd, std::vector<Token> &tokens) const {
+bool Parser::scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd, std::vector<Token> &tokens) const {
+  DLOG(INFO) << "SCANNING " << state.ruleType;
+  // DLOG(INFO) << "\t\tfrom index=" << tokInd;
+  // DLOG(INFO) << "\t\ton potential " << state.ruleType;
+  // DLOG(INFO) << "\t\toriginating from " << state.matchOrigin;
   TokenType nextExpectedTerminal = state.nextUnmatchedAsTerminal();
-  Token nextToken = tokens[tokInd+1];
+  DLOG(INFO) << "\tExpecting:\t" << nextExpectedTerminal;
+  Token nextToken = tokens[tokInd];
+  DLOG(INFO) << "\tNext token:\t" << nextToken.getType();
   if (nextToken.getType() == nextExpectedTerminal) {
+    DLOG(INFO) << "" << nextToken;
     stateSets[tokInd+1].addState(state.advanced(nextToken));
     return true;
+  } else {
+    DLOG(INFO) << "\t\tScan failed";
   }
   return false;
 }
 
-bool Parser::completion(std::vector<ParsingStateSet> &stateSets, ParsingState &state, uint16_t tokInd) const {
+bool Parser::completion(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd) const {
+  DLOG(INFO) << "COMPLETION " << state.ruleType;
   bool added = false;
   for (auto originState : stateSets[state.matchOrigin].states) { // for each state in the origin of this match
     if (!originState.isFullyMatched() && !originState.nextComponentIsTerminal()) { // origin state has a non-terminal next
       if (originState.nextUnmatchedAsNonTerminal() == state.ruleType) { // the next expected non-terminal finished here
+        DLOG(INFO) << "\tPull rule: " << originState.ruleType << "[" << originState.matchOrigin << "]";
         stateSets[tokInd].addState(originState.advanced(state.matchedTree));
         added = true;
       }
@@ -236,6 +402,7 @@ bool Parser::completion(std::vector<ParsingStateSet> &stateSets, ParsingState &s
 bool ParsingStateSet::addState(ParsingState newState) {
   for (auto existing : states) {
     if (existing == newState) {
+      // DLOG(INFO) << "\t\tFailed to add new state: " << newState.ruleType << "=" << newState.currentProduction << "|new-" << newState.numMatchedComponents << " vs old-" << existing.numMatchedComponents;
       return false;
     }
   }
@@ -251,4 +418,31 @@ ParsingState ParsingState::advanced(ParseTreeChild recognizedChild) const {
   });
   newState.matchedTree.children.push_back(recognizedChild);
   return newState;
+}
+
+void ParseTree::setFrom(ParsingTree &tree) {
+  if (tree.root.index() == PARSE_NODE_TYPE_INDEX) { // ParseNodeType
+    root = std::get<ParseNodeType>(tree.root);
+  } else {
+    // root = Token{std::get<Token>(tree.root)};
+  }
+  std::for_each(tree.children.begin(), tree.children.end(), [this](ParseTreeChild child) {
+    this->children.push_back(child);
+  });
+};
+
+bool Parser::writeTree(ParseTree &ptree, boost::filesystem::path filePath) {
+  if (!boost::filesystem::exists(filePath.parent_path())) {
+    LOG(ERROR) << "Cannot write ptree to " << filePath << " because parent dir does not exist!" ;
+    return false;
+  }
+
+  boost::filesystem::ofstream ptreeFile{filePath};
+
+  // for (auto token : tokens) {
+  //   ptreeFile << token << '\n';
+  // }
+
+  ptreeFile.close();
+  return true;
 }

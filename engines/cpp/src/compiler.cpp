@@ -92,7 +92,7 @@ CompilerResult Compiler::run(void) {
 
   if (outputTemps) {
     boost::filesystem::path tokenFile = tempFileDir / fmt::format("{}.tok", sourceName);
-    LOG(INFO) << "Writing tokens to temp file: " << tokenFile ;
+    LOG(INFO) << "Writing tokens to temp file: " << tokenFile;
     lexer.writeTokens(tokens, tokenFile);
   }
 
@@ -100,10 +100,19 @@ CompilerResult Compiler::run(void) {
     DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" ;
   });
 
-  ParserResult parserResult = parser.run(tokens);
+  ParseTree ptree;
+  ParserResult parserResult = parser.run(tokens, ptree);
   if (parserResult != ParserResult::PARSING_SUCCESS) {
     LOG(ERROR) << "Parsing has failed! Code: " << static_cast<int>(parserResult);
     return CompilerResult::FAILED_PARSING;
+  }
+
+  DLOG(INFO) << "Generated parse tree for tokens";
+
+  if (outputTemps) {
+    boost::filesystem::path ptreeFile = tempFileDir / fmt::format("{}.ptree", sourceName);
+    LOG(INFO) << "Writing parse tree to temp file: " << ptreeFile;
+    parser.writeTree(ptree, ptreeFile);
   }
 
   return CompilerResult::COMPILATION_SUCCESS;

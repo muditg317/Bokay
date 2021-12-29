@@ -23,8 +23,8 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::STRING, std::regex("(\"(\\\\[^\\n]|[^\"\\\\\\n])*\")") }, // ("(\\[^\n]|[^"\\\n])*")
   { TokenType::COLON, std::regex("(:)") },
   { TokenType::BASE_TYPE, std::regex("(\\b((u|s)(8|16|32|64))|(f(32|64))\\b)") },
-  { TokenType::DECIMAL_LITERAL, std::regex("(\\b-?\\d+\\b)") },
-  { TokenType::FLOAT_LITERAL, std::regex("(\\b(-?\\d+)f|-?\\d+\\.\\d+\\b)") },
+  { TokenType::DECIMAL_LITERAL, std::regex("(\\b\\d+\\b)") },
+  { TokenType::FLOAT_LITERAL, std::regex("(\\b\\d+(f|\\.\\d+)\\b)") },
   { TokenType::OPEN_BRACKET, std::regex("(\\[)") },
   { TokenType::CLOSE_BRACKET, std::regex("(\\])") },
   { TokenType::EQUALS, std::regex("(=)") },

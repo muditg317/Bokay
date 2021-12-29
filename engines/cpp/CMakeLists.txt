@@ -51,7 +51,7 @@ target_include_directories(LibParser PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})
 target_link_libraries(LibArgsParser PRIVATE Boost::program_options glog::glog)
 target_link_libraries(LibCompiler PRIVATE Boost::filesystem fmt::fmt glog::glog)
 target_link_libraries(LibLexer PRIVATE Boost::headers Boost::filesystem fmt::fmt glog::glog)
-target_link_libraries(LibParser PRIVATE glog::glog)
+target_link_libraries(LibParser PRIVATE Boost::filesystem glog::glog)
 
 
 add_executable(bokay-cpp main.cpp)

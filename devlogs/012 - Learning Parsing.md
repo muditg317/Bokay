@@ -3,7 +3,8 @@
 December 28th, 2021
 
 Sign on: 1pm\
-Sign off: XXpm/am
+Sign off: 8pm\
+Also 10pm to __am
 </div>
 
 ## Goals
@@ -37,6 +38,9 @@ Sign off: XXpm/am
   - Uses Earley parsing algo
 - Implement tree building as the match states are built up
 - Create all the grammar rules (subject to change)
+- Create stringifications for node types and production rules
+- Fully debug parsing on `basic-types`
+- Add structure for output temps of parse tree (`.ptree`)
 
 ## TODO
 1. Numbered list
