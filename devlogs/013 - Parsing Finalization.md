@@ -10,10 +10,15 @@ Sign off: XXpm/am
 - [x] Create better ptree printing
 - [ ] Bug-test parsing on `full-design`
 - [ ] Generate returnable `ParseTree` if necessary
-- [ ] Write ptrees to temp file
+- [x] Write ptrees to temp file
 
 ## Struggles
-- Nothing serious today!
+- Bug: Nested rules don't work past 1 level of nesting
+  - The parser doesn't add duplicated `ParsingState` (potential matches)
+  - Ex: Already have `expr op term` from t=3 with 1 level, won't add another `expr op term` from t=3 even though it's more nested.
+  - Fix options:
+    - equality check will iterate over the tree
+    - force add children from completions
 
 ## Notes
 ### No major stuff
@@ -24,6 +29,9 @@ Sign off: XXpm/am
 - Print tree as tabbed string (pretty tree format isn't strictly necessary)
 - Write tabbed string of ptree to file and check tests
 - Add 0 tokens check to pass `one-comment` test
+- Add test for complicated arithmetic expressions
+- Fix rule nesting bugs
+- 
 
 ## TODO
 1. Numbered list
@@ -32,4 +40,4 @@ Sign off: XXpm/am
 - None today!
 
 ## Unorganized thoughts as they came
-- 
+- PEMDAS is best implemented within the parser not the ptree->AST

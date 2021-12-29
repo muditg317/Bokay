@@ -115,7 +115,7 @@ struct ParsingState {
 
 struct ParsingStateSet {
   std::deque<ParsingState> states;
-  bool addState(ParsingState); // checks for duplicates before adding the new state to the internal queue
+  bool addState(ParsingState newState, bool force = false); // checks for duplicates before adding the new state to the internal queue
   size_t size() const {return states.size();};
 };
 

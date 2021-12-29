@@ -34,8 +34,8 @@ enum class TokenType : char {
   OPEN_BRACKET,CLOSE_BRACKET, // []
   // ARRAY_DECL, // the [5] in `u8 arr[5]` -- maybe just use open[ + num_lit + close]
   EQUALS,
-  PLUS,   MINUS,   MULT,   DIV,   MOD,
-  PLUS_EQ,MINUS_EQ,MULT_EQ,DIV_EQ,MOD_EQ,
+  PLUS,   MINUS,   STAR,   DIV,   MOD,
+  PLUS_EQ,MINUS_EQ,STAR_EQ,DIV_EQ,MOD_EQ,
   KW_STRUCT,KW_UNION,
   PERIOD, // . used for member access -- . in `struct_var.member`
   OPEN_BRACE,CLOSE_BRACE, // {}

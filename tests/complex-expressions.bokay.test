@@ -1,0 +1,64 @@
+--STDOUT:
+
+--STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+
+--STDERR-END
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+        COMMENT at [Line:    1, Column:   1]: `// this test checks that simple integer and floating point types can be compiled\n`
+     WHITESPACE at [Line:    2, Column:   1]: `\n`
+      BASE_TYPE at [Line:    3, Column:   1]: `u32`
+     WHITESPACE at [Line:    3, Column:   4]: ` `
+           WORD at [Line:    3, Column:   5]: `bitIntWith5components`
+     WHITESPACE at [Line:    3, Column:  26]: ` `
+         EQUALS at [Line:    3, Column:  27]: `=`
+     WHITESPACE at [Line:    3, Column:  28]: ` `
+DECIMAL_LITERAL at [Line:    3, Column:  29]: `5`
+     WHITESPACE at [Line:    3, Column:  30]: ` `
+           PLUS at [Line:    3, Column:  31]: `+`
+     WHITESPACE at [Line:    3, Column:  32]: ` `
+DECIMAL_LITERAL at [Line:    3, Column:  33]: `100`
+     WHITESPACE at [Line:    3, Column:  36]: ` `
+          MINUS at [Line:    3, Column:  37]: `-`
+     WHITESPACE at [Line:    3, Column:  38]: ` `
+DECIMAL_LITERAL at [Line:    3, Column:  39]: `52`
+     WHITESPACE at [Line:    3, Column:  41]: ` `
+           STAR at [Line:    3, Column:  42]: `*`
+     WHITESPACE at [Line:    3, Column:  43]: ` `
+DECIMAL_LITERAL at [Line:    3, Column:  44]: `38`
+     WHITESPACE at [Line:    3, Column:  46]: ` `
+           PLUS at [Line:    3, Column:  47]: `+`
+     WHITESPACE at [Line:    3, Column:  48]: ` `
+DECIMAL_LITERAL at [Line:    3, Column:  49]: `16`
+      SEMICOLON at [Line:    3, Column:  51]: `;`
+     WHITESPACE at [Line:    3, Column:  52]: `\n`
+      BASE_TYPE at [Line:    4, Column:   1]: `s64`
+     WHITESPACE at [Line:    4, Column:   4]: ` `
+           WORD at [Line:    4, Column:   5]: `floating_expressions`
+     WHITESPACE at [Line:    4, Column:  25]: ` `
+         EQUALS at [Line:    4, Column:  26]: `=`
+     WHITESPACE at [Line:    4, Column:  27]: ` `
+          MINUS at [Line:    4, Column:  28]: `-`
+DECIMAL_LITERAL at [Line:    4, Column:  29]: `100`
+     WHITESPACE at [Line:    4, Column:  32]: ` `
+            DIV at [Line:    4, Column:  33]: `/`
+     WHITESPACE at [Line:    4, Column:  34]: ` `
+  FLOAT_LITERAL at [Line:    4, Column:  35]: `26.789`
+     WHITESPACE at [Line:    4, Column:  41]: ` `
+           PLUS at [Line:    4, Column:  42]: `+`
+     WHITESPACE at [Line:    4, Column:  43]: ` `
+  FLOAT_LITERAL at [Line:    4, Column:  44]: `34.15`
+     WHITESPACE at [Line:    4, Column:  49]: ` `
+           STAR at [Line:    4, Column:  50]: `*`
+     WHITESPACE at [Line:    4, Column:  51]: ` `
+          MINUS at [Line:    4, Column:  52]: `-`
+  FLOAT_LITERAL at [Line:    4, Column:  53]: `253.14`
+      SEMICOLON at [Line:    4, Column:  59]: `;`
+
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Parse tree(tests/build/complex-expressions.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+AST(tests/build/complex-expressions.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Blocks w/ control flow(tests/build/complex-expressions.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+executable FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

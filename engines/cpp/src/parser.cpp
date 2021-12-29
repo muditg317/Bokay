@@ -121,7 +121,7 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       TokenType::MINUS,
     } },
     Production{ {
-      TokenType::MULT,
+      TokenType::STAR,
     } },
     Production{ {
       TokenType::DIV,
@@ -225,11 +225,15 @@ std::ostream& operator<< (std::ostream& out, const Production& production) {
 
 std::ostream& operator<< (std::ostream& out, const ParseNode& node) {
   if (node.index() == PARSE_NODE_TYPE_INDEX) {
-    out << "ParseNode{" << std::get<ParseNodeType>(node);
+    out
+      // << "ParseNode{" 
+      << std::get<ParseNodeType>(node);
   } else {
-    out << "Token{" << std::get<Token>(node).toShortString();
+    out 
+      // << "Token{"
+      << std::get<Token>(node).toShortString();
   }
-  out << "}";
+  // out << "}";
   return out;
 }
 
@@ -303,9 +307,10 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree *&resultTree) c
   // stateSets.clear();
   stateSets[0].states.push_back(ParsingState{ParseNodeType::SOURCE, getRule(ParseNodeType::SOURCE), 0});
 
+
   for (size_t tokenIndex = 0, tokensSize = tokens.size(); tokenIndex <= tokensSize; tokenIndex++) {
     DLOG(INFO) << "Parse for tokenIndex=" << tokenIndex;
-    DLOG_IF(INFO, tokenIndex < tokensSize) << "" << tokens[tokenIndex];
+    DLOG_IF(INFO, tokenIndex < tokensSize) << "\t" << tokens[tokenIndex].toShortString();
     DLOG_IF(INFO, tokenIndex == tokensSize) << "\tfinal stateSet";
     bool stateChanged = false;
     for (size_t stateIndex = 0; stateIndex < stateSets[tokenIndex].size(); stateIndex++) {
@@ -351,6 +356,7 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree *&resultTree) c
     DLOG(INFO) << "\t----";
     if (state.ruleType == ParseNodeType::SOURCE && state.isFullyMatched()) {
       successfulParseState = &state;
+      break; // accept first one because other ones may be unmatched
     }
   }
 
@@ -425,9 +431,6 @@ bool Parser::prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &s
 
 bool Parser::scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd, std::vector<Token> &tokens) const {
   DLOG(INFO) << "SCANNING " << state.ruleType;
-  // DLOG(INFO) << "\t\tfrom index=" << tokInd;
-  // DLOG(INFO) << "\t\ton potential " << state.ruleType;
-  // DLOG(INFO) << "\t\toriginating from " << state.matchOrigin;
   TokenType nextExpectedTerminal = state.nextUnmatchedAsTerminal();
   DLOG(INFO) << "\tExpecting:\t" << nextExpectedTerminal;
   Token nextToken = tokens[tokInd];
@@ -449,8 +452,13 @@ bool Parser::completion(std::vector<ParsingStateSet> &stateSets, ParsingState &s
     if (!originState.isFullyMatched() && !originState.nextComponentIsTerminal()) { // origin state has a non-terminal next
       if (originState.nextUnmatchedAsNonTerminal() == state.ruleType) { // the next expected non-terminal finished here
         DLOG(INFO) << "\tPull rule: " << originState.ruleType << "[" << originState.matchOrigin << "]";
-        stateSets[tokInd].addState(originState.advanced(state.matchedTree));
-        added = true;
+        ParsingState newState = originState.advanced(state.matchedTree);
+        bool newStateAdded = stateSets[tokInd].addState(newState, true);
+        // DLOG_IF(INFO, originState.ruleType == ParseNodeType::EXPRESSION)
+        //   << "\t" << (newStateAdded ? "" : "FAILED TO ") << "Pull expression from: " << originState.matchOrigin
+        //   << "\n\texpr=" << originState.currentProduction
+        //   << "\n" << newState.matchedTree.toTabbedString();
+        added |= newStateAdded;
       }
     }
   }
@@ -458,11 +466,13 @@ bool Parser::completion(std::vector<ParsingStateSet> &stateSets, ParsingState &s
 }
 
 // add state only if unique
-bool ParsingStateSet::addState(ParsingState newState) {
-  for (auto existing : states) {
-    if (existing == newState) {
-      // DLOG(INFO) << "\t\tFailed to add new state: " << newState.ruleType << "=" << newState.currentProduction << "|new-" << newState.numMatchedComponents << " vs old-" << existing.numMatchedComponents;
-      return false;
+bool ParsingStateSet::addState(ParsingState newState, bool force) {
+  if (!force) {
+    for (auto existing : states) {
+      if (existing == newState) {
+        // DLOG(INFO) << "\t\tFailed to add new state: " << newState.ruleType << "=" << newState.currentProduction << "|new-" << newState.numMatchedComponents << " vs old-" << existing.numMatchedComponents;
+        return false;
+      }
     }
   }
   states.push_back(newState);

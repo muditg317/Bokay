@@ -30,12 +30,12 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::EQUALS, std::regex("(=)") },
   { TokenType::PLUS, std::regex("(\\+)") },
   { TokenType::MINUS, std::regex("(-)") },
-  { TokenType::MULT, std::regex("(\\*)") },
+  { TokenType::STAR, std::regex("(\\*)") },
   { TokenType::DIV, std::regex("(/)") },
   { TokenType::MOD, std::regex("(%)") },
   { TokenType::PLUS_EQ, std::regex("(\\+=)") },
   { TokenType::MINUS_EQ, std::regex("(-=)") },
-  { TokenType::MULT_EQ, std::regex("(\\*=)") },
+  { TokenType::STAR_EQ, std::regex("(\\*=)") },
   { TokenType::DIV_EQ, std::regex("(/=)") },
   { TokenType::MOD_EQ, std::regex("(%=)") },
   { TokenType::KW_STRUCT, std::regex("(\\bstruct\\b)") },
@@ -85,12 +85,12 @@ std::string typeToString(const TokenType& type) {
     case TokenType::EQUALS: return "EQUALS";
     case TokenType::PLUS: return "PLUS";
     case TokenType::MINUS: return "MINUS";
-    case TokenType::MULT: return "MULT";
+    case TokenType::STAR: return "STAR";
     case TokenType::DIV: return "DIV";
     case TokenType::MOD: return "MOD";
     case TokenType::PLUS_EQ: return "PLUS_EQ";
     case TokenType::MINUS_EQ: return "MINUS_EQ";
-    case TokenType::MULT_EQ: return "MULT_EQ";
+    case TokenType::STAR_EQ: return "STAR_EQ";
     case TokenType::DIV_EQ: return "DIV_EQ";
     case TokenType::MOD_EQ: return "MOD_EQ";
     case TokenType::KW_STRUCT: return "KW_STRUCT";
