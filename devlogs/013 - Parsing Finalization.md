@@ -3,7 +3,7 @@
 December 29th, 2021
 
 Sign on: 12pm\
-Sign off: XXpm/am
+Sign off: 5pm\
 </div>
 
 ## Goals
@@ -31,10 +31,11 @@ Sign off: XXpm/am
 - Add 0 tokens check to pass `one-comment` test
 - Add test for complicated arithmetic expressions
 - Fix rule nesting bugs
-- 
 
 ## TODO
-1. Numbered list
+1. Implement PEMDAS in arithmetic expression parsing
+2. Expand parsing rules to complete `full-design`
+3. Consider better failure messages on failure to match grammar
 
 ## Language Status/Changes
 - None today!

@@ -265,11 +265,7 @@ std::string ParsingTree::toTabbedString(void) const {
   return oss.str();
 }
 
-// ParsingTree &ParsingTree::operator=(const ParsingTree &tree) {
-//   tree.root = root;
-//   tree.children = children;
-//   return tree;
-// }
+
 
 Parser::Parser(void) {
   CHECK(grammarRuleMap.size() == static_cast<int>(ParseNodeType::NUM_NODE_TYPES)) << "Must define rule for every parse node type!";
@@ -468,9 +464,25 @@ bool Parser::completion(std::vector<ParsingStateSet> &stateSets, ParsingState &s
 // add state only if unique
 bool ParsingStateSet::addState(ParsingState newState, bool force) {
   if (!force) {
+
+    bool already_exists = std::any_of(states.begin(), states.end(), [&](ParsingState &existing) {
+      // DLOG(INFO) << "\t\tFailed to add new state: " << newState.ruleType << "=" << newState.currentProduction << "|new-" << newState.numMatchedComponents << " vs old-" << existing.numMatchedComponents;
+      return existing == newState;
+    });
+    // if (already_exists) {
+    //   return false;
+    // }
+
     for (auto existing : states) {
       if (existing == newState) {
         // DLOG(INFO) << "\t\tFailed to add new state: " << newState.ruleType << "=" << newState.currentProduction << "|new-" << newState.numMatchedComponents << " vs old-" << existing.numMatchedComponents;
+        if (!already_exists) {
+          // throw an error
+          std::cout << "bad!" << std::endl;
+          throw std::runtime_error("State already exists but was not detected by iterator check");
+        } else {
+          std::cout << "good!" << std::endl;
+        }
         return false;
       }
     }

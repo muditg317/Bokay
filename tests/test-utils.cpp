@@ -58,7 +58,7 @@ std::string readFile(boost::filesystem::path filePath) {
 std::string engineCompile(TestingOptions options, std::string engineArgs, std::string fileToCompile) {
   // std::cout << "compile file: " << fmt::format("{}/{}.bokay", options.testDir, fileToCompile) << std::endl;
   std::string compilationCommand = fmt::format(
-    "{} {} {}/{}.bokay -t {} -o {}/{}",
+    "{} {} {}/{}.bokay -t {} -o {}/{} TESTING_ENGINE",
     options.enginePath, engineArgs, // "{} {}"
     options.testDir, fileToCompile, // "{}/{}.bokay"
     options.buildDir,               // "-t {}"

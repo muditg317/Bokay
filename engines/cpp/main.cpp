@@ -13,8 +13,12 @@
  * (The third parameter can be used to receive user-supplied data, and is
  * NULL by default.)
  */
-void CustomPrefix(std::ostream &s, const LogMessageInfo &l, void*) {
-   s 
+void CustomPrefix(std::ostream &s, const LogMessageInfo &l, void* userData) {
+  bool testing = *((bool *) userData);
+  if (testing) {
+    return;
+  }
+  s 
    << "["
    << std::setfill(' ') << std::setw(16) << l.filename
    << ':'
@@ -46,7 +50,16 @@ int main(int argc, char *argv[]) {
 #else
 int main(int argc, char *argv[]) {
 
-  google::InitGoogleLogging(argv[0], &CustomPrefix);
+  // Add jank option to detect when in testing mode
+  bool testing = false;
+  if (argc > 1) {
+    if (std::string(argv[argc-1]) == "TESTING_ENGINE") {
+      testing = true;
+      argc--;
+    }
+  }
+
+  google::InitGoogleLogging(argv[0], &CustomPrefix, &testing);
   google::InstallFailureSignalHandler();
   FLAGS_logtostderr = true;
 

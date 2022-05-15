@@ -109,7 +109,13 @@ struct ParsingState {
   ParseNodeType nextUnmatchedAsNonTerminal() const {return std::get<ParseNodeType>(nextUnmatchedComponent());};
   TokenType nextUnmatchedAsTerminal() const {return std::get<TokenType>(nextUnmatchedComponent());};
   bool nextComponentIsTerminal() const {return nextUnmatchedComponent().index() == TOKEN_TYPE_INDEX;};
-  bool operator==(ParsingState other) const {return ruleType == other.ruleType && currentProduction == other.currentProduction && matchOrigin == other.matchOrigin;};
+  bool operator==(ParsingState &other) const {
+    if (ruleType != other.ruleType) return false;
+    if (!(currentProduction == other.currentProduction)) return false;
+    if (matchOrigin != other.matchOrigin) return false;
+    return true;
+    // return ruleType == other.ruleType && currentProduction == other.currentProduction && matchOrigin == other.matchOrigin;
+  };
   ParsingState advanced(ParseTreeChild) const;
 };
 

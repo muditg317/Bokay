@@ -163,7 +163,7 @@ std::ostream& operator<<(std::ostream& out, const Token& tok) {
 // const std::regex NON_STRING_SPACE_REGEX
 
 Lexer::Lexer(void) {
-  assert(tokenRegexMap.size() == TokenType::NUM_TOKEN_TYPES && "Must define regex for every token type!");
+  assert(tokenRegexMap.size() == static_cast<uint64_t>(TokenType::NUM_TOKEN_TYPES) && "Must define regex for every token type!");
 }
 
 bool Lexer::validateOptionsAndSource(std::string sourceCode) {
