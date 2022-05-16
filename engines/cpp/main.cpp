@@ -15,14 +15,18 @@
  */
 void CustomPrefix(std::ostream &s, const LogMessageInfo &l, void* userData) {
   bool testing = *((bool *) userData);
-  if (testing) {
-    return;
-  }
+  // if (testing) {
+  //   return;
+  // }
   s 
    << "["
-   << std::setfill(' ') << std::setw(16) << l.filename
-   << ':'
-   << std::setw(4) << l.line_number
+   << std::setfill(' ') << std::setw(16) << l.filename;
+  if (!testing) {
+    s
+     << ':'
+     << std::setw(4) << l.line_number;
+  }
+  s
    << "] "
    << std::setw(7) << std::left << l.severity
    << " -";

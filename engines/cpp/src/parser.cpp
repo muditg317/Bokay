@@ -426,6 +426,11 @@ bool Parser::prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &s
 }
 
 bool Parser::scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd, std::vector<Token> &tokens) const {
+  assert(tokInd < tokens.size() && "Token index out of bounds!");
+  if (tokInd >= tokens.size()) {
+    // LOG(ERROR) << "Token index out of bounds!";
+    return false;
+  }
   DLOG(INFO) << "SCANNING " << state.ruleType;
   TokenType nextExpectedTerminal = state.nextUnmatchedAsTerminal();
   DLOG(INFO) << "\tExpecting:\t" << nextExpectedTerminal;
@@ -433,6 +438,9 @@ bool Parser::scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &sta
   DLOG(INFO) << "\tNext token:\t" << nextToken.getType();
   if (nextToken.getType() == nextExpectedTerminal) {
     DLOG(INFO) << "" << nextToken;
+    assert(stateSets.size() > tokInd+1 && "Token index out of bounds");
+    // DLOG(INFO) << "Token " << nextToken << " matched " << state.ruleType << " at index " << tokInd;
+    // DLOG(INFO) << "Adding to stateSets size: " << stateSets.size() << " - index: " << (tokInd+1);
     stateSets[tokInd+1].addState(state.advanced(nextToken));
     return true;
   } else {
@@ -461,30 +469,19 @@ bool Parser::completion(std::vector<ParsingStateSet> &stateSets, ParsingState &s
   return added;
 }
 
+ParsingStateSet::ParsingStateSet() {
+  states.clear();
+}
+
 // add state only if unique
 bool ParsingStateSet::addState(ParsingState newState, bool force) {
   if (!force) {
-
     bool already_exists = std::any_of(states.begin(), states.end(), [&](ParsingState &existing) {
       // DLOG(INFO) << "\t\tFailed to add new state: " << newState.ruleType << "=" << newState.currentProduction << "|new-" << newState.numMatchedComponents << " vs old-" << existing.numMatchedComponents;
       return existing == newState;
     });
-    // if (already_exists) {
-    //   return false;
-    // }
-
-    for (auto existing : states) {
-      if (existing == newState) {
-        // DLOG(INFO) << "\t\tFailed to add new state: " << newState.ruleType << "=" << newState.currentProduction << "|new-" << newState.numMatchedComponents << " vs old-" << existing.numMatchedComponents;
-        if (!already_exists) {
-          // throw an error
-          std::cout << "bad!" << std::endl;
-          throw std::runtime_error("State already exists but was not detected by iterator check");
-        } else {
-          std::cout << "good!" << std::endl;
-        }
-        return false;
-      }
+    if (already_exists) {
+      return false;
     }
   }
   states.push_back(newState);

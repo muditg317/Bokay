@@ -1,11 +1,13 @@
 --STDOUT:
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
-[ args-parser.cpp: 102] INFO    - Input source file: tests/basic-types.bokay
-[ args-parser.cpp: 105] INFO    - Output path: tests/build/basic-types
-[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
-[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/basic-types.tok"
-[    compiler.cpp: 114] INFO    - Writing parse tree to temp file: "tests/build/basic-types.ptree"
+[ args-parser.cpp] INFO    - Input source file: tests/basic-types.bokay
+[ args-parser.cpp] INFO    - Output path: tests/build/basic-types
+[ args-parser.cpp] INFO    - Temp file output to: tests/build
+[    compiler.cpp] INFO    - Writing tokens to temp file: "tests/build/basic-types.tok"
+[      parser.cpp] ERROR   - Token index out of bounds!
+[      parser.cpp] ERROR   - Token index out of bounds!
+[    compiler.cpp] INFO    - Writing parse tree to temp file: "tests/build/basic-types.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -29,41 +31,93 @@ DECIMAL_LITERAL at [Line:    3, Column:  13]: `5`
           MINUS at [Line:    4, Column:  14]: `-`
 DECIMAL_LITERAL at [Line:    4, Column:  15]: `100`
       SEMICOLON at [Line:    4, Column:  18]: `;`
+     WHITESPACE at [Line:    4, Column:  19]: `\n`
+      BASE_TYPE at [Line:    5, Column:   1]: `u16`
+     WHITESPACE at [Line:    5, Column:   4]: ` `
+           WORD at [Line:    5, Column:   5]: `biggerInt`
+     WHITESPACE at [Line:    5, Column:  14]: ` `
+         EQUALS at [Line:    5, Column:  15]: `=`
+     WHITESPACE at [Line:    5, Column:  16]: ` `
+          MINUS at [Line:    5, Column:  17]: `-`
+DECIMAL_LITERAL at [Line:    5, Column:  18]: `2315`
+      SEMICOLON at [Line:    5, Column:  22]: `;`
+     WHITESPACE at [Line:    5, Column:  23]: `\n`
+      BASE_TYPE at [Line:    6, Column:   1]: `f32`
+     WHITESPACE at [Line:    6, Column:   4]: ` `
+           WORD at [Line:    6, Column:   5]: `a_float2`
+     WHITESPACE at [Line:    6, Column:  13]: ` `
+         EQUALS at [Line:    6, Column:  14]: `=`
+     WHITESPACE at [Line:    6, Column:  15]: ` `
+  FLOAT_LITERAL at [Line:    6, Column:  16]: `234.2412`
+      SEMICOLON at [Line:    6, Column:  24]: `;`
+     WHITESPACE at [Line:    6, Column:  25]: `\n`
+     WHITESPACE at [Line:    7, Column:   1]: `\n`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-ParseNode{SOURCE}
-	ParseNode{SOURCE_BODY}
-		ParseNode{STATEMENTS}
-			ParseNode{STATEMENTS}
-				ParseNode{STATEMENT}
-					ParseNode{STATEMENT_BODY}
-						ParseNode{ASSIGNMENT}
-							ParseNode{LHS}
-								ParseNode{DECLARATION}
-									Token{BASE_TYPE(`u8`)}
-									ParseNode{VARIABLE_USE}
-										ParseNode{ID} - Token{WORD(`a_byte`)}
-							Token{EQUALS(`=`)}
-							ParseNode{EXPRESSION}
-								ParseNode{TERM}
-									ParseNode{LITERAL}
-										ParseNode{RAW_LITERAL} - Token{DECIMAL_LITERAL(`5`)}
-					Token{SEMICOLON(`;`)}
-			ParseNode{STATEMENT}
-				ParseNode{STATEMENT_BODY}
-					ParseNode{ASSIGNMENT}
-						ParseNode{LHS}
-							ParseNode{DECLARATION}
-								Token{BASE_TYPE(`s64`)}
-								ParseNode{VARIABLE_USE}
-									ParseNode{ID} - Token{WORD(`signed`)}
-						Token{EQUALS(`=`)}
-						ParseNode{EXPRESSION}
-							ParseNode{TERM}
-								ParseNode{LITERAL}
-									Token{MINUS(`-`)}
-									ParseNode{RAW_LITERAL} - Token{DECIMAL_LITERAL(`100`)}
-				Token{SEMICOLON(`;`)}
+SOURCE
+	SOURCE_BODY
+		STATEMENTS
+			STATEMENTS
+				STATEMENTS
+					STATEMENTS
+						STATEMENT
+							STATEMENT_BODY
+								ASSIGNMENT
+									LHS
+										DECLARATION
+											BASE_TYPE(`u8`)
+											VARIABLE_USE
+												ID - WORD(`a_byte`)
+									EQUALS(`=`)
+									EXPRESSION
+										TERM
+											LITERAL
+												RAW_LITERAL - DECIMAL_LITERAL(`5`)
+							SEMICOLON(`;`)
+					STATEMENT
+						STATEMENT_BODY
+							ASSIGNMENT
+								LHS
+									DECLARATION
+										BASE_TYPE(`s64`)
+										VARIABLE_USE
+											ID - WORD(`signed`)
+								EQUALS(`=`)
+								EXPRESSION
+									TERM
+										LITERAL
+											MINUS(`-`)
+											RAW_LITERAL - DECIMAL_LITERAL(`100`)
+						SEMICOLON(`;`)
+				STATEMENT
+					STATEMENT_BODY
+						ASSIGNMENT
+							LHS
+								DECLARATION
+									BASE_TYPE(`u16`)
+									VARIABLE_USE
+										ID - WORD(`biggerInt`)
+							EQUALS(`=`)
+							EXPRESSION
+								TERM
+									LITERAL
+										MINUS(`-`)
+										RAW_LITERAL - DECIMAL_LITERAL(`2315`)
+					SEMICOLON(`;`)
+			STATEMENT
+				STATEMENT_BODY
+					ASSIGNMENT
+						LHS
+							DECLARATION
+								BASE_TYPE(`f32`)
+								VARIABLE_USE
+									ID - WORD(`a_float2`)
+						EQUALS(`=`)
+						EXPRESSION
+							TERM
+								LITERAL
+									RAW_LITERAL - FLOAT_LITERAL(`234.2412`)
+				SEMICOLON(`;`)
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/basic-types.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

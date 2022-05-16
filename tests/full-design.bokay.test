@@ -1,13 +1,12 @@
 --STDOUT:
-Input source file: tests/full-design.bokay
-Output path: tests/build/full-design
-Temp file output to: tests/build
-File contains 103 lines.
-Line 1: // The program should compile once all features are implemented.
-Found 486 tokens!
-Writing tokens to temp file: "tests/build/full-design.tok"
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp] INFO    - Input source file: tests/full-design.bokay
+[ args-parser.cpp] INFO    - Output path: tests/build/full-design
+[ args-parser.cpp] INFO    - Temp file output to: tests/build
+[    compiler.cpp] INFO    - Writing tokens to temp file: "tests/build/full-design.tok"
+[      parser.cpp] ERROR   - Parsing failed to recognize source from grammar!
+[    compiler.cpp] ERROR   - Parsing has failed! Code: 2
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -69,11 +68,14 @@ DECIMAL_LITERAL at [Line:   20, Column:  15]: `100`
      WHITESPACE at [Line:   20, Column:  19]: `\n`
       BASE_TYPE at [Line:   21, Column:   1]: `f32`
      WHITESPACE at [Line:   21, Column:   4]: ` `
-         EQUALS at [Line:   21, Column:   5]: `=`
-     WHITESPACE at [Line:   21, Column:   6]: ` `
-  FLOAT_LITERAL at [Line:   21, Column:   7]: `-1234.4352`
-      SEMICOLON at [Line:   21, Column:  17]: `;`
-     WHITESPACE at [Line:   21, Column:  18]: `\n`
+           WORD at [Line:   21, Column:   5]: `a_float`
+     WHITESPACE at [Line:   21, Column:  12]: ` `
+         EQUALS at [Line:   21, Column:  13]: `=`
+     WHITESPACE at [Line:   21, Column:  14]: ` `
+          MINUS at [Line:   21, Column:  15]: `-`
+  FLOAT_LITERAL at [Line:   21, Column:  16]: `1234.4352`
+      SEMICOLON at [Line:   21, Column:  25]: `;`
+     WHITESPACE at [Line:   21, Column:  26]: `\n`
       BASE_TYPE at [Line:   22, Column:   1]: `u16`
      WHITESPACE at [Line:   22, Column:   4]: ` `
            WORD at [Line:   22, Column:   5]: `arr`

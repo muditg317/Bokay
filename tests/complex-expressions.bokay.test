@@ -1,6 +1,13 @@
 --STDOUT:
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp] INFO    - Input source file: tests/complex-expressions.bokay
+[ args-parser.cpp] INFO    - Output path: tests/build/complex-expressions
+[ args-parser.cpp] INFO    - Temp file output to: tests/build
+[    compiler.cpp] INFO    - Writing tokens to temp file: "tests/build/complex-expressions.tok"
+[      parser.cpp] ERROR   - Token index out of bounds!
+[      parser.cpp] ERROR   - Token index out of bounds!
+[    compiler.cpp] INFO    - Writing parse tree to temp file: "tests/build/complex-expressions.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -55,7 +62,76 @@ DECIMAL_LITERAL at [Line:    4, Column:  29]: `100`
       SEMICOLON at [Line:    4, Column:  59]: `;`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Parse tree(tests/build/complex-expressions.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+SOURCE
+	SOURCE_BODY
+		STATEMENTS
+			STATEMENTS
+				STATEMENT
+					STATEMENT_BODY
+						ASSIGNMENT
+							LHS
+								DECLARATION
+									BASE_TYPE(`u32`)
+									VARIABLE_USE
+										ID - WORD(`bitIntWith5components`)
+							EQUALS(`=`)
+							EXPRESSION
+								EXPRESSION
+									EXPRESSION
+										EXPRESSION
+											EXPRESSION
+												TERM
+													LITERAL
+														RAW_LITERAL - DECIMAL_LITERAL(`5`)
+											OPERATOR - PLUS(`+`)
+											TERM
+												LITERAL
+													RAW_LITERAL - DECIMAL_LITERAL(`100`)
+										OPERATOR - MINUS(`-`)
+										TERM
+											LITERAL
+												RAW_LITERAL - DECIMAL_LITERAL(`52`)
+									OPERATOR - STAR(`*`)
+									TERM
+										LITERAL
+											RAW_LITERAL - DECIMAL_LITERAL(`38`)
+								OPERATOR - PLUS(`+`)
+								TERM
+									LITERAL
+										RAW_LITERAL - DECIMAL_LITERAL(`16`)
+					SEMICOLON(`;`)
+			STATEMENT
+				STATEMENT_BODY
+					ASSIGNMENT
+						LHS
+							DECLARATION
+								BASE_TYPE(`s64`)
+								VARIABLE_USE
+									ID - WORD(`floating_expressions`)
+						EQUALS(`=`)
+						EXPRESSION
+							EXPRESSION
+								EXPRESSION
+									EXPRESSION
+										TERM
+											LITERAL
+												MINUS(`-`)
+												RAW_LITERAL - DECIMAL_LITERAL(`100`)
+									OPERATOR - DIV(`/`)
+									TERM
+										LITERAL
+											RAW_LITERAL - FLOAT_LITERAL(`26.789`)
+								OPERATOR - PLUS(`+`)
+								TERM
+									LITERAL
+										RAW_LITERAL - FLOAT_LITERAL(`34.15`)
+							OPERATOR - STAR(`*`)
+							TERM
+								LITERAL
+									MINUS(`-`)
+									RAW_LITERAL - FLOAT_LITERAL(`253.14`)
+				SEMICOLON(`;`)
+
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/complex-expressions.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
