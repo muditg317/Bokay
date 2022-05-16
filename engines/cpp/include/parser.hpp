@@ -58,12 +58,9 @@ std::ostream& operator<< (std::ostream& out, const ParseNode& node);
 
 /**
  * @brief represents a single production rule
- * @tparam T the lhs/head of the rule
+ *  the rhs/body of the rule
  */
 struct Production {
-  /**
-   * @brief the rhs/body of the rule
-   */
   const std::vector<RuleComponent> components;
   Production(const std::vector<RuleComponent> _components): components(_components) {};
   size_t length() const {return components.size();};

@@ -87,7 +87,7 @@ while (weird < -300) {
 
 
 // Comments:
-//  The collowing comments shoul be handled.
+//  The following comments should be handled.
 //  The result should be `u8 newVar = 2345;` and `f64 big_float = 345.3245;`
 
 /* a simple comment */

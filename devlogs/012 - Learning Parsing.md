@@ -52,7 +52,7 @@ Also 10pm to 2am
 - None today!
 
 ## Unorganized thoughts as they came
-- I know nothing, so the best course of action is probably to jsut research online about parsers.
+- I know nothing, so the best course of action is probably to just research online about parsers.
 - I'll probably go with some version of Earley's algorithm
   - I don't want to copy-paste an existing algorithm, so I'm just going to jump in and work.
 - I can provide meaningful `invalid token` messages by waiting until lexing completion to error and provide all invalid tokens.
