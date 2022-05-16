@@ -4,7 +4,7 @@ May 15th, 2022
 
 Sign on: 12:30pm\
 Sign off: 1pm\
-Also 10pm to 11pm
+Also 10pm to 12:30am
 </div>
 
 ## Goals
@@ -25,6 +25,7 @@ Also 10pm to 11pm
   - Issue in ~line 435 (at time-of-writing) of `parser.cpp` - `Token nextToken = tokens[tokInd];`
 - Play around with logger prefix during testing to avoid silly mismatches with line numbers of compiler files
 - Update correct outputs for all tests
+- Start some initial work on PEMDAS for expressions
 
 ## TODO
 1. Work on parser to correctly parse the full-design test
@@ -34,4 +35,5 @@ Also 10pm to 11pm
 - None today!
 
 ## Unorganized thoughts as they came
-- 
+- Implementing PEMDAS may require reworking `variable_use` and `term`
+  - Referencing [Java operator precedence](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/operators.html) and [Java expression precedence](https://www.javatpoint.com/highest-precedence-in-java)

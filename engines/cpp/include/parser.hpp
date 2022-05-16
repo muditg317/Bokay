@@ -33,6 +33,12 @@ enum class ParseNodeType {
   VARIABLE_USE, // [id] | [var_use][arr_access]
   ARRAY_ACCESS, // [ [expression] ]
   EXPRESSION, // [expression] [operator] [term] | [term]
+  ARITHMETIC_EXPRESSION, // [expression] [operator] [term] | [term]
+  ARITHMETIC_OPERATOR, // [+-]
+  MULTIPLICATIVE_EXPRESSION, // [expression] [operator] [term] | [term]
+  MULTIPLICATIVE_OPERATOR, // [*/%]
+  UNARY_EXPRESSION, // [operator] [expression]
+  UNARY_OPERATOR, // [!-]
   OPERATOR, // +-*/%
   DECLARATION, // [base type] [variable_use]
   LHS, // [decl] | [var_use]

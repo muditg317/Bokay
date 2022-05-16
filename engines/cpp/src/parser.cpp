@@ -105,12 +105,7 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
   } },
   { ParseNodeType::EXPRESSION, {
     Production{ {
-      ParseNodeType::EXPRESSION,
-      ParseNodeType::OPERATOR,
-      ParseNodeType::TERM,
-    } },
-    Production{ {
-      ParseNodeType::TERM,
+      ParseNodeType::ARITHMETIC_EXPRESSION,
     } },
   } },
   { ParseNodeType::OPERATOR, {
