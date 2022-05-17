@@ -40,7 +40,7 @@ set(Bokay-Engine-C++_INCLUDE_DIR "${Bokay-Engine-C++_SOURCE_DIR}/include")
 add_library(LibArgsParser src/args-parser.cpp include/args-parser.hpp)
 add_library(LibCompiler src/compiler.cpp include/compiler.hpp)
 add_library(LibLexer src/lexer.cpp include/lexer.hpp)
-add_library(LibParser src/parser.cpp include/parser.hpp)
+add_library(LibParser src/parser.cpp src/grammar.cpp include/parser.hpp include/grammar.hpp)
 
 # We need this directory, and users of our library will not need it too
 target_include_directories(LibArgsParser PRIVATE ${Bokay-Engine-C++_INCLUDE_DIR})

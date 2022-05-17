@@ -85,7 +85,11 @@ TEST_CASE(#testCase ".bokay", "[main]") {                                       
 #define ALL_TESTS     \
 TEST_MACRO(one-comment) \
 TEST_MACRO(basic-types) \
+TEST_MACRO(annoying-comments) \
 TEST_MACRO(complex-expressions) \
+TEST_MACRO(conditionals) \
+TEST_MACRO(loops) \
+TEST_MACRO(functions) \
 TEST_MACRO(full-design) \
 
 

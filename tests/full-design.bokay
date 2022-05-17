@@ -19,6 +19,7 @@ import WholeLib, {oneMethod, SomeClass, anotherMethod} from "./export-stuff.boka
 u8 a_byte = 5;
 s64 signed = -100;
 f32 a_float = -1234.4352;
+bool the_boolean = false;
 u16 arr[3]; // global space will default to 0'd out memory
 arr[1] = 70531;
 
@@ -58,7 +59,7 @@ u32 small_num = union_var.chunks[0]; // must specify which type to use when extr
 u32 do_stuff(u16 a, u32 b) {
   return a+b;
 }
-u32 res = do_stuff(a,b);
+u32 res = do_stuff(5,6);
 
 s64 weird_defaults(u16 a = 5, u32 b, s16 c, s32 d = -100, s64 e = -8398, u8 f) {
   return a+b+c+d+e+f;

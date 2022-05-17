@@ -2,6 +2,7 @@
 #define PARSER_HPP
 
 #include "lexer.hpp"
+#include "grammar.hpp"
 
 #include <algorithm>
 #include <queue>
@@ -16,64 +17,6 @@ enum class ParserResult {
   INVALID_TOKEN_FOUND,
   FAILED_RECOGNITION,
 };
-
-enum class ParseNodeType {
-  // RAW_TOKEN,
-  // KW_IMPORT,KW_FROM,
-  // STRING,
-  SOURCE, // [imports] [statements]
-  SOURCE_BODY, // [imports] [statements]
-  IMPORT_GROUP, // [import_group] [import_stmnt] | [import_stmnt]
-  IMPORT_STATEMENT, // import WholeLib, {method, otherField} from "./lib.bokay";
-  LIB_ACCESSOR, // ::
-  ID, // variable
-  LITERAL, // [raw_lit] | [minus] [raw_lit]
-  RAW_LITERAL, // decimal | float
-  TERM, // ( [expression] )  | [var_use] | [func call]
-  VARIABLE_USE, // [id] | [var_use][arr_access]
-  ARRAY_ACCESS, // [ [expression] ]
-  EXPRESSION, // [expression] [operator] [term] | [term]
-  ARITHMETIC_EXPRESSION, // [expression] [operator] [term] | [term]
-  ARITHMETIC_OPERATOR, // [+-]
-  MULTIPLICATIVE_EXPRESSION, // [expression] [operator] [term] | [term]
-  MULTIPLICATIVE_OPERATOR, // [*/%]
-  UNARY_EXPRESSION, // [operator] [expression]
-  UNARY_OPERATOR, // [!-]
-  OPERATOR, // +-*/%
-  DECLARATION, // [base type] [variable_use]
-  LHS, // [decl] | [var_use]
-  ASSIGNMENT, // [LHS] equals [expression]
-  STATEMENTS, // [statements] [statement] | [statement]
-  STATEMENT_BODY, // [anything]
-  STATEMENT, // [stmt_body] ;
-  // STRUCT_DEF, UNION_DEF,
-  // CONDITIONALS, LOOPS,
-  // FUNCTIONS
-  // USELESS, // [whitespace] | [comment]
-  NUM_NODE_TYPES
-};
-std::string typeToString(const ParseNodeType& type);
-std::ostream& operator<< (std::ostream& out, const ParseNodeType& type);
-
-#define PARSE_NODE_TYPE_INDEX 0
-#define TOKEN_TYPE_INDEX 1
-typedef std::variant<ParseNodeType, TokenType> RuleComponent;
-typedef std::variant<ParseNodeType, Token> ParseNode;
-
-std::ostream& operator<< (std::ostream& out, const ParseNode& node);
-
-/**
- * @brief represents a single production rule
- *  the rhs/body of the rule
- */
-struct Production {
-  const std::vector<RuleComponent> components;
-  Production(const std::vector<RuleComponent> _components): components(_components) {};
-  size_t length() const {return components.size();};
-  RuleComponent operator[](size_t n) const {return components[n];};
-  bool operator==(const Production other) const {return components == other.components;};
-};
-std::ostream& operator<< (std::ostream& out, const Production& production);
 
 struct ParsingTree;
 typedef std::variant<ParseNode, ParsingTree> ParseTreeChild;

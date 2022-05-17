@@ -1,0 +1,7 @@
+// while loops:
+//  while ({condition}) {
+//    // code...
+//  }
+while (weird < -300) {
+  weird += 1;
+}
