@@ -5,8 +5,7 @@
 [ args-parser.cpp: 105] INFO    - Output path: tests/build/functions
 [ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
 [    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/functions.tok"
-[      parser.cpp: 136] ERROR   - Parsing failed to recognize source from grammar!
-[    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
+[    compiler.cpp: 114] INFO    - Writing parse tree to temp file: "tests/build/functions.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -149,7 +148,344 @@ DECIMAL_LITERAL at [Line:   15, Column:  43]: `20`
         COMMENT at [Line:   15, Column:  47]: ` // runs with abcdef==5,5,-10,-100,-234,20 -- returns -314\n`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Parse tree(tests/build/functions.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+SOURCE
+	SOURCE_BODY
+		STATEMENTS
+			STATEMENTS
+				STATEMENTS
+					STATEMENTS
+						STATEMENT
+							FUNCTION_IMPL
+								FUNC_TYPE_DECL
+									DECL_SPECIFIER - BASE_TYPE(`u32`)
+									NO_PTR_DECL
+										ID - WORD(`do_stuff`)
+								OPEN_PAREN(`(`)
+								FUNCTION_ARGUMENTS
+									FUNCTION_ARGUMENTS
+										FUNCTION_ARGUMENT
+											FUNC_TYPE_DECL
+												DECL_SPECIFIER - BASE_TYPE(`u16`)
+												NO_PTR_DECL
+													ID - WORD(`a`)
+									COMMA(`,`)
+									FUNCTION_ARGUMENT
+										FUNC_TYPE_DECL
+											DECL_SPECIFIER - BASE_TYPE(`u32`)
+											NO_PTR_DECL
+												ID - WORD(`b`)
+								CLOSE_PAREN(`)`)
+								OPEN_BRACE(`{`)
+								STATEMENTS
+									STATEMENT
+										RETURN_STMT
+											KW_RETURN(`return`)
+											EXPRESSION
+												ASSIGNMENT_EXPR
+													LOGICAL_EXPR
+														RELATIONAL_EQ_EXPR
+															RELATIONAL_COMP_EXPR
+																ADDITIVE_EXPR
+																	ADDITIVE_EXPR
+																		MULTIPLICATIVE_EXPR
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						ID - WORD(`a`)
+																	ADDITIVE_OP - PLUS(`+`)
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					ID - WORD(`b`)
+											SEMICOLON(`;`)
+								CLOSE_BRACE(`}`)
+					STATEMENT
+						STATEMENT_BODY
+							DECLARATION
+								DECL_SPECIFIER - BASE_TYPE(`u32`)
+								DECL_LIST
+									DECL_ITEM
+										DECLARATOR
+											ID - WORD(`res`)
+										EQUALS(`=`)
+										INITIALIZER
+											EXPRESSION
+												ASSIGNMENT_EXPR
+													LOGICAL_EXPR
+														RELATIONAL_EQ_EXPR
+															RELATIONAL_COMP_EXPR
+																ADDITIVE_EXPR
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				FUNCTION_CALL_EXPR
+																					VARUSE_EXPR
+																						VAR_EXPR
+																							ID - WORD(`do_stuff`)
+																					OPEN_PAREN(`(`)
+																					ARG_LIST
+																						ARG_LIST
+																							EXPRESSION
+																								ASSIGNMENT_EXPR
+																									LOGICAL_EXPR
+																										RELATIONAL_EQ_EXPR
+																											RELATIONAL_COMP_EXPR
+																												ADDITIVE_EXPR
+																													MULTIPLICATIVE_EXPR
+																														UNARY_EXPR
+																															VARUSE_EXPR
+																																VAR_EXPR
+																																	LITERAL - DECIMAL_LITERAL(`2`)
+																						COMMA(`,`)
+																						ARG_LIST
+																							EXPRESSION
+																								ASSIGNMENT_EXPR
+																									LOGICAL_EXPR
+																										RELATIONAL_EQ_EXPR
+																											RELATIONAL_COMP_EXPR
+																												ADDITIVE_EXPR
+																													MULTIPLICATIVE_EXPR
+																														UNARY_EXPR
+																															VARUSE_EXPR
+																																VAR_EXPR
+																																	LITERAL - DECIMAL_LITERAL(`3`)
+																					CLOSE_PAREN(`)`)
+						SEMICOLON(`;`)
+				STATEMENT
+					FUNCTION_IMPL
+						FUNC_TYPE_DECL
+							DECL_SPECIFIER - BASE_TYPE(`s64`)
+							NO_PTR_DECL
+								ID - WORD(`weird_defaults`)
+						OPEN_PAREN(`(`)
+						FUNCTION_ARGUMENTS
+							FUNCTION_ARGUMENTS
+								FUNCTION_ARGUMENTS
+									FUNCTION_ARGUMENTS
+										FUNCTION_ARGUMENTS
+											FUNCTION_ARGUMENTS
+												FUNCTION_ARGUMENT
+													FUNC_TYPE_DECL
+														DECL_SPECIFIER - BASE_TYPE(`u16`)
+														NO_PTR_DECL
+															ID - WORD(`a`)
+													EQUALS(`=`)
+													DEFAULT_FUNC_ARG_VALUE
+														EXPRESSION
+															ASSIGNMENT_EXPR
+																LOGICAL_EXPR
+																	RELATIONAL_EQ_EXPR
+																		RELATIONAL_COMP_EXPR
+																			ADDITIVE_EXPR
+																				MULTIPLICATIVE_EXPR
+																					UNARY_EXPR
+																						VARUSE_EXPR
+																							VAR_EXPR
+																								LITERAL - DECIMAL_LITERAL(`5`)
+											COMMA(`,`)
+											FUNCTION_ARGUMENT
+												FUNC_TYPE_DECL
+													DECL_SPECIFIER - BASE_TYPE(`u32`)
+													NO_PTR_DECL
+														ID - WORD(`b`)
+										COMMA(`,`)
+										FUNCTION_ARGUMENT
+											FUNC_TYPE_DECL
+												DECL_SPECIFIER - BASE_TYPE(`s16`)
+												NO_PTR_DECL
+													ID - WORD(`c`)
+									COMMA(`,`)
+									FUNCTION_ARGUMENT
+										FUNC_TYPE_DECL
+											DECL_SPECIFIER - BASE_TYPE(`s32`)
+											NO_PTR_DECL
+												ID - WORD(`d`)
+										EQUALS(`=`)
+										DEFAULT_FUNC_ARG_VALUE
+											EXPRESSION
+												ASSIGNMENT_EXPR
+													LOGICAL_EXPR
+														RELATIONAL_EQ_EXPR
+															RELATIONAL_COMP_EXPR
+																ADDITIVE_EXPR
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			UNARY_OP - MINUS(`-`)
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						LITERAL - DECIMAL_LITERAL(`100`)
+								COMMA(`,`)
+								FUNCTION_ARGUMENT
+									FUNC_TYPE_DECL
+										DECL_SPECIFIER - BASE_TYPE(`s64`)
+										NO_PTR_DECL
+											ID - WORD(`e`)
+									EQUALS(`=`)
+									DEFAULT_FUNC_ARG_VALUE
+										EXPRESSION
+											ASSIGNMENT_EXPR
+												LOGICAL_EXPR
+													RELATIONAL_EQ_EXPR
+														RELATIONAL_COMP_EXPR
+															ADDITIVE_EXPR
+																MULTIPLICATIVE_EXPR
+																	UNARY_EXPR
+																		UNARY_OP - MINUS(`-`)
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					LITERAL - DECIMAL_LITERAL(`8398`)
+							COMMA(`,`)
+							FUNCTION_ARGUMENT
+								FUNC_TYPE_DECL
+									DECL_SPECIFIER - BASE_TYPE(`u8`)
+									NO_PTR_DECL
+										ID - WORD(`f`)
+						CLOSE_PAREN(`)`)
+						OPEN_BRACE(`{`)
+						STATEMENTS
+							STATEMENT
+								RETURN_STMT
+									KW_RETURN(`return`)
+									EXPRESSION
+										ASSIGNMENT_EXPR
+											LOGICAL_EXPR
+												RELATIONAL_EQ_EXPR
+													RELATIONAL_COMP_EXPR
+														ADDITIVE_EXPR
+															ADDITIVE_EXPR
+																ADDITIVE_EXPR
+																	ADDITIVE_EXPR
+																		ADDITIVE_EXPR
+																			ADDITIVE_EXPR
+																				MULTIPLICATIVE_EXPR
+																					UNARY_EXPR
+																						VARUSE_EXPR
+																							VAR_EXPR
+																								ID - WORD(`a`)
+																			ADDITIVE_OP - PLUS(`+`)
+																			MULTIPLICATIVE_EXPR
+																				UNARY_EXPR
+																					VARUSE_EXPR
+																						VAR_EXPR
+																							ID - WORD(`b`)
+																		ADDITIVE_OP - PLUS(`+`)
+																		MULTIPLICATIVE_EXPR
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						ID - WORD(`c`)
+																	ADDITIVE_OP - PLUS(`+`)
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					ID - WORD(`d`)
+																ADDITIVE_OP - PLUS(`+`)
+																MULTIPLICATIVE_EXPR
+																	UNARY_EXPR
+																		VARUSE_EXPR
+																			VAR_EXPR
+																				ID - WORD(`e`)
+															ADDITIVE_OP - PLUS(`+`)
+															MULTIPLICATIVE_EXPR
+																UNARY_EXPR
+																	VARUSE_EXPR
+																		VAR_EXPR
+																			ID - WORD(`f`)
+									SEMICOLON(`;`)
+						CLOSE_BRACE(`}`)
+			STATEMENT
+				STATEMENT_BODY
+					DECLARATION
+						DECL_SPECIFIER - BASE_TYPE(`s64`)
+						DECL_LIST
+							DECL_ITEM
+								DECLARATOR
+									ID - WORD(`weird`)
+								EQUALS(`=`)
+								INITIALIZER
+									EXPRESSION
+										ASSIGNMENT_EXPR
+											LOGICAL_EXPR
+												RELATIONAL_EQ_EXPR
+													RELATIONAL_COMP_EXPR
+														ADDITIVE_EXPR
+															MULTIPLICATIVE_EXPR
+																UNARY_EXPR
+																	VARUSE_EXPR
+																		FUNCTION_CALL_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					ID - WORD(`weird_defaults`)
+																			OPEN_PAREN(`(`)
+																			ARG_LIST
+																				ARG_LIST
+																					ARG_LIST
+																						ARG_LIST
+																							COMMA(`,`)
+																							ARG_LIST
+																								EXPRESSION
+																									ASSIGNMENT_EXPR
+																										LOGICAL_EXPR
+																											RELATIONAL_EQ_EXPR
+																												RELATIONAL_COMP_EXPR
+																													ADDITIVE_EXPR
+																														MULTIPLICATIVE_EXPR
+																															UNARY_EXPR
+																																VARUSE_EXPR
+																																	VAR_EXPR
+																																		ID - WORD(`res`)
+																						COMMA(`,`)
+																						ARG_LIST
+																							EXPRESSION
+																								ASSIGNMENT_EXPR
+																									LOGICAL_EXPR
+																										RELATIONAL_EQ_EXPR
+																											RELATIONAL_COMP_EXPR
+																												ADDITIVE_EXPR
+																													MULTIPLICATIVE_EXPR
+																														UNARY_EXPR
+																															UNARY_OP - MINUS(`-`)
+																															UNARY_EXPR
+																																VARUSE_EXPR
+																																	VAR_EXPR
+																																		LITERAL - DECIMAL_LITERAL(`10`)
+																					COMMA(`,`)
+																					ARG_LIST
+																						COMMA(`,`)
+																						ARG_LIST
+																							EXPRESSION
+																								ASSIGNMENT_EXPR
+																									LOGICAL_EXPR
+																										RELATIONAL_EQ_EXPR
+																											RELATIONAL_COMP_EXPR
+																												ADDITIVE_EXPR
+																													MULTIPLICATIVE_EXPR
+																														UNARY_EXPR
+																															UNARY_OP - MINUS(`-`)
+																															UNARY_EXPR
+																																VARUSE_EXPR
+																																	VAR_EXPR
+																																		LITERAL - DECIMAL_LITERAL(`234`)
+																				COMMA(`,`)
+																				ARG_LIST
+																					EXPRESSION
+																						ASSIGNMENT_EXPR
+																							LOGICAL_EXPR
+																								RELATIONAL_EQ_EXPR
+																									RELATIONAL_COMP_EXPR
+																										ADDITIVE_EXPR
+																											MULTIPLICATIVE_EXPR
+																												UNARY_EXPR
+																													VARUSE_EXPR
+																														VAR_EXPR
+																															LITERAL - DECIMAL_LITERAL(`20`)
+																			CLOSE_PAREN(`)`)
+				SEMICOLON(`;`)
+
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/functions.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================

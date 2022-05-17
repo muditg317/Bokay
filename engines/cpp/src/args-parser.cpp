@@ -21,7 +21,7 @@ ParseResult parseCommandLine(int argc, char *argv[], Options &options) {
                     "name of a file of a configuration.")
         ;
     
-    DLOG(INFO) << "generic options\n" << generic ;
+    // DLOG(INFO) << "generic options\n" << generic ;
 
     // Declare a group of options that will be 
     // allowed both on command line and in
@@ -39,7 +39,7 @@ ParseResult parseCommandLine(int argc, char *argv[], Options &options) {
         //     "include path")
         ;
 
-    DLOG(INFO) << "config options\n" << config ;
+    // DLOG(INFO) << "config options\n" << config ;
 
     // Hidden options, will be allowed both on command line and
     // in config file, but will not be shown to the user.
@@ -48,17 +48,17 @@ ParseResult parseCommandLine(int argc, char *argv[], Options &options) {
         (OPT_W_ALIAS(ARG_INPUT_FILE), boost::program_options::value<std::string>(&options.sourceFile), "input file")
         ;
 
-    DLOG(INFO) << "hidden options\n" << hidden ;
+    // DLOG(INFO) << "hidden options\n" << hidden ;
 
     boost::program_options::options_description cmdline_options;
     cmdline_options.add(generic).add(config).add(hidden);
 
-    DLOG(INFO) << "cmd options\n" << cmdline_options ;
+    // DLOG(INFO) << "cmd options\n" << cmdline_options ;
 
     boost::program_options::options_description config_file_options;
     config_file_options.add(config).add(hidden);
 
-    DLOG(INFO) << "config file options\n" << config_file_options ;
+    // DLOG(INFO) << "config file options\n" << config_file_options ;
 
     boost::program_options::options_description visible("Allowed options");
     visible.add(generic).add(config);
@@ -72,7 +72,7 @@ ParseResult parseCommandLine(int argc, char *argv[], Options &options) {
     boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(cmdline_options).positional(p).run(), vm);
     boost::program_options::notify(vm);
 
-    DLOG(INFO) << cmdline_options ;
+    // // DLOG(INFO) << cmdline_options ;
 
     if (vm.count(ARG_CONFIG)) {
       std::ifstream ifs(configFile.c_str());

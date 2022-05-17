@@ -295,10 +295,6 @@ bool Parser::writeTree(ParseTree &ptree, boost::filesystem::path filePath) {
 
   ptreeFile << ptree.toTabbedString();
 
-  // for (auto token : tokens) {
-  //   ptreeFile << token << '\n';
-  // }
-
   ptreeFile.close();
   return true;
 }

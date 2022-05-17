@@ -11,33 +11,44 @@
 
 enum class ParseNodeType {
   SOURCE, // [imports] [statements]
-  SOURCE_BODY, // [imports] [statements]
+  SOURCE_BODY, // [import_group] [statements]
   IMPORT_GROUP, // [import_group] [import_stmnt] | [import_stmnt]
   IMPORT_STATEMENT, // import [lib_name] , { method, otherField }  from [string] ;
   LIB_NAME, // [id]
 
   STATEMENTS, // [statements] [statement] | [statement]
-  STATEMENT, // [stmt_body] ;
+  STATEMENT, // [stmt_body] ; | [function_impl] | [return_stmt] // TODO: | [if_cond] | [while_loop]
   STATEMENT_BODY, // [declaration] | [expression]
 
+  // declarations - C/C++ style
   DECLARATION, // [decl_specifier] [decl_list]
   DECL_SPECIFIER, // [base_type] // TODO: | [struct_decl] | [union_decl]
   DECL_LIST, // [decl_list],[decl_item] | [decl_item]
   DECL_ITEM, // [declarator] | [declarator] equals [initializer]
   INITIALIZER, // [expression]
 
+  // declarators - everything between the base type and initializers for declarations
   DECLARATOR, // [id] | [paren_decl] | [ptr_decl] | [array_decl] | [func_decl]
   PAREN_DECL, // ( [declarator] )
   PTR_DECL, //. *[declarator] // TODO pointers
   NO_PTR_DECL, // [id] | [paren_decl] | [array_decl] | [func_decl]
   ARRAY_DECL, // [no_ptr_decl] [ [expression] ]
   FUNC_DECL, // [no_ptr_decl] ( [param_list] )
-  // TODO: param lists
-  // TODO: FUNCTIONS
-
-  // TODO: STRUCT_DEF, UNION_DEF,
+  // param lists
+  PARAM_LIST, // [param_list],[param_item] | [param_item]
+  PARAM_ITEM, // [func_type_decl]
+  
+  // FUNCTIONS
+  FUNC_TYPE_DECL, // [decl_specifier] [no_ptr_decl]
+  FUNCTION_IMPL, // [func_type_decl] ( [func_args] ) { [statements] }
+  FUNCTION_ARGUMENTS, // [func_args],[func_arg] | [func_arg]
+  FUNCTION_ARGUMENT, // [func_type_decl] = [default_func_arg_value] | [func_type_decl]
+  DEFAULT_FUNC_ARG_VALUE, // [expression] // TODO: type checking for const stuff
+  RETURN_STMT, // return [expression] ;
 
   // TODO: CONDITIONALS, LOOPS,
+
+  // TODO: STRUCT_DEF, UNION_DEF,
 
   EXPRESSION, // [assignment_expr]
   ASSIGNMENT_EXPR, // [logical_expr] [assignment_op] [assignment_expr] | [logical_expr]
@@ -57,7 +68,7 @@ enum class ParseNodeType {
   VARUSE_EXPR, // [member_access_expr] | [function_call_expr] | [subscript_expr] | [var_expr]
   MEMBER_ACCESS_EXPR, // [varuse_expr] period [var_expr]
   FUNCTION_CALL_EXPR, // [varuse_expr] ( [arg_list] )
-  ARG_LIST, // [arg_list] , [expression] | [expression]
+  ARG_LIST, // [arg_list] , [arg_list] | , [arg_list] | [expression]
   SUBSCRIPT_EXPR, // [varuse_expr] [ [expression] ]
   
   VAR_EXPR, // [paren_expr] | [lib_access] | [id] | [literal]

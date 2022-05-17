@@ -55,6 +55,12 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       ParseNodeType::STATEMENT_BODY,
       TokenType::SEMICOLON,
     } },
+    Production{ {
+      ParseNodeType::FUNCTION_IMPL,
+    } },
+    Production{ {
+      ParseNodeType::RETURN_STMT,
+    } },
   } },
   { ParseNodeType::STATEMENT_BODY, {
     Production{ {
@@ -156,8 +162,72 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     Production{ {
       ParseNodeType::NO_PTR_DECL,
       TokenType::OPEN_PAREN,
-      // ParseNodeType::PARAM_LIST,
+      ParseNodeType::PARAM_LIST,
       TokenType::CLOSE_PAREN,
+    } },
+  } },
+  { ParseNodeType::PARAM_LIST, {
+    Production{ {
+      ParseNodeType::PARAM_LIST,
+      TokenType::COMMA,
+      ParseNodeType::PARAM_ITEM,
+    } },
+    Production{ {
+      ParseNodeType::PARAM_ITEM,
+    } },
+  } },
+  { ParseNodeType::PARAM_ITEM, {
+    Production{ {
+      ParseNodeType::FUNC_TYPE_DECL,
+    } },
+  } },
+  { ParseNodeType::FUNC_TYPE_DECL, {
+    Production{ {
+      ParseNodeType::DECL_SPECIFIER,
+      ParseNodeType::NO_PTR_DECL,
+    } },
+  } },
+  { ParseNodeType::FUNCTION_IMPL, {
+    Production{ {
+      ParseNodeType::FUNC_TYPE_DECL,
+      TokenType::OPEN_PAREN,
+      ParseNodeType::FUNCTION_ARGUMENTS,
+      TokenType::CLOSE_PAREN,
+      TokenType::OPEN_BRACE,
+      ParseNodeType::STATEMENTS,
+      TokenType::CLOSE_BRACE,
+    } },
+  } },
+  { ParseNodeType::FUNCTION_ARGUMENTS, {
+    Production{ {
+      ParseNodeType::FUNCTION_ARGUMENTS,
+      TokenType::COMMA,
+      ParseNodeType::FUNCTION_ARGUMENT,
+    } },
+    Production{ {
+      ParseNodeType::FUNCTION_ARGUMENT,
+    } },
+  } },
+  { ParseNodeType::FUNCTION_ARGUMENT, {
+    Production{ {
+      ParseNodeType::FUNC_TYPE_DECL,
+      TokenType::EQUALS,
+      ParseNodeType::DEFAULT_FUNC_ARG_VALUE,
+    } },
+    Production{ {
+      ParseNodeType::FUNC_TYPE_DECL,
+    } },
+  } },
+  { ParseNodeType::DEFAULT_FUNC_ARG_VALUE, {
+    Production{ {
+      ParseNodeType::EXPRESSION,
+    } },
+  } },
+  { ParseNodeType::RETURN_STMT, {
+    Production{ {
+      TokenType::KW_RETURN,
+      ParseNodeType::EXPRESSION,
+      TokenType::SEMICOLON,
     } },
   } },
   { ParseNodeType::EXPRESSION, {
@@ -353,7 +423,11 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     Production{ {
       ParseNodeType::ARG_LIST,
       TokenType::COMMA,
-      ParseNodeType::EXPRESSION,
+      ParseNodeType::ARG_LIST,
+    } },
+    Production{ {
+      TokenType::COMMA,
+      ParseNodeType::ARG_LIST,
     } },
     Production{ {
       ParseNodeType::EXPRESSION,
@@ -451,6 +525,14 @@ std::string typeToString(const ParseNodeType& type) {
     case ParseNodeType::NO_PTR_DECL: return "NO_PTR_DECL";
     case ParseNodeType::ARRAY_DECL: return "ARRAY_DECL";
     case ParseNodeType::FUNC_DECL: return "FUNC_DECL";
+    case ParseNodeType::PARAM_LIST: return "PARAM_LIST";
+    case ParseNodeType::PARAM_ITEM: return "PARAM_ITEM";
+    case ParseNodeType::FUNC_TYPE_DECL: return "FUNC_TYPE_DECL";
+    case ParseNodeType::FUNCTION_IMPL: return "FUNCTION_IMPL";
+    case ParseNodeType::FUNCTION_ARGUMENTS: return "FUNCTION_ARGUMENTS";
+    case ParseNodeType::FUNCTION_ARGUMENT: return "FUNCTION_ARGUMENT";
+    case ParseNodeType::DEFAULT_FUNC_ARG_VALUE: return "DEFAULT_FUNC_ARG_VALUE";
+    case ParseNodeType::RETURN_STMT: return "RETURN_STMT";
     case ParseNodeType::EXPRESSION: return "EXPRESSION";
     case ParseNodeType::ASSIGNMENT_EXPR: return "ASSIGNMENT_EXPR";
     case ParseNodeType::ASSIGNMENT_OP: return "ASSIGNMENT_OP";
