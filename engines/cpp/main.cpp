@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
   
   google::InitGoogleLogging(argv[0], &CustomPrefix);
   FLAGS_logtostderr = true;
-  FLAGS_colorlogtostderr = true;
+  // FLAGS_colorlogtostderr = true;
 
   std::string comment = "\n\n";
   LOG(INFO) << "the string: `" << comment << "`\n";
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
   google::InitGoogleLogging(argv[0], &CustomPrefix, &testing);
   google::InstallFailureSignalHandler();
   FLAGS_logtostderr = true;
-  FLAGS_colorlogtostderr = true;
+  // FLAGS_colorlogtostderr = true;
 
   Options options;
   ParseResult ret = parseCommandLine(argc, argv, options);

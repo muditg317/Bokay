@@ -55,8 +55,14 @@ std::string readFile(boost::filesystem::path filePath) {
   return buffer.str();
 }
 
+
+inline void clearExistingTmpOutputs(TestingOptions options, std::string fileToCompile) {
+  std::string deleteCommand = fmt::format("rm {}/{}*", options.buildDir, fileToCompile);
+  ShellCommandOutput output = execShellCommand(deleteCommand);
+}
 std::string engineCompile(TestingOptions options, std::string engineArgs, std::string fileToCompile) {
-  // std::cout << "compile file: " << fmt::format("{}/{}.bokay", options.testDir, fileToCompile) << std::endl;
+  clearExistingTmpOutputs(options, fileToCompile);
+
   std::string compilationCommand = fmt::format(
     "{} {} {}/{}.bokay -t {} -o {}/{} TESTING_ENGINE",
     options.enginePath, engineArgs, // "{} {}"
