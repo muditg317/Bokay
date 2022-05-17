@@ -1,0 +1,108 @@
+--STDOUT:
+
+--STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp: 102] INFO    - Input source file: tests/annoying-comments.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/annoying-comments
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/annoying-comments.tok"
+[    compiler.cpp: 114] INFO    - Writing parse tree to temp file: "tests/build/annoying-comments.ptree"
+
+--STDERR-END
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+        COMMENT at [Line:    1, Column:   1]: `// Comments:\n`
+        COMMENT at [Line:    2, Column:   1]: `//  The following comments should be handled.\n`
+        COMMENT at [Line:    3, Column:   1]: `//  The result should be `u8 newVar = 2345;` and `f64 big_float = 345.3245;`\n`
+     WHITESPACE at [Line:    4, Column:   1]: `\n`
+        COMMENT at [Line:    5, Column:   1]: `/* a simple comment */`
+     WHITESPACE at [Line:    5, Column:  23]: `\n`
+        COMMENT at [Line:    6, Column:   1]: `/* also /* a comment */`
+     WHITESPACE at [Line:    6, Column:  24]: `\n`
+        COMMENT at [Line:    7, Column:   1]: `/* a comment * with a silly character in it */`
+     WHITESPACE at [Line:    7, Column:  47]: `\n`
+        COMMENT at [Line:    8, Column:   1]: `/* a multi-line\n  comment\n*/`
+     WHITESPACE at [Line:    9, Column:  13]: `\n`
+        COMMENT at [Line:   10, Column:   1]: `/* two comments on one line */`
+     WHITESPACE at [Line:   10, Column:  31]: ` `
+      BASE_TYPE at [Line:   10, Column:  32]: `u8`
+     WHITESPACE at [Line:   10, Column:  34]: ` `
+           WORD at [Line:   10, Column:  35]: `newVar`
+     WHITESPACE at [Line:   10, Column:  41]: ` `
+         EQUALS at [Line:   10, Column:  42]: `=`
+     WHITESPACE at [Line:   10, Column:  43]: ` `
+DECIMAL_LITERAL at [Line:   10, Column:  44]: `2345`
+      SEMICOLON at [Line:   10, Column:  48]: `;`
+        COMMENT at [Line:   10, Column:  49]: ` /* NOT one long comment */`
+     WHITESPACE at [Line:   10, Column:  76]: `\n`
+        COMMENT at [Line:   11, Column:   1]: `/* a comment with a silly character at the end **/`
+     WHITESPACE at [Line:   11, Column:  51]: `\n`
+     WHITESPACE at [Line:   12, Column:   1]: `\n`
+      BASE_TYPE at [Line:   13, Column:   1]: `f64`
+        COMMENT at [Line:   13, Column:   4]: ` /* annoying comment */`
+     WHITESPACE at [Line:   13, Column:  27]: ` `
+           WORD at [Line:   13, Column:  28]: `big_float`
+     WHITESPACE at [Line:   13, Column:  37]: ` `
+         EQUALS at [Line:   13, Column:  38]: `=`
+        COMMENT at [Line:   13, Column:  39]: `/*kwfklre\n*/`
+     WHITESPACE at [Line:   14, Column:   3]: ` `
+  FLOAT_LITERAL at [Line:   14, Column:   4]: `345.2345`
+        COMMENT at [Line:   14, Column:  12]: ` /*rehehtr*/`
+     WHITESPACE at [Line:   14, Column:  24]: ` `
+      SEMICOLON at [Line:   14, Column:  25]: `;`
+        COMMENT at [Line:   14, Column:  26]: ` // annoyingly commented`
+
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+SOURCE
+	SOURCE_BODY
+		STATEMENTS
+			STATEMENTS
+				STATEMENT
+					STATEMENT_BODY
+						DECLARATION
+							DECL_SPECIFIER - BASE_TYPE(`u8`)
+							DECL_LIST
+								DECL_ITEM
+									DECLARATOR
+										ID - WORD(`newVar`)
+									EQUALS(`=`)
+									INITIALIZER
+										EXPRESSION
+											ASSIGNMENT_EXPR
+												LOGICAL_EXPR
+													RELATIONAL_EQ_EXPR
+														RELATIONAL_COMP_EXPR
+															ADDITIVE_EXPR
+																MULTIPLICATIVE_EXPR
+																	UNARY_EXPR
+																		VARUSE_EXPR
+																			VAR_EXPR
+																				LITERAL - DECIMAL_LITERAL(`2345`)
+					SEMICOLON(`;`)
+			STATEMENT
+				STATEMENT_BODY
+					DECLARATION
+						DECL_SPECIFIER - BASE_TYPE(`f64`)
+						DECL_LIST
+							DECL_ITEM
+								DECLARATOR
+									ID - WORD(`big_float`)
+								EQUALS(`=`)
+								INITIALIZER
+									EXPRESSION
+										ASSIGNMENT_EXPR
+											LOGICAL_EXPR
+												RELATIONAL_EQ_EXPR
+													RELATIONAL_COMP_EXPR
+														ADDITIVE_EXPR
+															MULTIPLICATIVE_EXPR
+																UNARY_EXPR
+																	VARUSE_EXPR
+																		VAR_EXPR
+																			LITERAL - FLOAT_LITERAL(`345.2345`)
+				SEMICOLON(`;`)
+
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+AST(tests/build/annoying-comments.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Blocks w/ control flow(tests/build/annoying-comments.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+executable FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

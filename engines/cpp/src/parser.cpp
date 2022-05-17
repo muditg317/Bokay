@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <map>
 // #include <pair>
+#include <ostream>
 #include <typeinfo>
 #include <vector>
 
@@ -43,7 +44,7 @@ std::string ParsingTree::toTabbedString(void) const {
 
 
 Parser::Parser(void) {
-  CHECK(grammarRuleMap.size() == static_cast<int>(ParseNodeType::NUM_NODE_TYPES)) << "Must define rule for every parse node type!";
+  CHECK(grammarRuleMap.size() == static_cast<int>(ParseNodeType::NUM_NODE_TYPES)) << "Must define rule for every parse node type!" << std::endl << "Rule types: " << static_cast<int>(ParseNodeType::NUM_NODE_TYPES) << std::endl << "Rule map size: " << grammarRuleMap.size();
 }
 
 bool uselessToken(Token tok) {
@@ -201,9 +202,9 @@ bool Parser::prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &s
 }
 
 bool Parser::scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd, std::vector<Token> &tokens) const {
-  assert(tokInd < tokens.size() && "Token index out of bounds!");
   if (tokInd >= tokens.size()) {
     // LOG(ERROR) << "Token index out of bounds!";
+    // assert(tokInd < tokens.size() && "Token index out of bounds!");
     return false;
   }
   DLOG(INFO) << "SCANNING " << state.ruleType;

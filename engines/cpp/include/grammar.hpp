@@ -26,10 +26,10 @@ enum class ParseNodeType {
   DECL_ITEM, // [declarator] | [declarator] equals [initializer]
   INITIALIZER, // [expression]
 
-  DECLARATOR, // [id] | [paren_decl] | [ptr_decl] | [array_decl] [func_decl]
+  DECLARATOR, // [id] | [paren_decl] | [ptr_decl] | [array_decl] | [func_decl]
   PAREN_DECL, // ( [declarator] )
   PTR_DECL, //. *[declarator] // TODO pointers
-  NO_PTR_DECL, // [id] | [paren_decl] | [array_decl] [func_decl]
+  NO_PTR_DECL, // [id] | [paren_decl] | [array_decl] | [func_decl]
   ARRAY_DECL, // [no_ptr_decl] [ [expression] ]
   FUNC_DECL, // [no_ptr_decl] ( [param_list] )
   // TODO: param lists

@@ -1,12 +1,12 @@
 --STDOUT:
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
-[ args-parser.cpp] INFO    - Input source file: tests/full-design.bokay
-[ args-parser.cpp] INFO    - Output path: tests/build/full-design
-[ args-parser.cpp] INFO    - Temp file output to: tests/build
-[    compiler.cpp] INFO    - Writing tokens to temp file: "tests/build/full-design.tok"
-[      parser.cpp] ERROR   - Parsing failed to recognize source from grammar!
-[    compiler.cpp] ERROR   - Parsing has failed! Code: 2
+[ args-parser.cpp: 102] INFO    - Input source file: tests/full-design.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/full-design
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/full-design.tok"
+[      parser.cpp: 136] ERROR   - Parsing failed to recognize source from grammar!
+[    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -76,429 +76,438 @@ DECIMAL_LITERAL at [Line:   20, Column:  15]: `100`
   FLOAT_LITERAL at [Line:   21, Column:  16]: `1234.4352`
       SEMICOLON at [Line:   21, Column:  25]: `;`
      WHITESPACE at [Line:   21, Column:  26]: `\n`
-      BASE_TYPE at [Line:   22, Column:   1]: `u16`
-     WHITESPACE at [Line:   22, Column:   4]: ` `
-           WORD at [Line:   22, Column:   5]: `arr`
-   OPEN_BRACKET at [Line:   22, Column:   8]: `[`
-DECIMAL_LITERAL at [Line:   22, Column:   9]: `3`
-  CLOSE_BRACKET at [Line:   22, Column:  10]: `]`
-      SEMICOLON at [Line:   22, Column:  11]: `;`
-        COMMENT at [Line:   22, Column:  12]: ` // global space will default to 0'd out memory\n`
-           WORD at [Line:   23, Column:   1]: `arr`
-   OPEN_BRACKET at [Line:   23, Column:   4]: `[`
-DECIMAL_LITERAL at [Line:   23, Column:   5]: `1`
-  CLOSE_BRACKET at [Line:   23, Column:   6]: `]`
-     WHITESPACE at [Line:   23, Column:   7]: ` `
-         EQUALS at [Line:   23, Column:   8]: `=`
-     WHITESPACE at [Line:   23, Column:   9]: ` `
-DECIMAL_LITERAL at [Line:   23, Column:  10]: `70531`
-      SEMICOLON at [Line:   23, Column:  15]: `;`
-     WHITESPACE at [Line:   23, Column:  16]: `\n`
-     WHITESPACE at [Line:   24, Column:   1]: `\n`
-        COMMENT at [Line:   25, Column:   1]: `// special assignments:\n`
-        COMMENT at [Line:   26, Column:   1]: `//  C-style += -= *= /= etc\n`
-     WHITESPACE at [Line:   27, Column:   1]: `\n`
-        COMMENT at [Line:   28, Column:   1]: `// special types:\n`
-        COMMENT at [Line:   29, Column:   1]: `//  structs : same as C\n`
-        COMMENT at [Line:   30, Column:   1]: `//    can't preinitialize\n`
-        COMMENT at [Line:   31, Column:   1]: `//    0 initialized\n`
-        COMMENT at [Line:   32, Column:   1]: `//  unions  : {base type} union {new_name} { [{type} {name};]... }\n`
-        COMMENT at [Line:   33, Column:   1]: `//    access unions with .\n`
-        COMMENT at [Line:   34, Column:   1]: `//    auto-assume base type of union if . not used - enables using u64 as u16[4] or something\n`
-      KW_STRUCT at [Line:   35, Column:   1]: `struct`
-     WHITESPACE at [Line:   35, Column:   7]: ` `
-           WORD at [Line:   35, Column:   8]: `my_struct`
-     WHITESPACE at [Line:   35, Column:  17]: ` `
-     OPEN_BRACE at [Line:   35, Column:  18]: `{`
-     WHITESPACE at [Line:   35, Column:  19]: `\n`
-     WHITESPACE at [Line:   36, Column:   1]: `  `
-      BASE_TYPE at [Line:   36, Column:   3]: `u16`
-     WHITESPACE at [Line:   36, Column:   6]: ` `
-           WORD at [Line:   36, Column:   7]: `unsigned16`
-      SEMICOLON at [Line:   36, Column:  17]: `;`
-     WHITESPACE at [Line:   36, Column:  18]: `\n`
+           WORD at [Line:   22, Column:   1]: `bool`
+     WHITESPACE at [Line:   22, Column:   5]: ` `
+           WORD at [Line:   22, Column:   6]: `the_boolean`
+     WHITESPACE at [Line:   22, Column:  17]: ` `
+         EQUALS at [Line:   22, Column:  18]: `=`
+     WHITESPACE at [Line:   22, Column:  19]: ` `
+       KW_FALSE at [Line:   22, Column:  20]: `false`
+      SEMICOLON at [Line:   22, Column:  25]: `;`
+     WHITESPACE at [Line:   22, Column:  26]: `\n`
+      BASE_TYPE at [Line:   23, Column:   1]: `u16`
+     WHITESPACE at [Line:   23, Column:   4]: ` `
+           WORD at [Line:   23, Column:   5]: `arr`
+   OPEN_BRACKET at [Line:   23, Column:   8]: `[`
+DECIMAL_LITERAL at [Line:   23, Column:   9]: `3`
+  CLOSE_BRACKET at [Line:   23, Column:  10]: `]`
+      SEMICOLON at [Line:   23, Column:  11]: `;`
+        COMMENT at [Line:   23, Column:  12]: ` // global space will default to 0'd out memory\n`
+           WORD at [Line:   24, Column:   1]: `arr`
+   OPEN_BRACKET at [Line:   24, Column:   4]: `[`
+DECIMAL_LITERAL at [Line:   24, Column:   5]: `1`
+  CLOSE_BRACKET at [Line:   24, Column:   6]: `]`
+     WHITESPACE at [Line:   24, Column:   7]: ` `
+         EQUALS at [Line:   24, Column:   8]: `=`
+     WHITESPACE at [Line:   24, Column:   9]: ` `
+DECIMAL_LITERAL at [Line:   24, Column:  10]: `70531`
+      SEMICOLON at [Line:   24, Column:  15]: `;`
+     WHITESPACE at [Line:   24, Column:  16]: `\n`
+     WHITESPACE at [Line:   25, Column:   1]: `\n`
+        COMMENT at [Line:   26, Column:   1]: `// special assignments:\n`
+        COMMENT at [Line:   27, Column:   1]: `//  C-style += -= *= /= etc\n`
+     WHITESPACE at [Line:   28, Column:   1]: `\n`
+        COMMENT at [Line:   29, Column:   1]: `// special types:\n`
+        COMMENT at [Line:   30, Column:   1]: `//  structs : same as C\n`
+        COMMENT at [Line:   31, Column:   1]: `//    can't preinitialize\n`
+        COMMENT at [Line:   32, Column:   1]: `//    0 initialized\n`
+        COMMENT at [Line:   33, Column:   1]: `//  unions  : {base type} union {new_name} { [{type} {name};]... }\n`
+        COMMENT at [Line:   34, Column:   1]: `//    access unions with .\n`
+        COMMENT at [Line:   35, Column:   1]: `//    auto-assume base type of union if . not used - enables using u64 as u16[4] or something\n`
+      KW_STRUCT at [Line:   36, Column:   1]: `struct`
+     WHITESPACE at [Line:   36, Column:   7]: ` `
+           WORD at [Line:   36, Column:   8]: `my_struct`
+     WHITESPACE at [Line:   36, Column:  17]: ` `
+     OPEN_BRACE at [Line:   36, Column:  18]: `{`
+     WHITESPACE at [Line:   36, Column:  19]: `\n`
      WHITESPACE at [Line:   37, Column:   1]: `  `
-      BASE_TYPE at [Line:   37, Column:   3]: `s32`
+      BASE_TYPE at [Line:   37, Column:   3]: `u16`
      WHITESPACE at [Line:   37, Column:   6]: ` `
-           WORD at [Line:   37, Column:   7]: `number`
-      SEMICOLON at [Line:   37, Column:  13]: `;`
-     WHITESPACE at [Line:   37, Column:  14]: `\n`
-    CLOSE_BRACE at [Line:   38, Column:   1]: `}`
-      SEMICOLON at [Line:   38, Column:   2]: `;`
-     WHITESPACE at [Line:   38, Column:   3]: `\n`
-           WORD at [Line:   39, Column:   1]: `my_struct`
-     WHITESPACE at [Line:   39, Column:  10]: ` `
-           WORD at [Line:   39, Column:  11]: `struct_var`
-      SEMICOLON at [Line:   39, Column:  21]: `;`
-        COMMENT at [Line:   39, Column:  22]: ` // can't be initialized for now (defaults to 0 initialized)\n`
-           WORD at [Line:   40, Column:   1]: `struct_var`
-         PERIOD at [Line:   40, Column:  11]: `.`
-           WORD at [Line:   40, Column:  12]: `unsigned16`
-     WHITESPACE at [Line:   40, Column:  22]: ` `
-         EQUALS at [Line:   40, Column:  23]: `=`
-     WHITESPACE at [Line:   40, Column:  24]: ` `
-DECIMAL_LITERAL at [Line:   40, Column:  25]: `1452`
-      SEMICOLON at [Line:   40, Column:  29]: `;`
-     WHITESPACE at [Line:   40, Column:  30]: `\n`
+           WORD at [Line:   37, Column:   7]: `unsigned16`
+      SEMICOLON at [Line:   37, Column:  17]: `;`
+     WHITESPACE at [Line:   37, Column:  18]: `\n`
+     WHITESPACE at [Line:   38, Column:   1]: `  `
+      BASE_TYPE at [Line:   38, Column:   3]: `s32`
+     WHITESPACE at [Line:   38, Column:   6]: ` `
+           WORD at [Line:   38, Column:   7]: `number`
+      SEMICOLON at [Line:   38, Column:  13]: `;`
+     WHITESPACE at [Line:   38, Column:  14]: `\n`
+    CLOSE_BRACE at [Line:   39, Column:   1]: `}`
+      SEMICOLON at [Line:   39, Column:   2]: `;`
+     WHITESPACE at [Line:   39, Column:   3]: `\n`
+           WORD at [Line:   40, Column:   1]: `my_struct`
+     WHITESPACE at [Line:   40, Column:  10]: ` `
+           WORD at [Line:   40, Column:  11]: `struct_var`
+      SEMICOLON at [Line:   40, Column:  21]: `;`
+        COMMENT at [Line:   40, Column:  22]: ` // can't be initialized for now (defaults to 0 initialized)\n`
            WORD at [Line:   41, Column:   1]: `struct_var`
          PERIOD at [Line:   41, Column:  11]: `.`
-           WORD at [Line:   41, Column:  12]: `number`
-     WHITESPACE at [Line:   41, Column:  18]: ` `
-         EQUALS at [Line:   41, Column:  19]: `=`
-     WHITESPACE at [Line:   41, Column:  20]: ` `
-          MINUS at [Line:   41, Column:  21]: `-`
-DECIMAL_LITERAL at [Line:   41, Column:  22]: `23441`
-      SEMICOLON at [Line:   41, Column:  27]: `;`
-     WHITESPACE at [Line:   41, Column:  28]: `\n`
-      BASE_TYPE at [Line:   42, Column:   1]: `u64`
-     WHITESPACE at [Line:   42, Column:   4]: ` `
-       KW_UNION at [Line:   42, Column:   5]: `union`
-     WHITESPACE at [Line:   42, Column:  10]: ` `
-           WORD at [Line:   42, Column:  11]: `my_union`
-     WHITESPACE at [Line:   42, Column:  19]: ` `
-     OPEN_BRACE at [Line:   42, Column:  20]: `{`
-     WHITESPACE at [Line:   42, Column:  21]: `\n`
-     WHITESPACE at [Line:   43, Column:   1]: `  `
-      BASE_TYPE at [Line:   43, Column:   3]: `f32`
-     WHITESPACE at [Line:   43, Column:   6]: ` `
-           WORD at [Line:   43, Column:   7]: `height`
-      SEMICOLON at [Line:   43, Column:  13]: `;`
-     WHITESPACE at [Line:   43, Column:  14]: `\n`
+           WORD at [Line:   41, Column:  12]: `unsigned16`
+     WHITESPACE at [Line:   41, Column:  22]: ` `
+         EQUALS at [Line:   41, Column:  23]: `=`
+     WHITESPACE at [Line:   41, Column:  24]: ` `
+DECIMAL_LITERAL at [Line:   41, Column:  25]: `1452`
+      SEMICOLON at [Line:   41, Column:  29]: `;`
+     WHITESPACE at [Line:   41, Column:  30]: `\n`
+           WORD at [Line:   42, Column:   1]: `struct_var`
+         PERIOD at [Line:   42, Column:  11]: `.`
+           WORD at [Line:   42, Column:  12]: `number`
+     WHITESPACE at [Line:   42, Column:  18]: ` `
+         EQUALS at [Line:   42, Column:  19]: `=`
+     WHITESPACE at [Line:   42, Column:  20]: ` `
+          MINUS at [Line:   42, Column:  21]: `-`
+DECIMAL_LITERAL at [Line:   42, Column:  22]: `23441`
+      SEMICOLON at [Line:   42, Column:  27]: `;`
+     WHITESPACE at [Line:   42, Column:  28]: `\n`
+      BASE_TYPE at [Line:   43, Column:   1]: `u64`
+     WHITESPACE at [Line:   43, Column:   4]: ` `
+       KW_UNION at [Line:   43, Column:   5]: `union`
+     WHITESPACE at [Line:   43, Column:  10]: ` `
+           WORD at [Line:   43, Column:  11]: `my_union`
+     WHITESPACE at [Line:   43, Column:  19]: ` `
+     OPEN_BRACE at [Line:   43, Column:  20]: `{`
+     WHITESPACE at [Line:   43, Column:  21]: `\n`
      WHITESPACE at [Line:   44, Column:   1]: `  `
-      BASE_TYPE at [Line:   44, Column:   3]: `u32`
+      BASE_TYPE at [Line:   44, Column:   3]: `f32`
      WHITESPACE at [Line:   44, Column:   6]: ` `
-           WORD at [Line:   44, Column:   7]: `chunks`
-   OPEN_BRACKET at [Line:   44, Column:  13]: `[`
-DECIMAL_LITERAL at [Line:   44, Column:  14]: `2`
-  CLOSE_BRACKET at [Line:   44, Column:  15]: `]`
-      SEMICOLON at [Line:   44, Column:  16]: `;`
-     WHITESPACE at [Line:   44, Column:  17]: `\n`
+           WORD at [Line:   44, Column:   7]: `height`
+      SEMICOLON at [Line:   44, Column:  13]: `;`
+     WHITESPACE at [Line:   44, Column:  14]: `\n`
      WHITESPACE at [Line:   45, Column:   1]: `  `
-      BASE_TYPE at [Line:   45, Column:   3]: `u16`
+      BASE_TYPE at [Line:   45, Column:   3]: `u32`
      WHITESPACE at [Line:   45, Column:   6]: ` `
-           WORD at [Line:   45, Column:   7]: `small_chunks`
-   OPEN_BRACKET at [Line:   45, Column:  19]: `[`
-DECIMAL_LITERAL at [Line:   45, Column:  20]: `4`
-  CLOSE_BRACKET at [Line:   45, Column:  21]: `]`
-      SEMICOLON at [Line:   45, Column:  22]: `;`
-     WHITESPACE at [Line:   45, Column:  23]: `\n`
-    CLOSE_BRACE at [Line:   46, Column:   1]: `}`
-      SEMICOLON at [Line:   46, Column:   2]: `;`
-     WHITESPACE at [Line:   46, Column:   3]: `\n`
-           WORD at [Line:   47, Column:   1]: `my_union`
-     WHITESPACE at [Line:   47, Column:   9]: ` `
-           WORD at [Line:   47, Column:  10]: `union_var`
-     WHITESPACE at [Line:   47, Column:  19]: ` `
-         EQUALS at [Line:   47, Column:  20]: `=`
-     WHITESPACE at [Line:   47, Column:  21]: ` `
-DECIMAL_LITERAL at [Line:   47, Column:  22]: `100`
-      SEMICOLON at [Line:   47, Column:  25]: `;`
-        COMMENT at [Line:   47, Column:  26]: ` // simply has to be assignable to one of the components or the base type\n`
-      BASE_TYPE at [Line:   48, Column:   1]: `u64`
-     WHITESPACE at [Line:   48, Column:   4]: ` `
-           WORD at [Line:   48, Column:   5]: `a_number`
-     WHITESPACE at [Line:   48, Column:  13]: ` `
-         EQUALS at [Line:   48, Column:  14]: `=`
-     WHITESPACE at [Line:   48, Column:  15]: ` `
-           WORD at [Line:   48, Column:  16]: `union_var`
+           WORD at [Line:   45, Column:   7]: `chunks`
+   OPEN_BRACKET at [Line:   45, Column:  13]: `[`
+DECIMAL_LITERAL at [Line:   45, Column:  14]: `2`
+  CLOSE_BRACKET at [Line:   45, Column:  15]: `]`
+      SEMICOLON at [Line:   45, Column:  16]: `;`
+     WHITESPACE at [Line:   45, Column:  17]: `\n`
+     WHITESPACE at [Line:   46, Column:   1]: `  `
+      BASE_TYPE at [Line:   46, Column:   3]: `u16`
+     WHITESPACE at [Line:   46, Column:   6]: ` `
+           WORD at [Line:   46, Column:   7]: `small_chunks`
+   OPEN_BRACKET at [Line:   46, Column:  19]: `[`
+DECIMAL_LITERAL at [Line:   46, Column:  20]: `4`
+  CLOSE_BRACKET at [Line:   46, Column:  21]: `]`
+      SEMICOLON at [Line:   46, Column:  22]: `;`
+     WHITESPACE at [Line:   46, Column:  23]: `\n`
+    CLOSE_BRACE at [Line:   47, Column:   1]: `}`
+      SEMICOLON at [Line:   47, Column:   2]: `;`
+     WHITESPACE at [Line:   47, Column:   3]: `\n`
+           WORD at [Line:   48, Column:   1]: `my_union`
+     WHITESPACE at [Line:   48, Column:   9]: ` `
+           WORD at [Line:   48, Column:  10]: `union_var`
+     WHITESPACE at [Line:   48, Column:  19]: ` `
+         EQUALS at [Line:   48, Column:  20]: `=`
+     WHITESPACE at [Line:   48, Column:  21]: ` `
+DECIMAL_LITERAL at [Line:   48, Column:  22]: `100`
       SEMICOLON at [Line:   48, Column:  25]: `;`
-        COMMENT at [Line:   48, Column:  26]: ` // automatically assumes base type when not specified\n`
-      BASE_TYPE at [Line:   49, Column:   1]: `f64`
+        COMMENT at [Line:   48, Column:  26]: ` // simply has to be assignable to one of the components or the base type\n`
+      BASE_TYPE at [Line:   49, Column:   1]: `u64`
      WHITESPACE at [Line:   49, Column:   4]: ` `
-           WORD at [Line:   49, Column:   5]: `big_float`
-     WHITESPACE at [Line:   49, Column:  14]: ` `
-         EQUALS at [Line:   49, Column:  15]: `=`
-     WHITESPACE at [Line:   49, Column:  16]: ` `
-           WORD at [Line:   49, Column:  17]: `union_var`
-         PERIOD at [Line:   49, Column:  26]: `.`
-           WORD at [Line:   49, Column:  27]: `height`
-      SEMICOLON at [Line:   49, Column:  33]: `;`
-        COMMENT at [Line:   49, Column:  34]: ` // must specify which type to extract with since multiple options are assignable to f64\n`
-      BASE_TYPE at [Line:   50, Column:   1]: `u32`
+           WORD at [Line:   49, Column:   5]: `a_number`
+     WHITESPACE at [Line:   49, Column:  13]: ` `
+         EQUALS at [Line:   49, Column:  14]: `=`
+     WHITESPACE at [Line:   49, Column:  15]: ` `
+           WORD at [Line:   49, Column:  16]: `union_var`
+      SEMICOLON at [Line:   49, Column:  25]: `;`
+        COMMENT at [Line:   49, Column:  26]: ` // automatically assumes base type when not specified\n`
+      BASE_TYPE at [Line:   50, Column:   1]: `f64`
      WHITESPACE at [Line:   50, Column:   4]: ` `
-           WORD at [Line:   50, Column:   5]: `small_num`
+           WORD at [Line:   50, Column:   5]: `big_float`
      WHITESPACE at [Line:   50, Column:  14]: ` `
          EQUALS at [Line:   50, Column:  15]: `=`
      WHITESPACE at [Line:   50, Column:  16]: ` `
            WORD at [Line:   50, Column:  17]: `union_var`
          PERIOD at [Line:   50, Column:  26]: `.`
-           WORD at [Line:   50, Column:  27]: `chunks`
-   OPEN_BRACKET at [Line:   50, Column:  33]: `[`
-DECIMAL_LITERAL at [Line:   50, Column:  34]: `0`
-  CLOSE_BRACKET at [Line:   50, Column:  35]: `]`
-      SEMICOLON at [Line:   50, Column:  36]: `;`
-        COMMENT at [Line:   50, Column:  37]: ` // must specify which type to use when extracting value\n`
-     WHITESPACE at [Line:   51, Column:   1]: `\n`
-        COMMENT at [Line:   52, Column:   1]: `// functions:\n`
-        COMMENT at [Line:   53, Column:   1]: `//  {return type} {function name}({type} {name} [= {default to be evaluated at each call}]) {\n`
-        COMMENT at [Line:   54, Column:   1]: `//    // contents\n`
-        COMMENT at [Line:   55, Column:   1]: `//  }\n`
-        COMMENT at [Line:   56, Column:   1]: `//  default params can be any where in the arg list (skip them via empty commas `func(5,,253)`)\n`
-     WHITESPACE at [Line:   57, Column:   1]: `\n`
-      BASE_TYPE at [Line:   58, Column:   1]: `u32`
-     WHITESPACE at [Line:   58, Column:   4]: ` `
-           WORD at [Line:   58, Column:   5]: `do_stuff`
-     OPEN_PAREN at [Line:   58, Column:  13]: `(`
-      BASE_TYPE at [Line:   58, Column:  14]: `u16`
-     WHITESPACE at [Line:   58, Column:  17]: ` `
-           WORD at [Line:   58, Column:  18]: `a`
-          COMMA at [Line:   58, Column:  19]: `,`
-     WHITESPACE at [Line:   58, Column:  20]: ` `
-      BASE_TYPE at [Line:   58, Column:  21]: `u32`
-     WHITESPACE at [Line:   58, Column:  24]: ` `
-           WORD at [Line:   58, Column:  25]: `b`
-    CLOSE_PAREN at [Line:   58, Column:  26]: `)`
-     WHITESPACE at [Line:   58, Column:  27]: ` `
-     OPEN_BRACE at [Line:   58, Column:  28]: `{`
-     WHITESPACE at [Line:   58, Column:  29]: `\n`
-     WHITESPACE at [Line:   59, Column:   1]: `  `
-      KW_RETURN at [Line:   59, Column:   3]: `return`
-     WHITESPACE at [Line:   59, Column:   9]: ` `
-           WORD at [Line:   59, Column:  10]: `a`
-           PLUS at [Line:   59, Column:  11]: `+`
-           WORD at [Line:   59, Column:  12]: `b`
-      SEMICOLON at [Line:   59, Column:  13]: `;`
-     WHITESPACE at [Line:   59, Column:  14]: `\n`
-    CLOSE_BRACE at [Line:   60, Column:   1]: `}`
-     WHITESPACE at [Line:   60, Column:   2]: `\n`
-      BASE_TYPE at [Line:   61, Column:   1]: `u32`
-     WHITESPACE at [Line:   61, Column:   4]: ` `
-           WORD at [Line:   61, Column:   5]: `res`
-     WHITESPACE at [Line:   61, Column:   8]: ` `
-         EQUALS at [Line:   61, Column:   9]: `=`
-     WHITESPACE at [Line:   61, Column:  10]: ` `
-           WORD at [Line:   61, Column:  11]: `do_stuff`
-     OPEN_PAREN at [Line:   61, Column:  19]: `(`
-           WORD at [Line:   61, Column:  20]: `a`
-          COMMA at [Line:   61, Column:  21]: `,`
-           WORD at [Line:   61, Column:  22]: `b`
-    CLOSE_PAREN at [Line:   61, Column:  23]: `)`
-      SEMICOLON at [Line:   61, Column:  24]: `;`
-     WHITESPACE at [Line:   61, Column:  25]: `\n`
-     WHITESPACE at [Line:   62, Column:   1]: `\n`
-      BASE_TYPE at [Line:   63, Column:   1]: `s64`
-     WHITESPACE at [Line:   63, Column:   4]: ` `
-           WORD at [Line:   63, Column:   5]: `weird_defaults`
-     OPEN_PAREN at [Line:   63, Column:  19]: `(`
-      BASE_TYPE at [Line:   63, Column:  20]: `u16`
-     WHITESPACE at [Line:   63, Column:  23]: ` `
-           WORD at [Line:   63, Column:  24]: `a`
-     WHITESPACE at [Line:   63, Column:  25]: ` `
-         EQUALS at [Line:   63, Column:  26]: `=`
-     WHITESPACE at [Line:   63, Column:  27]: ` `
-DECIMAL_LITERAL at [Line:   63, Column:  28]: `5`
-          COMMA at [Line:   63, Column:  29]: `,`
-     WHITESPACE at [Line:   63, Column:  30]: ` `
-      BASE_TYPE at [Line:   63, Column:  31]: `u32`
-     WHITESPACE at [Line:   63, Column:  34]: ` `
-           WORD at [Line:   63, Column:  35]: `b`
-          COMMA at [Line:   63, Column:  36]: `,`
-     WHITESPACE at [Line:   63, Column:  37]: ` `
-      BASE_TYPE at [Line:   63, Column:  38]: `s16`
-     WHITESPACE at [Line:   63, Column:  41]: ` `
-           WORD at [Line:   63, Column:  42]: `c`
-          COMMA at [Line:   63, Column:  43]: `,`
-     WHITESPACE at [Line:   63, Column:  44]: ` `
-      BASE_TYPE at [Line:   63, Column:  45]: `s32`
-     WHITESPACE at [Line:   63, Column:  48]: ` `
-           WORD at [Line:   63, Column:  49]: `d`
-     WHITESPACE at [Line:   63, Column:  50]: ` `
-         EQUALS at [Line:   63, Column:  51]: `=`
-     WHITESPACE at [Line:   63, Column:  52]: ` `
-          MINUS at [Line:   63, Column:  53]: `-`
-DECIMAL_LITERAL at [Line:   63, Column:  54]: `100`
-          COMMA at [Line:   63, Column:  57]: `,`
-     WHITESPACE at [Line:   63, Column:  58]: ` `
-      BASE_TYPE at [Line:   63, Column:  59]: `s64`
-     WHITESPACE at [Line:   63, Column:  62]: ` `
-           WORD at [Line:   63, Column:  63]: `e`
-     WHITESPACE at [Line:   63, Column:  64]: ` `
-         EQUALS at [Line:   63, Column:  65]: `=`
-     WHITESPACE at [Line:   63, Column:  66]: ` `
-          MINUS at [Line:   63, Column:  67]: `-`
-DECIMAL_LITERAL at [Line:   63, Column:  68]: `8398`
-          COMMA at [Line:   63, Column:  72]: `,`
-     WHITESPACE at [Line:   63, Column:  73]: ` `
-      BASE_TYPE at [Line:   63, Column:  74]: `u8`
-     WHITESPACE at [Line:   63, Column:  76]: ` `
-           WORD at [Line:   63, Column:  77]: `f`
-    CLOSE_PAREN at [Line:   63, Column:  78]: `)`
-     WHITESPACE at [Line:   63, Column:  79]: ` `
-     OPEN_BRACE at [Line:   63, Column:  80]: `{`
-     WHITESPACE at [Line:   63, Column:  81]: `\n`
-     WHITESPACE at [Line:   64, Column:   1]: `  `
-      KW_RETURN at [Line:   64, Column:   3]: `return`
-     WHITESPACE at [Line:   64, Column:   9]: ` `
-           WORD at [Line:   64, Column:  10]: `a`
-           PLUS at [Line:   64, Column:  11]: `+`
-           WORD at [Line:   64, Column:  12]: `b`
-           PLUS at [Line:   64, Column:  13]: `+`
-           WORD at [Line:   64, Column:  14]: `c`
-           PLUS at [Line:   64, Column:  15]: `+`
-           WORD at [Line:   64, Column:  16]: `d`
-           PLUS at [Line:   64, Column:  17]: `+`
-           WORD at [Line:   64, Column:  18]: `e`
-           PLUS at [Line:   64, Column:  19]: `+`
-           WORD at [Line:   64, Column:  20]: `f`
-      SEMICOLON at [Line:   64, Column:  21]: `;`
-     WHITESPACE at [Line:   64, Column:  22]: `\n`
-    CLOSE_BRACE at [Line:   65, Column:   1]: `}`
-     WHITESPACE at [Line:   65, Column:   2]: `\n`
-      BASE_TYPE at [Line:   66, Column:   1]: `s64`
-     WHITESPACE at [Line:   66, Column:   4]: ` `
-           WORD at [Line:   66, Column:   5]: `weird`
-     WHITESPACE at [Line:   66, Column:  10]: ` `
-         EQUALS at [Line:   66, Column:  11]: `=`
-     WHITESPACE at [Line:   66, Column:  12]: ` `
-           WORD at [Line:   66, Column:  13]: `weird_defaults`
-     OPEN_PAREN at [Line:   66, Column:  27]: `(`
-          COMMA at [Line:   66, Column:  28]: `,`
-DECIMAL_LITERAL at [Line:   66, Column:  29]: `5`
-          COMMA at [Line:   66, Column:  30]: `,`
-          MINUS at [Line:   66, Column:  31]: `-`
-DECIMAL_LITERAL at [Line:   66, Column:  32]: `10`
-          COMMA at [Line:   66, Column:  34]: `,`
-          COMMA at [Line:   66, Column:  35]: `,`
-          MINUS at [Line:   66, Column:  36]: `-`
-DECIMAL_LITERAL at [Line:   66, Column:  37]: `234`
-          COMMA at [Line:   66, Column:  40]: `,`
-DECIMAL_LITERAL at [Line:   66, Column:  41]: `20`
-    CLOSE_PAREN at [Line:   66, Column:  43]: `)`
-      SEMICOLON at [Line:   66, Column:  44]: `;`
-        COMMENT at [Line:   66, Column:  45]: ` // runs with abcdef==5,5,-10,-100,-234,20 -- returns -314\n`
-     WHITESPACE at [Line:   67, Column:   1]: `\n`
-        COMMENT at [Line:   68, Column:   1]: `// if conditionals:\n`
-        COMMENT at [Line:   69, Column:   1]: `//  if ({condition}) {\n`
-        COMMENT at [Line:   70, Column:   1]: `//    // code...\n`
-        COMMENT at [Line:   71, Column:   1]: `//  }\n`
-          KW_IF at [Line:   72, Column:   1]: `if`
-     WHITESPACE at [Line:   72, Column:   3]: ` `
-     OPEN_PAREN at [Line:   72, Column:   4]: `(`
-           WORD at [Line:   72, Column:   5]: `weird`
-     WHITESPACE at [Line:   72, Column:  10]: ` `
-      DOUBLE_EQ at [Line:   72, Column:  11]: `==`
-     WHITESPACE at [Line:   72, Column:  13]: ` `
-          MINUS at [Line:   72, Column:  14]: `-`
-DECIMAL_LITERAL at [Line:   72, Column:  15]: `314`
-    CLOSE_PAREN at [Line:   72, Column:  18]: `)`
-     WHITESPACE at [Line:   72, Column:  19]: ` `
-     OPEN_BRACE at [Line:   72, Column:  20]: `{`
-        COMMENT at [Line:   72, Column:  21]: ` // checks value equals, for structs, will iterate using == over entries\n`
-     WHITESPACE at [Line:   73, Column:   1]: `  `
-           WORD at [Line:   73, Column:   3]: `u18`
-     WHITESPACE at [Line:   73, Column:   6]: ` `
-           WORD at [Line:   73, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   73, Column:  15]: ` `
-         EQUALS at [Line:   73, Column:  16]: `=`
-     WHITESPACE at [Line:   73, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   73, Column:  18]: `0`
-      SEMICOLON at [Line:   73, Column:  19]: `;`
-     WHITESPACE at [Line:   73, Column:  20]: `\n`
-    CLOSE_BRACE at [Line:   74, Column:   1]: `}`
-     WHITESPACE at [Line:   74, Column:   2]: `\n`
-      BASE_TYPE at [Line:   75, Column:   1]: `s64`
-     WHITESPACE at [Line:   75, Column:   4]: ` `
-           WORD at [Line:   75, Column:   5]: `weird2`
-     WHITESPACE at [Line:   75, Column:  11]: ` `
-         EQUALS at [Line:   75, Column:  12]: `=`
-     WHITESPACE at [Line:   75, Column:  13]: ` `
-           WORD at [Line:   75, Column:  14]: `weird`
-      SEMICOLON at [Line:   75, Column:  19]: `;`
-     WHITESPACE at [Line:   75, Column:  20]: `\n`
-          KW_IF at [Line:   76, Column:   1]: `if`
-     WHITESPACE at [Line:   76, Column:   3]: ` `
-     OPEN_PAREN at [Line:   76, Column:   4]: `(`
-           WORD at [Line:   76, Column:   5]: `weird`
-     WHITESPACE at [Line:   76, Column:  10]: ` `
-      TRIPLE_EQ at [Line:   76, Column:  11]: `===`
-     WHITESPACE at [Line:   76, Column:  14]: ` `
-           WORD at [Line:   76, Column:  15]: `weird2`
-    CLOSE_PAREN at [Line:   76, Column:  21]: `)`
-     WHITESPACE at [Line:   76, Column:  22]: ` `
-     OPEN_BRACE at [Line:   76, Column:  23]: `{`
-        COMMENT at [Line:   76, Column:  24]: ` // checks pointer equals (similar to JS)\n`
-     WHITESPACE at [Line:   77, Column:   1]: `  `
-           WORD at [Line:   77, Column:   3]: `u18`
-     WHITESPACE at [Line:   77, Column:   6]: ` `
-           WORD at [Line:   77, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   77, Column:  15]: ` `
-         EQUALS at [Line:   77, Column:  16]: `=`
-     WHITESPACE at [Line:   77, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   77, Column:  18]: `0`
-      SEMICOLON at [Line:   77, Column:  19]: `;`
-     WHITESPACE at [Line:   77, Column:  20]: `\n`
-    CLOSE_BRACE at [Line:   78, Column:   1]: `}`
-     WHITESPACE at [Line:   78, Column:   2]: `\n`
-     WHITESPACE at [Line:   79, Column:   1]: `\n`
-        COMMENT at [Line:   80, Column:   1]: `// while loops:\n`
-        COMMENT at [Line:   81, Column:   1]: `//  while ({condition}) {\n`
-        COMMENT at [Line:   82, Column:   1]: `//    // code...\n`
-        COMMENT at [Line:   83, Column:   1]: `//  }\n`
-       KW_WHILE at [Line:   84, Column:   1]: `while`
-     WHITESPACE at [Line:   84, Column:   6]: ` `
-     OPEN_PAREN at [Line:   84, Column:   7]: `(`
-           WORD at [Line:   84, Column:   8]: `weird`
-     WHITESPACE at [Line:   84, Column:  13]: ` `
-            LSS at [Line:   84, Column:  14]: `<`
-     WHITESPACE at [Line:   84, Column:  15]: ` `
-          MINUS at [Line:   84, Column:  16]: `-`
-DECIMAL_LITERAL at [Line:   84, Column:  17]: `300`
-    CLOSE_PAREN at [Line:   84, Column:  20]: `)`
-     WHITESPACE at [Line:   84, Column:  21]: ` `
-     OPEN_BRACE at [Line:   84, Column:  22]: `{`
-     WHITESPACE at [Line:   84, Column:  23]: `\n`
-     WHITESPACE at [Line:   85, Column:   1]: `  `
-           WORD at [Line:   85, Column:   3]: `weird`
-     WHITESPACE at [Line:   85, Column:   8]: ` `
-        PLUS_EQ at [Line:   85, Column:   9]: `+=`
-     WHITESPACE at [Line:   85, Column:  11]: ` `
-DECIMAL_LITERAL at [Line:   85, Column:  12]: `1`
-      SEMICOLON at [Line:   85, Column:  13]: `;`
-     WHITESPACE at [Line:   85, Column:  14]: `\n`
-    CLOSE_BRACE at [Line:   86, Column:   1]: `}`
-     WHITESPACE at [Line:   86, Column:   2]: `\n`
-     WHITESPACE at [Line:   87, Column:   1]: `\n`
+           WORD at [Line:   50, Column:  27]: `height`
+      SEMICOLON at [Line:   50, Column:  33]: `;`
+        COMMENT at [Line:   50, Column:  34]: ` // must specify which type to extract with since multiple options are assignable to f64\n`
+      BASE_TYPE at [Line:   51, Column:   1]: `u32`
+     WHITESPACE at [Line:   51, Column:   4]: ` `
+           WORD at [Line:   51, Column:   5]: `small_num`
+     WHITESPACE at [Line:   51, Column:  14]: ` `
+         EQUALS at [Line:   51, Column:  15]: `=`
+     WHITESPACE at [Line:   51, Column:  16]: ` `
+           WORD at [Line:   51, Column:  17]: `union_var`
+         PERIOD at [Line:   51, Column:  26]: `.`
+           WORD at [Line:   51, Column:  27]: `chunks`
+   OPEN_BRACKET at [Line:   51, Column:  33]: `[`
+DECIMAL_LITERAL at [Line:   51, Column:  34]: `0`
+  CLOSE_BRACKET at [Line:   51, Column:  35]: `]`
+      SEMICOLON at [Line:   51, Column:  36]: `;`
+        COMMENT at [Line:   51, Column:  37]: ` // must specify which type to use when extracting value\n`
+     WHITESPACE at [Line:   52, Column:   1]: `\n`
+        COMMENT at [Line:   53, Column:   1]: `// functions:\n`
+        COMMENT at [Line:   54, Column:   1]: `//  {return type} {function name}({type} {name} [= {default to be evaluated at each call}]) {\n`
+        COMMENT at [Line:   55, Column:   1]: `//    // contents\n`
+        COMMENT at [Line:   56, Column:   1]: `//  }\n`
+        COMMENT at [Line:   57, Column:   1]: `//  default params can be any where in the arg list (skip them via empty commas `func(5,,253)`)\n`
+     WHITESPACE at [Line:   58, Column:   1]: `\n`
+      BASE_TYPE at [Line:   59, Column:   1]: `u32`
+     WHITESPACE at [Line:   59, Column:   4]: ` `
+           WORD at [Line:   59, Column:   5]: `do_stuff`
+     OPEN_PAREN at [Line:   59, Column:  13]: `(`
+      BASE_TYPE at [Line:   59, Column:  14]: `u16`
+     WHITESPACE at [Line:   59, Column:  17]: ` `
+           WORD at [Line:   59, Column:  18]: `a`
+          COMMA at [Line:   59, Column:  19]: `,`
+     WHITESPACE at [Line:   59, Column:  20]: ` `
+      BASE_TYPE at [Line:   59, Column:  21]: `u32`
+     WHITESPACE at [Line:   59, Column:  24]: ` `
+           WORD at [Line:   59, Column:  25]: `b`
+    CLOSE_PAREN at [Line:   59, Column:  26]: `)`
+     WHITESPACE at [Line:   59, Column:  27]: ` `
+     OPEN_BRACE at [Line:   59, Column:  28]: `{`
+     WHITESPACE at [Line:   59, Column:  29]: `\n`
+     WHITESPACE at [Line:   60, Column:   1]: `  `
+      KW_RETURN at [Line:   60, Column:   3]: `return`
+     WHITESPACE at [Line:   60, Column:   9]: ` `
+           WORD at [Line:   60, Column:  10]: `a`
+           PLUS at [Line:   60, Column:  11]: `+`
+           WORD at [Line:   60, Column:  12]: `b`
+      SEMICOLON at [Line:   60, Column:  13]: `;`
+     WHITESPACE at [Line:   60, Column:  14]: `\n`
+    CLOSE_BRACE at [Line:   61, Column:   1]: `}`
+     WHITESPACE at [Line:   61, Column:   2]: `\n`
+      BASE_TYPE at [Line:   62, Column:   1]: `u32`
+     WHITESPACE at [Line:   62, Column:   4]: ` `
+           WORD at [Line:   62, Column:   5]: `res`
+     WHITESPACE at [Line:   62, Column:   8]: ` `
+         EQUALS at [Line:   62, Column:   9]: `=`
+     WHITESPACE at [Line:   62, Column:  10]: ` `
+           WORD at [Line:   62, Column:  11]: `do_stuff`
+     OPEN_PAREN at [Line:   62, Column:  19]: `(`
+DECIMAL_LITERAL at [Line:   62, Column:  20]: `5`
+          COMMA at [Line:   62, Column:  21]: `,`
+DECIMAL_LITERAL at [Line:   62, Column:  22]: `6`
+    CLOSE_PAREN at [Line:   62, Column:  23]: `)`
+      SEMICOLON at [Line:   62, Column:  24]: `;`
+     WHITESPACE at [Line:   62, Column:  25]: `\n`
+     WHITESPACE at [Line:   63, Column:   1]: `\n`
+      BASE_TYPE at [Line:   64, Column:   1]: `s64`
+     WHITESPACE at [Line:   64, Column:   4]: ` `
+           WORD at [Line:   64, Column:   5]: `weird_defaults`
+     OPEN_PAREN at [Line:   64, Column:  19]: `(`
+      BASE_TYPE at [Line:   64, Column:  20]: `u16`
+     WHITESPACE at [Line:   64, Column:  23]: ` `
+           WORD at [Line:   64, Column:  24]: `a`
+     WHITESPACE at [Line:   64, Column:  25]: ` `
+         EQUALS at [Line:   64, Column:  26]: `=`
+     WHITESPACE at [Line:   64, Column:  27]: ` `
+DECIMAL_LITERAL at [Line:   64, Column:  28]: `5`
+          COMMA at [Line:   64, Column:  29]: `,`
+     WHITESPACE at [Line:   64, Column:  30]: ` `
+      BASE_TYPE at [Line:   64, Column:  31]: `u32`
+     WHITESPACE at [Line:   64, Column:  34]: ` `
+           WORD at [Line:   64, Column:  35]: `b`
+          COMMA at [Line:   64, Column:  36]: `,`
+     WHITESPACE at [Line:   64, Column:  37]: ` `
+      BASE_TYPE at [Line:   64, Column:  38]: `s16`
+     WHITESPACE at [Line:   64, Column:  41]: ` `
+           WORD at [Line:   64, Column:  42]: `c`
+          COMMA at [Line:   64, Column:  43]: `,`
+     WHITESPACE at [Line:   64, Column:  44]: ` `
+      BASE_TYPE at [Line:   64, Column:  45]: `s32`
+     WHITESPACE at [Line:   64, Column:  48]: ` `
+           WORD at [Line:   64, Column:  49]: `d`
+     WHITESPACE at [Line:   64, Column:  50]: ` `
+         EQUALS at [Line:   64, Column:  51]: `=`
+     WHITESPACE at [Line:   64, Column:  52]: ` `
+          MINUS at [Line:   64, Column:  53]: `-`
+DECIMAL_LITERAL at [Line:   64, Column:  54]: `100`
+          COMMA at [Line:   64, Column:  57]: `,`
+     WHITESPACE at [Line:   64, Column:  58]: ` `
+      BASE_TYPE at [Line:   64, Column:  59]: `s64`
+     WHITESPACE at [Line:   64, Column:  62]: ` `
+           WORD at [Line:   64, Column:  63]: `e`
+     WHITESPACE at [Line:   64, Column:  64]: ` `
+         EQUALS at [Line:   64, Column:  65]: `=`
+     WHITESPACE at [Line:   64, Column:  66]: ` `
+          MINUS at [Line:   64, Column:  67]: `-`
+DECIMAL_LITERAL at [Line:   64, Column:  68]: `8398`
+          COMMA at [Line:   64, Column:  72]: `,`
+     WHITESPACE at [Line:   64, Column:  73]: ` `
+      BASE_TYPE at [Line:   64, Column:  74]: `u8`
+     WHITESPACE at [Line:   64, Column:  76]: ` `
+           WORD at [Line:   64, Column:  77]: `f`
+    CLOSE_PAREN at [Line:   64, Column:  78]: `)`
+     WHITESPACE at [Line:   64, Column:  79]: ` `
+     OPEN_BRACE at [Line:   64, Column:  80]: `{`
+     WHITESPACE at [Line:   64, Column:  81]: `\n`
+     WHITESPACE at [Line:   65, Column:   1]: `  `
+      KW_RETURN at [Line:   65, Column:   3]: `return`
+     WHITESPACE at [Line:   65, Column:   9]: ` `
+           WORD at [Line:   65, Column:  10]: `a`
+           PLUS at [Line:   65, Column:  11]: `+`
+           WORD at [Line:   65, Column:  12]: `b`
+           PLUS at [Line:   65, Column:  13]: `+`
+           WORD at [Line:   65, Column:  14]: `c`
+           PLUS at [Line:   65, Column:  15]: `+`
+           WORD at [Line:   65, Column:  16]: `d`
+           PLUS at [Line:   65, Column:  17]: `+`
+           WORD at [Line:   65, Column:  18]: `e`
+           PLUS at [Line:   65, Column:  19]: `+`
+           WORD at [Line:   65, Column:  20]: `f`
+      SEMICOLON at [Line:   65, Column:  21]: `;`
+     WHITESPACE at [Line:   65, Column:  22]: `\n`
+    CLOSE_BRACE at [Line:   66, Column:   1]: `}`
+     WHITESPACE at [Line:   66, Column:   2]: `\n`
+      BASE_TYPE at [Line:   67, Column:   1]: `s64`
+     WHITESPACE at [Line:   67, Column:   4]: ` `
+           WORD at [Line:   67, Column:   5]: `weird`
+     WHITESPACE at [Line:   67, Column:  10]: ` `
+         EQUALS at [Line:   67, Column:  11]: `=`
+     WHITESPACE at [Line:   67, Column:  12]: ` `
+           WORD at [Line:   67, Column:  13]: `weird_defaults`
+     OPEN_PAREN at [Line:   67, Column:  27]: `(`
+          COMMA at [Line:   67, Column:  28]: `,`
+DECIMAL_LITERAL at [Line:   67, Column:  29]: `5`
+          COMMA at [Line:   67, Column:  30]: `,`
+          MINUS at [Line:   67, Column:  31]: `-`
+DECIMAL_LITERAL at [Line:   67, Column:  32]: `10`
+          COMMA at [Line:   67, Column:  34]: `,`
+          COMMA at [Line:   67, Column:  35]: `,`
+          MINUS at [Line:   67, Column:  36]: `-`
+DECIMAL_LITERAL at [Line:   67, Column:  37]: `234`
+          COMMA at [Line:   67, Column:  40]: `,`
+DECIMAL_LITERAL at [Line:   67, Column:  41]: `20`
+    CLOSE_PAREN at [Line:   67, Column:  43]: `)`
+      SEMICOLON at [Line:   67, Column:  44]: `;`
+        COMMENT at [Line:   67, Column:  45]: ` // runs with abcdef==5,5,-10,-100,-234,20 -- returns -314\n`
+     WHITESPACE at [Line:   68, Column:   1]: `\n`
+        COMMENT at [Line:   69, Column:   1]: `// if conditionals:\n`
+        COMMENT at [Line:   70, Column:   1]: `//  if ({condition}) {\n`
+        COMMENT at [Line:   71, Column:   1]: `//    // code...\n`
+        COMMENT at [Line:   72, Column:   1]: `//  }\n`
+          KW_IF at [Line:   73, Column:   1]: `if`
+     WHITESPACE at [Line:   73, Column:   3]: ` `
+     OPEN_PAREN at [Line:   73, Column:   4]: `(`
+           WORD at [Line:   73, Column:   5]: `weird`
+     WHITESPACE at [Line:   73, Column:  10]: ` `
+      DOUBLE_EQ at [Line:   73, Column:  11]: `==`
+     WHITESPACE at [Line:   73, Column:  13]: ` `
+          MINUS at [Line:   73, Column:  14]: `-`
+DECIMAL_LITERAL at [Line:   73, Column:  15]: `314`
+    CLOSE_PAREN at [Line:   73, Column:  18]: `)`
+     WHITESPACE at [Line:   73, Column:  19]: ` `
+     OPEN_BRACE at [Line:   73, Column:  20]: `{`
+        COMMENT at [Line:   73, Column:  21]: ` // checks value equals, for structs, will iterate using == over entries\n`
+     WHITESPACE at [Line:   74, Column:   1]: `  `
+           WORD at [Line:   74, Column:   3]: `u18`
+     WHITESPACE at [Line:   74, Column:   6]: ` `
+           WORD at [Line:   74, Column:   7]: `cond_var`
+     WHITESPACE at [Line:   74, Column:  15]: ` `
+         EQUALS at [Line:   74, Column:  16]: `=`
+     WHITESPACE at [Line:   74, Column:  17]: ` `
+DECIMAL_LITERAL at [Line:   74, Column:  18]: `0`
+      SEMICOLON at [Line:   74, Column:  19]: `;`
+     WHITESPACE at [Line:   74, Column:  20]: `\n`
+    CLOSE_BRACE at [Line:   75, Column:   1]: `}`
+     WHITESPACE at [Line:   75, Column:   2]: `\n`
+      BASE_TYPE at [Line:   76, Column:   1]: `s64`
+     WHITESPACE at [Line:   76, Column:   4]: ` `
+           WORD at [Line:   76, Column:   5]: `weird2`
+     WHITESPACE at [Line:   76, Column:  11]: ` `
+         EQUALS at [Line:   76, Column:  12]: `=`
+     WHITESPACE at [Line:   76, Column:  13]: ` `
+           WORD at [Line:   76, Column:  14]: `weird`
+      SEMICOLON at [Line:   76, Column:  19]: `;`
+     WHITESPACE at [Line:   76, Column:  20]: `\n`
+          KW_IF at [Line:   77, Column:   1]: `if`
+     WHITESPACE at [Line:   77, Column:   3]: ` `
+     OPEN_PAREN at [Line:   77, Column:   4]: `(`
+           WORD at [Line:   77, Column:   5]: `weird`
+     WHITESPACE at [Line:   77, Column:  10]: ` `
+      TRIPLE_EQ at [Line:   77, Column:  11]: `===`
+     WHITESPACE at [Line:   77, Column:  14]: ` `
+           WORD at [Line:   77, Column:  15]: `weird2`
+    CLOSE_PAREN at [Line:   77, Column:  21]: `)`
+     WHITESPACE at [Line:   77, Column:  22]: ` `
+     OPEN_BRACE at [Line:   77, Column:  23]: `{`
+        COMMENT at [Line:   77, Column:  24]: ` // checks pointer equals (similar to JS)\n`
+     WHITESPACE at [Line:   78, Column:   1]: `  `
+           WORD at [Line:   78, Column:   3]: `u18`
+     WHITESPACE at [Line:   78, Column:   6]: ` `
+           WORD at [Line:   78, Column:   7]: `cond_var`
+     WHITESPACE at [Line:   78, Column:  15]: ` `
+         EQUALS at [Line:   78, Column:  16]: `=`
+     WHITESPACE at [Line:   78, Column:  17]: ` `
+DECIMAL_LITERAL at [Line:   78, Column:  18]: `0`
+      SEMICOLON at [Line:   78, Column:  19]: `;`
+     WHITESPACE at [Line:   78, Column:  20]: `\n`
+    CLOSE_BRACE at [Line:   79, Column:   1]: `}`
+     WHITESPACE at [Line:   79, Column:   2]: `\n`
+     WHITESPACE at [Line:   80, Column:   1]: `\n`
+        COMMENT at [Line:   81, Column:   1]: `// while loops:\n`
+        COMMENT at [Line:   82, Column:   1]: `//  while ({condition}) {\n`
+        COMMENT at [Line:   83, Column:   1]: `//    // code...\n`
+        COMMENT at [Line:   84, Column:   1]: `//  }\n`
+       KW_WHILE at [Line:   85, Column:   1]: `while`
+     WHITESPACE at [Line:   85, Column:   6]: ` `
+     OPEN_PAREN at [Line:   85, Column:   7]: `(`
+           WORD at [Line:   85, Column:   8]: `weird`
+     WHITESPACE at [Line:   85, Column:  13]: ` `
+            LSS at [Line:   85, Column:  14]: `<`
+     WHITESPACE at [Line:   85, Column:  15]: ` `
+          MINUS at [Line:   85, Column:  16]: `-`
+DECIMAL_LITERAL at [Line:   85, Column:  17]: `300`
+    CLOSE_PAREN at [Line:   85, Column:  20]: `)`
+     WHITESPACE at [Line:   85, Column:  21]: ` `
+     OPEN_BRACE at [Line:   85, Column:  22]: `{`
+     WHITESPACE at [Line:   85, Column:  23]: `\n`
+     WHITESPACE at [Line:   86, Column:   1]: `  `
+           WORD at [Line:   86, Column:   3]: `weird`
+     WHITESPACE at [Line:   86, Column:   8]: ` `
+        PLUS_EQ at [Line:   86, Column:   9]: `+=`
+     WHITESPACE at [Line:   86, Column:  11]: ` `
+DECIMAL_LITERAL at [Line:   86, Column:  12]: `1`
+      SEMICOLON at [Line:   86, Column:  13]: `;`
+     WHITESPACE at [Line:   86, Column:  14]: `\n`
+    CLOSE_BRACE at [Line:   87, Column:   1]: `}`
+     WHITESPACE at [Line:   87, Column:   2]: `\n`
      WHITESPACE at [Line:   88, Column:   1]: `\n`
-        COMMENT at [Line:   89, Column:   1]: `// Comments:\n`
-        COMMENT at [Line:   90, Column:   1]: `//  The collowing comments shoul be handled.\n`
-        COMMENT at [Line:   91, Column:   1]: `//  The result should be `u8 newVar = 2345;` and `f64 big_float = 345.3245;`\n`
-     WHITESPACE at [Line:   92, Column:   1]: `\n`
-        COMMENT at [Line:   93, Column:   1]: `/* a simple comment */`
-     WHITESPACE at [Line:   93, Column:  23]: `\n`
-        COMMENT at [Line:   94, Column:   1]: `/* also /* a comment */`
-     WHITESPACE at [Line:   94, Column:  24]: `\n`
-        COMMENT at [Line:   95, Column:   1]: `/* a comment * with a silly character in it */`
-     WHITESPACE at [Line:   95, Column:  47]: `\n`
-        COMMENT at [Line:   96, Column:   1]: `/* a multi-line\n  comment\n*/`
-     WHITESPACE at [Line:   97, Column:  13]: `\n`
-        COMMENT at [Line:   98, Column:   1]: `/* two comments on one line */`
-     WHITESPACE at [Line:   98, Column:  31]: ` `
-      BASE_TYPE at [Line:   98, Column:  32]: `u8`
-     WHITESPACE at [Line:   98, Column:  34]: ` `
-           WORD at [Line:   98, Column:  35]: `newVar`
-     WHITESPACE at [Line:   98, Column:  41]: ` `
-         EQUALS at [Line:   98, Column:  42]: `=`
-     WHITESPACE at [Line:   98, Column:  43]: ` `
-DECIMAL_LITERAL at [Line:   98, Column:  44]: `2345`
-      SEMICOLON at [Line:   98, Column:  48]: `;`
-        COMMENT at [Line:   98, Column:  49]: ` /* NOT one long comment */`
-     WHITESPACE at [Line:   98, Column:  76]: `\n`
-        COMMENT at [Line:   99, Column:   1]: `/* a comment with a silly character at the end **/`
-     WHITESPACE at [Line:   99, Column:  51]: `\n`
-     WHITESPACE at [Line:  100, Column:   1]: `\n`
-      BASE_TYPE at [Line:  101, Column:   1]: `f64`
-        COMMENT at [Line:  101, Column:   4]: ` /* annoying comment */`
-     WHITESPACE at [Line:  101, Column:  27]: ` `
-           WORD at [Line:  101, Column:  28]: `big_float`
-     WHITESPACE at [Line:  101, Column:  37]: ` `
-         EQUALS at [Line:  101, Column:  38]: `=`
-        COMMENT at [Line:  101, Column:  39]: `/*kwfklre\n*/`
-     WHITESPACE at [Line:  102, Column:   3]: ` `
-  FLOAT_LITERAL at [Line:  102, Column:   4]: `345.2345`
-        COMMENT at [Line:  102, Column:  12]: ` /*rehehtr*/`
-     WHITESPACE at [Line:  102, Column:  24]: ` `
-      SEMICOLON at [Line:  102, Column:  25]: `;`
-        COMMENT at [Line:  102, Column:  26]: ` // annoyingly commented`
+     WHITESPACE at [Line:   89, Column:   1]: `\n`
+        COMMENT at [Line:   90, Column:   1]: `// Comments:\n`
+        COMMENT at [Line:   91, Column:   1]: `//  The following comments should be handled.\n`
+        COMMENT at [Line:   92, Column:   1]: `//  The result should be `u8 newVar = 2345;` and `f64 big_float = 345.3245;`\n`
+     WHITESPACE at [Line:   93, Column:   1]: `\n`
+        COMMENT at [Line:   94, Column:   1]: `/* a simple comment */`
+     WHITESPACE at [Line:   94, Column:  23]: `\n`
+        COMMENT at [Line:   95, Column:   1]: `/* also /* a comment */`
+     WHITESPACE at [Line:   95, Column:  24]: `\n`
+        COMMENT at [Line:   96, Column:   1]: `/* a comment * with a silly character in it */`
+     WHITESPACE at [Line:   96, Column:  47]: `\n`
+        COMMENT at [Line:   97, Column:   1]: `/* a multi-line\n  comment\n*/`
+     WHITESPACE at [Line:   98, Column:  13]: `\n`
+        COMMENT at [Line:   99, Column:   1]: `/* two comments on one line */`
+     WHITESPACE at [Line:   99, Column:  31]: ` `
+      BASE_TYPE at [Line:   99, Column:  32]: `u8`
+     WHITESPACE at [Line:   99, Column:  34]: ` `
+           WORD at [Line:   99, Column:  35]: `newVar`
+     WHITESPACE at [Line:   99, Column:  41]: ` `
+         EQUALS at [Line:   99, Column:  42]: `=`
+     WHITESPACE at [Line:   99, Column:  43]: ` `
+DECIMAL_LITERAL at [Line:   99, Column:  44]: `2345`
+      SEMICOLON at [Line:   99, Column:  48]: `;`
+        COMMENT at [Line:   99, Column:  49]: ` /* NOT one long comment */`
+     WHITESPACE at [Line:   99, Column:  76]: `\n`
+        COMMENT at [Line:  100, Column:   1]: `/* a comment with a silly character at the end **/`
+     WHITESPACE at [Line:  100, Column:  51]: `\n`
+     WHITESPACE at [Line:  101, Column:   1]: `\n`
+      BASE_TYPE at [Line:  102, Column:   1]: `f64`
+        COMMENT at [Line:  102, Column:   4]: ` /* annoying comment */`
+     WHITESPACE at [Line:  102, Column:  27]: ` `
+           WORD at [Line:  102, Column:  28]: `big_float`
+     WHITESPACE at [Line:  102, Column:  37]: ` `
+         EQUALS at [Line:  102, Column:  38]: `=`
+        COMMENT at [Line:  102, Column:  39]: `/*kwfklre\n*/`
+     WHITESPACE at [Line:  103, Column:   3]: ` `
+  FLOAT_LITERAL at [Line:  103, Column:   4]: `345.2345`
+        COMMENT at [Line:  103, Column:  12]: ` /*rehehtr*/`
+     WHITESPACE at [Line:  103, Column:  24]: ` `
+      SEMICOLON at [Line:  103, Column:  25]: `;`
+        COMMENT at [Line:  103, Column:  26]: ` // annoyingly commented`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 Parse tree(tests/build/full-design.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

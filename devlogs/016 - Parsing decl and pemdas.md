@@ -3,7 +3,8 @@
 May 16th, 2022
 
 Sign on: 2:30pm\
-Sign off: 7pm
+Sign off: 7pm\
+Also 11:30pm to 12am
 </div>
 
 ## Goals

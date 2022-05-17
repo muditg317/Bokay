@@ -83,6 +83,8 @@ std::string typeToString(const TokenType& type) {
     case TokenType::STRING: return "STRING";
     case TokenType::COLON: return "COLON";
     case TokenType::BASE_TYPE: return "BASE_TYPE";
+    case TokenType::KW_TRUE: return "KW_TRUE";
+    case TokenType::KW_FALSE: return "KW_FALSE";
     case TokenType::DECIMAL_LITERAL: return "DECIMAL_LITERAL";
     case TokenType::FLOAT_LITERAL: return "FLOAT_LITERAL";
     case TokenType::OPEN_BRACKET: return "OPEN_BRACKET";
@@ -93,6 +95,7 @@ std::string typeToString(const TokenType& type) {
     case TokenType::STAR: return "STAR";
     case TokenType::DIV: return "DIV";
     case TokenType::MOD: return "MOD";
+    case TokenType::BANG: return "BANG";
     case TokenType::PLUS_EQ: return "PLUS_EQ";
     case TokenType::MINUS_EQ: return "MINUS_EQ";
     case TokenType::STAR_EQ: return "STAR_EQ";
@@ -112,7 +115,9 @@ std::string typeToString(const TokenType& type) {
     case TokenType::KW_IF: return "KW_IF";
     case TokenType::KW_WHILE: return "KW_WHILE";
     case TokenType::DOUBLE_EQ: return "DOUBLE_EQ";
+    case TokenType::NOT_EQ: return "NOT_EQ";
     case TokenType::TRIPLE_EQ: return "TRIPLE_EQ";
+    case TokenType::TRIPLE_NOT_EQ: return "TRIPLE_NOT_EQ";
     case TokenType::LSS: return "LSS";
     case TokenType::GTR: return "GTR";
     case TokenType::LEQ: return "LEQ";

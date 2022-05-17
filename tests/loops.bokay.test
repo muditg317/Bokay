@@ -1,0 +1,48 @@
+--STDOUT:
+
+--STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp: 102] INFO    - Input source file: tests/loops.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/loops
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/loops.tok"
+[      parser.cpp: 136] ERROR   - Parsing failed to recognize source from grammar!
+[    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
+
+--STDERR-END
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+        COMMENT at [Line:    1, Column:   1]: `// while loops:\n`
+        COMMENT at [Line:    2, Column:   1]: `//  while ({condition}) {\n`
+        COMMENT at [Line:    3, Column:   1]: `//    // code...\n`
+        COMMENT at [Line:    4, Column:   1]: `//  }\n`
+       KW_WHILE at [Line:    5, Column:   1]: `while`
+     WHITESPACE at [Line:    5, Column:   6]: ` `
+     OPEN_PAREN at [Line:    5, Column:   7]: `(`
+           WORD at [Line:    5, Column:   8]: `weird`
+     WHITESPACE at [Line:    5, Column:  13]: ` `
+            LSS at [Line:    5, Column:  14]: `<`
+     WHITESPACE at [Line:    5, Column:  15]: ` `
+          MINUS at [Line:    5, Column:  16]: `-`
+DECIMAL_LITERAL at [Line:    5, Column:  17]: `300`
+    CLOSE_PAREN at [Line:    5, Column:  20]: `)`
+     WHITESPACE at [Line:    5, Column:  21]: ` `
+     OPEN_BRACE at [Line:    5, Column:  22]: `{`
+     WHITESPACE at [Line:    5, Column:  23]: `\n`
+     WHITESPACE at [Line:    6, Column:   1]: `  `
+           WORD at [Line:    6, Column:   3]: `weird`
+     WHITESPACE at [Line:    6, Column:   8]: ` `
+        PLUS_EQ at [Line:    6, Column:   9]: `+=`
+     WHITESPACE at [Line:    6, Column:  11]: ` `
+DECIMAL_LITERAL at [Line:    6, Column:  12]: `1`
+      SEMICOLON at [Line:    6, Column:  13]: `;`
+     WHITESPACE at [Line:    6, Column:  14]: `\n`
+    CLOSE_BRACE at [Line:    7, Column:   1]: `}`
+     WHITESPACE at [Line:    7, Column:   2]: `\n`
+
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Parse tree(tests/build/loops.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+AST(tests/build/loops.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Blocks w/ control flow(tests/build/loops.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+executable FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

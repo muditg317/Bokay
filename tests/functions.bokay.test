@@ -1,0 +1,158 @@
+--STDOUT:
+
+--STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp: 102] INFO    - Input source file: tests/functions.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/functions
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/functions.tok"
+[      parser.cpp: 136] ERROR   - Parsing failed to recognize source from grammar!
+[    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
+
+--STDERR-END
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+        COMMENT at [Line:    1, Column:   1]: `// functions:\n`
+        COMMENT at [Line:    2, Column:   1]: `//  {return type} {function name}({type} {name} [= {default to be evaluated at each call}]) {\n`
+        COMMENT at [Line:    3, Column:   1]: `//    // contents\n`
+        COMMENT at [Line:    4, Column:   1]: `//  }\n`
+        COMMENT at [Line:    5, Column:   1]: `//  default params can be any where in the arg list (skip them via empty commas `func(5,,253)`)\n`
+     WHITESPACE at [Line:    6, Column:   1]: `\n`
+      BASE_TYPE at [Line:    7, Column:   1]: `u32`
+     WHITESPACE at [Line:    7, Column:   4]: ` `
+           WORD at [Line:    7, Column:   5]: `do_stuff`
+     OPEN_PAREN at [Line:    7, Column:  13]: `(`
+      BASE_TYPE at [Line:    7, Column:  14]: `u16`
+     WHITESPACE at [Line:    7, Column:  17]: ` `
+           WORD at [Line:    7, Column:  18]: `a`
+          COMMA at [Line:    7, Column:  19]: `,`
+     WHITESPACE at [Line:    7, Column:  20]: ` `
+      BASE_TYPE at [Line:    7, Column:  21]: `u32`
+     WHITESPACE at [Line:    7, Column:  24]: ` `
+           WORD at [Line:    7, Column:  25]: `b`
+    CLOSE_PAREN at [Line:    7, Column:  26]: `)`
+     WHITESPACE at [Line:    7, Column:  27]: ` `
+     OPEN_BRACE at [Line:    7, Column:  28]: `{`
+     WHITESPACE at [Line:    7, Column:  29]: `\n`
+     WHITESPACE at [Line:    8, Column:   1]: `  `
+      KW_RETURN at [Line:    8, Column:   3]: `return`
+     WHITESPACE at [Line:    8, Column:   9]: ` `
+           WORD at [Line:    8, Column:  10]: `a`
+           PLUS at [Line:    8, Column:  11]: `+`
+           WORD at [Line:    8, Column:  12]: `b`
+      SEMICOLON at [Line:    8, Column:  13]: `;`
+     WHITESPACE at [Line:    8, Column:  14]: `\n`
+    CLOSE_BRACE at [Line:    9, Column:   1]: `}`
+     WHITESPACE at [Line:    9, Column:   2]: `\n`
+      BASE_TYPE at [Line:   10, Column:   1]: `u32`
+     WHITESPACE at [Line:   10, Column:   4]: ` `
+           WORD at [Line:   10, Column:   5]: `res`
+     WHITESPACE at [Line:   10, Column:   8]: ` `
+         EQUALS at [Line:   10, Column:   9]: `=`
+     WHITESPACE at [Line:   10, Column:  10]: ` `
+           WORD at [Line:   10, Column:  11]: `do_stuff`
+     OPEN_PAREN at [Line:   10, Column:  19]: `(`
+DECIMAL_LITERAL at [Line:   10, Column:  20]: `2`
+          COMMA at [Line:   10, Column:  21]: `,`
+DECIMAL_LITERAL at [Line:   10, Column:  22]: `3`
+    CLOSE_PAREN at [Line:   10, Column:  23]: `)`
+      SEMICOLON at [Line:   10, Column:  24]: `;`
+        COMMENT at [Line:   10, Column:  25]: ` // returns 5\n`
+     WHITESPACE at [Line:   11, Column:   1]: `\n`
+      BASE_TYPE at [Line:   12, Column:   1]: `s64`
+     WHITESPACE at [Line:   12, Column:   4]: ` `
+           WORD at [Line:   12, Column:   5]: `weird_defaults`
+     OPEN_PAREN at [Line:   12, Column:  19]: `(`
+      BASE_TYPE at [Line:   12, Column:  20]: `u16`
+     WHITESPACE at [Line:   12, Column:  23]: ` `
+           WORD at [Line:   12, Column:  24]: `a`
+     WHITESPACE at [Line:   12, Column:  25]: ` `
+         EQUALS at [Line:   12, Column:  26]: `=`
+     WHITESPACE at [Line:   12, Column:  27]: ` `
+DECIMAL_LITERAL at [Line:   12, Column:  28]: `5`
+          COMMA at [Line:   12, Column:  29]: `,`
+     WHITESPACE at [Line:   12, Column:  30]: ` `
+      BASE_TYPE at [Line:   12, Column:  31]: `u32`
+     WHITESPACE at [Line:   12, Column:  34]: ` `
+           WORD at [Line:   12, Column:  35]: `b`
+          COMMA at [Line:   12, Column:  36]: `,`
+     WHITESPACE at [Line:   12, Column:  37]: ` `
+      BASE_TYPE at [Line:   12, Column:  38]: `s16`
+     WHITESPACE at [Line:   12, Column:  41]: ` `
+           WORD at [Line:   12, Column:  42]: `c`
+          COMMA at [Line:   12, Column:  43]: `,`
+     WHITESPACE at [Line:   12, Column:  44]: ` `
+      BASE_TYPE at [Line:   12, Column:  45]: `s32`
+     WHITESPACE at [Line:   12, Column:  48]: ` `
+           WORD at [Line:   12, Column:  49]: `d`
+     WHITESPACE at [Line:   12, Column:  50]: ` `
+         EQUALS at [Line:   12, Column:  51]: `=`
+     WHITESPACE at [Line:   12, Column:  52]: ` `
+          MINUS at [Line:   12, Column:  53]: `-`
+DECIMAL_LITERAL at [Line:   12, Column:  54]: `100`
+          COMMA at [Line:   12, Column:  57]: `,`
+     WHITESPACE at [Line:   12, Column:  58]: ` `
+      BASE_TYPE at [Line:   12, Column:  59]: `s64`
+     WHITESPACE at [Line:   12, Column:  62]: ` `
+           WORD at [Line:   12, Column:  63]: `e`
+     WHITESPACE at [Line:   12, Column:  64]: ` `
+         EQUALS at [Line:   12, Column:  65]: `=`
+     WHITESPACE at [Line:   12, Column:  66]: ` `
+          MINUS at [Line:   12, Column:  67]: `-`
+DECIMAL_LITERAL at [Line:   12, Column:  68]: `8398`
+          COMMA at [Line:   12, Column:  72]: `,`
+     WHITESPACE at [Line:   12, Column:  73]: ` `
+      BASE_TYPE at [Line:   12, Column:  74]: `u8`
+     WHITESPACE at [Line:   12, Column:  76]: ` `
+           WORD at [Line:   12, Column:  77]: `f`
+    CLOSE_PAREN at [Line:   12, Column:  78]: `)`
+     WHITESPACE at [Line:   12, Column:  79]: ` `
+     OPEN_BRACE at [Line:   12, Column:  80]: `{`
+     WHITESPACE at [Line:   12, Column:  81]: `\n`
+     WHITESPACE at [Line:   13, Column:   1]: `  `
+      KW_RETURN at [Line:   13, Column:   3]: `return`
+     WHITESPACE at [Line:   13, Column:   9]: ` `
+           WORD at [Line:   13, Column:  10]: `a`
+           PLUS at [Line:   13, Column:  11]: `+`
+           WORD at [Line:   13, Column:  12]: `b`
+           PLUS at [Line:   13, Column:  13]: `+`
+           WORD at [Line:   13, Column:  14]: `c`
+           PLUS at [Line:   13, Column:  15]: `+`
+           WORD at [Line:   13, Column:  16]: `d`
+           PLUS at [Line:   13, Column:  17]: `+`
+           WORD at [Line:   13, Column:  18]: `e`
+           PLUS at [Line:   13, Column:  19]: `+`
+           WORD at [Line:   13, Column:  20]: `f`
+      SEMICOLON at [Line:   13, Column:  21]: `;`
+     WHITESPACE at [Line:   13, Column:  22]: `\n`
+    CLOSE_BRACE at [Line:   14, Column:   1]: `}`
+     WHITESPACE at [Line:   14, Column:   2]: `\n`
+      BASE_TYPE at [Line:   15, Column:   1]: `s64`
+     WHITESPACE at [Line:   15, Column:   4]: ` `
+           WORD at [Line:   15, Column:   5]: `weird`
+     WHITESPACE at [Line:   15, Column:  10]: ` `
+         EQUALS at [Line:   15, Column:  11]: `=`
+     WHITESPACE at [Line:   15, Column:  12]: ` `
+           WORD at [Line:   15, Column:  13]: `weird_defaults`
+     OPEN_PAREN at [Line:   15, Column:  27]: `(`
+          COMMA at [Line:   15, Column:  28]: `,`
+           WORD at [Line:   15, Column:  29]: `res`
+          COMMA at [Line:   15, Column:  32]: `,`
+          MINUS at [Line:   15, Column:  33]: `-`
+DECIMAL_LITERAL at [Line:   15, Column:  34]: `10`
+          COMMA at [Line:   15, Column:  36]: `,`
+          COMMA at [Line:   15, Column:  37]: `,`
+          MINUS at [Line:   15, Column:  38]: `-`
+DECIMAL_LITERAL at [Line:   15, Column:  39]: `234`
+          COMMA at [Line:   15, Column:  42]: `,`
+DECIMAL_LITERAL at [Line:   15, Column:  43]: `20`
+    CLOSE_PAREN at [Line:   15, Column:  45]: `)`
+      SEMICOLON at [Line:   15, Column:  46]: `;`
+        COMMENT at [Line:   15, Column:  47]: ` // runs with abcdef==5,5,-10,-100,-234,20 -- returns -314\n`
+
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Parse tree(tests/build/functions.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+AST(tests/build/functions.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Blocks w/ control flow(tests/build/functions.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+executable FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

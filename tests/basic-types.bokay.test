@@ -1,13 +1,11 @@
 --STDOUT:
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
-[ args-parser.cpp] INFO    - Input source file: tests/basic-types.bokay
-[ args-parser.cpp] INFO    - Output path: tests/build/basic-types
-[ args-parser.cpp] INFO    - Temp file output to: tests/build
-[    compiler.cpp] INFO    - Writing tokens to temp file: "tests/build/basic-types.tok"
-[      parser.cpp] ERROR   - Token index out of bounds!
-[      parser.cpp] ERROR   - Token index out of bounds!
-[    compiler.cpp] INFO    - Writing parse tree to temp file: "tests/build/basic-types.ptree"
+[ args-parser.cpp: 102] INFO    - Input source file: tests/basic-types.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/basic-types
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/basic-types.tok"
+[    compiler.cpp: 114] INFO    - Writing parse tree to temp file: "tests/build/basic-types.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -62,61 +60,95 @@ SOURCE
 					STATEMENTS
 						STATEMENT
 							STATEMENT_BODY
-								ASSIGNMENT
-									LHS
-										DECLARATION
-											BASE_TYPE(`u8`)
-											VARIABLE_USE
+								DECLARATION
+									DECL_SPECIFIER - BASE_TYPE(`u8`)
+									DECL_LIST
+										DECL_ITEM
+											DECLARATOR
 												ID - WORD(`a_byte`)
-									EQUALS(`=`)
-									EXPRESSION
-										TERM
-											LITERAL
-												RAW_LITERAL - DECIMAL_LITERAL(`5`)
+											EQUALS(`=`)
+											INITIALIZER
+												EXPRESSION
+													ASSIGNMENT_EXPR
+														LOGICAL_EXPR
+															RELATIONAL_EQ_EXPR
+																RELATIONAL_COMP_EXPR
+																	ADDITIVE_EXPR
+																		MULTIPLICATIVE_EXPR
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						LITERAL - DECIMAL_LITERAL(`5`)
 							SEMICOLON(`;`)
 					STATEMENT
 						STATEMENT_BODY
-							ASSIGNMENT
-								LHS
-									DECLARATION
-										BASE_TYPE(`s64`)
-										VARIABLE_USE
+							DECLARATION
+								DECL_SPECIFIER - BASE_TYPE(`s64`)
+								DECL_LIST
+									DECL_ITEM
+										DECLARATOR
 											ID - WORD(`signed`)
-								EQUALS(`=`)
-								EXPRESSION
-									TERM
-										LITERAL
-											MINUS(`-`)
-											RAW_LITERAL - DECIMAL_LITERAL(`100`)
+										EQUALS(`=`)
+										INITIALIZER
+											EXPRESSION
+												ASSIGNMENT_EXPR
+													LOGICAL_EXPR
+														RELATIONAL_EQ_EXPR
+															RELATIONAL_COMP_EXPR
+																ADDITIVE_EXPR
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			UNARY_OP - MINUS(`-`)
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						LITERAL - DECIMAL_LITERAL(`100`)
 						SEMICOLON(`;`)
 				STATEMENT
 					STATEMENT_BODY
-						ASSIGNMENT
-							LHS
-								DECLARATION
-									BASE_TYPE(`u16`)
-									VARIABLE_USE
+						DECLARATION
+							DECL_SPECIFIER - BASE_TYPE(`u16`)
+							DECL_LIST
+								DECL_ITEM
+									DECLARATOR
 										ID - WORD(`biggerInt`)
-							EQUALS(`=`)
-							EXPRESSION
-								TERM
-									LITERAL
-										MINUS(`-`)
-										RAW_LITERAL - DECIMAL_LITERAL(`2315`)
+									EQUALS(`=`)
+									INITIALIZER
+										EXPRESSION
+											ASSIGNMENT_EXPR
+												LOGICAL_EXPR
+													RELATIONAL_EQ_EXPR
+														RELATIONAL_COMP_EXPR
+															ADDITIVE_EXPR
+																MULTIPLICATIVE_EXPR
+																	UNARY_EXPR
+																		UNARY_OP - MINUS(`-`)
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					LITERAL - DECIMAL_LITERAL(`2315`)
 					SEMICOLON(`;`)
 			STATEMENT
 				STATEMENT_BODY
-					ASSIGNMENT
-						LHS
-							DECLARATION
-								BASE_TYPE(`f32`)
-								VARIABLE_USE
+					DECLARATION
+						DECL_SPECIFIER - BASE_TYPE(`f32`)
+						DECL_LIST
+							DECL_ITEM
+								DECLARATOR
 									ID - WORD(`a_float2`)
-						EQUALS(`=`)
-						EXPRESSION
-							TERM
-								LITERAL
-									RAW_LITERAL - FLOAT_LITERAL(`234.2412`)
+								EQUALS(`=`)
+								INITIALIZER
+									EXPRESSION
+										ASSIGNMENT_EXPR
+											LOGICAL_EXPR
+												RELATIONAL_EQ_EXPR
+													RELATIONAL_COMP_EXPR
+														ADDITIVE_EXPR
+															MULTIPLICATIVE_EXPR
+																UNARY_EXPR
+																	VARUSE_EXPR
+																		VAR_EXPR
+																			LITERAL - FLOAT_LITERAL(`234.2412`)
 				SEMICOLON(`;`)
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================

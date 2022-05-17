@@ -130,6 +130,20 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       ParseNodeType::DECLARATOR,
     } },
   } },
+  { ParseNodeType::NO_PTR_DECL, {
+    Production{ {
+      ParseNodeType::ID,
+    } },
+    Production{ {
+      ParseNodeType::PAREN_DECL,
+    } },
+    Production{ {
+      ParseNodeType::ARRAY_DECL,
+    } },
+    Production{ {
+      ParseNodeType::FUNC_DECL,
+    } },
+  } },
   { ParseNodeType::ARRAY_DECL, {
     Production{ {
       ParseNodeType::NO_PTR_DECL,

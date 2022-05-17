@@ -1,19 +1,51 @@
 --STDOUT:
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
-[ args-parser.cpp] INFO    - Input source file: tests/one-comment.bokay
-[ args-parser.cpp] INFO    - Output path: tests/build/one-comment
-[ args-parser.cpp] INFO    - Temp file output to: tests/build
-[    compiler.cpp] INFO    - Writing tokens to temp file: "tests/build/one-comment.tok"
-[      parser.cpp] ERROR   - Source has no usefull tokens!
-[    compiler.cpp] ERROR   - Parsing has failed! Code: 2
+[ args-parser.cpp: 102] INFO    - Input source file: tests/one-comment.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/one-comment
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/one-comment.tok"
+[      parser.cpp:  66] ERROR   - Source has no usefull tokens!
+[    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
         COMMENT at [Line:    1, Column:   1]: `// hello world.`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Parse tree(tests/build/one-comment.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+SOURCE
+	SOURCE_BODY
+		STATEMENTS
+			STATEMENTS
+				STATEMENT
+					STATEMENT_BODY
+						ASSIGNMENT
+							LHS
+								DECLARATION
+									BASE_TYPE(`u8`)
+									VARIABLE_USE
+										ID - WORD(`newVar`)
+							EQUALS(`=`)
+							EXPRESSION
+								TERM
+									LITERAL
+										RAW_LITERAL - DECIMAL_LITERAL(`2345`)
+					SEMICOLON(`;`)
+			STATEMENT
+				STATEMENT_BODY
+					ASSIGNMENT
+						LHS
+							DECLARATION
+								BASE_TYPE(`f64`)
+								VARIABLE_USE
+									ID - WORD(`big_float`)
+						EQUALS(`=`)
+						EXPRESSION
+							TERM
+								LITERAL
+									RAW_LITERAL - FLOAT_LITERAL(`345.2345`)
+				SEMICOLON(`;`)
+
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/one-comment.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================

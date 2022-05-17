@@ -1,13 +1,11 @@
 --STDOUT:
 
 --STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
-[ args-parser.cpp] INFO    - Input source file: tests/complex-expressions.bokay
-[ args-parser.cpp] INFO    - Output path: tests/build/complex-expressions
-[ args-parser.cpp] INFO    - Temp file output to: tests/build
-[    compiler.cpp] INFO    - Writing tokens to temp file: "tests/build/complex-expressions.tok"
-[      parser.cpp] ERROR   - Token index out of bounds!
-[      parser.cpp] ERROR   - Token index out of bounds!
-[    compiler.cpp] INFO    - Writing parse tree to temp file: "tests/build/complex-expressions.ptree"
+[ args-parser.cpp: 102] INFO    - Input source file: tests/complex-expressions.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/complex-expressions
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/complex-expressions.tok"
+[    compiler.cpp: 114] INFO    - Writing parse tree to temp file: "tests/build/complex-expressions.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -68,68 +66,97 @@ SOURCE
 			STATEMENTS
 				STATEMENT
 					STATEMENT_BODY
-						ASSIGNMENT
-							LHS
-								DECLARATION
-									BASE_TYPE(`u32`)
-									VARIABLE_USE
+						DECLARATION
+							DECL_SPECIFIER - BASE_TYPE(`u32`)
+							DECL_LIST
+								DECL_ITEM
+									DECLARATOR
 										ID - WORD(`bitIntWith5components`)
-							EQUALS(`=`)
-							EXPRESSION
-								EXPRESSION
-									EXPRESSION
+									EQUALS(`=`)
+									INITIALIZER
 										EXPRESSION
-											EXPRESSION
-												TERM
-													LITERAL
-														RAW_LITERAL - DECIMAL_LITERAL(`5`)
-											OPERATOR - PLUS(`+`)
-											TERM
-												LITERAL
-													RAW_LITERAL - DECIMAL_LITERAL(`100`)
-										OPERATOR - MINUS(`-`)
-										TERM
-											LITERAL
-												RAW_LITERAL - DECIMAL_LITERAL(`52`)
-									OPERATOR - STAR(`*`)
-									TERM
-										LITERAL
-											RAW_LITERAL - DECIMAL_LITERAL(`38`)
-								OPERATOR - PLUS(`+`)
-								TERM
-									LITERAL
-										RAW_LITERAL - DECIMAL_LITERAL(`16`)
+											ASSIGNMENT_EXPR
+												LOGICAL_EXPR
+													RELATIONAL_EQ_EXPR
+														RELATIONAL_COMP_EXPR
+															ADDITIVE_EXPR
+																ADDITIVE_EXPR
+																	ADDITIVE_EXPR
+																		ADDITIVE_EXPR
+																			MULTIPLICATIVE_EXPR
+																				UNARY_EXPR
+																					VARUSE_EXPR
+																						VAR_EXPR
+																							LITERAL - DECIMAL_LITERAL(`5`)
+																		ADDITIVE_OP - PLUS(`+`)
+																		MULTIPLICATIVE_EXPR
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						LITERAL - DECIMAL_LITERAL(`100`)
+																	ADDITIVE_OP - MINUS(`-`)
+																	MULTIPLICATIVE_EXPR
+																		MULTIPLICATIVE_EXPR
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						LITERAL - DECIMAL_LITERAL(`52`)
+																		MULTIPLICATIVE_OP - STAR(`*`)
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					LITERAL - DECIMAL_LITERAL(`38`)
+																ADDITIVE_OP - PLUS(`+`)
+																MULTIPLICATIVE_EXPR
+																	UNARY_EXPR
+																		VARUSE_EXPR
+																			VAR_EXPR
+																				LITERAL - DECIMAL_LITERAL(`16`)
 					SEMICOLON(`;`)
 			STATEMENT
 				STATEMENT_BODY
-					ASSIGNMENT
-						LHS
-							DECLARATION
-								BASE_TYPE(`s64`)
-								VARIABLE_USE
+					DECLARATION
+						DECL_SPECIFIER - BASE_TYPE(`s64`)
+						DECL_LIST
+							DECL_ITEM
+								DECLARATOR
 									ID - WORD(`floating_expressions`)
-						EQUALS(`=`)
-						EXPRESSION
-							EXPRESSION
-								EXPRESSION
+								EQUALS(`=`)
+								INITIALIZER
 									EXPRESSION
-										TERM
-											LITERAL
-												MINUS(`-`)
-												RAW_LITERAL - DECIMAL_LITERAL(`100`)
-									OPERATOR - DIV(`/`)
-									TERM
-										LITERAL
-											RAW_LITERAL - FLOAT_LITERAL(`26.789`)
-								OPERATOR - PLUS(`+`)
-								TERM
-									LITERAL
-										RAW_LITERAL - FLOAT_LITERAL(`34.15`)
-							OPERATOR - STAR(`*`)
-							TERM
-								LITERAL
-									MINUS(`-`)
-									RAW_LITERAL - FLOAT_LITERAL(`253.14`)
+										ASSIGNMENT_EXPR
+											LOGICAL_EXPR
+												RELATIONAL_EQ_EXPR
+													RELATIONAL_COMP_EXPR
+														ADDITIVE_EXPR
+															ADDITIVE_EXPR
+																MULTIPLICATIVE_EXPR
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			UNARY_OP - MINUS(`-`)
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						LITERAL - DECIMAL_LITERAL(`100`)
+																	MULTIPLICATIVE_OP - DIV(`/`)
+																	UNARY_EXPR
+																		VARUSE_EXPR
+																			VAR_EXPR
+																				LITERAL - FLOAT_LITERAL(`26.789`)
+															ADDITIVE_OP - PLUS(`+`)
+															MULTIPLICATIVE_EXPR
+																MULTIPLICATIVE_EXPR
+																	UNARY_EXPR
+																		VARUSE_EXPR
+																			VAR_EXPR
+																				LITERAL - FLOAT_LITERAL(`34.15`)
+																MULTIPLICATIVE_OP - STAR(`*`)
+																UNARY_EXPR
+																	UNARY_OP - MINUS(`-`)
+																	UNARY_EXPR
+																		VARUSE_EXPR
+																			VAR_EXPR
+																				LITERAL - FLOAT_LITERAL(`253.14`)
 				SEMICOLON(`;`)
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
