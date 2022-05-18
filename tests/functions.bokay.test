@@ -175,31 +175,32 @@ SOURCE
 											NO_PTR_DECL
 												ID - WORD(`b`)
 								CLOSE_PAREN(`)`)
-								OPEN_BRACE(`{`)
-								STATEMENTS
-									STATEMENT
-										RETURN_STMT
-											KW_RETURN(`return`)
-											EXPRESSION
-												ASSIGNMENT_EXPR
-													LOGICAL_EXPR
-														RELATIONAL_EQ_EXPR
-															RELATIONAL_COMP_EXPR
-																ADDITIVE_EXPR
+								CODE_BLOCK
+									OPEN_BRACE(`{`)
+									STATEMENTS
+										STATEMENT
+											RETURN_STMT
+												KW_RETURN(`return`)
+												EXPRESSION
+													ASSIGNMENT_EXPR
+														LOGICAL_EXPR
+															RELATIONAL_EQ_EXPR
+																RELATIONAL_COMP_EXPR
 																	ADDITIVE_EXPR
+																		ADDITIVE_EXPR
+																			MULTIPLICATIVE_EXPR
+																				UNARY_EXPR
+																					VARUSE_EXPR
+																						VAR_EXPR
+																							ID - WORD(`a`)
+																		ADDITIVE_OP - PLUS(`+`)
 																		MULTIPLICATIVE_EXPR
 																			UNARY_EXPR
 																				VARUSE_EXPR
 																					VAR_EXPR
-																						ID - WORD(`a`)
-																	ADDITIVE_OP - PLUS(`+`)
-																	MULTIPLICATIVE_EXPR
-																		UNARY_EXPR
-																			VARUSE_EXPR
-																				VAR_EXPR
-																					ID - WORD(`b`)
-											SEMICOLON(`;`)
-								CLOSE_BRACE(`}`)
+																						ID - WORD(`b`)
+												SEMICOLON(`;`)
+									CLOSE_BRACE(`}`)
 					STATEMENT
 						STATEMENT_BODY
 							DECLARATION
@@ -344,59 +345,60 @@ SOURCE
 									NO_PTR_DECL
 										ID - WORD(`f`)
 						CLOSE_PAREN(`)`)
-						OPEN_BRACE(`{`)
-						STATEMENTS
-							STATEMENT
-								RETURN_STMT
-									KW_RETURN(`return`)
-									EXPRESSION
-										ASSIGNMENT_EXPR
-											LOGICAL_EXPR
-												RELATIONAL_EQ_EXPR
-													RELATIONAL_COMP_EXPR
-														ADDITIVE_EXPR
+						CODE_BLOCK
+							OPEN_BRACE(`{`)
+							STATEMENTS
+								STATEMENT
+									RETURN_STMT
+										KW_RETURN(`return`)
+										EXPRESSION
+											ASSIGNMENT_EXPR
+												LOGICAL_EXPR
+													RELATIONAL_EQ_EXPR
+														RELATIONAL_COMP_EXPR
 															ADDITIVE_EXPR
 																ADDITIVE_EXPR
 																	ADDITIVE_EXPR
 																		ADDITIVE_EXPR
 																			ADDITIVE_EXPR
+																				ADDITIVE_EXPR
+																					MULTIPLICATIVE_EXPR
+																						UNARY_EXPR
+																							VARUSE_EXPR
+																								VAR_EXPR
+																									ID - WORD(`a`)
+																				ADDITIVE_OP - PLUS(`+`)
 																				MULTIPLICATIVE_EXPR
 																					UNARY_EXPR
 																						VARUSE_EXPR
 																							VAR_EXPR
-																								ID - WORD(`a`)
+																								ID - WORD(`b`)
 																			ADDITIVE_OP - PLUS(`+`)
 																			MULTIPLICATIVE_EXPR
 																				UNARY_EXPR
 																					VARUSE_EXPR
 																						VAR_EXPR
-																							ID - WORD(`b`)
+																							ID - WORD(`c`)
 																		ADDITIVE_OP - PLUS(`+`)
 																		MULTIPLICATIVE_EXPR
 																			UNARY_EXPR
 																				VARUSE_EXPR
 																					VAR_EXPR
-																						ID - WORD(`c`)
+																						ID - WORD(`d`)
 																	ADDITIVE_OP - PLUS(`+`)
 																	MULTIPLICATIVE_EXPR
 																		UNARY_EXPR
 																			VARUSE_EXPR
 																				VAR_EXPR
-																					ID - WORD(`d`)
+																					ID - WORD(`e`)
 																ADDITIVE_OP - PLUS(`+`)
 																MULTIPLICATIVE_EXPR
 																	UNARY_EXPR
 																		VARUSE_EXPR
 																			VAR_EXPR
-																				ID - WORD(`e`)
-															ADDITIVE_OP - PLUS(`+`)
-															MULTIPLICATIVE_EXPR
-																UNARY_EXPR
-																	VARUSE_EXPR
-																		VAR_EXPR
-																			ID - WORD(`f`)
-									SEMICOLON(`;`)
-						CLOSE_BRACE(`}`)
+																				ID - WORD(`f`)
+										SEMICOLON(`;`)
+							CLOSE_BRACE(`}`)
 			STATEMENT
 				STATEMENT_BODY
 					DECLARATION

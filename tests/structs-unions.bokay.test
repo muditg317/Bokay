@@ -1,0 +1,151 @@
+--STDOUT:
+
+--STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp: 102] INFO    - Input source file: tests/structs-unions.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/structs-unions
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/structs-unions.tok"
+[      parser.cpp: 136] ERROR   - Parsing failed to recognize source from grammar!
+[    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
+
+--STDERR-END
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+        COMMENT at [Line:    1, Column:   1]: `// special types:\n`
+        COMMENT at [Line:    2, Column:   1]: `//  structs : same as C\n`
+        COMMENT at [Line:    3, Column:   1]: `//    can't preinitialize\n`
+        COMMENT at [Line:    4, Column:   1]: `//    0 initialized\n`
+        COMMENT at [Line:    5, Column:   1]: `//  unions  : {base type} union {new_name} { [{type} {name};]... }\n`
+        COMMENT at [Line:    6, Column:   1]: `//    access unions with .\n`
+        COMMENT at [Line:    7, Column:   1]: `//    auto-assume base type of union if . not used - enables using u64 as u16[4] or something\n`
+      KW_STRUCT at [Line:    8, Column:   1]: `struct`
+     WHITESPACE at [Line:    8, Column:   7]: ` `
+           WORD at [Line:    8, Column:   8]: `my_struct`
+     WHITESPACE at [Line:    8, Column:  17]: ` `
+     OPEN_BRACE at [Line:    8, Column:  18]: `{`
+     WHITESPACE at [Line:    8, Column:  19]: `\n`
+     WHITESPACE at [Line:    9, Column:   1]: `  `
+      BASE_TYPE at [Line:    9, Column:   3]: `u16`
+     WHITESPACE at [Line:    9, Column:   6]: ` `
+           WORD at [Line:    9, Column:   7]: `unsigned16`
+      SEMICOLON at [Line:    9, Column:  17]: `;`
+     WHITESPACE at [Line:    9, Column:  18]: `\n`
+     WHITESPACE at [Line:   10, Column:   1]: `  `
+      BASE_TYPE at [Line:   10, Column:   3]: `s32`
+     WHITESPACE at [Line:   10, Column:   6]: ` `
+           WORD at [Line:   10, Column:   7]: `number`
+      SEMICOLON at [Line:   10, Column:  13]: `;`
+     WHITESPACE at [Line:   10, Column:  14]: `\n`
+    CLOSE_BRACE at [Line:   11, Column:   1]: `}`
+      SEMICOLON at [Line:   11, Column:   2]: `;`
+     WHITESPACE at [Line:   11, Column:   3]: `\n`
+           WORD at [Line:   12, Column:   1]: `my_struct`
+     WHITESPACE at [Line:   12, Column:  10]: ` `
+           WORD at [Line:   12, Column:  11]: `struct_var`
+      SEMICOLON at [Line:   12, Column:  21]: `;`
+        COMMENT at [Line:   12, Column:  22]: ` // can't be initialized for now (defaults to 0 initialized)\n`
+           WORD at [Line:   13, Column:   1]: `struct_var`
+         PERIOD at [Line:   13, Column:  11]: `.`
+           WORD at [Line:   13, Column:  12]: `unsigned16`
+     WHITESPACE at [Line:   13, Column:  22]: ` `
+         EQUALS at [Line:   13, Column:  23]: `=`
+     WHITESPACE at [Line:   13, Column:  24]: ` `
+DECIMAL_LITERAL at [Line:   13, Column:  25]: `1452`
+      SEMICOLON at [Line:   13, Column:  29]: `;`
+     WHITESPACE at [Line:   13, Column:  30]: `\n`
+           WORD at [Line:   14, Column:   1]: `struct_var`
+         PERIOD at [Line:   14, Column:  11]: `.`
+           WORD at [Line:   14, Column:  12]: `number`
+     WHITESPACE at [Line:   14, Column:  18]: ` `
+         EQUALS at [Line:   14, Column:  19]: `=`
+     WHITESPACE at [Line:   14, Column:  20]: ` `
+          MINUS at [Line:   14, Column:  21]: `-`
+DECIMAL_LITERAL at [Line:   14, Column:  22]: `23441`
+      SEMICOLON at [Line:   14, Column:  27]: `;`
+     WHITESPACE at [Line:   14, Column:  28]: `\n`
+      BASE_TYPE at [Line:   15, Column:   1]: `u64`
+     WHITESPACE at [Line:   15, Column:   4]: ` `
+       KW_UNION at [Line:   15, Column:   5]: `union`
+     WHITESPACE at [Line:   15, Column:  10]: ` `
+           WORD at [Line:   15, Column:  11]: `my_union`
+     WHITESPACE at [Line:   15, Column:  19]: ` `
+     OPEN_BRACE at [Line:   15, Column:  20]: `{`
+     WHITESPACE at [Line:   15, Column:  21]: `\n`
+     WHITESPACE at [Line:   16, Column:   1]: `  `
+      BASE_TYPE at [Line:   16, Column:   3]: `f32`
+     WHITESPACE at [Line:   16, Column:   6]: ` `
+           WORD at [Line:   16, Column:   7]: `height`
+      SEMICOLON at [Line:   16, Column:  13]: `;`
+     WHITESPACE at [Line:   16, Column:  14]: `\n`
+     WHITESPACE at [Line:   17, Column:   1]: `  `
+      BASE_TYPE at [Line:   17, Column:   3]: `u32`
+     WHITESPACE at [Line:   17, Column:   6]: ` `
+           WORD at [Line:   17, Column:   7]: `chunks`
+   OPEN_BRACKET at [Line:   17, Column:  13]: `[`
+DECIMAL_LITERAL at [Line:   17, Column:  14]: `2`
+  CLOSE_BRACKET at [Line:   17, Column:  15]: `]`
+      SEMICOLON at [Line:   17, Column:  16]: `;`
+     WHITESPACE at [Line:   17, Column:  17]: `\n`
+     WHITESPACE at [Line:   18, Column:   1]: `  `
+      BASE_TYPE at [Line:   18, Column:   3]: `u16`
+     WHITESPACE at [Line:   18, Column:   6]: ` `
+           WORD at [Line:   18, Column:   7]: `small_chunks`
+   OPEN_BRACKET at [Line:   18, Column:  19]: `[`
+DECIMAL_LITERAL at [Line:   18, Column:  20]: `4`
+  CLOSE_BRACKET at [Line:   18, Column:  21]: `]`
+      SEMICOLON at [Line:   18, Column:  22]: `;`
+     WHITESPACE at [Line:   18, Column:  23]: `\n`
+    CLOSE_BRACE at [Line:   19, Column:   1]: `}`
+      SEMICOLON at [Line:   19, Column:   2]: `;`
+     WHITESPACE at [Line:   19, Column:   3]: `\n`
+           WORD at [Line:   20, Column:   1]: `my_union`
+     WHITESPACE at [Line:   20, Column:   9]: ` `
+           WORD at [Line:   20, Column:  10]: `union_var`
+     WHITESPACE at [Line:   20, Column:  19]: ` `
+         EQUALS at [Line:   20, Column:  20]: `=`
+     WHITESPACE at [Line:   20, Column:  21]: ` `
+DECIMAL_LITERAL at [Line:   20, Column:  22]: `100`
+      SEMICOLON at [Line:   20, Column:  25]: `;`
+        COMMENT at [Line:   20, Column:  26]: ` // simply has to be assignable to one of the components or the base type\n`
+      BASE_TYPE at [Line:   21, Column:   1]: `u64`
+     WHITESPACE at [Line:   21, Column:   4]: ` `
+           WORD at [Line:   21, Column:   5]: `a_number`
+     WHITESPACE at [Line:   21, Column:  13]: ` `
+         EQUALS at [Line:   21, Column:  14]: `=`
+     WHITESPACE at [Line:   21, Column:  15]: ` `
+           WORD at [Line:   21, Column:  16]: `union_var`
+      SEMICOLON at [Line:   21, Column:  25]: `;`
+        COMMENT at [Line:   21, Column:  26]: ` // automatically assumes base type when not specified\n`
+      BASE_TYPE at [Line:   22, Column:   1]: `f64`
+     WHITESPACE at [Line:   22, Column:   4]: ` `
+           WORD at [Line:   22, Column:   5]: `big_float`
+     WHITESPACE at [Line:   22, Column:  14]: ` `
+         EQUALS at [Line:   22, Column:  15]: `=`
+     WHITESPACE at [Line:   22, Column:  16]: ` `
+           WORD at [Line:   22, Column:  17]: `union_var`
+         PERIOD at [Line:   22, Column:  26]: `.`
+           WORD at [Line:   22, Column:  27]: `height`
+      SEMICOLON at [Line:   22, Column:  33]: `;`
+        COMMENT at [Line:   22, Column:  34]: ` // must specify which type to extract with since multiple options are assignable to f64\n`
+      BASE_TYPE at [Line:   23, Column:   1]: `u32`
+     WHITESPACE at [Line:   23, Column:   4]: ` `
+           WORD at [Line:   23, Column:   5]: `small_num`
+     WHITESPACE at [Line:   23, Column:  14]: ` `
+         EQUALS at [Line:   23, Column:  15]: `=`
+     WHITESPACE at [Line:   23, Column:  16]: ` `
+           WORD at [Line:   23, Column:  17]: `union_var`
+         PERIOD at [Line:   23, Column:  26]: `.`
+           WORD at [Line:   23, Column:  27]: `chunks`
+   OPEN_BRACKET at [Line:   23, Column:  33]: `[`
+DECIMAL_LITERAL at [Line:   23, Column:  34]: `0`
+  CLOSE_BRACKET at [Line:   23, Column:  35]: `]`
+      SEMICOLON at [Line:   23, Column:  36]: `;`
+        COMMENT at [Line:   23, Column:  37]: ` // must specify which type to use when extracting value\n`
+
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Parse tree(tests/build/structs-unions.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+AST(tests/build/structs-unions.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Blocks w/ control flow(tests/build/structs-unions.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+executable FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

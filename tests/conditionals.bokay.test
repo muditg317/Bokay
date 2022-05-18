@@ -82,7 +82,7 @@ DECIMAL_LITERAL at [Line:   11, Column:  18]: `0`
      WHITESPACE at [Line:   11, Column:  20]: `\n`
     CLOSE_BRACE at [Line:   12, Column:   1]: `}`
      WHITESPACE at [Line:   12, Column:   2]: ` `
-           WORD at [Line:   12, Column:   3]: `else`
+        KW_ELSE at [Line:   12, Column:   3]: `else`
      WHITESPACE at [Line:   12, Column:   7]: ` `
      OPEN_BRACE at [Line:   12, Column:   8]: `{`
      WHITESPACE at [Line:   12, Column:   9]: `\n`
@@ -190,6 +190,195 @@ DECIMAL_LITERAL at [Line:   28, Column:  18]: `0`
       SEMICOLON at [Line:   28, Column:  19]: `;`
      WHITESPACE at [Line:   28, Column:  20]: `\n`
     CLOSE_BRACE at [Line:   29, Column:   1]: `}`
+     WHITESPACE at [Line:   29, Column:   2]: `\n`
+     WHITESPACE at [Line:   30, Column:   1]: `\n`
+        COMMENT at [Line:   31, Column:   1]: `// complex conditionals\n`
+          KW_IF at [Line:   32, Column:   1]: `if`
+     WHITESPACE at [Line:   32, Column:   3]: ` `
+     OPEN_PAREN at [Line:   32, Column:   4]: `(`
+           WORD at [Line:   32, Column:   5]: `weird2`
+     WHITESPACE at [Line:   32, Column:  11]: ` `
+            GTR at [Line:   32, Column:  12]: `>`
+     WHITESPACE at [Line:   32, Column:  13]: ` `
+DECIMAL_LITERAL at [Line:   32, Column:  14]: `0`
+     WHITESPACE at [Line:   32, Column:  15]: ` `
+     DOUBLE_AMP at [Line:   32, Column:  16]: `&&`
+     WHITESPACE at [Line:   32, Column:  18]: ` `
+           WORD at [Line:   32, Column:  19]: `weird2`
+     WHITESPACE at [Line:   32, Column:  25]: ` `
+            LSS at [Line:   32, Column:  26]: `<`
+     WHITESPACE at [Line:   32, Column:  27]: ` `
+DECIMAL_LITERAL at [Line:   32, Column:  28]: `100`
+    CLOSE_PAREN at [Line:   32, Column:  31]: `)`
+     WHITESPACE at [Line:   32, Column:  32]: ` `
+     OPEN_BRACE at [Line:   32, Column:  33]: `{`
+     WHITESPACE at [Line:   32, Column:  34]: `\n`
+     WHITESPACE at [Line:   33, Column:   1]: `  `
+           WORD at [Line:   33, Column:   3]: `u18`
+     WHITESPACE at [Line:   33, Column:   6]: ` `
+           WORD at [Line:   33, Column:   7]: `cond_var`
+     WHITESPACE at [Line:   33, Column:  15]: ` `
+         EQUALS at [Line:   33, Column:  16]: `=`
+     WHITESPACE at [Line:   33, Column:  17]: ` `
+DECIMAL_LITERAL at [Line:   33, Column:  18]: `0`
+      SEMICOLON at [Line:   33, Column:  19]: `;`
+     WHITESPACE at [Line:   33, Column:  20]: `\n`
+    CLOSE_BRACE at [Line:   34, Column:   1]: `}`
+     WHITESPACE at [Line:   34, Column:   2]: ` `
+        KW_ELSE at [Line:   34, Column:   3]: `else`
+     WHITESPACE at [Line:   34, Column:   7]: ` `
+          KW_IF at [Line:   34, Column:   8]: `if`
+     WHITESPACE at [Line:   34, Column:  10]: ` `
+     OPEN_PAREN at [Line:   34, Column:  11]: `(`
+DECIMAL_LITERAL at [Line:   34, Column:  12]: `5`
+     WHITESPACE at [Line:   34, Column:  13]: ` `
+            GTR at [Line:   34, Column:  14]: `>`
+     WHITESPACE at [Line:   34, Column:  15]: ` `
+           WORD at [Line:   34, Column:  16]: `weird2`
+    CLOSE_PAREN at [Line:   34, Column:  22]: `)`
+     WHITESPACE at [Line:   34, Column:  23]: ` `
+     OPEN_BRACE at [Line:   34, Column:  24]: `{`
+     WHITESPACE at [Line:   34, Column:  25]: `\n`
+     WHITESPACE at [Line:   35, Column:   1]: `  `
+           WORD at [Line:   35, Column:   3]: `u18`
+     WHITESPACE at [Line:   35, Column:   6]: ` `
+           WORD at [Line:   35, Column:   7]: `cond_var`
+     WHITESPACE at [Line:   35, Column:  15]: ` `
+         EQUALS at [Line:   35, Column:  16]: `=`
+     WHITESPACE at [Line:   35, Column:  17]: ` `
+DECIMAL_LITERAL at [Line:   35, Column:  18]: `0`
+      SEMICOLON at [Line:   35, Column:  19]: `;`
+     WHITESPACE at [Line:   35, Column:  20]: `\n`
+     WHITESPACE at [Line:   36, Column:   1]: `  `
+          KW_IF at [Line:   36, Column:   3]: `if`
+     WHITESPACE at [Line:   36, Column:   5]: ` `
+     OPEN_PAREN at [Line:   36, Column:   6]: `(`
+           WORD at [Line:   36, Column:   7]: `weird2`
+     WHITESPACE at [Line:   36, Column:  13]: ` `
+            GTR at [Line:   36, Column:  14]: `>`
+     WHITESPACE at [Line:   36, Column:  15]: ` `
+DECIMAL_LITERAL at [Line:   36, Column:  16]: `0`
+    CLOSE_PAREN at [Line:   36, Column:  17]: `)`
+     WHITESPACE at [Line:   36, Column:  18]: ` `
+     OPEN_BRACE at [Line:   36, Column:  19]: `{`
+     WHITESPACE at [Line:   36, Column:  20]: `\n`
+     WHITESPACE at [Line:   37, Column:   1]: `    `
+           WORD at [Line:   37, Column:   5]: `u18`
+     WHITESPACE at [Line:   37, Column:   8]: ` `
+           WORD at [Line:   37, Column:   9]: `cond_var2`
+     WHITESPACE at [Line:   37, Column:  18]: ` `
+         EQUALS at [Line:   37, Column:  19]: `=`
+     WHITESPACE at [Line:   37, Column:  20]: ` `
+DECIMAL_LITERAL at [Line:   37, Column:  21]: `0`
+      SEMICOLON at [Line:   37, Column:  22]: `;`
+     WHITESPACE at [Line:   37, Column:  23]: `\n`
+     WHITESPACE at [Line:   38, Column:   1]: `  `
+    CLOSE_BRACE at [Line:   38, Column:   3]: `}`
+     WHITESPACE at [Line:   38, Column:   4]: ` `
+        KW_ELSE at [Line:   38, Column:   5]: `else`
+     WHITESPACE at [Line:   38, Column:   9]: ` `
+          KW_IF at [Line:   38, Column:  10]: `if`
+     WHITESPACE at [Line:   38, Column:  12]: ` `
+     OPEN_PAREN at [Line:   38, Column:  13]: `(`
+           WORD at [Line:   38, Column:  14]: `weird2`
+     WHITESPACE at [Line:   38, Column:  20]: ` `
+            LSS at [Line:   38, Column:  21]: `<`
+     WHITESPACE at [Line:   38, Column:  22]: ` `
+DECIMAL_LITERAL at [Line:   38, Column:  23]: `100`
+    CLOSE_PAREN at [Line:   38, Column:  26]: `)`
+     WHITESPACE at [Line:   38, Column:  27]: ` `
+     OPEN_BRACE at [Line:   38, Column:  28]: `{`
+     WHITESPACE at [Line:   38, Column:  29]: `\n`
+     WHITESPACE at [Line:   39, Column:   1]: `    `
+           WORD at [Line:   39, Column:   5]: `u18`
+     WHITESPACE at [Line:   39, Column:   8]: ` `
+           WORD at [Line:   39, Column:   9]: `cond_var2`
+     WHITESPACE at [Line:   39, Column:  18]: ` `
+         EQUALS at [Line:   39, Column:  19]: `=`
+     WHITESPACE at [Line:   39, Column:  20]: ` `
+DECIMAL_LITERAL at [Line:   39, Column:  21]: `0`
+      SEMICOLON at [Line:   39, Column:  22]: `;`
+     WHITESPACE at [Line:   39, Column:  23]: `\n`
+     WHITESPACE at [Line:   40, Column:   1]: `  `
+    CLOSE_BRACE at [Line:   40, Column:   3]: `}`
+     WHITESPACE at [Line:   40, Column:   4]: ` `
+        KW_ELSE at [Line:   40, Column:   5]: `else`
+     WHITESPACE at [Line:   40, Column:   9]: ` `
+     OPEN_BRACE at [Line:   40, Column:  10]: `{`
+     WHITESPACE at [Line:   40, Column:  11]: `\n`
+     WHITESPACE at [Line:   41, Column:   1]: `    `
+           WORD at [Line:   41, Column:   5]: `u18`
+     WHITESPACE at [Line:   41, Column:   8]: ` `
+           WORD at [Line:   41, Column:   9]: `cond_var2`
+     WHITESPACE at [Line:   41, Column:  18]: ` `
+         EQUALS at [Line:   41, Column:  19]: `=`
+     WHITESPACE at [Line:   41, Column:  20]: ` `
+DECIMAL_LITERAL at [Line:   41, Column:  21]: `0`
+      SEMICOLON at [Line:   41, Column:  22]: `;`
+     WHITESPACE at [Line:   41, Column:  23]: `\n`
+     WHITESPACE at [Line:   42, Column:   1]: `  `
+    CLOSE_BRACE at [Line:   42, Column:   3]: `}`
+     WHITESPACE at [Line:   42, Column:   4]: `\n`
+    CLOSE_BRACE at [Line:   43, Column:   1]: `}`
+     WHITESPACE at [Line:   43, Column:   2]: ` `
+        KW_ELSE at [Line:   43, Column:   3]: `else`
+     WHITESPACE at [Line:   43, Column:   7]: ` `
+     OPEN_BRACE at [Line:   43, Column:   8]: `{`
+     WHITESPACE at [Line:   43, Column:   9]: `\n`
+     WHITESPACE at [Line:   44, Column:   1]: `  `
+           WORD at [Line:   44, Column:   3]: `u18`
+     WHITESPACE at [Line:   44, Column:   6]: ` `
+           WORD at [Line:   44, Column:   7]: `cond_var`
+     WHITESPACE at [Line:   44, Column:  15]: ` `
+         EQUALS at [Line:   44, Column:  16]: `=`
+     WHITESPACE at [Line:   44, Column:  17]: ` `
+DECIMAL_LITERAL at [Line:   44, Column:  18]: `0`
+      SEMICOLON at [Line:   44, Column:  19]: `;`
+     WHITESPACE at [Line:   44, Column:  20]: `\n`
+     WHITESPACE at [Line:   45, Column:   1]: `  `
+          KW_IF at [Line:   45, Column:   3]: `if`
+     WHITESPACE at [Line:   45, Column:   5]: ` `
+     OPEN_PAREN at [Line:   45, Column:   6]: `(`
+           WORD at [Line:   45, Column:   7]: `weird2`
+     WHITESPACE at [Line:   45, Column:  13]: ` `
+            GTR at [Line:   45, Column:  14]: `>`
+     WHITESPACE at [Line:   45, Column:  15]: ` `
+DECIMAL_LITERAL at [Line:   45, Column:  16]: `0`
+    CLOSE_PAREN at [Line:   45, Column:  17]: `)`
+     WHITESPACE at [Line:   45, Column:  18]: ` `
+     OPEN_BRACE at [Line:   45, Column:  19]: `{`
+     WHITESPACE at [Line:   45, Column:  20]: `\n`
+     WHITESPACE at [Line:   46, Column:   1]: `    `
+           WORD at [Line:   46, Column:   5]: `u18`
+     WHITESPACE at [Line:   46, Column:   8]: ` `
+           WORD at [Line:   46, Column:   9]: `cond_var2`
+     WHITESPACE at [Line:   46, Column:  18]: ` `
+         EQUALS at [Line:   46, Column:  19]: `=`
+     WHITESPACE at [Line:   46, Column:  20]: ` `
+DECIMAL_LITERAL at [Line:   46, Column:  21]: `0`
+      SEMICOLON at [Line:   46, Column:  22]: `;`
+     WHITESPACE at [Line:   46, Column:  23]: `\n`
+     WHITESPACE at [Line:   47, Column:   1]: `  `
+    CLOSE_BRACE at [Line:   47, Column:   3]: `}`
+     WHITESPACE at [Line:   47, Column:   4]: ` `
+        KW_ELSE at [Line:   47, Column:   5]: `else`
+     WHITESPACE at [Line:   47, Column:   9]: ` `
+     OPEN_BRACE at [Line:   47, Column:  10]: `{`
+     WHITESPACE at [Line:   47, Column:  11]: `\n`
+     WHITESPACE at [Line:   48, Column:   1]: `    `
+           WORD at [Line:   48, Column:   5]: `u18`
+     WHITESPACE at [Line:   48, Column:   8]: ` `
+           WORD at [Line:   48, Column:   9]: `cond_var3`
+     WHITESPACE at [Line:   48, Column:  18]: ` `
+         EQUALS at [Line:   48, Column:  19]: `=`
+     WHITESPACE at [Line:   48, Column:  20]: ` `
+DECIMAL_LITERAL at [Line:   48, Column:  21]: `0`
+      SEMICOLON at [Line:   48, Column:  22]: `;`
+     WHITESPACE at [Line:   48, Column:  23]: `\n`
+     WHITESPACE at [Line:   49, Column:   1]: `  `
+    CLOSE_BRACE at [Line:   49, Column:   3]: `}`
+     WHITESPACE at [Line:   49, Column:   4]: `\n`
+    CLOSE_BRACE at [Line:   50, Column:   1]: `}`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 Parse tree(tests/build/conditionals.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

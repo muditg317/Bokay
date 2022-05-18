@@ -68,17 +68,13 @@ REQUIRE(false);}\
 TEST_CASE(#testCase ".bokay", "[main]") {                                               \
   ProgramOutput actual = runEngineOn(#testCase);                                        \
   boost::filesystem::path expectedOutputPath(testOutputFile(options, #testCase));       \
-  std::cout << "checking expected output from: " << expectedOutputPath << std::endl;    \
   REQUIRE((boost::filesystem::exists(expectedOutputPath) && #testCase));                \
-  std::cout << "Expected output exists! " << std::endl;                                 \
   ProgramOutput expected(expectedOutputPath);                                           \
   for (uint8_t i = 0; i < COUNT_OUTPUT_TYPES; i++) {                                    \
-    DYNAMIC_SECTION( "checking " << outputTypeNames[i] << " output for " #testCase ) {  \
-      REQUIRE_THAT(actual.getOutput(static_cast<OutputType>(i)),                        \
-          Catch::Matchers::Equals(                                                      \
-              expected.getOutput(static_cast<OutputType>(i)),                           \
-              Catch::CaseSensitive::Yes));                                              \
-    }                                                                                   \
+    REQUIRE_THAT(actual.getOutput(static_cast<OutputType>(i)),                          \
+        Catch::Matchers::Equals(                                                        \
+            expected.getOutput(static_cast<OutputType>(i)),                             \
+            Catch::CaseSensitive::Yes));                                                \
   }                                                                                     \
 }
 
