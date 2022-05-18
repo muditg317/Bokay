@@ -71,11 +71,11 @@ s64 weird = weird_defaults(,5,-10,,-234,20); // runs with abcdef==5,5,-10,-100,-
 //    // code...
 //  }
 if (weird == -314) { // checks value equals, for structs, will iterate using == over entries
-  u18 cond_var = 0;
+  u8 cond_var = 0;
 }
 s64 weird2 = weird;
 if (weird === weird2) { // checks pointer equals (similar to JS)
-  u18 cond_var = 0;
+  u8 cond_var = 0;
 }
 
 // while loops:

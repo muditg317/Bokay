@@ -5,8 +5,7 @@
 [ args-parser.cpp: 105] INFO    - Output path: tests/build/conditionals
 [ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
 [    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/conditionals.tok"
-[      parser.cpp: 136] ERROR   - Parsing failed to recognize source from grammar!
-[    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
+[    compiler.cpp: 114] INFO    - Writing parse tree to temp file: "tests/build/conditionals.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -38,15 +37,15 @@ DECIMAL_LITERAL at [Line:    6, Column:  15]: `314`
      OPEN_BRACE at [Line:    6, Column:  20]: `{`
         COMMENT at [Line:    6, Column:  21]: ` // checks value equals, for structs, will iterate using == over entries\n`
      WHITESPACE at [Line:    7, Column:   1]: `  `
-           WORD at [Line:    7, Column:   3]: `u18`
-     WHITESPACE at [Line:    7, Column:   6]: ` `
-           WORD at [Line:    7, Column:   7]: `cond_var`
-     WHITESPACE at [Line:    7, Column:  15]: ` `
-         EQUALS at [Line:    7, Column:  16]: `=`
-     WHITESPACE at [Line:    7, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:    7, Column:  18]: `0`
-      SEMICOLON at [Line:    7, Column:  19]: `;`
-     WHITESPACE at [Line:    7, Column:  20]: `\n`
+      BASE_TYPE at [Line:    7, Column:   3]: `u8`
+     WHITESPACE at [Line:    7, Column:   5]: ` `
+           WORD at [Line:    7, Column:   6]: `cond_var`
+     WHITESPACE at [Line:    7, Column:  14]: ` `
+         EQUALS at [Line:    7, Column:  15]: `=`
+     WHITESPACE at [Line:    7, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:    7, Column:  17]: `0`
+      SEMICOLON at [Line:    7, Column:  18]: `;`
+     WHITESPACE at [Line:    7, Column:  19]: `\n`
     CLOSE_BRACE at [Line:    8, Column:   1]: `}`
      WHITESPACE at [Line:    8, Column:   2]: `\n`
       BASE_TYPE at [Line:    9, Column:   1]: `s64`
@@ -71,15 +70,15 @@ DECIMAL_LITERAL at [Line:    7, Column:  18]: `0`
      OPEN_BRACE at [Line:   10, Column:  23]: `{`
         COMMENT at [Line:   10, Column:  24]: ` // checks pointer equals (similar to JS) - should fail\n`
      WHITESPACE at [Line:   11, Column:   1]: `  `
-           WORD at [Line:   11, Column:   3]: `u18`
-     WHITESPACE at [Line:   11, Column:   6]: ` `
-           WORD at [Line:   11, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   11, Column:  15]: ` `
-         EQUALS at [Line:   11, Column:  16]: `=`
-     WHITESPACE at [Line:   11, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   11, Column:  18]: `0`
-      SEMICOLON at [Line:   11, Column:  19]: `;`
-     WHITESPACE at [Line:   11, Column:  20]: `\n`
+      BASE_TYPE at [Line:   11, Column:   3]: `u8`
+     WHITESPACE at [Line:   11, Column:   5]: ` `
+           WORD at [Line:   11, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   11, Column:  14]: ` `
+         EQUALS at [Line:   11, Column:  15]: `=`
+     WHITESPACE at [Line:   11, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   11, Column:  17]: `0`
+      SEMICOLON at [Line:   11, Column:  18]: `;`
+     WHITESPACE at [Line:   11, Column:  19]: `\n`
     CLOSE_BRACE at [Line:   12, Column:   1]: `}`
      WHITESPACE at [Line:   12, Column:   2]: ` `
         KW_ELSE at [Line:   12, Column:   3]: `else`
@@ -87,15 +86,15 @@ DECIMAL_LITERAL at [Line:   11, Column:  18]: `0`
      OPEN_BRACE at [Line:   12, Column:   8]: `{`
      WHITESPACE at [Line:   12, Column:   9]: `\n`
      WHITESPACE at [Line:   13, Column:   1]: `  `
-           WORD at [Line:   13, Column:   3]: `u18`
-     WHITESPACE at [Line:   13, Column:   6]: ` `
-           WORD at [Line:   13, Column:   7]: `something`
-     WHITESPACE at [Line:   13, Column:  16]: ` `
-         EQUALS at [Line:   13, Column:  17]: `=`
-     WHITESPACE at [Line:   13, Column:  18]: ` `
-DECIMAL_LITERAL at [Line:   13, Column:  19]: `123`
-      SEMICOLON at [Line:   13, Column:  22]: `;`
-     WHITESPACE at [Line:   13, Column:  23]: `\n`
+      BASE_TYPE at [Line:   13, Column:   3]: `u8`
+     WHITESPACE at [Line:   13, Column:   5]: ` `
+           WORD at [Line:   13, Column:   6]: `something`
+     WHITESPACE at [Line:   13, Column:  15]: ` `
+         EQUALS at [Line:   13, Column:  16]: `=`
+     WHITESPACE at [Line:   13, Column:  17]: ` `
+DECIMAL_LITERAL at [Line:   13, Column:  18]: `123`
+      SEMICOLON at [Line:   13, Column:  21]: `;`
+     WHITESPACE at [Line:   13, Column:  22]: `\n`
     CLOSE_BRACE at [Line:   14, Column:   1]: `}`
      WHITESPACE at [Line:   14, Column:   2]: `\n`
      WHITESPACE at [Line:   15, Column:   1]: `\n`
@@ -116,19 +115,19 @@ DECIMAL_LITERAL at [Line:   16, Column:  10]: `0`
      OPEN_BRACE at [Line:   17, Column:  14]: `{`
         COMMENT at [Line:   17, Column:  15]: ` // can simply ! a numeric value to check if falsy (0, null, undefined, NaN)\n`
      WHITESPACE at [Line:   18, Column:   1]: `  `
-           WORD at [Line:   18, Column:   3]: `u18`
-     WHITESPACE at [Line:   18, Column:   6]: ` `
-           WORD at [Line:   18, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   18, Column:  15]: ` `
-         EQUALS at [Line:   18, Column:  16]: `=`
-     WHITESPACE at [Line:   18, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   18, Column:  18]: `0`
-      SEMICOLON at [Line:   18, Column:  19]: `;`
-     WHITESPACE at [Line:   18, Column:  20]: `\n`
+      BASE_TYPE at [Line:   18, Column:   3]: `u8`
+     WHITESPACE at [Line:   18, Column:   5]: ` `
+           WORD at [Line:   18, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   18, Column:  14]: ` `
+         EQUALS at [Line:   18, Column:  15]: `=`
+     WHITESPACE at [Line:   18, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   18, Column:  17]: `0`
+      SEMICOLON at [Line:   18, Column:  18]: `;`
+     WHITESPACE at [Line:   18, Column:  19]: `\n`
     CLOSE_BRACE at [Line:   19, Column:   1]: `}`
      WHITESPACE at [Line:   19, Column:   2]: `\n`
      WHITESPACE at [Line:   20, Column:   1]: `\n`
-           WORD at [Line:   21, Column:   1]: `bool`
+      BASE_TYPE at [Line:   21, Column:   1]: `bool`
      WHITESPACE at [Line:   21, Column:   5]: ` `
            WORD at [Line:   21, Column:   6]: `hello`
      WHITESPACE at [Line:   21, Column:  11]: ` `
@@ -147,15 +146,15 @@ DECIMAL_LITERAL at [Line:   18, Column:  18]: `0`
      OPEN_BRACE at [Line:   22, Column:  13]: `{`
         COMMENT at [Line:   22, Column:  14]: ` // unary ! works on booleans\n`
      WHITESPACE at [Line:   23, Column:   1]: `  `
-           WORD at [Line:   23, Column:   3]: `u18`
-     WHITESPACE at [Line:   23, Column:   6]: ` `
-           WORD at [Line:   23, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   23, Column:  15]: ` `
-         EQUALS at [Line:   23, Column:  16]: `=`
-     WHITESPACE at [Line:   23, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   23, Column:  18]: `0`
-      SEMICOLON at [Line:   23, Column:  19]: `;`
-     WHITESPACE at [Line:   23, Column:  20]: `\n`
+      BASE_TYPE at [Line:   23, Column:   3]: `u8`
+     WHITESPACE at [Line:   23, Column:   5]: ` `
+           WORD at [Line:   23, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   23, Column:  14]: ` `
+         EQUALS at [Line:   23, Column:  15]: `=`
+     WHITESPACE at [Line:   23, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   23, Column:  17]: `0`
+      SEMICOLON at [Line:   23, Column:  18]: `;`
+     WHITESPACE at [Line:   23, Column:  19]: `\n`
     CLOSE_BRACE at [Line:   24, Column:   1]: `}`
      WHITESPACE at [Line:   24, Column:   2]: `\n`
      WHITESPACE at [Line:   25, Column:   1]: `\n`
@@ -180,15 +179,15 @@ DECIMAL_LITERAL at [Line:   23, Column:  18]: `0`
      OPEN_BRACE at [Line:   27, Column:  23]: `{`
         COMMENT at [Line:   27, Column:  24]: ` // can use && or || or ^^ for boolean logic\n`
      WHITESPACE at [Line:   28, Column:   1]: `  `
-           WORD at [Line:   28, Column:   3]: `u18`
-     WHITESPACE at [Line:   28, Column:   6]: ` `
-           WORD at [Line:   28, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   28, Column:  15]: ` `
-         EQUALS at [Line:   28, Column:  16]: `=`
-     WHITESPACE at [Line:   28, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   28, Column:  18]: `0`
-      SEMICOLON at [Line:   28, Column:  19]: `;`
-     WHITESPACE at [Line:   28, Column:  20]: `\n`
+      BASE_TYPE at [Line:   28, Column:   3]: `u8`
+     WHITESPACE at [Line:   28, Column:   5]: ` `
+           WORD at [Line:   28, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   28, Column:  14]: ` `
+         EQUALS at [Line:   28, Column:  15]: `=`
+     WHITESPACE at [Line:   28, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   28, Column:  17]: `0`
+      SEMICOLON at [Line:   28, Column:  18]: `;`
+     WHITESPACE at [Line:   28, Column:  19]: `\n`
     CLOSE_BRACE at [Line:   29, Column:   1]: `}`
      WHITESPACE at [Line:   29, Column:   2]: `\n`
      WHITESPACE at [Line:   30, Column:   1]: `\n`
@@ -214,15 +213,15 @@ DECIMAL_LITERAL at [Line:   32, Column:  28]: `100`
      OPEN_BRACE at [Line:   32, Column:  33]: `{`
      WHITESPACE at [Line:   32, Column:  34]: `\n`
      WHITESPACE at [Line:   33, Column:   1]: `  `
-           WORD at [Line:   33, Column:   3]: `u18`
-     WHITESPACE at [Line:   33, Column:   6]: ` `
-           WORD at [Line:   33, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   33, Column:  15]: ` `
-         EQUALS at [Line:   33, Column:  16]: `=`
-     WHITESPACE at [Line:   33, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   33, Column:  18]: `0`
-      SEMICOLON at [Line:   33, Column:  19]: `;`
-     WHITESPACE at [Line:   33, Column:  20]: `\n`
+      BASE_TYPE at [Line:   33, Column:   3]: `u8`
+     WHITESPACE at [Line:   33, Column:   5]: ` `
+           WORD at [Line:   33, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   33, Column:  14]: ` `
+         EQUALS at [Line:   33, Column:  15]: `=`
+     WHITESPACE at [Line:   33, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   33, Column:  17]: `0`
+      SEMICOLON at [Line:   33, Column:  18]: `;`
+     WHITESPACE at [Line:   33, Column:  19]: `\n`
     CLOSE_BRACE at [Line:   34, Column:   1]: `}`
      WHITESPACE at [Line:   34, Column:   2]: ` `
         KW_ELSE at [Line:   34, Column:   3]: `else`
@@ -240,15 +239,15 @@ DECIMAL_LITERAL at [Line:   34, Column:  12]: `5`
      OPEN_BRACE at [Line:   34, Column:  24]: `{`
      WHITESPACE at [Line:   34, Column:  25]: `\n`
      WHITESPACE at [Line:   35, Column:   1]: `  `
-           WORD at [Line:   35, Column:   3]: `u18`
-     WHITESPACE at [Line:   35, Column:   6]: ` `
-           WORD at [Line:   35, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   35, Column:  15]: ` `
-         EQUALS at [Line:   35, Column:  16]: `=`
-     WHITESPACE at [Line:   35, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   35, Column:  18]: `0`
-      SEMICOLON at [Line:   35, Column:  19]: `;`
-     WHITESPACE at [Line:   35, Column:  20]: `\n`
+      BASE_TYPE at [Line:   35, Column:   3]: `u8`
+     WHITESPACE at [Line:   35, Column:   5]: ` `
+           WORD at [Line:   35, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   35, Column:  14]: ` `
+         EQUALS at [Line:   35, Column:  15]: `=`
+     WHITESPACE at [Line:   35, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   35, Column:  17]: `0`
+      SEMICOLON at [Line:   35, Column:  18]: `;`
+     WHITESPACE at [Line:   35, Column:  19]: `\n`
      WHITESPACE at [Line:   36, Column:   1]: `  `
           KW_IF at [Line:   36, Column:   3]: `if`
      WHITESPACE at [Line:   36, Column:   5]: ` `
@@ -263,15 +262,15 @@ DECIMAL_LITERAL at [Line:   36, Column:  16]: `0`
      OPEN_BRACE at [Line:   36, Column:  19]: `{`
      WHITESPACE at [Line:   36, Column:  20]: `\n`
      WHITESPACE at [Line:   37, Column:   1]: `    `
-           WORD at [Line:   37, Column:   5]: `u18`
-     WHITESPACE at [Line:   37, Column:   8]: ` `
-           WORD at [Line:   37, Column:   9]: `cond_var2`
-     WHITESPACE at [Line:   37, Column:  18]: ` `
-         EQUALS at [Line:   37, Column:  19]: `=`
-     WHITESPACE at [Line:   37, Column:  20]: ` `
-DECIMAL_LITERAL at [Line:   37, Column:  21]: `0`
-      SEMICOLON at [Line:   37, Column:  22]: `;`
-     WHITESPACE at [Line:   37, Column:  23]: `\n`
+      BASE_TYPE at [Line:   37, Column:   5]: `u8`
+     WHITESPACE at [Line:   37, Column:   7]: ` `
+           WORD at [Line:   37, Column:   8]: `cond_var2`
+     WHITESPACE at [Line:   37, Column:  17]: ` `
+         EQUALS at [Line:   37, Column:  18]: `=`
+     WHITESPACE at [Line:   37, Column:  19]: ` `
+DECIMAL_LITERAL at [Line:   37, Column:  20]: `0`
+      SEMICOLON at [Line:   37, Column:  21]: `;`
+     WHITESPACE at [Line:   37, Column:  22]: `\n`
      WHITESPACE at [Line:   38, Column:   1]: `  `
     CLOSE_BRACE at [Line:   38, Column:   3]: `}`
      WHITESPACE at [Line:   38, Column:   4]: ` `
@@ -290,15 +289,15 @@ DECIMAL_LITERAL at [Line:   38, Column:  23]: `100`
      OPEN_BRACE at [Line:   38, Column:  28]: `{`
      WHITESPACE at [Line:   38, Column:  29]: `\n`
      WHITESPACE at [Line:   39, Column:   1]: `    `
-           WORD at [Line:   39, Column:   5]: `u18`
-     WHITESPACE at [Line:   39, Column:   8]: ` `
-           WORD at [Line:   39, Column:   9]: `cond_var2`
-     WHITESPACE at [Line:   39, Column:  18]: ` `
-         EQUALS at [Line:   39, Column:  19]: `=`
-     WHITESPACE at [Line:   39, Column:  20]: ` `
-DECIMAL_LITERAL at [Line:   39, Column:  21]: `0`
-      SEMICOLON at [Line:   39, Column:  22]: `;`
-     WHITESPACE at [Line:   39, Column:  23]: `\n`
+      BASE_TYPE at [Line:   39, Column:   5]: `u8`
+     WHITESPACE at [Line:   39, Column:   7]: ` `
+           WORD at [Line:   39, Column:   8]: `cond_var2`
+     WHITESPACE at [Line:   39, Column:  17]: ` `
+         EQUALS at [Line:   39, Column:  18]: `=`
+     WHITESPACE at [Line:   39, Column:  19]: ` `
+DECIMAL_LITERAL at [Line:   39, Column:  20]: `0`
+      SEMICOLON at [Line:   39, Column:  21]: `;`
+     WHITESPACE at [Line:   39, Column:  22]: `\n`
      WHITESPACE at [Line:   40, Column:   1]: `  `
     CLOSE_BRACE at [Line:   40, Column:   3]: `}`
      WHITESPACE at [Line:   40, Column:   4]: ` `
@@ -307,15 +306,15 @@ DECIMAL_LITERAL at [Line:   39, Column:  21]: `0`
      OPEN_BRACE at [Line:   40, Column:  10]: `{`
      WHITESPACE at [Line:   40, Column:  11]: `\n`
      WHITESPACE at [Line:   41, Column:   1]: `    `
-           WORD at [Line:   41, Column:   5]: `u18`
-     WHITESPACE at [Line:   41, Column:   8]: ` `
-           WORD at [Line:   41, Column:   9]: `cond_var2`
-     WHITESPACE at [Line:   41, Column:  18]: ` `
-         EQUALS at [Line:   41, Column:  19]: `=`
-     WHITESPACE at [Line:   41, Column:  20]: ` `
-DECIMAL_LITERAL at [Line:   41, Column:  21]: `0`
-      SEMICOLON at [Line:   41, Column:  22]: `;`
-     WHITESPACE at [Line:   41, Column:  23]: `\n`
+      BASE_TYPE at [Line:   41, Column:   5]: `u8`
+     WHITESPACE at [Line:   41, Column:   7]: ` `
+           WORD at [Line:   41, Column:   8]: `cond_var2`
+     WHITESPACE at [Line:   41, Column:  17]: ` `
+         EQUALS at [Line:   41, Column:  18]: `=`
+     WHITESPACE at [Line:   41, Column:  19]: ` `
+DECIMAL_LITERAL at [Line:   41, Column:  20]: `0`
+      SEMICOLON at [Line:   41, Column:  21]: `;`
+     WHITESPACE at [Line:   41, Column:  22]: `\n`
      WHITESPACE at [Line:   42, Column:   1]: `  `
     CLOSE_BRACE at [Line:   42, Column:   3]: `}`
      WHITESPACE at [Line:   42, Column:   4]: `\n`
@@ -326,15 +325,15 @@ DECIMAL_LITERAL at [Line:   41, Column:  21]: `0`
      OPEN_BRACE at [Line:   43, Column:   8]: `{`
      WHITESPACE at [Line:   43, Column:   9]: `\n`
      WHITESPACE at [Line:   44, Column:   1]: `  `
-           WORD at [Line:   44, Column:   3]: `u18`
-     WHITESPACE at [Line:   44, Column:   6]: ` `
-           WORD at [Line:   44, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   44, Column:  15]: ` `
-         EQUALS at [Line:   44, Column:  16]: `=`
-     WHITESPACE at [Line:   44, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   44, Column:  18]: `0`
-      SEMICOLON at [Line:   44, Column:  19]: `;`
-     WHITESPACE at [Line:   44, Column:  20]: `\n`
+      BASE_TYPE at [Line:   44, Column:   3]: `u8`
+     WHITESPACE at [Line:   44, Column:   5]: ` `
+           WORD at [Line:   44, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   44, Column:  14]: ` `
+         EQUALS at [Line:   44, Column:  15]: `=`
+     WHITESPACE at [Line:   44, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   44, Column:  17]: `0`
+      SEMICOLON at [Line:   44, Column:  18]: `;`
+     WHITESPACE at [Line:   44, Column:  19]: `\n`
      WHITESPACE at [Line:   45, Column:   1]: `  `
           KW_IF at [Line:   45, Column:   3]: `if`
      WHITESPACE at [Line:   45, Column:   5]: ` `
@@ -349,15 +348,15 @@ DECIMAL_LITERAL at [Line:   45, Column:  16]: `0`
      OPEN_BRACE at [Line:   45, Column:  19]: `{`
      WHITESPACE at [Line:   45, Column:  20]: `\n`
      WHITESPACE at [Line:   46, Column:   1]: `    `
-           WORD at [Line:   46, Column:   5]: `u18`
-     WHITESPACE at [Line:   46, Column:   8]: ` `
-           WORD at [Line:   46, Column:   9]: `cond_var2`
-     WHITESPACE at [Line:   46, Column:  18]: ` `
-         EQUALS at [Line:   46, Column:  19]: `=`
-     WHITESPACE at [Line:   46, Column:  20]: ` `
-DECIMAL_LITERAL at [Line:   46, Column:  21]: `0`
-      SEMICOLON at [Line:   46, Column:  22]: `;`
-     WHITESPACE at [Line:   46, Column:  23]: `\n`
+      BASE_TYPE at [Line:   46, Column:   5]: `u8`
+     WHITESPACE at [Line:   46, Column:   7]: ` `
+           WORD at [Line:   46, Column:   8]: `cond_var2`
+     WHITESPACE at [Line:   46, Column:  17]: ` `
+         EQUALS at [Line:   46, Column:  18]: `=`
+     WHITESPACE at [Line:   46, Column:  19]: ` `
+DECIMAL_LITERAL at [Line:   46, Column:  20]: `0`
+      SEMICOLON at [Line:   46, Column:  21]: `;`
+     WHITESPACE at [Line:   46, Column:  22]: `\n`
      WHITESPACE at [Line:   47, Column:   1]: `  `
     CLOSE_BRACE at [Line:   47, Column:   3]: `}`
      WHITESPACE at [Line:   47, Column:   4]: ` `
@@ -366,22 +365,810 @@ DECIMAL_LITERAL at [Line:   46, Column:  21]: `0`
      OPEN_BRACE at [Line:   47, Column:  10]: `{`
      WHITESPACE at [Line:   47, Column:  11]: `\n`
      WHITESPACE at [Line:   48, Column:   1]: `    `
-           WORD at [Line:   48, Column:   5]: `u18`
-     WHITESPACE at [Line:   48, Column:   8]: ` `
-           WORD at [Line:   48, Column:   9]: `cond_var3`
-     WHITESPACE at [Line:   48, Column:  18]: ` `
-         EQUALS at [Line:   48, Column:  19]: `=`
-     WHITESPACE at [Line:   48, Column:  20]: ` `
-DECIMAL_LITERAL at [Line:   48, Column:  21]: `0`
-      SEMICOLON at [Line:   48, Column:  22]: `;`
-     WHITESPACE at [Line:   48, Column:  23]: `\n`
+      BASE_TYPE at [Line:   48, Column:   5]: `u8`
+     WHITESPACE at [Line:   48, Column:   7]: ` `
+           WORD at [Line:   48, Column:   8]: `cond_var3`
+     WHITESPACE at [Line:   48, Column:  17]: ` `
+         EQUALS at [Line:   48, Column:  18]: `=`
+     WHITESPACE at [Line:   48, Column:  19]: ` `
+DECIMAL_LITERAL at [Line:   48, Column:  20]: `0`
+      SEMICOLON at [Line:   48, Column:  21]: `;`
+     WHITESPACE at [Line:   48, Column:  22]: `\n`
      WHITESPACE at [Line:   49, Column:   1]: `  `
     CLOSE_BRACE at [Line:   49, Column:   3]: `}`
      WHITESPACE at [Line:   49, Column:   4]: `\n`
     CLOSE_BRACE at [Line:   50, Column:   1]: `}`
+     WHITESPACE at [Line:   50, Column:   2]: `\n`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Parse tree(tests/build/conditionals.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+SOURCE
+	SOURCE_BODY
+		STATEMENTS
+			STATEMENTS
+				STATEMENTS
+					STATEMENTS
+						STATEMENTS
+							STATEMENTS
+								STATEMENTS
+									STATEMENTS
+										STATEMENTS
+											STATEMENTS
+												STATEMENTS
+													STATEMENT
+														STATEMENT_BODY
+															DECLARATION
+																DECL_SPECIFIER - BASE_TYPE(`s64`)
+																DECL_LIST
+																	DECL_ITEM
+																		DECLARATOR
+																			ID - WORD(`weird`)
+																		EQUALS(`=`)
+																		INITIALIZER
+																			EXPRESSION
+																				ASSIGNMENT_EXPR
+																					LOGICAL_EXPR
+																						RELATIONAL_EQ_EXPR
+																							RELATIONAL_COMP_EXPR
+																								ADDITIVE_EXPR
+																									MULTIPLICATIVE_EXPR
+																										UNARY_EXPR
+																											UNARY_OP - MINUS(`-`)
+																											UNARY_EXPR
+																												VARUSE_EXPR
+																													VAR_EXPR
+																														LITERAL - DECIMAL_LITERAL(`314`)
+														SEMICOLON(`;`)
+												STATEMENT
+													CONDITION_CHAIN
+														IF_CONDITION
+															KW_IF(`if`)
+															OPEN_PAREN(`(`)
+															EXPRESSION
+																ASSIGNMENT_EXPR
+																	LOGICAL_EXPR
+																		RELATIONAL_EQ_EXPR
+																			RELATIONAL_EQ_EXPR
+																				RELATIONAL_COMP_EXPR
+																					ADDITIVE_EXPR
+																						MULTIPLICATIVE_EXPR
+																							UNARY_EXPR
+																								VARUSE_EXPR
+																									VAR_EXPR
+																										ID - WORD(`weird`)
+																			RELATIONAL_EQ_OP - DOUBLE_EQ(`==`)
+																			RELATIONAL_COMP_EXPR
+																				ADDITIVE_EXPR
+																					MULTIPLICATIVE_EXPR
+																						UNARY_EXPR
+																							UNARY_OP - MINUS(`-`)
+																							UNARY_EXPR
+																								VARUSE_EXPR
+																									VAR_EXPR
+																										LITERAL - DECIMAL_LITERAL(`314`)
+															CLOSE_PAREN(`)`)
+														CONDITIONAL_BLOCKS
+															CODE_BLOCK
+																OPEN_BRACE(`{`)
+																STATEMENTS
+																	STATEMENT
+																		STATEMENT_BODY
+																			DECLARATION
+																				DECL_SPECIFIER - BASE_TYPE(`u8`)
+																				DECL_LIST
+																					DECL_ITEM
+																						DECLARATOR
+																							ID - WORD(`cond_var`)
+																						EQUALS(`=`)
+																						INITIALIZER
+																							EXPRESSION
+																								ASSIGNMENT_EXPR
+																									LOGICAL_EXPR
+																										RELATIONAL_EQ_EXPR
+																											RELATIONAL_COMP_EXPR
+																												ADDITIVE_EXPR
+																													MULTIPLICATIVE_EXPR
+																														UNARY_EXPR
+																															VARUSE_EXPR
+																																VAR_EXPR
+																																	LITERAL - DECIMAL_LITERAL(`0`)
+																		SEMICOLON(`;`)
+																CLOSE_BRACE(`}`)
+											STATEMENT
+												STATEMENT_BODY
+													DECLARATION
+														DECL_SPECIFIER - BASE_TYPE(`s64`)
+														DECL_LIST
+															DECL_ITEM
+																DECLARATOR
+																	ID - WORD(`weird2`)
+																EQUALS(`=`)
+																INITIALIZER
+																	EXPRESSION
+																		ASSIGNMENT_EXPR
+																			LOGICAL_EXPR
+																				RELATIONAL_EQ_EXPR
+																					RELATIONAL_COMP_EXPR
+																						ADDITIVE_EXPR
+																							MULTIPLICATIVE_EXPR
+																								UNARY_EXPR
+																									VARUSE_EXPR
+																										VAR_EXPR
+																											ID - WORD(`weird`)
+												SEMICOLON(`;`)
+										STATEMENT
+											CONDITION_CHAIN
+												IF_CONDITION
+													KW_IF(`if`)
+													OPEN_PAREN(`(`)
+													EXPRESSION
+														ASSIGNMENT_EXPR
+															LOGICAL_EXPR
+																RELATIONAL_EQ_EXPR
+																	RELATIONAL_EQ_EXPR
+																		RELATIONAL_COMP_EXPR
+																			ADDITIVE_EXPR
+																				MULTIPLICATIVE_EXPR
+																					UNARY_EXPR
+																						VARUSE_EXPR
+																							VAR_EXPR
+																								ID - WORD(`weird`)
+																	RELATIONAL_EQ_OP - TRIPLE_EQ(`===`)
+																	RELATIONAL_COMP_EXPR
+																		ADDITIVE_EXPR
+																			MULTIPLICATIVE_EXPR
+																				UNARY_EXPR
+																					VARUSE_EXPR
+																						VAR_EXPR
+																							ID - WORD(`weird2`)
+													CLOSE_PAREN(`)`)
+												CONDITIONAL_BLOCKS
+													CONDITIONAL_BLOCKS
+														CODE_BLOCK
+															OPEN_BRACE(`{`)
+															STATEMENTS
+																STATEMENT
+																	STATEMENT_BODY
+																		DECLARATION
+																			DECL_SPECIFIER - BASE_TYPE(`u8`)
+																			DECL_LIST
+																				DECL_ITEM
+																					DECLARATOR
+																						ID - WORD(`cond_var`)
+																					EQUALS(`=`)
+																					INITIALIZER
+																						EXPRESSION
+																							ASSIGNMENT_EXPR
+																								LOGICAL_EXPR
+																									RELATIONAL_EQ_EXPR
+																										RELATIONAL_COMP_EXPR
+																											ADDITIVE_EXPR
+																												MULTIPLICATIVE_EXPR
+																													UNARY_EXPR
+																														VARUSE_EXPR
+																															VAR_EXPR
+																																LITERAL - DECIMAL_LITERAL(`0`)
+																	SEMICOLON(`;`)
+															CLOSE_BRACE(`}`)
+													CONDITIONAL_BLOCK_CONNECTOR
+														ELSE_CONNECTOR - KW_ELSE(`else`)
+													CODE_BLOCK
+														OPEN_BRACE(`{`)
+														STATEMENTS
+															STATEMENT
+																STATEMENT_BODY
+																	DECLARATION
+																		DECL_SPECIFIER - BASE_TYPE(`u8`)
+																		DECL_LIST
+																			DECL_ITEM
+																				DECLARATOR
+																					ID - WORD(`something`)
+																				EQUALS(`=`)
+																				INITIALIZER
+																					EXPRESSION
+																						ASSIGNMENT_EXPR
+																							LOGICAL_EXPR
+																								RELATIONAL_EQ_EXPR
+																									RELATIONAL_COMP_EXPR
+																										ADDITIVE_EXPR
+																											MULTIPLICATIVE_EXPR
+																												UNARY_EXPR
+																													VARUSE_EXPR
+																														VAR_EXPR
+																															LITERAL - DECIMAL_LITERAL(`123`)
+																SEMICOLON(`;`)
+														CLOSE_BRACE(`}`)
+									STATEMENT
+										STATEMENT_BODY
+											EXPRESSION
+												ASSIGNMENT_EXPR
+													LOGICAL_EXPR
+														RELATIONAL_EQ_EXPR
+															RELATIONAL_COMP_EXPR
+																ADDITIVE_EXPR
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					ID - WORD(`weird2`)
+													ASSIGNMENT_OP - EQUALS(`=`)
+													ASSIGNMENT_EXPR
+														LOGICAL_EXPR
+															RELATIONAL_EQ_EXPR
+																RELATIONAL_COMP_EXPR
+																	ADDITIVE_EXPR
+																		MULTIPLICATIVE_EXPR
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						LITERAL - DECIMAL_LITERAL(`0`)
+										SEMICOLON(`;`)
+								STATEMENT
+									CONDITION_CHAIN
+										IF_CONDITION
+											KW_IF(`if`)
+											OPEN_PAREN(`(`)
+											EXPRESSION
+												ASSIGNMENT_EXPR
+													LOGICAL_EXPR
+														RELATIONAL_EQ_EXPR
+															RELATIONAL_COMP_EXPR
+																ADDITIVE_EXPR
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			UNARY_OP - BANG(`!`)
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						ID - WORD(`weird2`)
+											CLOSE_PAREN(`)`)
+										CONDITIONAL_BLOCKS
+											CODE_BLOCK
+												OPEN_BRACE(`{`)
+												STATEMENTS
+													STATEMENT
+														STATEMENT_BODY
+															DECLARATION
+																DECL_SPECIFIER - BASE_TYPE(`u8`)
+																DECL_LIST
+																	DECL_ITEM
+																		DECLARATOR
+																			ID - WORD(`cond_var`)
+																		EQUALS(`=`)
+																		INITIALIZER
+																			EXPRESSION
+																				ASSIGNMENT_EXPR
+																					LOGICAL_EXPR
+																						RELATIONAL_EQ_EXPR
+																							RELATIONAL_COMP_EXPR
+																								ADDITIVE_EXPR
+																									MULTIPLICATIVE_EXPR
+																										UNARY_EXPR
+																											VARUSE_EXPR
+																												VAR_EXPR
+																													LITERAL - DECIMAL_LITERAL(`0`)
+														SEMICOLON(`;`)
+												CLOSE_BRACE(`}`)
+							STATEMENT
+								STATEMENT_BODY
+									DECLARATION
+										DECL_SPECIFIER - BASE_TYPE(`bool`)
+										DECL_LIST
+											DECL_ITEM
+												DECLARATOR
+													ID - WORD(`hello`)
+												EQUALS(`=`)
+												INITIALIZER
+													EXPRESSION
+														ASSIGNMENT_EXPR
+															LOGICAL_EXPR
+																RELATIONAL_EQ_EXPR
+																	RELATIONAL_COMP_EXPR
+																		ADDITIVE_EXPR
+																			MULTIPLICATIVE_EXPR
+																				UNARY_EXPR
+																					VARUSE_EXPR
+																						VAR_EXPR
+																							LITERAL
+																								BOOLEAN_LITERAL - KW_FALSE(`false`)
+								SEMICOLON(`;`)
+						STATEMENT
+							CONDITION_CHAIN
+								IF_CONDITION
+									KW_IF(`if`)
+									OPEN_PAREN(`(`)
+									EXPRESSION
+										ASSIGNMENT_EXPR
+											LOGICAL_EXPR
+												RELATIONAL_EQ_EXPR
+													RELATIONAL_COMP_EXPR
+														ADDITIVE_EXPR
+															MULTIPLICATIVE_EXPR
+																UNARY_EXPR
+																	UNARY_OP - BANG(`!`)
+																	UNARY_EXPR
+																		VARUSE_EXPR
+																			VAR_EXPR
+																				ID - WORD(`hello`)
+									CLOSE_PAREN(`)`)
+								CONDITIONAL_BLOCKS
+									CODE_BLOCK
+										OPEN_BRACE(`{`)
+										STATEMENTS
+											STATEMENT
+												STATEMENT_BODY
+													DECLARATION
+														DECL_SPECIFIER - BASE_TYPE(`u8`)
+														DECL_LIST
+															DECL_ITEM
+																DECLARATOR
+																	ID - WORD(`cond_var`)
+																EQUALS(`=`)
+																INITIALIZER
+																	EXPRESSION
+																		ASSIGNMENT_EXPR
+																			LOGICAL_EXPR
+																				RELATIONAL_EQ_EXPR
+																					RELATIONAL_COMP_EXPR
+																						ADDITIVE_EXPR
+																							MULTIPLICATIVE_EXPR
+																								UNARY_EXPR
+																									VARUSE_EXPR
+																										VAR_EXPR
+																											LITERAL - DECIMAL_LITERAL(`0`)
+												SEMICOLON(`;`)
+										CLOSE_BRACE(`}`)
+					STATEMENT
+						STATEMENT_BODY
+							EXPRESSION
+								ASSIGNMENT_EXPR
+									LOGICAL_EXPR
+										RELATIONAL_EQ_EXPR
+											RELATIONAL_COMP_EXPR
+												ADDITIVE_EXPR
+													MULTIPLICATIVE_EXPR
+														UNARY_EXPR
+															VARUSE_EXPR
+																VAR_EXPR
+																	ID - WORD(`hello`)
+									ASSIGNMENT_OP - EQUALS(`=`)
+									ASSIGNMENT_EXPR
+										LOGICAL_EXPR
+											RELATIONAL_EQ_EXPR
+												RELATIONAL_COMP_EXPR
+													ADDITIVE_EXPR
+														MULTIPLICATIVE_EXPR
+															UNARY_EXPR
+																VARUSE_EXPR
+																	VAR_EXPR
+																		LITERAL
+																			BOOLEAN_LITERAL - KW_TRUE(`true`)
+						SEMICOLON(`;`)
+				STATEMENT
+					CONDITION_CHAIN
+						IF_CONDITION
+							KW_IF(`if`)
+							OPEN_PAREN(`(`)
+							EXPRESSION
+								ASSIGNMENT_EXPR
+									LOGICAL_EXPR
+										LOGICAL_EXPR
+											RELATIONAL_EQ_EXPR
+												RELATIONAL_COMP_EXPR
+													ADDITIVE_EXPR
+														MULTIPLICATIVE_EXPR
+															UNARY_EXPR
+																VARUSE_EXPR
+																	VAR_EXPR
+																		ID - WORD(`hello`)
+										LOGICAL_OP - DOUBLE_AMP(`&&`)
+										RELATIONAL_EQ_EXPR
+											RELATIONAL_COMP_EXPR
+												ADDITIVE_EXPR
+													MULTIPLICATIVE_EXPR
+														UNARY_EXPR
+															UNARY_OP - BANG(`!`)
+															UNARY_EXPR
+																VARUSE_EXPR
+																	VAR_EXPR
+																		ID - WORD(`weird2`)
+							CLOSE_PAREN(`)`)
+						CONDITIONAL_BLOCKS
+							CODE_BLOCK
+								OPEN_BRACE(`{`)
+								STATEMENTS
+									STATEMENT
+										STATEMENT_BODY
+											DECLARATION
+												DECL_SPECIFIER - BASE_TYPE(`u8`)
+												DECL_LIST
+													DECL_ITEM
+														DECLARATOR
+															ID - WORD(`cond_var`)
+														EQUALS(`=`)
+														INITIALIZER
+															EXPRESSION
+																ASSIGNMENT_EXPR
+																	LOGICAL_EXPR
+																		RELATIONAL_EQ_EXPR
+																			RELATIONAL_COMP_EXPR
+																				ADDITIVE_EXPR
+																					MULTIPLICATIVE_EXPR
+																						UNARY_EXPR
+																							VARUSE_EXPR
+																								VAR_EXPR
+																									LITERAL - DECIMAL_LITERAL(`0`)
+										SEMICOLON(`;`)
+								CLOSE_BRACE(`}`)
+			STATEMENT
+				CONDITION_CHAIN
+					IF_CONDITION
+						KW_IF(`if`)
+						OPEN_PAREN(`(`)
+						EXPRESSION
+							ASSIGNMENT_EXPR
+								LOGICAL_EXPR
+									LOGICAL_EXPR
+										RELATIONAL_EQ_EXPR
+											RELATIONAL_COMP_EXPR
+												RELATIONAL_COMP_EXPR
+													ADDITIVE_EXPR
+														MULTIPLICATIVE_EXPR
+															UNARY_EXPR
+																VARUSE_EXPR
+																	VAR_EXPR
+																		ID - WORD(`weird2`)
+												RELATIONAL_COMP_OP - GTR(`>`)
+												ADDITIVE_EXPR
+													MULTIPLICATIVE_EXPR
+														UNARY_EXPR
+															VARUSE_EXPR
+																VAR_EXPR
+																	LITERAL - DECIMAL_LITERAL(`0`)
+									LOGICAL_OP - DOUBLE_AMP(`&&`)
+									RELATIONAL_EQ_EXPR
+										RELATIONAL_COMP_EXPR
+											RELATIONAL_COMP_EXPR
+												ADDITIVE_EXPR
+													MULTIPLICATIVE_EXPR
+														UNARY_EXPR
+															VARUSE_EXPR
+																VAR_EXPR
+																	ID - WORD(`weird2`)
+											RELATIONAL_COMP_OP - LSS(`<`)
+											ADDITIVE_EXPR
+												MULTIPLICATIVE_EXPR
+													UNARY_EXPR
+														VARUSE_EXPR
+															VAR_EXPR
+																LITERAL - DECIMAL_LITERAL(`100`)
+						CLOSE_PAREN(`)`)
+					CONDITIONAL_BLOCKS
+						CONDITIONAL_BLOCKS
+							CONDITIONAL_BLOCKS
+								CODE_BLOCK
+									OPEN_BRACE(`{`)
+									STATEMENTS
+										STATEMENT
+											STATEMENT_BODY
+												DECLARATION
+													DECL_SPECIFIER - BASE_TYPE(`u8`)
+													DECL_LIST
+														DECL_ITEM
+															DECLARATOR
+																ID - WORD(`cond_var`)
+															EQUALS(`=`)
+															INITIALIZER
+																EXPRESSION
+																	ASSIGNMENT_EXPR
+																		LOGICAL_EXPR
+																			RELATIONAL_EQ_EXPR
+																				RELATIONAL_COMP_EXPR
+																					ADDITIVE_EXPR
+																						MULTIPLICATIVE_EXPR
+																							UNARY_EXPR
+																								VARUSE_EXPR
+																									VAR_EXPR
+																										LITERAL - DECIMAL_LITERAL(`0`)
+											SEMICOLON(`;`)
+									CLOSE_BRACE(`}`)
+							CONDITIONAL_BLOCK_CONNECTOR
+								ELSEIF_CONNECTOR
+									KW_ELSE(`else`)
+									IF_CONDITION
+										KW_IF(`if`)
+										OPEN_PAREN(`(`)
+										EXPRESSION
+											ASSIGNMENT_EXPR
+												LOGICAL_EXPR
+													RELATIONAL_EQ_EXPR
+														RELATIONAL_COMP_EXPR
+															RELATIONAL_COMP_EXPR
+																ADDITIVE_EXPR
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					LITERAL - DECIMAL_LITERAL(`5`)
+															RELATIONAL_COMP_OP - GTR(`>`)
+															ADDITIVE_EXPR
+																MULTIPLICATIVE_EXPR
+																	UNARY_EXPR
+																		VARUSE_EXPR
+																			VAR_EXPR
+																				ID - WORD(`weird2`)
+										CLOSE_PAREN(`)`)
+							CODE_BLOCK
+								OPEN_BRACE(`{`)
+								STATEMENTS
+									STATEMENTS
+										STATEMENT
+											STATEMENT_BODY
+												DECLARATION
+													DECL_SPECIFIER - BASE_TYPE(`u8`)
+													DECL_LIST
+														DECL_ITEM
+															DECLARATOR
+																ID - WORD(`cond_var`)
+															EQUALS(`=`)
+															INITIALIZER
+																EXPRESSION
+																	ASSIGNMENT_EXPR
+																		LOGICAL_EXPR
+																			RELATIONAL_EQ_EXPR
+																				RELATIONAL_COMP_EXPR
+																					ADDITIVE_EXPR
+																						MULTIPLICATIVE_EXPR
+																							UNARY_EXPR
+																								VARUSE_EXPR
+																									VAR_EXPR
+																										LITERAL - DECIMAL_LITERAL(`0`)
+											SEMICOLON(`;`)
+									STATEMENT
+										CONDITION_CHAIN
+											IF_CONDITION
+												KW_IF(`if`)
+												OPEN_PAREN(`(`)
+												EXPRESSION
+													ASSIGNMENT_EXPR
+														LOGICAL_EXPR
+															RELATIONAL_EQ_EXPR
+																RELATIONAL_COMP_EXPR
+																	RELATIONAL_COMP_EXPR
+																		ADDITIVE_EXPR
+																			MULTIPLICATIVE_EXPR
+																				UNARY_EXPR
+																					VARUSE_EXPR
+																						VAR_EXPR
+																							ID - WORD(`weird2`)
+																	RELATIONAL_COMP_OP - GTR(`>`)
+																	ADDITIVE_EXPR
+																		MULTIPLICATIVE_EXPR
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						LITERAL - DECIMAL_LITERAL(`0`)
+												CLOSE_PAREN(`)`)
+											CONDITIONAL_BLOCKS
+												CONDITIONAL_BLOCKS
+													CONDITIONAL_BLOCKS
+														CODE_BLOCK
+															OPEN_BRACE(`{`)
+															STATEMENTS
+																STATEMENT
+																	STATEMENT_BODY
+																		DECLARATION
+																			DECL_SPECIFIER - BASE_TYPE(`u8`)
+																			DECL_LIST
+																				DECL_ITEM
+																					DECLARATOR
+																						ID - WORD(`cond_var2`)
+																					EQUALS(`=`)
+																					INITIALIZER
+																						EXPRESSION
+																							ASSIGNMENT_EXPR
+																								LOGICAL_EXPR
+																									RELATIONAL_EQ_EXPR
+																										RELATIONAL_COMP_EXPR
+																											ADDITIVE_EXPR
+																												MULTIPLICATIVE_EXPR
+																													UNARY_EXPR
+																														VARUSE_EXPR
+																															VAR_EXPR
+																																LITERAL - DECIMAL_LITERAL(`0`)
+																	SEMICOLON(`;`)
+															CLOSE_BRACE(`}`)
+													CONDITIONAL_BLOCK_CONNECTOR
+														ELSEIF_CONNECTOR
+															KW_ELSE(`else`)
+															IF_CONDITION
+																KW_IF(`if`)
+																OPEN_PAREN(`(`)
+																EXPRESSION
+																	ASSIGNMENT_EXPR
+																		LOGICAL_EXPR
+																			RELATIONAL_EQ_EXPR
+																				RELATIONAL_COMP_EXPR
+																					RELATIONAL_COMP_EXPR
+																						ADDITIVE_EXPR
+																							MULTIPLICATIVE_EXPR
+																								UNARY_EXPR
+																									VARUSE_EXPR
+																										VAR_EXPR
+																											ID - WORD(`weird2`)
+																					RELATIONAL_COMP_OP - LSS(`<`)
+																					ADDITIVE_EXPR
+																						MULTIPLICATIVE_EXPR
+																							UNARY_EXPR
+																								VARUSE_EXPR
+																									VAR_EXPR
+																										LITERAL - DECIMAL_LITERAL(`100`)
+																CLOSE_PAREN(`)`)
+													CODE_BLOCK
+														OPEN_BRACE(`{`)
+														STATEMENTS
+															STATEMENT
+																STATEMENT_BODY
+																	DECLARATION
+																		DECL_SPECIFIER - BASE_TYPE(`u8`)
+																		DECL_LIST
+																			DECL_ITEM
+																				DECLARATOR
+																					ID - WORD(`cond_var2`)
+																				EQUALS(`=`)
+																				INITIALIZER
+																					EXPRESSION
+																						ASSIGNMENT_EXPR
+																							LOGICAL_EXPR
+																								RELATIONAL_EQ_EXPR
+																									RELATIONAL_COMP_EXPR
+																										ADDITIVE_EXPR
+																											MULTIPLICATIVE_EXPR
+																												UNARY_EXPR
+																													VARUSE_EXPR
+																														VAR_EXPR
+																															LITERAL - DECIMAL_LITERAL(`0`)
+																SEMICOLON(`;`)
+														CLOSE_BRACE(`}`)
+												CONDITIONAL_BLOCK_CONNECTOR
+													ELSE_CONNECTOR - KW_ELSE(`else`)
+												CODE_BLOCK
+													OPEN_BRACE(`{`)
+													STATEMENTS
+														STATEMENT
+															STATEMENT_BODY
+																DECLARATION
+																	DECL_SPECIFIER - BASE_TYPE(`u8`)
+																	DECL_LIST
+																		DECL_ITEM
+																			DECLARATOR
+																				ID - WORD(`cond_var2`)
+																			EQUALS(`=`)
+																			INITIALIZER
+																				EXPRESSION
+																					ASSIGNMENT_EXPR
+																						LOGICAL_EXPR
+																							RELATIONAL_EQ_EXPR
+																								RELATIONAL_COMP_EXPR
+																									ADDITIVE_EXPR
+																										MULTIPLICATIVE_EXPR
+																											UNARY_EXPR
+																												VARUSE_EXPR
+																													VAR_EXPR
+																														LITERAL - DECIMAL_LITERAL(`0`)
+															SEMICOLON(`;`)
+													CLOSE_BRACE(`}`)
+								CLOSE_BRACE(`}`)
+						CONDITIONAL_BLOCK_CONNECTOR
+							ELSE_CONNECTOR - KW_ELSE(`else`)
+						CODE_BLOCK
+							OPEN_BRACE(`{`)
+							STATEMENTS
+								STATEMENTS
+									STATEMENT
+										STATEMENT_BODY
+											DECLARATION
+												DECL_SPECIFIER - BASE_TYPE(`u8`)
+												DECL_LIST
+													DECL_ITEM
+														DECLARATOR
+															ID - WORD(`cond_var`)
+														EQUALS(`=`)
+														INITIALIZER
+															EXPRESSION
+																ASSIGNMENT_EXPR
+																	LOGICAL_EXPR
+																		RELATIONAL_EQ_EXPR
+																			RELATIONAL_COMP_EXPR
+																				ADDITIVE_EXPR
+																					MULTIPLICATIVE_EXPR
+																						UNARY_EXPR
+																							VARUSE_EXPR
+																								VAR_EXPR
+																									LITERAL - DECIMAL_LITERAL(`0`)
+										SEMICOLON(`;`)
+								STATEMENT
+									CONDITION_CHAIN
+										IF_CONDITION
+											KW_IF(`if`)
+											OPEN_PAREN(`(`)
+											EXPRESSION
+												ASSIGNMENT_EXPR
+													LOGICAL_EXPR
+														RELATIONAL_EQ_EXPR
+															RELATIONAL_COMP_EXPR
+																RELATIONAL_COMP_EXPR
+																	ADDITIVE_EXPR
+																		MULTIPLICATIVE_EXPR
+																			UNARY_EXPR
+																				VARUSE_EXPR
+																					VAR_EXPR
+																						ID - WORD(`weird2`)
+																RELATIONAL_COMP_OP - GTR(`>`)
+																ADDITIVE_EXPR
+																	MULTIPLICATIVE_EXPR
+																		UNARY_EXPR
+																			VARUSE_EXPR
+																				VAR_EXPR
+																					LITERAL - DECIMAL_LITERAL(`0`)
+											CLOSE_PAREN(`)`)
+										CONDITIONAL_BLOCKS
+											CONDITIONAL_BLOCKS
+												CODE_BLOCK
+													OPEN_BRACE(`{`)
+													STATEMENTS
+														STATEMENT
+															STATEMENT_BODY
+																DECLARATION
+																	DECL_SPECIFIER - BASE_TYPE(`u8`)
+																	DECL_LIST
+																		DECL_ITEM
+																			DECLARATOR
+																				ID - WORD(`cond_var2`)
+																			EQUALS(`=`)
+																			INITIALIZER
+																				EXPRESSION
+																					ASSIGNMENT_EXPR
+																						LOGICAL_EXPR
+																							RELATIONAL_EQ_EXPR
+																								RELATIONAL_COMP_EXPR
+																									ADDITIVE_EXPR
+																										MULTIPLICATIVE_EXPR
+																											UNARY_EXPR
+																												VARUSE_EXPR
+																													VAR_EXPR
+																														LITERAL - DECIMAL_LITERAL(`0`)
+															SEMICOLON(`;`)
+													CLOSE_BRACE(`}`)
+											CONDITIONAL_BLOCK_CONNECTOR
+												ELSE_CONNECTOR - KW_ELSE(`else`)
+											CODE_BLOCK
+												OPEN_BRACE(`{`)
+												STATEMENTS
+													STATEMENT
+														STATEMENT_BODY
+															DECLARATION
+																DECL_SPECIFIER - BASE_TYPE(`u8`)
+																DECL_LIST
+																	DECL_ITEM
+																		DECLARATOR
+																			ID - WORD(`cond_var3`)
+																		EQUALS(`=`)
+																		INITIALIZER
+																			EXPRESSION
+																				ASSIGNMENT_EXPR
+																					LOGICAL_EXPR
+																						RELATIONAL_EQ_EXPR
+																							RELATIONAL_COMP_EXPR
+																								ADDITIVE_EXPR
+																									MULTIPLICATIVE_EXPR
+																										UNARY_EXPR
+																											VARUSE_EXPR
+																												VAR_EXPR
+																													LITERAL - DECIMAL_LITERAL(`0`)
+														SEMICOLON(`;`)
+												CLOSE_BRACE(`}`)
+							CLOSE_BRACE(`}`)
+
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/conditionals.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================

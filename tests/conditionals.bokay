@@ -4,47 +4,47 @@
 //  }
 s64 weird = -314;
 if (weird == -314) { // checks value equals, for structs, will iterate using == over entries
-  u18 cond_var = 0;
+  u8 cond_var = 0;
 }
 s64 weird2 = weird;
 if (weird === weird2) { // checks pointer equals (similar to JS) - should fail
-  u18 cond_var = 0;
+  u8 cond_var = 0;
 } else {
-  u18 something = 123;
+  u8 something = 123;
 }
 
 weird2 = 0;
 if (!weird2) { // can simply ! a numeric value to check if falsy (0, null, undefined, NaN)
-  u18 cond_var = 0;
+  u8 cond_var = 0;
 }
 
 bool hello = false;
 if (!hello) { // unary ! works on booleans
-  u18 cond_var = 0;
+  u8 cond_var = 0;
 }
 
 hello = true;
 if (hello && !weird2) { // can use && or || or ^^ for boolean logic
-  u18 cond_var = 0;
+  u8 cond_var = 0;
 }
 
 // complex conditionals
 if (weird2 > 0 && weird2 < 100) {
-  u18 cond_var = 0;
+  u8 cond_var = 0;
 } else if (5 > weird2) {
-  u18 cond_var = 0;
+  u8 cond_var = 0;
   if (weird2 > 0) {
-    u18 cond_var2 = 0;
+    u8 cond_var2 = 0;
   } else if (weird2 < 100) {
-    u18 cond_var2 = 0;
+    u8 cond_var2 = 0;
   } else {
-    u18 cond_var2 = 0;
+    u8 cond_var2 = 0;
   }
 } else {
-  u18 cond_var = 0;
+  u8 cond_var = 0;
   if (weird2 > 0) {
-    u18 cond_var2 = 0;
+    u8 cond_var2 = 0;
   } else {
-    u18 cond_var3 = 0;
+    u8 cond_var3 = 0;
   }
 }

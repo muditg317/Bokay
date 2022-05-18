@@ -76,7 +76,7 @@ DECIMAL_LITERAL at [Line:   20, Column:  15]: `100`
   FLOAT_LITERAL at [Line:   21, Column:  16]: `1234.4352`
       SEMICOLON at [Line:   21, Column:  25]: `;`
      WHITESPACE at [Line:   21, Column:  26]: `\n`
-           WORD at [Line:   22, Column:   1]: `bool`
+      BASE_TYPE at [Line:   22, Column:   1]: `bool`
      WHITESPACE at [Line:   22, Column:   5]: ` `
            WORD at [Line:   22, Column:   6]: `the_boolean`
      WHITESPACE at [Line:   22, Column:  17]: ` `
@@ -394,15 +394,15 @@ DECIMAL_LITERAL at [Line:   73, Column:  15]: `314`
      OPEN_BRACE at [Line:   73, Column:  20]: `{`
         COMMENT at [Line:   73, Column:  21]: ` // checks value equals, for structs, will iterate using == over entries\n`
      WHITESPACE at [Line:   74, Column:   1]: `  `
-           WORD at [Line:   74, Column:   3]: `u18`
-     WHITESPACE at [Line:   74, Column:   6]: ` `
-           WORD at [Line:   74, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   74, Column:  15]: ` `
-         EQUALS at [Line:   74, Column:  16]: `=`
-     WHITESPACE at [Line:   74, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   74, Column:  18]: `0`
-      SEMICOLON at [Line:   74, Column:  19]: `;`
-     WHITESPACE at [Line:   74, Column:  20]: `\n`
+      BASE_TYPE at [Line:   74, Column:   3]: `u8`
+     WHITESPACE at [Line:   74, Column:   5]: ` `
+           WORD at [Line:   74, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   74, Column:  14]: ` `
+         EQUALS at [Line:   74, Column:  15]: `=`
+     WHITESPACE at [Line:   74, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   74, Column:  17]: `0`
+      SEMICOLON at [Line:   74, Column:  18]: `;`
+     WHITESPACE at [Line:   74, Column:  19]: `\n`
     CLOSE_BRACE at [Line:   75, Column:   1]: `}`
      WHITESPACE at [Line:   75, Column:   2]: `\n`
       BASE_TYPE at [Line:   76, Column:   1]: `s64`
@@ -427,15 +427,15 @@ DECIMAL_LITERAL at [Line:   74, Column:  18]: `0`
      OPEN_BRACE at [Line:   77, Column:  23]: `{`
         COMMENT at [Line:   77, Column:  24]: ` // checks pointer equals (similar to JS)\n`
      WHITESPACE at [Line:   78, Column:   1]: `  `
-           WORD at [Line:   78, Column:   3]: `u18`
-     WHITESPACE at [Line:   78, Column:   6]: ` `
-           WORD at [Line:   78, Column:   7]: `cond_var`
-     WHITESPACE at [Line:   78, Column:  15]: ` `
-         EQUALS at [Line:   78, Column:  16]: `=`
-     WHITESPACE at [Line:   78, Column:  17]: ` `
-DECIMAL_LITERAL at [Line:   78, Column:  18]: `0`
-      SEMICOLON at [Line:   78, Column:  19]: `;`
-     WHITESPACE at [Line:   78, Column:  20]: `\n`
+      BASE_TYPE at [Line:   78, Column:   3]: `u8`
+     WHITESPACE at [Line:   78, Column:   5]: ` `
+           WORD at [Line:   78, Column:   6]: `cond_var`
+     WHITESPACE at [Line:   78, Column:  14]: ` `
+         EQUALS at [Line:   78, Column:  15]: `=`
+     WHITESPACE at [Line:   78, Column:  16]: ` `
+DECIMAL_LITERAL at [Line:   78, Column:  17]: `0`
+      SEMICOLON at [Line:   78, Column:  18]: `;`
+     WHITESPACE at [Line:   78, Column:  19]: `\n`
     CLOSE_BRACE at [Line:   79, Column:   1]: `}`
      WHITESPACE at [Line:   79, Column:   2]: `\n`
      WHITESPACE at [Line:   80, Column:   1]: `\n`
