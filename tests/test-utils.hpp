@@ -54,7 +54,7 @@ static std::string outputFileExtensions[COUNT_OUTPUT_TYPES] = {ALL_OUTPUT_TYPES}
 #undef X
 
 #define X(type, extension, name) name,
-static std::string outputFileNames[COUNT_OUTPUT_TYPES] = {ALL_OUTPUT_TYPES};
+static std::string outputTypeNames[COUNT_OUTPUT_TYPES] = {ALL_OUTPUT_TYPES};
 #undef X
 
 class ShellCommandOutput {

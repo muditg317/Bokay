@@ -39,6 +39,7 @@ Also 11:30pm to 3am
    1. May be pushed for later since I was able to get back into it without much difficulty
 2. Setup configure/build/run scripts for this cmake project
    1. (favored over reliance on the VSCode plugin)
+3. Add parsing for loops and conditionals
 
 ## Language Status/Changes
 - The language may or may not now support pointers and stuff.

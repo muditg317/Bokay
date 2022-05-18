@@ -61,6 +61,9 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     Production{ {
       ParseNodeType::RETURN_STMT,
     } },
+    Production{ {
+      ParseNodeType::CONDITION_CHAIN,
+    } },
   } },
   { ParseNodeType::STATEMENT_BODY, {
     Production{ {
@@ -68,6 +71,13 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     } },
     Production{ {
       ParseNodeType::EXPRESSION,
+    } },
+  } },
+  { ParseNodeType::CODE_BLOCK, {
+    Production{ {
+      TokenType::OPEN_BRACE,
+      ParseNodeType::STATEMENTS,
+      TokenType::CLOSE_BRACE,
     } },
   } },
   { ParseNodeType::DECLARATION, {
@@ -193,9 +203,7 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       TokenType::OPEN_PAREN,
       ParseNodeType::FUNCTION_ARGUMENTS,
       TokenType::CLOSE_PAREN,
-      TokenType::OPEN_BRACE,
-      ParseNodeType::STATEMENTS,
-      TokenType::CLOSE_BRACE,
+      ParseNodeType::CODE_BLOCK,
     } },
   } },
   { ParseNodeType::FUNCTION_ARGUMENTS, {
@@ -228,6 +236,49 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       TokenType::KW_RETURN,
       ParseNodeType::EXPRESSION,
       TokenType::SEMICOLON,
+    } },
+  } },
+  { ParseNodeType::CONDITION_CHAIN, {
+    Production{ {
+      ParseNodeType::IF_CONDITION,
+      ParseNodeType::CONDITIONAL_BLOCKS,
+    } },
+  } },
+  { ParseNodeType::IF_CONDITION, {
+    Production{ {
+      TokenType::KW_IF,
+      TokenType::OPEN_PAREN,
+      ParseNodeType::EXPRESSION,
+      TokenType::CLOSE_PAREN,
+    } },
+  } },
+  { ParseNodeType::CONDITIONAL_BLOCKS, {
+    Production{ {
+      ParseNodeType::CONDITIONAL_BLOCKS,
+      ParseNodeType::CONDITIONAL_BLOCK_CONNECTOR,
+      ParseNodeType::CODE_BLOCK,
+    } },
+    Production{ {
+      ParseNodeType::CODE_BLOCK,
+    } },
+  } },
+  { ParseNodeType::CONDITIONAL_BLOCK_CONNECTOR, {
+    Production{ {
+      ParseNodeType::ELSE_CONNECTOR,
+    } },
+    Production{ {
+      ParseNodeType::ELSEIF_CONNECTOR,
+    } },
+  } },
+  { ParseNodeType::ELSE_CONNECTOR, {
+    Production{ {
+      TokenType::KW_ELSE,
+    } },
+  } },
+  { ParseNodeType::ELSEIF_CONNECTOR, {
+    Production{ {
+      TokenType::KW_ELSE,
+      ParseNodeType::IF_CONDITION,
     } },
   } },
   { ParseNodeType::EXPRESSION, {
@@ -514,6 +565,7 @@ std::string typeToString(const ParseNodeType& type) {
     case ParseNodeType::STATEMENTS: return "STATEMENTS";
     case ParseNodeType::STATEMENT: return "STATEMENT";
     case ParseNodeType::STATEMENT_BODY: return "STATEMENT_BODY";
+    case ParseNodeType::CODE_BLOCK: return "CODE_BLOCK";
     case ParseNodeType::DECLARATION: return "DECLARATION";
     case ParseNodeType::DECL_SPECIFIER: return "DECL_SPECIFIER";
     case ParseNodeType::DECL_LIST: return "DECL_LIST";
@@ -533,6 +585,12 @@ std::string typeToString(const ParseNodeType& type) {
     case ParseNodeType::FUNCTION_ARGUMENT: return "FUNCTION_ARGUMENT";
     case ParseNodeType::DEFAULT_FUNC_ARG_VALUE: return "DEFAULT_FUNC_ARG_VALUE";
     case ParseNodeType::RETURN_STMT: return "RETURN_STMT";
+    case ParseNodeType::CONDITION_CHAIN: return "CONDITION_CHAIN";
+    case ParseNodeType::IF_CONDITION: return "IF_CONDITION";
+    case ParseNodeType::CONDITIONAL_BLOCKS: return "CONDITIONAL_BLOCKS";
+    case ParseNodeType::CONDITIONAL_BLOCK_CONNECTOR: return "CONDITIONAL_BLOCK_CONNECTOR";
+    case ParseNodeType::ELSE_CONNECTOR: return "ELSE_CONNECTOR";
+    case ParseNodeType::ELSEIF_CONNECTOR: return "ELSEIF_CONNECTOR";
     case ParseNodeType::EXPRESSION: return "EXPRESSION";
     case ParseNodeType::ASSIGNMENT_EXPR: return "ASSIGNMENT_EXPR";
     case ParseNodeType::ASSIGNMENT_OP: return "ASSIGNMENT_OP";

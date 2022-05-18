@@ -47,6 +47,7 @@ enum class TokenType : char {
   OPEN_PAREN,CLOSE_PAREN, // ()
   KW_RETURN,
   KW_IF,
+  KW_ELSE,
   KW_WHILE,
   DOUBLE_EQ,     //  ==
   NOT_EQ,        //. !=

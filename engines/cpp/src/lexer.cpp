@@ -53,6 +53,7 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::CLOSE_PAREN, std::regex("(\\))") },
   { TokenType::KW_RETURN, std::regex("(\\breturn\\b)") },
   { TokenType::KW_IF, std::regex("(\\bif\\b)") },
+  { TokenType::KW_ELSE, std::regex("(\\belse\\b)") },
   { TokenType::KW_WHILE, std::regex("(\\bwhile\\b)") },
   { TokenType::DOUBLE_EQ, std::regex("(==)") },
   { TokenType::NOT_EQ, std::regex("(!=)") },
@@ -113,6 +114,7 @@ std::string typeToString(const TokenType& type) {
     case TokenType::CLOSE_PAREN: return "CLOSE_PAREN";
     case TokenType::KW_RETURN: return "KW_RETURN";
     case TokenType::KW_IF: return "KW_IF";
+    case TokenType::KW_ELSE: return "KW_ELSE";
     case TokenType::KW_WHILE: return "KW_WHILE";
     case TokenType::DOUBLE_EQ: return "DOUBLE_EQ";
     case TokenType::NOT_EQ: return "NOT_EQ";

@@ -17,8 +17,9 @@ enum class ParseNodeType {
   LIB_NAME, // [id]
 
   STATEMENTS, // [statements] [statement] | [statement]
-  STATEMENT, // [stmt_body] ; | [function_impl] | [return_stmt] // TODO: | [if_cond] | [while_loop]
+  STATEMENT, // [stmt_body] ; | [function_impl] | [return_stmt] | [condition_chain] // TODO: | [while_loop]
   STATEMENT_BODY, // [declaration] | [expression]
+  CODE_BLOCK, // { [statements] }
 
   // declarations - C/C++ style
   DECLARATION, // [decl_specifier] [decl_list]
@@ -40,13 +41,19 @@ enum class ParseNodeType {
   
   // FUNCTIONS
   FUNC_TYPE_DECL, // [decl_specifier] [no_ptr_decl]
-  FUNCTION_IMPL, // [func_type_decl] ( [func_args] ) { [statements] }
+  FUNCTION_IMPL, // [func_type_decl] ( [func_args] ) [code_block]
   FUNCTION_ARGUMENTS, // [func_args],[func_arg] | [func_arg]
   FUNCTION_ARGUMENT, // [func_type_decl] = [default_func_arg_value] | [func_type_decl]
   DEFAULT_FUNC_ARG_VALUE, // [expression] // TODO: type checking for const stuff
   RETURN_STMT, // return [expression] ;
 
   // TODO: CONDITIONALS, LOOPS,
+  CONDITION_CHAIN, // [if_condition] [conditional_blocks]
+  IF_CONDITION, // if ( [expression] )
+  CONDITIONAL_BLOCKS, // [conditional_blocks] [conditional_block_connector] [code_block] | [code_block]
+  CONDITIONAL_BLOCK_CONNECTOR, // [else_connector] | [elseif_connector]
+  ELSE_CONNECTOR, // else
+  ELSEIF_CONNECTOR, // else [if_condition]
 
   // TODO: STRUCT_DEF, UNION_DEF,
 

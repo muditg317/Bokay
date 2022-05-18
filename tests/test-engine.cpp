@@ -69,14 +69,16 @@ TEST_CASE(#testCase ".bokay", "[main]") {                                       
   ProgramOutput actual = runEngineOn(#testCase);                                        \
   boost::filesystem::path expectedOutputPath(testOutputFile(options, #testCase));       \
   std::cout << "checking expected output from: " << expectedOutputPath << std::endl;    \
-  REQUIRE(boost::filesystem::exists(expectedOutputPath));                               \
+  REQUIRE((boost::filesystem::exists(expectedOutputPath) && #testCase));                \
   std::cout << "Expected output exists! " << std::endl;                                 \
   ProgramOutput expected(expectedOutputPath);                                           \
-  for (uint8_t i = 0; i < COUNT_OUTPUT_TYPES; i++) {                                        \
-    REQUIRE_THAT(actual.getOutput(static_cast<OutputType>(i)),                          \
-        Catch::Matchers::Equals(                                                        \
-            expected.getOutput(static_cast<OutputType>(i)),                             \
-            Catch::CaseSensitive::Yes));                                                \
+  for (uint8_t i = 0; i < COUNT_OUTPUT_TYPES; i++) {                                    \
+    DYNAMIC_SECTION( "checking " << outputTypeNames[i] << " output for " #testCase ) {  \
+      REQUIRE_THAT(actual.getOutput(static_cast<OutputType>(i)),                        \
+          Catch::Matchers::Equals(                                                      \
+              expected.getOutput(static_cast<OutputType>(i)),                           \
+              Catch::CaseSensitive::Yes));                                              \
+    }                                                                                   \
   }                                                                                     \
 }
 
@@ -87,9 +89,10 @@ TEST_MACRO(one-comment) \
 TEST_MACRO(basic-types) \
 TEST_MACRO(annoying-comments) \
 TEST_MACRO(complex-expressions) \
+TEST_MACRO(functions) \
 TEST_MACRO(conditionals) \
 TEST_MACRO(loops) \
-TEST_MACRO(functions) \
+TEST_MACRO(structs-unions) \
 TEST_MACRO(full-design) \
 
 

@@ -127,7 +127,7 @@ void ProgramOutput::setOutput(OutputType type, std::string newOutput) {
 void ProgramOutput::setFromFile(OutputType type, std::string outputPathString) {
   boost::filesystem::path outputPath(outputPathString);
   if (!boost::filesystem::exists(outputPath)) {
-    outputs[type] = fmt::format("{}({}) {}", outputFileNames[type], outputPathString, NOT_FOUND_TEXT(""));
+    outputs[type] = fmt::format("{}({}) {}", outputTypeNames[type], outputPathString, NOT_FOUND_TEXT(""));
     return;
   }
   outputs[type] = readFile(outputPath);
