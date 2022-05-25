@@ -3,14 +3,16 @@
 May 24th, 2022
 
 Sign on: 9pm\
-Sign off: XXpm/am
+Sign off: 10:30pm
 </div>
 
 ## Goals
-- [ ] Rewrite the printing of parse trees to be more readable in degenerate cases
+- [x] Rewrite the printing of parse trees to be more readable in degenerate cases
 
 ## Struggles
-- Nothing serious today!
+- Forgetting to rename variables was annoying because of code duplication
+  - Consider refactoring the toTabbedString to be fully recursive
+- The confusion regarding `operator=` made it annoying to keep stuff within the same iterative implementation
 
 ## Notes
 ### No major stuff
