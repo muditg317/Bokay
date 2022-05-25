@@ -22,14 +22,28 @@ std::string ParsingTree::toTabbedString(void) const {
     ParseTreeChild node = treeNodeQueue.front().first;
     size_t depth = treeNodeQueue.front().second;
     treeNodeQueue.pop_front();
-    if (node.index() == 0) { // node is a leaf
+    if (node.index() == PARSE_TREE_CHILD_TYPE_LEAF) { // node is a leaf
       oss << std::string(depth, '\t') << std::get<ParseNode>(node) << '\n';
       continue;
     }
     ParsingTree subtree = std::get<ParsingTree>(node);
 
-    if (subtree.children.size() == 1 && subtree.children[0].index() == 0) {
-      oss << std::string(depth, '\t') << subtree.root << " - " << std::get<ParseNode>(subtree.children[0])<< '\n';
+    if (subtree.isLeaf()) {
+      oss << std::string(depth, '\t') << subtree.root << " - " << std::get<ParseNode>(subtree.children[0]) << '\n';
+    } else if (subtree.isDegenerateTree()) {
+      oss << std::string(depth, '\t') << subtree.root;
+      ParsingTree descendant_tree =
+          std::get<ParsingTree>(subtree.children[0])
+            .recursivelyPrintDegenerateSubtrees(oss, " > ");
+      if (descendant_tree.isLeaf()) {
+        oss << " - " << std::get<ParseNode>(descendant_tree.children[0])<< '\n';
+      } else {
+        oss << " > " << descendant_tree.root << '\n';
+        for (std::vector<ParseTreeChild>::reverse_iterator i = descendant_tree.children.rbegin(); 
+            i != descendant_tree.children.rend(); ++i ) {
+          treeNodeQueue.push_front(std::make_pair(*i, depth+1));
+        }
+      }
     } else {
       oss << std::string(depth, '\t') << subtree.root << '\n';
       for (std::vector<ParseTreeChild>::reverse_iterator i = subtree.children.rbegin(); 
@@ -39,6 +53,17 @@ std::string ParsingTree::toTabbedString(void) const {
     }
   }
   return oss.str();
+}
+
+ParsingTree ParsingTree::recursivelyPrintDegenerateSubtrees(std::ostream &stream, std::string prefix) const {
+  if (children.size() > 1) {
+    return *this;
+  }
+  if (isLeaf() || childTreeIsLeaf()) {
+    return *this;
+  }
+  stream << prefix << root;
+  return std::get<ParsingTree>(children[0]).recursivelyPrintDegenerateSubtrees(stream, prefix);
 }
 
 

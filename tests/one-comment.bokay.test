@@ -5,7 +5,7 @@
 [ args-parser.cpp: 105] INFO    - Output path: tests/build/one-comment
 [ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
 [    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/one-comment.tok"
-[      parser.cpp:  66] ERROR   - Source has no usefull tokens!
+[      parser.cpp:  91] ERROR   - Source has no usefull tokens!
 [    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
 
 --STDERR-END

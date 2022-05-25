@@ -5,7 +5,7 @@
 [ args-parser.cpp: 105] INFO    - Output path: tests/build/full-design
 [ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
 [    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/full-design.tok"
-[      parser.cpp: 136] ERROR   - Parsing failed to recognize source from grammar!
+[      parser.cpp: 161] ERROR   - Parsing failed to recognize source from grammar!
 [    compiler.cpp: 106] ERROR   - Parsing has failed! Code: 2
 
 --STDERR-END

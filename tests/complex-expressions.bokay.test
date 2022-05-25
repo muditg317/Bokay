@@ -60,104 +60,57 @@ DECIMAL_LITERAL at [Line:    4, Column:  29]: `100`
       SEMICOLON at [Line:    4, Column:  59]: `;`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-SOURCE
-	SOURCE_BODY
-		STATEMENTS
-			STATEMENTS
-				STATEMENT
-					STATEMENT_BODY
-						DECLARATION
-							DECL_SPECIFIER - BASE_TYPE(`u32`)
-							DECL_LIST
-								DECL_ITEM
-									DECLARATOR
-										ID - WORD(`bitIntWith5components`)
-									EQUALS(`=`)
-									INITIALIZER
-										EXPRESSION
-											ASSIGNMENT_EXPR
-												LOGICAL_EXPR
-													RELATIONAL_EQ_EXPR
-														RELATIONAL_COMP_EXPR
-															ADDITIVE_EXPR
-																ADDITIVE_EXPR
-																	ADDITIVE_EXPR
-																		ADDITIVE_EXPR
-																			MULTIPLICATIVE_EXPR
-																				UNARY_EXPR
-																					VARUSE_EXPR
-																						VAR_EXPR
-																							LITERAL - DECIMAL_LITERAL(`5`)
-																		ADDITIVE_OP - PLUS(`+`)
-																		MULTIPLICATIVE_EXPR
-																			UNARY_EXPR
-																				VARUSE_EXPR
-																					VAR_EXPR
-																						LITERAL - DECIMAL_LITERAL(`100`)
-																	ADDITIVE_OP - MINUS(`-`)
-																	MULTIPLICATIVE_EXPR
-																		MULTIPLICATIVE_EXPR
-																			UNARY_EXPR
-																				VARUSE_EXPR
-																					VAR_EXPR
-																						LITERAL - DECIMAL_LITERAL(`52`)
-																		MULTIPLICATIVE_OP - STAR(`*`)
-																		UNARY_EXPR
-																			VARUSE_EXPR
-																				VAR_EXPR
-																					LITERAL - DECIMAL_LITERAL(`38`)
-																ADDITIVE_OP - PLUS(`+`)
-																MULTIPLICATIVE_EXPR
-																	UNARY_EXPR
-																		VARUSE_EXPR
-																			VAR_EXPR
-																				LITERAL - DECIMAL_LITERAL(`16`)
-					SEMICOLON(`;`)
-			STATEMENT
-				STATEMENT_BODY
-					DECLARATION
-						DECL_SPECIFIER - BASE_TYPE(`s64`)
-						DECL_LIST
-							DECL_ITEM
-								DECLARATOR
-									ID - WORD(`floating_expressions`)
-								EQUALS(`=`)
-								INITIALIZER
-									EXPRESSION
-										ASSIGNMENT_EXPR
-											LOGICAL_EXPR
-												RELATIONAL_EQ_EXPR
-													RELATIONAL_COMP_EXPR
-														ADDITIVE_EXPR
-															ADDITIVE_EXPR
-																MULTIPLICATIVE_EXPR
-																	MULTIPLICATIVE_EXPR
-																		UNARY_EXPR
-																			UNARY_OP - MINUS(`-`)
-																			UNARY_EXPR
-																				VARUSE_EXPR
-																					VAR_EXPR
-																						LITERAL - DECIMAL_LITERAL(`100`)
-																	MULTIPLICATIVE_OP - DIV(`/`)
-																	UNARY_EXPR
-																		VARUSE_EXPR
-																			VAR_EXPR
-																				LITERAL - FLOAT_LITERAL(`26.789`)
-															ADDITIVE_OP - PLUS(`+`)
-															MULTIPLICATIVE_EXPR
-																MULTIPLICATIVE_EXPR
-																	UNARY_EXPR
-																		VARUSE_EXPR
-																			VAR_EXPR
-																				LITERAL - FLOAT_LITERAL(`34.15`)
-																MULTIPLICATIVE_OP - STAR(`*`)
-																UNARY_EXPR
-																	UNARY_OP - MINUS(`-`)
-																	UNARY_EXPR
-																		VARUSE_EXPR
-																			VAR_EXPR
-																				LITERAL - FLOAT_LITERAL(`253.14`)
-				SEMICOLON(`;`)
+SOURCE > SOURCE_BODY > STATEMENTS
+	STATEMENTS > STATEMENT
+		STATEMENT_BODY > DECLARATION
+			DECL_SPECIFIER - BASE_TYPE(`u32`)
+			DECL_LIST > DECL_ITEM
+				DECLARATOR - WORD(`bitIntWith5components`)
+				EQUALS(`=`)
+				INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR
+					ADDITIVE_EXPR
+						ADDITIVE_EXPR
+							ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`5`)
+							ADDITIVE_OP - PLUS(`+`)
+							MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`100`)
+						ADDITIVE_OP - MINUS(`-`)
+						MULTIPLICATIVE_EXPR
+							MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`52`)
+							MULTIPLICATIVE_OP - STAR(`*`)
+							UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`38`)
+					ADDITIVE_OP - PLUS(`+`)
+					MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+						LITERAL - DECIMAL_LITERAL(`16`)
+		SEMICOLON(`;`)
+	STATEMENT
+		STATEMENT_BODY > DECLARATION
+			DECL_SPECIFIER - BASE_TYPE(`s64`)
+			DECL_LIST > DECL_ITEM
+				DECLARATOR - WORD(`floating_expressions`)
+				EQUALS(`=`)
+				INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR
+					ADDITIVE_EXPR > MULTIPLICATIVE_EXPR
+						MULTIPLICATIVE_EXPR > UNARY_EXPR
+							UNARY_OP - MINUS(`-`)
+							UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`100`)
+						MULTIPLICATIVE_OP - DIV(`/`)
+						UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+							LITERAL - FLOAT_LITERAL(`26.789`)
+					ADDITIVE_OP - PLUS(`+`)
+					MULTIPLICATIVE_EXPR
+						MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+							LITERAL - FLOAT_LITERAL(`34.15`)
+						MULTIPLICATIVE_OP - STAR(`*`)
+						UNARY_EXPR
+							UNARY_OP - MINUS(`-`)
+							UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - FLOAT_LITERAL(`253.14`)
+		SEMICOLON(`;`)
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/complex-expressions.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

@@ -5,6 +5,7 @@
 #include "grammar.hpp"
 
 #include <algorithm>
+#include <ostream>
 #include <queue>
 #include <vector>
 #include <variant>
@@ -19,6 +20,11 @@ enum class ParserResult {
 };
 
 struct ParsingTree;
+
+enum ParseTreeChildType {
+  PARSE_TREE_CHILD_TYPE_LEAF = 0,
+  PARSE_TREE_CHILD_TYPE_SUBTREE = 1,
+};
 typedef std::variant<ParseNode, ParsingTree> ParseTreeChild;
 
 struct ParsingTree {
@@ -28,7 +34,29 @@ struct ParsingTree {
     ParsingTree(): root(Token{"",TokenType::NUM_TOKEN_TYPES,-1,-1}) {};
     ParsingTree(ParseNode rootType): root(rootType) {};
     std::string toTabbedString(void) const;
+    /**
+     * @brief print a degenerate section of the tree in a single line
+     * 
+     * @param stream where to print the tree nodes to
+     * @param prefix the prefix for the tree node names
+     * @return ParsingTree the lowest descendant of the tree that is not degenerate or a leaf
+     */
+    ParsingTree recursivelyPrintDegenerateSubtrees(std::ostream &stream, std::string prefix) const;
     // ParsingTree &operator=(const ParsingTree &) = default;
+
+    inline bool hasOneChild(void) const {return children.size() == 1;};
+
+    inline bool isLeaf(void) const {
+      return hasOneChild() && std::holds_alternative<ParseNode>(children[0]);
+    };
+
+    inline bool isDegenerateTree(void) const {
+      return hasOneChild() && std::holds_alternative<ParsingTree>(children[0]);
+    };
+
+    inline bool childTreeIsLeaf(void) const {
+      return isDegenerateTree() && std::get<ParsingTree>(children[0]).isLeaf();
+    };
 };
 
 // struct ParseTree {

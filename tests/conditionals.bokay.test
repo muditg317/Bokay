@@ -381,8 +381,8 @@ DECIMAL_LITERAL at [Line:   48, Column:  20]: `0`
      WHITESPACE at [Line:   50, Column:   2]: `\n`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-SOURCE
-	SOURCE_BODY
+SOURCE > SOURCE_BODY > STATEMENTS
+	STATEMENTS
 		STATEMENTS
 			STATEMENTS
 				STATEMENTS
@@ -391,783 +391,351 @@ SOURCE
 							STATEMENTS
 								STATEMENTS
 									STATEMENTS
-										STATEMENTS
-											STATEMENTS
-												STATEMENTS
-													STATEMENT
-														STATEMENT_BODY
-															DECLARATION
-																DECL_SPECIFIER - BASE_TYPE(`s64`)
-																DECL_LIST
-																	DECL_ITEM
-																		DECLARATOR
-																			ID - WORD(`weird`)
-																		EQUALS(`=`)
-																		INITIALIZER
-																			EXPRESSION
-																				ASSIGNMENT_EXPR
-																					LOGICAL_EXPR
-																						RELATIONAL_EQ_EXPR
-																							RELATIONAL_COMP_EXPR
-																								ADDITIVE_EXPR
-																									MULTIPLICATIVE_EXPR
-																										UNARY_EXPR
-																											UNARY_OP - MINUS(`-`)
-																											UNARY_EXPR
-																												VARUSE_EXPR
-																													VAR_EXPR
-																														LITERAL - DECIMAL_LITERAL(`314`)
-														SEMICOLON(`;`)
-												STATEMENT
-													CONDITION_CHAIN
-														IF_CONDITION
-															KW_IF(`if`)
-															OPEN_PAREN(`(`)
-															EXPRESSION
-																ASSIGNMENT_EXPR
-																	LOGICAL_EXPR
-																		RELATIONAL_EQ_EXPR
-																			RELATIONAL_EQ_EXPR
-																				RELATIONAL_COMP_EXPR
-																					ADDITIVE_EXPR
-																						MULTIPLICATIVE_EXPR
-																							UNARY_EXPR
-																								VARUSE_EXPR
-																									VAR_EXPR
-																										ID - WORD(`weird`)
-																			RELATIONAL_EQ_OP - DOUBLE_EQ(`==`)
-																			RELATIONAL_COMP_EXPR
-																				ADDITIVE_EXPR
-																					MULTIPLICATIVE_EXPR
-																						UNARY_EXPR
-																							UNARY_OP - MINUS(`-`)
-																							UNARY_EXPR
-																								VARUSE_EXPR
-																									VAR_EXPR
-																										LITERAL - DECIMAL_LITERAL(`314`)
-															CLOSE_PAREN(`)`)
-														CONDITIONAL_BLOCKS
-															CODE_BLOCK
-																OPEN_BRACE(`{`)
-																STATEMENTS
-																	STATEMENT
-																		STATEMENT_BODY
-																			DECLARATION
-																				DECL_SPECIFIER - BASE_TYPE(`u8`)
-																				DECL_LIST
-																					DECL_ITEM
-																						DECLARATOR
-																							ID - WORD(`cond_var`)
-																						EQUALS(`=`)
-																						INITIALIZER
-																							EXPRESSION
-																								ASSIGNMENT_EXPR
-																									LOGICAL_EXPR
-																										RELATIONAL_EQ_EXPR
-																											RELATIONAL_COMP_EXPR
-																												ADDITIVE_EXPR
-																													MULTIPLICATIVE_EXPR
-																														UNARY_EXPR
-																															VARUSE_EXPR
-																																VAR_EXPR
-																																	LITERAL - DECIMAL_LITERAL(`0`)
-																		SEMICOLON(`;`)
-																CLOSE_BRACE(`}`)
-											STATEMENT
-												STATEMENT_BODY
-													DECLARATION
-														DECL_SPECIFIER - BASE_TYPE(`s64`)
-														DECL_LIST
-															DECL_ITEM
-																DECLARATOR
-																	ID - WORD(`weird2`)
-																EQUALS(`=`)
-																INITIALIZER
-																	EXPRESSION
-																		ASSIGNMENT_EXPR
-																			LOGICAL_EXPR
-																				RELATIONAL_EQ_EXPR
-																					RELATIONAL_COMP_EXPR
-																						ADDITIVE_EXPR
-																							MULTIPLICATIVE_EXPR
-																								UNARY_EXPR
-																									VARUSE_EXPR
-																										VAR_EXPR
-																											ID - WORD(`weird`)
-												SEMICOLON(`;`)
-										STATEMENT
-											CONDITION_CHAIN
-												IF_CONDITION
-													KW_IF(`if`)
-													OPEN_PAREN(`(`)
-													EXPRESSION
-														ASSIGNMENT_EXPR
-															LOGICAL_EXPR
-																RELATIONAL_EQ_EXPR
-																	RELATIONAL_EQ_EXPR
-																		RELATIONAL_COMP_EXPR
-																			ADDITIVE_EXPR
-																				MULTIPLICATIVE_EXPR
-																					UNARY_EXPR
-																						VARUSE_EXPR
-																							VAR_EXPR
-																								ID - WORD(`weird`)
-																	RELATIONAL_EQ_OP - TRIPLE_EQ(`===`)
-																	RELATIONAL_COMP_EXPR
-																		ADDITIVE_EXPR
-																			MULTIPLICATIVE_EXPR
-																				UNARY_EXPR
-																					VARUSE_EXPR
-																						VAR_EXPR
-																							ID - WORD(`weird2`)
-													CLOSE_PAREN(`)`)
-												CONDITIONAL_BLOCKS
-													CONDITIONAL_BLOCKS
-														CODE_BLOCK
-															OPEN_BRACE(`{`)
-															STATEMENTS
-																STATEMENT
-																	STATEMENT_BODY
-																		DECLARATION
-																			DECL_SPECIFIER - BASE_TYPE(`u8`)
-																			DECL_LIST
-																				DECL_ITEM
-																					DECLARATOR
-																						ID - WORD(`cond_var`)
-																					EQUALS(`=`)
-																					INITIALIZER
-																						EXPRESSION
-																							ASSIGNMENT_EXPR
-																								LOGICAL_EXPR
-																									RELATIONAL_EQ_EXPR
-																										RELATIONAL_COMP_EXPR
-																											ADDITIVE_EXPR
-																												MULTIPLICATIVE_EXPR
-																													UNARY_EXPR
-																														VARUSE_EXPR
-																															VAR_EXPR
-																																LITERAL - DECIMAL_LITERAL(`0`)
-																	SEMICOLON(`;`)
-															CLOSE_BRACE(`}`)
-													CONDITIONAL_BLOCK_CONNECTOR
-														ELSE_CONNECTOR - KW_ELSE(`else`)
-													CODE_BLOCK
-														OPEN_BRACE(`{`)
-														STATEMENTS
-															STATEMENT
-																STATEMENT_BODY
-																	DECLARATION
-																		DECL_SPECIFIER - BASE_TYPE(`u8`)
-																		DECL_LIST
-																			DECL_ITEM
-																				DECLARATOR
-																					ID - WORD(`something`)
-																				EQUALS(`=`)
-																				INITIALIZER
-																					EXPRESSION
-																						ASSIGNMENT_EXPR
-																							LOGICAL_EXPR
-																								RELATIONAL_EQ_EXPR
-																									RELATIONAL_COMP_EXPR
-																										ADDITIVE_EXPR
-																											MULTIPLICATIVE_EXPR
-																												UNARY_EXPR
-																													VARUSE_EXPR
-																														VAR_EXPR
-																															LITERAL - DECIMAL_LITERAL(`123`)
-																SEMICOLON(`;`)
-														CLOSE_BRACE(`}`)
-									STATEMENT
-										STATEMENT_BODY
-											EXPRESSION
-												ASSIGNMENT_EXPR
-													LOGICAL_EXPR
-														RELATIONAL_EQ_EXPR
-															RELATIONAL_COMP_EXPR
-																ADDITIVE_EXPR
-																	MULTIPLICATIVE_EXPR
-																		UNARY_EXPR
-																			VARUSE_EXPR
-																				VAR_EXPR
-																					ID - WORD(`weird2`)
-													ASSIGNMENT_OP - EQUALS(`=`)
-													ASSIGNMENT_EXPR
-														LOGICAL_EXPR
-															RELATIONAL_EQ_EXPR
-																RELATIONAL_COMP_EXPR
-																	ADDITIVE_EXPR
-																		MULTIPLICATIVE_EXPR
-																			UNARY_EXPR
-																				VARUSE_EXPR
-																					VAR_EXPR
-																						LITERAL - DECIMAL_LITERAL(`0`)
-										SEMICOLON(`;`)
-								STATEMENT
-									CONDITION_CHAIN
-										IF_CONDITION
-											KW_IF(`if`)
-											OPEN_PAREN(`(`)
-											EXPRESSION
-												ASSIGNMENT_EXPR
-													LOGICAL_EXPR
-														RELATIONAL_EQ_EXPR
-															RELATIONAL_COMP_EXPR
-																ADDITIVE_EXPR
-																	MULTIPLICATIVE_EXPR
-																		UNARY_EXPR
-																			UNARY_OP - BANG(`!`)
-																			UNARY_EXPR
-																				VARUSE_EXPR
-																					VAR_EXPR
-																						ID - WORD(`weird2`)
-											CLOSE_PAREN(`)`)
-										CONDITIONAL_BLOCKS
-											CODE_BLOCK
-												OPEN_BRACE(`{`)
-												STATEMENTS
-													STATEMENT
-														STATEMENT_BODY
-															DECLARATION
-																DECL_SPECIFIER - BASE_TYPE(`u8`)
-																DECL_LIST
-																	DECL_ITEM
-																		DECLARATOR
-																			ID - WORD(`cond_var`)
-																		EQUALS(`=`)
-																		INITIALIZER
-																			EXPRESSION
-																				ASSIGNMENT_EXPR
-																					LOGICAL_EXPR
-																						RELATIONAL_EQ_EXPR
-																							RELATIONAL_COMP_EXPR
-																								ADDITIVE_EXPR
-																									MULTIPLICATIVE_EXPR
-																										UNARY_EXPR
-																											VARUSE_EXPR
-																												VAR_EXPR
-																													LITERAL - DECIMAL_LITERAL(`0`)
-														SEMICOLON(`;`)
-												CLOSE_BRACE(`}`)
-							STATEMENT
-								STATEMENT_BODY
-									DECLARATION
-										DECL_SPECIFIER - BASE_TYPE(`bool`)
-										DECL_LIST
-											DECL_ITEM
-												DECLARATOR
-													ID - WORD(`hello`)
-												EQUALS(`=`)
-												INITIALIZER
-													EXPRESSION
-														ASSIGNMENT_EXPR
-															LOGICAL_EXPR
-																RELATIONAL_EQ_EXPR
-																	RELATIONAL_COMP_EXPR
-																		ADDITIVE_EXPR
-																			MULTIPLICATIVE_EXPR
-																				UNARY_EXPR
-																					VARUSE_EXPR
-																						VAR_EXPR
-																							LITERAL
-																								BOOLEAN_LITERAL - KW_FALSE(`false`)
-								SEMICOLON(`;`)
-						STATEMENT
-							CONDITION_CHAIN
-								IF_CONDITION
-									KW_IF(`if`)
-									OPEN_PAREN(`(`)
-									EXPRESSION
-										ASSIGNMENT_EXPR
-											LOGICAL_EXPR
-												RELATIONAL_EQ_EXPR
-													RELATIONAL_COMP_EXPR
-														ADDITIVE_EXPR
-															MULTIPLICATIVE_EXPR
-																UNARY_EXPR
-																	UNARY_OP - BANG(`!`)
-																	UNARY_EXPR
-																		VARUSE_EXPR
-																			VAR_EXPR
-																				ID - WORD(`hello`)
-									CLOSE_PAREN(`)`)
-								CONDITIONAL_BLOCKS
-									CODE_BLOCK
-										OPEN_BRACE(`{`)
-										STATEMENTS
-											STATEMENT
-												STATEMENT_BODY
-													DECLARATION
-														DECL_SPECIFIER - BASE_TYPE(`u8`)
-														DECL_LIST
-															DECL_ITEM
-																DECLARATOR
-																	ID - WORD(`cond_var`)
-																EQUALS(`=`)
-																INITIALIZER
-																	EXPRESSION
-																		ASSIGNMENT_EXPR
-																			LOGICAL_EXPR
-																				RELATIONAL_EQ_EXPR
-																					RELATIONAL_COMP_EXPR
-																						ADDITIVE_EXPR
-																							MULTIPLICATIVE_EXPR
-																								UNARY_EXPR
-																									VARUSE_EXPR
-																										VAR_EXPR
-																											LITERAL - DECIMAL_LITERAL(`0`)
-												SEMICOLON(`;`)
-										CLOSE_BRACE(`}`)
-					STATEMENT
-						STATEMENT_BODY
-							EXPRESSION
-								ASSIGNMENT_EXPR
-									LOGICAL_EXPR
-										RELATIONAL_EQ_EXPR
-											RELATIONAL_COMP_EXPR
-												ADDITIVE_EXPR
-													MULTIPLICATIVE_EXPR
-														UNARY_EXPR
-															VARUSE_EXPR
-																VAR_EXPR
-																	ID - WORD(`hello`)
-									ASSIGNMENT_OP - EQUALS(`=`)
-									ASSIGNMENT_EXPR
-										LOGICAL_EXPR
-											RELATIONAL_EQ_EXPR
-												RELATIONAL_COMP_EXPR
-													ADDITIVE_EXPR
-														MULTIPLICATIVE_EXPR
-															UNARY_EXPR
-																VARUSE_EXPR
-																	VAR_EXPR
-																		LITERAL
-																			BOOLEAN_LITERAL - KW_TRUE(`true`)
-						SEMICOLON(`;`)
-				STATEMENT
-					CONDITION_CHAIN
-						IF_CONDITION
-							KW_IF(`if`)
-							OPEN_PAREN(`(`)
-							EXPRESSION
-								ASSIGNMENT_EXPR
-									LOGICAL_EXPR
-										LOGICAL_EXPR
-											RELATIONAL_EQ_EXPR
-												RELATIONAL_COMP_EXPR
-													ADDITIVE_EXPR
-														MULTIPLICATIVE_EXPR
-															UNARY_EXPR
-																VARUSE_EXPR
-																	VAR_EXPR
-																		ID - WORD(`hello`)
-										LOGICAL_OP - DOUBLE_AMP(`&&`)
-										RELATIONAL_EQ_EXPR
-											RELATIONAL_COMP_EXPR
-												ADDITIVE_EXPR
-													MULTIPLICATIVE_EXPR
-														UNARY_EXPR
-															UNARY_OP - BANG(`!`)
-															UNARY_EXPR
-																VARUSE_EXPR
-																	VAR_EXPR
-																		ID - WORD(`weird2`)
-							CLOSE_PAREN(`)`)
-						CONDITIONAL_BLOCKS
-							CODE_BLOCK
-								OPEN_BRACE(`{`)
-								STATEMENTS
-									STATEMENT
-										STATEMENT_BODY
-											DECLARATION
-												DECL_SPECIFIER - BASE_TYPE(`u8`)
-												DECL_LIST
-													DECL_ITEM
-														DECLARATOR
-															ID - WORD(`cond_var`)
-														EQUALS(`=`)
-														INITIALIZER
-															EXPRESSION
-																ASSIGNMENT_EXPR
-																	LOGICAL_EXPR
-																		RELATIONAL_EQ_EXPR
-																			RELATIONAL_COMP_EXPR
-																				ADDITIVE_EXPR
-																					MULTIPLICATIVE_EXPR
-																						UNARY_EXPR
-																							VARUSE_EXPR
-																								VAR_EXPR
-																									LITERAL - DECIMAL_LITERAL(`0`)
-										SEMICOLON(`;`)
-								CLOSE_BRACE(`}`)
-			STATEMENT
-				CONDITION_CHAIN
-					IF_CONDITION
-						KW_IF(`if`)
-						OPEN_PAREN(`(`)
-						EXPRESSION
-							ASSIGNMENT_EXPR
-								LOGICAL_EXPR
-									LOGICAL_EXPR
-										RELATIONAL_EQ_EXPR
-											RELATIONAL_COMP_EXPR
-												RELATIONAL_COMP_EXPR
-													ADDITIVE_EXPR
-														MULTIPLICATIVE_EXPR
-															UNARY_EXPR
-																VARUSE_EXPR
-																	VAR_EXPR
-																		ID - WORD(`weird2`)
-												RELATIONAL_COMP_OP - GTR(`>`)
-												ADDITIVE_EXPR
-													MULTIPLICATIVE_EXPR
-														UNARY_EXPR
-															VARUSE_EXPR
-																VAR_EXPR
-																	LITERAL - DECIMAL_LITERAL(`0`)
-									LOGICAL_OP - DOUBLE_AMP(`&&`)
-									RELATIONAL_EQ_EXPR
-										RELATIONAL_COMP_EXPR
-											RELATIONAL_COMP_EXPR
-												ADDITIVE_EXPR
-													MULTIPLICATIVE_EXPR
-														UNARY_EXPR
-															VARUSE_EXPR
-																VAR_EXPR
-																	ID - WORD(`weird2`)
-											RELATIONAL_COMP_OP - LSS(`<`)
-											ADDITIVE_EXPR
-												MULTIPLICATIVE_EXPR
-													UNARY_EXPR
-														VARUSE_EXPR
-															VAR_EXPR
-																LITERAL - DECIMAL_LITERAL(`100`)
-						CLOSE_PAREN(`)`)
-					CONDITIONAL_BLOCKS
-						CONDITIONAL_BLOCKS
-							CONDITIONAL_BLOCKS
-								CODE_BLOCK
-									OPEN_BRACE(`{`)
-									STATEMENTS
-										STATEMENT
-											STATEMENT_BODY
-												DECLARATION
-													DECL_SPECIFIER - BASE_TYPE(`u8`)
-													DECL_LIST
-														DECL_ITEM
-															DECLARATOR
-																ID - WORD(`cond_var`)
-															EQUALS(`=`)
-															INITIALIZER
-																EXPRESSION
-																	ASSIGNMENT_EXPR
-																		LOGICAL_EXPR
-																			RELATIONAL_EQ_EXPR
-																				RELATIONAL_COMP_EXPR
-																					ADDITIVE_EXPR
-																						MULTIPLICATIVE_EXPR
-																							UNARY_EXPR
-																								VARUSE_EXPR
-																									VAR_EXPR
-																										LITERAL - DECIMAL_LITERAL(`0`)
+										STATEMENTS > STATEMENT
+											STATEMENT_BODY > DECLARATION
+												DECL_SPECIFIER - BASE_TYPE(`s64`)
+												DECL_LIST > DECL_ITEM
+													DECLARATOR - WORD(`weird`)
+													EQUALS(`=`)
+													INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR
+														UNARY_OP - MINUS(`-`)
+														UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+															LITERAL - DECIMAL_LITERAL(`314`)
 											SEMICOLON(`;`)
-									CLOSE_BRACE(`}`)
-							CONDITIONAL_BLOCK_CONNECTOR
-								ELSEIF_CONNECTOR
-									KW_ELSE(`else`)
-									IF_CONDITION
-										KW_IF(`if`)
-										OPEN_PAREN(`(`)
-										EXPRESSION
-											ASSIGNMENT_EXPR
-												LOGICAL_EXPR
-													RELATIONAL_EQ_EXPR
-														RELATIONAL_COMP_EXPR
-															RELATIONAL_COMP_EXPR
-																ADDITIVE_EXPR
-																	MULTIPLICATIVE_EXPR
-																		UNARY_EXPR
-																			VARUSE_EXPR
-																				VAR_EXPR
-																					LITERAL - DECIMAL_LITERAL(`5`)
-															RELATIONAL_COMP_OP - GTR(`>`)
-															ADDITIVE_EXPR
-																MULTIPLICATIVE_EXPR
-																	UNARY_EXPR
-																		VARUSE_EXPR
-																			VAR_EXPR
-																				ID - WORD(`weird2`)
-										CLOSE_PAREN(`)`)
-							CODE_BLOCK
-								OPEN_BRACE(`{`)
-								STATEMENTS
-									STATEMENTS
-										STATEMENT
-											STATEMENT_BODY
-												DECLARATION
-													DECL_SPECIFIER - BASE_TYPE(`u8`)
-													DECL_LIST
-														DECL_ITEM
-															DECLARATOR
-																ID - WORD(`cond_var`)
-															EQUALS(`=`)
-															INITIALIZER
-																EXPRESSION
-																	ASSIGNMENT_EXPR
-																		LOGICAL_EXPR
-																			RELATIONAL_EQ_EXPR
-																				RELATIONAL_COMP_EXPR
-																					ADDITIVE_EXPR
-																						MULTIPLICATIVE_EXPR
-																							UNARY_EXPR
-																								VARUSE_EXPR
-																									VAR_EXPR
-																										LITERAL - DECIMAL_LITERAL(`0`)
-											SEMICOLON(`;`)
-									STATEMENT
-										CONDITION_CHAIN
+										STATEMENT > CONDITION_CHAIN
 											IF_CONDITION
 												KW_IF(`if`)
 												OPEN_PAREN(`(`)
-												EXPRESSION
-													ASSIGNMENT_EXPR
-														LOGICAL_EXPR
-															RELATIONAL_EQ_EXPR
-																RELATIONAL_COMP_EXPR
-																	RELATIONAL_COMP_EXPR
-																		ADDITIVE_EXPR
-																			MULTIPLICATIVE_EXPR
-																				UNARY_EXPR
-																					VARUSE_EXPR
-																						VAR_EXPR
-																							ID - WORD(`weird2`)
-																	RELATIONAL_COMP_OP - GTR(`>`)
-																	ADDITIVE_EXPR
-																		MULTIPLICATIVE_EXPR
-																			UNARY_EXPR
-																				VARUSE_EXPR
-																					VAR_EXPR
-																						LITERAL - DECIMAL_LITERAL(`0`)
+												EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR
+													RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+														ID - WORD(`weird`)
+													RELATIONAL_EQ_OP - DOUBLE_EQ(`==`)
+													RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR
+														UNARY_OP - MINUS(`-`)
+														UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+															LITERAL - DECIMAL_LITERAL(`314`)
 												CLOSE_PAREN(`)`)
-											CONDITIONAL_BLOCKS
-												CONDITIONAL_BLOCKS
-													CONDITIONAL_BLOCKS
-														CODE_BLOCK
-															OPEN_BRACE(`{`)
-															STATEMENTS
-																STATEMENT
-																	STATEMENT_BODY
-																		DECLARATION
-																			DECL_SPECIFIER - BASE_TYPE(`u8`)
-																			DECL_LIST
-																				DECL_ITEM
-																					DECLARATOR
-																						ID - WORD(`cond_var2`)
-																					EQUALS(`=`)
-																					INITIALIZER
-																						EXPRESSION
-																							ASSIGNMENT_EXPR
-																								LOGICAL_EXPR
-																									RELATIONAL_EQ_EXPR
-																										RELATIONAL_COMP_EXPR
-																											ADDITIVE_EXPR
-																												MULTIPLICATIVE_EXPR
-																													UNARY_EXPR
-																														VARUSE_EXPR
-																															VAR_EXPR
-																																LITERAL - DECIMAL_LITERAL(`0`)
-																	SEMICOLON(`;`)
-															CLOSE_BRACE(`}`)
-													CONDITIONAL_BLOCK_CONNECTOR
-														ELSEIF_CONNECTOR
-															KW_ELSE(`else`)
-															IF_CONDITION
-																KW_IF(`if`)
-																OPEN_PAREN(`(`)
-																EXPRESSION
-																	ASSIGNMENT_EXPR
-																		LOGICAL_EXPR
-																			RELATIONAL_EQ_EXPR
-																				RELATIONAL_COMP_EXPR
-																					RELATIONAL_COMP_EXPR
-																						ADDITIVE_EXPR
-																							MULTIPLICATIVE_EXPR
-																								UNARY_EXPR
-																									VARUSE_EXPR
-																										VAR_EXPR
-																											ID - WORD(`weird2`)
-																					RELATIONAL_COMP_OP - LSS(`<`)
-																					ADDITIVE_EXPR
-																						MULTIPLICATIVE_EXPR
-																							UNARY_EXPR
-																								VARUSE_EXPR
-																									VAR_EXPR
-																										LITERAL - DECIMAL_LITERAL(`100`)
-																CLOSE_PAREN(`)`)
-													CODE_BLOCK
-														OPEN_BRACE(`{`)
-														STATEMENTS
-															STATEMENT
-																STATEMENT_BODY
-																	DECLARATION
-																		DECL_SPECIFIER - BASE_TYPE(`u8`)
-																		DECL_LIST
-																			DECL_ITEM
-																				DECLARATOR
-																					ID - WORD(`cond_var2`)
-																				EQUALS(`=`)
-																				INITIALIZER
-																					EXPRESSION
-																						ASSIGNMENT_EXPR
-																							LOGICAL_EXPR
-																								RELATIONAL_EQ_EXPR
-																									RELATIONAL_COMP_EXPR
-																										ADDITIVE_EXPR
-																											MULTIPLICATIVE_EXPR
-																												UNARY_EXPR
-																													VARUSE_EXPR
-																														VAR_EXPR
-																															LITERAL - DECIMAL_LITERAL(`0`)
-																SEMICOLON(`;`)
-														CLOSE_BRACE(`}`)
-												CONDITIONAL_BLOCK_CONNECTOR
-													ELSE_CONNECTOR - KW_ELSE(`else`)
-												CODE_BLOCK
-													OPEN_BRACE(`{`)
-													STATEMENTS
-														STATEMENT
-															STATEMENT_BODY
-																DECLARATION
-																	DECL_SPECIFIER - BASE_TYPE(`u8`)
-																	DECL_LIST
-																		DECL_ITEM
-																			DECLARATOR
-																				ID - WORD(`cond_var2`)
-																			EQUALS(`=`)
-																			INITIALIZER
-																				EXPRESSION
-																					ASSIGNMENT_EXPR
-																						LOGICAL_EXPR
-																							RELATIONAL_EQ_EXPR
-																								RELATIONAL_COMP_EXPR
-																									ADDITIVE_EXPR
-																										MULTIPLICATIVE_EXPR
-																											UNARY_EXPR
-																												VARUSE_EXPR
-																													VAR_EXPR
-																														LITERAL - DECIMAL_LITERAL(`0`)
-															SEMICOLON(`;`)
-													CLOSE_BRACE(`}`)
-								CLOSE_BRACE(`}`)
-						CONDITIONAL_BLOCK_CONNECTOR
-							ELSE_CONNECTOR - KW_ELSE(`else`)
-						CODE_BLOCK
-							OPEN_BRACE(`{`)
-							STATEMENTS
-								STATEMENTS
+											CONDITIONAL_BLOCKS > CODE_BLOCK
+												OPEN_BRACE(`{`)
+												STATEMENTS > STATEMENT
+													STATEMENT_BODY > DECLARATION
+														DECL_SPECIFIER - BASE_TYPE(`u8`)
+														DECL_LIST > DECL_ITEM
+															DECLARATOR - WORD(`cond_var`)
+															EQUALS(`=`)
+															INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+																LITERAL - DECIMAL_LITERAL(`0`)
+													SEMICOLON(`;`)
+												CLOSE_BRACE(`}`)
 									STATEMENT
-										STATEMENT_BODY
-											DECLARATION
-												DECL_SPECIFIER - BASE_TYPE(`u8`)
-												DECL_LIST
-													DECL_ITEM
-														DECLARATOR
-															ID - WORD(`cond_var`)
-														EQUALS(`=`)
-														INITIALIZER
-															EXPRESSION
-																ASSIGNMENT_EXPR
-																	LOGICAL_EXPR
-																		RELATIONAL_EQ_EXPR
-																			RELATIONAL_COMP_EXPR
-																				ADDITIVE_EXPR
-																					MULTIPLICATIVE_EXPR
-																						UNARY_EXPR
-																							VARUSE_EXPR
-																								VAR_EXPR
-																									LITERAL - DECIMAL_LITERAL(`0`)
+										STATEMENT_BODY > DECLARATION
+											DECL_SPECIFIER - BASE_TYPE(`s64`)
+											DECL_LIST > DECL_ITEM
+												DECLARATOR - WORD(`weird2`)
+												EQUALS(`=`)
+												INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+													ID - WORD(`weird`)
 										SEMICOLON(`;`)
-								STATEMENT
-									CONDITION_CHAIN
+								STATEMENT > CONDITION_CHAIN
+									IF_CONDITION
+										KW_IF(`if`)
+										OPEN_PAREN(`(`)
+										EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR
+											RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+												ID - WORD(`weird`)
+											RELATIONAL_EQ_OP - TRIPLE_EQ(`===`)
+											RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+												ID - WORD(`weird2`)
+										CLOSE_PAREN(`)`)
+									CONDITIONAL_BLOCKS
+										CONDITIONAL_BLOCKS > CODE_BLOCK
+											OPEN_BRACE(`{`)
+											STATEMENTS > STATEMENT
+												STATEMENT_BODY > DECLARATION
+													DECL_SPECIFIER - BASE_TYPE(`u8`)
+													DECL_LIST > DECL_ITEM
+														DECLARATOR - WORD(`cond_var`)
+														EQUALS(`=`)
+														INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+															LITERAL - DECIMAL_LITERAL(`0`)
+												SEMICOLON(`;`)
+											CLOSE_BRACE(`}`)
+										CONDITIONAL_BLOCK_CONNECTOR - KW_ELSE(`else`)
+										CODE_BLOCK
+											OPEN_BRACE(`{`)
+											STATEMENTS > STATEMENT
+												STATEMENT_BODY > DECLARATION
+													DECL_SPECIFIER - BASE_TYPE(`u8`)
+													DECL_LIST > DECL_ITEM
+														DECLARATOR - WORD(`something`)
+														EQUALS(`=`)
+														INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+															LITERAL - DECIMAL_LITERAL(`123`)
+												SEMICOLON(`;`)
+											CLOSE_BRACE(`}`)
+							STATEMENT
+								STATEMENT_BODY > EXPRESSION > ASSIGNMENT_EXPR
+									LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										ID - WORD(`weird2`)
+									ASSIGNMENT_OP - EQUALS(`=`)
+									ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										LITERAL - DECIMAL_LITERAL(`0`)
+								SEMICOLON(`;`)
+						STATEMENT > CONDITION_CHAIN
+							IF_CONDITION
+								KW_IF(`if`)
+								OPEN_PAREN(`(`)
+								EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR
+									UNARY_OP - BANG(`!`)
+									UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										ID - WORD(`weird2`)
+								CLOSE_PAREN(`)`)
+							CONDITIONAL_BLOCKS > CODE_BLOCK
+								OPEN_BRACE(`{`)
+								STATEMENTS > STATEMENT
+									STATEMENT_BODY > DECLARATION
+										DECL_SPECIFIER - BASE_TYPE(`u8`)
+										DECL_LIST > DECL_ITEM
+											DECLARATOR - WORD(`cond_var`)
+											EQUALS(`=`)
+											INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+												LITERAL - DECIMAL_LITERAL(`0`)
+									SEMICOLON(`;`)
+								CLOSE_BRACE(`}`)
+					STATEMENT
+						STATEMENT_BODY > DECLARATION
+							DECL_SPECIFIER - BASE_TYPE(`bool`)
+							DECL_LIST > DECL_ITEM
+								DECLARATOR - WORD(`hello`)
+								EQUALS(`=`)
+								INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR > LITERAL
+									BOOLEAN_LITERAL - KW_FALSE(`false`)
+						SEMICOLON(`;`)
+				STATEMENT > CONDITION_CHAIN
+					IF_CONDITION
+						KW_IF(`if`)
+						OPEN_PAREN(`(`)
+						EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR
+							UNARY_OP - BANG(`!`)
+							UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								ID - WORD(`hello`)
+						CLOSE_PAREN(`)`)
+					CONDITIONAL_BLOCKS > CODE_BLOCK
+						OPEN_BRACE(`{`)
+						STATEMENTS > STATEMENT
+							STATEMENT_BODY > DECLARATION
+								DECL_SPECIFIER - BASE_TYPE(`u8`)
+								DECL_LIST > DECL_ITEM
+									DECLARATOR - WORD(`cond_var`)
+									EQUALS(`=`)
+									INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										LITERAL - DECIMAL_LITERAL(`0`)
+							SEMICOLON(`;`)
+						CLOSE_BRACE(`}`)
+			STATEMENT
+				STATEMENT_BODY > EXPRESSION > ASSIGNMENT_EXPR
+					LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+						ID - WORD(`hello`)
+					ASSIGNMENT_OP - EQUALS(`=`)
+					ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR > LITERAL
+						BOOLEAN_LITERAL - KW_TRUE(`true`)
+				SEMICOLON(`;`)
+		STATEMENT > CONDITION_CHAIN
+			IF_CONDITION
+				KW_IF(`if`)
+				OPEN_PAREN(`(`)
+				EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR
+					LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+						ID - WORD(`hello`)
+					LOGICAL_OP - DOUBLE_AMP(`&&`)
+					RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR
+						UNARY_OP - BANG(`!`)
+						UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+							ID - WORD(`weird2`)
+				CLOSE_PAREN(`)`)
+			CONDITIONAL_BLOCKS > CODE_BLOCK
+				OPEN_BRACE(`{`)
+				STATEMENTS > STATEMENT
+					STATEMENT_BODY > DECLARATION
+						DECL_SPECIFIER - BASE_TYPE(`u8`)
+						DECL_LIST > DECL_ITEM
+							DECLARATOR - WORD(`cond_var`)
+							EQUALS(`=`)
+							INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`0`)
+					SEMICOLON(`;`)
+				CLOSE_BRACE(`}`)
+	STATEMENT > CONDITION_CHAIN
+		IF_CONDITION
+			KW_IF(`if`)
+			OPEN_PAREN(`(`)
+			EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR
+				LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR
+					RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+						ID - WORD(`weird2`)
+					RELATIONAL_COMP_OP - GTR(`>`)
+					ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+						LITERAL - DECIMAL_LITERAL(`0`)
+				LOGICAL_OP - DOUBLE_AMP(`&&`)
+				RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR
+					RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+						ID - WORD(`weird2`)
+					RELATIONAL_COMP_OP - LSS(`<`)
+					ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+						LITERAL - DECIMAL_LITERAL(`100`)
+			CLOSE_PAREN(`)`)
+		CONDITIONAL_BLOCKS
+			CONDITIONAL_BLOCKS
+				CONDITIONAL_BLOCKS > CODE_BLOCK
+					OPEN_BRACE(`{`)
+					STATEMENTS > STATEMENT
+						STATEMENT_BODY > DECLARATION
+							DECL_SPECIFIER - BASE_TYPE(`u8`)
+							DECL_LIST > DECL_ITEM
+								DECLARATOR - WORD(`cond_var`)
+								EQUALS(`=`)
+								INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+									LITERAL - DECIMAL_LITERAL(`0`)
+						SEMICOLON(`;`)
+					CLOSE_BRACE(`}`)
+				CONDITIONAL_BLOCK_CONNECTOR > ELSEIF_CONNECTOR
+					KW_ELSE(`else`)
+					IF_CONDITION
+						KW_IF(`if`)
+						OPEN_PAREN(`(`)
+						EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR
+							RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`5`)
+							RELATIONAL_COMP_OP - GTR(`>`)
+							ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								ID - WORD(`weird2`)
+						CLOSE_PAREN(`)`)
+				CODE_BLOCK
+					OPEN_BRACE(`{`)
+					STATEMENTS
+						STATEMENTS > STATEMENT
+							STATEMENT_BODY > DECLARATION
+								DECL_SPECIFIER - BASE_TYPE(`u8`)
+								DECL_LIST > DECL_ITEM
+									DECLARATOR - WORD(`cond_var`)
+									EQUALS(`=`)
+									INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										LITERAL - DECIMAL_LITERAL(`0`)
+							SEMICOLON(`;`)
+						STATEMENT > CONDITION_CHAIN
+							IF_CONDITION
+								KW_IF(`if`)
+								OPEN_PAREN(`(`)
+								EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR
+									RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										ID - WORD(`weird2`)
+									RELATIONAL_COMP_OP - GTR(`>`)
+									ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										LITERAL - DECIMAL_LITERAL(`0`)
+								CLOSE_PAREN(`)`)
+							CONDITIONAL_BLOCKS
+								CONDITIONAL_BLOCKS
+									CONDITIONAL_BLOCKS > CODE_BLOCK
+										OPEN_BRACE(`{`)
+										STATEMENTS > STATEMENT
+											STATEMENT_BODY > DECLARATION
+												DECL_SPECIFIER - BASE_TYPE(`u8`)
+												DECL_LIST > DECL_ITEM
+													DECLARATOR - WORD(`cond_var2`)
+													EQUALS(`=`)
+													INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+														LITERAL - DECIMAL_LITERAL(`0`)
+											SEMICOLON(`;`)
+										CLOSE_BRACE(`}`)
+									CONDITIONAL_BLOCK_CONNECTOR > ELSEIF_CONNECTOR
+										KW_ELSE(`else`)
 										IF_CONDITION
 											KW_IF(`if`)
 											OPEN_PAREN(`(`)
-											EXPRESSION
-												ASSIGNMENT_EXPR
-													LOGICAL_EXPR
-														RELATIONAL_EQ_EXPR
-															RELATIONAL_COMP_EXPR
-																RELATIONAL_COMP_EXPR
-																	ADDITIVE_EXPR
-																		MULTIPLICATIVE_EXPR
-																			UNARY_EXPR
-																				VARUSE_EXPR
-																					VAR_EXPR
-																						ID - WORD(`weird2`)
-																RELATIONAL_COMP_OP - GTR(`>`)
-																ADDITIVE_EXPR
-																	MULTIPLICATIVE_EXPR
-																		UNARY_EXPR
-																			VARUSE_EXPR
-																				VAR_EXPR
-																					LITERAL - DECIMAL_LITERAL(`0`)
+											EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR
+												RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+													ID - WORD(`weird2`)
+												RELATIONAL_COMP_OP - LSS(`<`)
+												ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+													LITERAL - DECIMAL_LITERAL(`100`)
 											CLOSE_PAREN(`)`)
-										CONDITIONAL_BLOCKS
-											CONDITIONAL_BLOCKS
-												CODE_BLOCK
-													OPEN_BRACE(`{`)
-													STATEMENTS
-														STATEMENT
-															STATEMENT_BODY
-																DECLARATION
-																	DECL_SPECIFIER - BASE_TYPE(`u8`)
-																	DECL_LIST
-																		DECL_ITEM
-																			DECLARATOR
-																				ID - WORD(`cond_var2`)
-																			EQUALS(`=`)
-																			INITIALIZER
-																				EXPRESSION
-																					ASSIGNMENT_EXPR
-																						LOGICAL_EXPR
-																							RELATIONAL_EQ_EXPR
-																								RELATIONAL_COMP_EXPR
-																									ADDITIVE_EXPR
-																										MULTIPLICATIVE_EXPR
-																											UNARY_EXPR
-																												VARUSE_EXPR
-																													VAR_EXPR
-																														LITERAL - DECIMAL_LITERAL(`0`)
-															SEMICOLON(`;`)
-													CLOSE_BRACE(`}`)
-											CONDITIONAL_BLOCK_CONNECTOR
-												ELSE_CONNECTOR - KW_ELSE(`else`)
-											CODE_BLOCK
-												OPEN_BRACE(`{`)
-												STATEMENTS
-													STATEMENT
-														STATEMENT_BODY
-															DECLARATION
-																DECL_SPECIFIER - BASE_TYPE(`u8`)
-																DECL_LIST
-																	DECL_ITEM
-																		DECLARATOR
-																			ID - WORD(`cond_var3`)
-																		EQUALS(`=`)
-																		INITIALIZER
-																			EXPRESSION
-																				ASSIGNMENT_EXPR
-																					LOGICAL_EXPR
-																						RELATIONAL_EQ_EXPR
-																							RELATIONAL_COMP_EXPR
-																								ADDITIVE_EXPR
-																									MULTIPLICATIVE_EXPR
-																										UNARY_EXPR
-																											VARUSE_EXPR
-																												VAR_EXPR
-																													LITERAL - DECIMAL_LITERAL(`0`)
-														SEMICOLON(`;`)
-												CLOSE_BRACE(`}`)
-							CLOSE_BRACE(`}`)
+									CODE_BLOCK
+										OPEN_BRACE(`{`)
+										STATEMENTS > STATEMENT
+											STATEMENT_BODY > DECLARATION
+												DECL_SPECIFIER - BASE_TYPE(`u8`)
+												DECL_LIST > DECL_ITEM
+													DECLARATOR - WORD(`cond_var2`)
+													EQUALS(`=`)
+													INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+														LITERAL - DECIMAL_LITERAL(`0`)
+											SEMICOLON(`;`)
+										CLOSE_BRACE(`}`)
+								CONDITIONAL_BLOCK_CONNECTOR - KW_ELSE(`else`)
+								CODE_BLOCK
+									OPEN_BRACE(`{`)
+									STATEMENTS > STATEMENT
+										STATEMENT_BODY > DECLARATION
+											DECL_SPECIFIER - BASE_TYPE(`u8`)
+											DECL_LIST > DECL_ITEM
+												DECLARATOR - WORD(`cond_var2`)
+												EQUALS(`=`)
+												INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+													LITERAL - DECIMAL_LITERAL(`0`)
+										SEMICOLON(`;`)
+									CLOSE_BRACE(`}`)
+					CLOSE_BRACE(`}`)
+			CONDITIONAL_BLOCK_CONNECTOR - KW_ELSE(`else`)
+			CODE_BLOCK
+				OPEN_BRACE(`{`)
+				STATEMENTS
+					STATEMENTS > STATEMENT
+						STATEMENT_BODY > DECLARATION
+							DECL_SPECIFIER - BASE_TYPE(`u8`)
+							DECL_LIST > DECL_ITEM
+								DECLARATOR - WORD(`cond_var`)
+								EQUALS(`=`)
+								INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+									LITERAL - DECIMAL_LITERAL(`0`)
+						SEMICOLON(`;`)
+					STATEMENT > CONDITION_CHAIN
+						IF_CONDITION
+							KW_IF(`if`)
+							OPEN_PAREN(`(`)
+							EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR
+								RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+									ID - WORD(`weird2`)
+								RELATIONAL_COMP_OP - GTR(`>`)
+								ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+									LITERAL - DECIMAL_LITERAL(`0`)
+							CLOSE_PAREN(`)`)
+						CONDITIONAL_BLOCKS
+							CONDITIONAL_BLOCKS > CODE_BLOCK
+								OPEN_BRACE(`{`)
+								STATEMENTS > STATEMENT
+									STATEMENT_BODY > DECLARATION
+										DECL_SPECIFIER - BASE_TYPE(`u8`)
+										DECL_LIST > DECL_ITEM
+											DECLARATOR - WORD(`cond_var2`)
+											EQUALS(`=`)
+											INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+												LITERAL - DECIMAL_LITERAL(`0`)
+									SEMICOLON(`;`)
+								CLOSE_BRACE(`}`)
+							CONDITIONAL_BLOCK_CONNECTOR - KW_ELSE(`else`)
+							CODE_BLOCK
+								OPEN_BRACE(`{`)
+								STATEMENTS > STATEMENT
+									STATEMENT_BODY > DECLARATION
+										DECL_SPECIFIER - BASE_TYPE(`u8`)
+										DECL_LIST > DECL_ITEM
+											DECLARATOR - WORD(`cond_var3`)
+											EQUALS(`=`)
+											INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+												LITERAL - DECIMAL_LITERAL(`0`)
+									SEMICOLON(`;`)
+								CLOSE_BRACE(`}`)
+				CLOSE_BRACE(`}`)
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/conditionals.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

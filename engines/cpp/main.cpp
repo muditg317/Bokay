@@ -78,14 +78,15 @@ int main(int argc, char *argv[]) {
 
   Compiler compiler(options);
 
-  try {
+  // try {
     CompilerResult result = compiler.run();
     // if (result != COMPILATION_SUCCESS) {
     return static_cast<int>(result);
     // }
-  } catch (std::exception &e) {
-    LOG(ERROR) << "Compiler error!\n\tError: " << e.what();
-    return 1;
-  }
+  // } catch (std::exception &e) {
+  //   LOG(ERROR) << "Compiler error!\n\tError: " << e.what();
+  //   throw e;
+  //   // return 1;
+  // }
 }
 #endif

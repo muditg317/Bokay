@@ -13,7 +13,7 @@ Also 11:45pm to 12am
 - [ ] If finished, start researching AST building
 
 ## Struggles
-- Nothing serious today!
+- Writing rules that use left-recursion is challenging sometimes
 
 ## Notes
 ### No major stuff

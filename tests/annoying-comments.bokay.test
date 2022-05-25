@@ -51,54 +51,25 @@ DECIMAL_LITERAL at [Line:   10, Column:  44]: `2345`
         COMMENT at [Line:   14, Column:  26]: ` // annoyingly commented`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-SOURCE
-	SOURCE_BODY
-		STATEMENTS
-			STATEMENTS
-				STATEMENT
-					STATEMENT_BODY
-						DECLARATION
-							DECL_SPECIFIER - BASE_TYPE(`u8`)
-							DECL_LIST
-								DECL_ITEM
-									DECLARATOR
-										ID - WORD(`newVar`)
-									EQUALS(`=`)
-									INITIALIZER
-										EXPRESSION
-											ASSIGNMENT_EXPR
-												LOGICAL_EXPR
-													RELATIONAL_EQ_EXPR
-														RELATIONAL_COMP_EXPR
-															ADDITIVE_EXPR
-																MULTIPLICATIVE_EXPR
-																	UNARY_EXPR
-																		VARUSE_EXPR
-																			VAR_EXPR
-																				LITERAL - DECIMAL_LITERAL(`2345`)
-					SEMICOLON(`;`)
-			STATEMENT
-				STATEMENT_BODY
-					DECLARATION
-						DECL_SPECIFIER - BASE_TYPE(`f64`)
-						DECL_LIST
-							DECL_ITEM
-								DECLARATOR
-									ID - WORD(`big_float`)
-								EQUALS(`=`)
-								INITIALIZER
-									EXPRESSION
-										ASSIGNMENT_EXPR
-											LOGICAL_EXPR
-												RELATIONAL_EQ_EXPR
-													RELATIONAL_COMP_EXPR
-														ADDITIVE_EXPR
-															MULTIPLICATIVE_EXPR
-																UNARY_EXPR
-																	VARUSE_EXPR
-																		VAR_EXPR
-																			LITERAL - FLOAT_LITERAL(`345.2345`)
-				SEMICOLON(`;`)
+SOURCE > SOURCE_BODY > STATEMENTS
+	STATEMENTS > STATEMENT
+		STATEMENT_BODY > DECLARATION
+			DECL_SPECIFIER - BASE_TYPE(`u8`)
+			DECL_LIST > DECL_ITEM
+				DECLARATOR - WORD(`newVar`)
+				EQUALS(`=`)
+				INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+					LITERAL - DECIMAL_LITERAL(`2345`)
+		SEMICOLON(`;`)
+	STATEMENT
+		STATEMENT_BODY > DECLARATION
+			DECL_SPECIFIER - BASE_TYPE(`f64`)
+			DECL_LIST > DECL_ITEM
+				DECLARATOR - WORD(`big_float`)
+				EQUALS(`=`)
+				INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+					LITERAL - FLOAT_LITERAL(`345.2345`)
+		SEMICOLON(`;`)
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/annoying-comments.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
