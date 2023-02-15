@@ -58,6 +58,7 @@ endfunction()
 ##################################################
 # Add packages `find_package([package])`
 # list(APPEND CMAKE_PREFIX_PATH "/home/muditg317/application-installs/vcpkg/installed/x64-linux/share")
+# include(/home/muditg317/_application-installs/vcpkg/scripts/buildsystems/vcpkg.cmake)
 # End packages
 ##################################################
 

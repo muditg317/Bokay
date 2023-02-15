@@ -3,6 +3,7 @@
 #include "lexer.hpp"
 #include "parser.hpp"
 
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -14,7 +15,7 @@
 
 static std::string readFile(boost::filesystem::path filePath) {
   assert(boost::filesystem::exists(filePath) && "File must exist to be read! Check before calling this method!");
-  boost::filesystem::fstream fileStream(filePath);
+  std::fstream fileStream(filePath.string(), std::ios::in);
   std::stringstream buffer;
   buffer << fileStream.rdbuf();
   return buffer.str();
@@ -47,7 +48,7 @@ bool Compiler::validate_options(void) {
     LOG(ERROR) << "Source file (" << sourceFile << ") does not exist!" ;
     return false;
   }
-  if (!boost::filesystem::exists(tempFileDir)) { // doesn't exist
+  if (!tempFileDir.empty() && !boost::filesystem::exists(tempFileDir)) { // doesn't exist
     LOG(WARNING) << "Directory for temp files doesn't exist! Creating..." ;
     bool created = boost::filesystem::create_directories(tempFileDir);
     if (!created) return false;

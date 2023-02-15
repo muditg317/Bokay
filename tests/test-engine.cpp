@@ -1,5 +1,5 @@
 #define CATCH_CONFIG_RUNNER
-#include <catch2/catch.hpp>
+#include <catch2/catch_all.hpp>
 
 #include <cstdio>
 #include <iostream>
@@ -107,22 +107,22 @@ int main( int argc, char* argv[] ) {
   // available options: ghjkmnpquyz 
   auto cli 
     = session.cli() // Get Catch's composite command line parser
-    | Catch::clara::Opt( options.enginePath, "engine" )
+    | Catch::Clara::Opt( options.enginePath, "engine" )
         ["--engine"]
         ("which engine should be used?")
-    | Catch::clara::Opt( options.testDir, "testDir" )
+    | Catch::Clara::Opt( options.testDir, "testDir" )
         ["--test-dir"]
         ("where are the tests saved?")
-    | Catch::clara::Opt( options.update, "update" )
+    | Catch::Clara::Opt( options.update, "update" )
         ["-u"]["--update"]
         ("which test (or all) should be updated?")
-    | Catch::clara::Opt( options.updateCompilation, "updateCompilation" )
+    | Catch::Clara::Opt( options.updateCompilation, "updateCompilation" )
         ["--update-comp"]
         ("which test (or all) should have compilation updated?")
-    | Catch::clara::Opt( options.updateIntermediates, "updateIntermediates" )
+    | Catch::Clara::Opt( options.updateIntermediates, "updateIntermediates" )
         ["--update-intm"]
         ("which test (or all) should have intermediates updated?")
-    | Catch::clara::Opt( options.updateExecution, "updateExecution" )
+    | Catch::Clara::Opt( options.updateExecution, "updateExecution" )
         ["--update-exec"]
         ("which test (or all) should have execution updated?");
         
