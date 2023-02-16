@@ -9,28 +9,28 @@
 #include <glog/logging.h>
 // potential missing log detection regex: (?<!LOG.*)<<(?!.*<<)
 
-/* This function writes a prefix that matches glog's default format.
- * (The third parameter can be used to receive user-supplied data, and is
- * NULL by default.)
- */
-void CustomPrefix(std::ostream &s, const LogMessageInfo &l, void* userData) {
-  // bool testing = *((bool *) userData);
-  // if (testing) {
-  //   return;
-  // }
-  s 
-   << "["
-   << std::setfill(' ') << std::setw(16) << l.filename;
-  // if (!testing) {
-    s
-     << ':'
-     << std::setw(4) << l.line_number;
-  // }
-  s
-   << "] "
-   << std::setw(7) << std::left << l.severity
-   << " -";
-}
+// /* This function writes a prefix that matches glog's default format.
+//  * (The third parameter can be used to receive user-supplied data, and is
+//  * NULL by default.)
+//  */
+// void CustomPrefix(std::ostream &s, const google::LogMessageInfo &l, void* userData) {
+//   // bool testing = *((bool *) userData);
+//   // if (testing) {
+//   //   return;
+//   // }
+//   s 
+//    << "["
+//    << std::setfill(' ') << std::setw(16) << l.filename;
+//   // if (!testing) {
+//     s
+//      << ':'
+//      << std::setw(4) << l.line_number;
+//   // }
+//   s
+//    << "] "
+//    << std::setw(7) << std::left << l.severity
+//    << " -";
+// }
 
 // #define TESTING
 #ifdef TESTING
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  google::InitGoogleLogging(argv[0], &CustomPrefix, &testing);
+  google::InitGoogleLogging(argv[0]);//, &CustomPrefix, &testing);
   google::InstallFailureSignalHandler();
   FLAGS_logtostderr = true;
   // FLAGS_colorlogtostderr = true;

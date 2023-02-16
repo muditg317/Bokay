@@ -69,7 +69,7 @@ ParsingTree ParsingTree::recursivelyPrintDegenerateSubtrees(std::ostream &stream
 
 
 Parser::Parser(void) {
-  CHECK(grammarRuleMap.size() == static_cast<int>(ParseNodeType::NUM_NODE_TYPES)) << "Must define rule for every parse node type!" << std::endl << "Rule types: " << static_cast<int>(ParseNodeType::NUM_NODE_TYPES) << std::endl << "Rule map size: " << grammarRuleMap.size();
+  CHECK(grammarRuleMap.size() == static_cast<size_t>(ParseNodeType::NUM_NODE_TYPES)) << "Must define rule for every parse node type!" << std::endl << "Rule types: " << static_cast<int>(ParseNodeType::NUM_NODE_TYPES) << std::endl << "Rule map size: " << grammarRuleMap.size();
 }
 
 bool uselessToken(Token tok) {

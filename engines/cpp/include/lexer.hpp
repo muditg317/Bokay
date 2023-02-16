@@ -85,8 +85,8 @@ class Token {
     const int16_t getCol(void) const {
       return col;
     }
-    std::string toShortString() const;
-    std::string toString() const;
+    std::string toShortString() const; // <type>(<contents>)
+    std::string toString() const; // <type> at [line, col]: <contents>
   private:
     const std::string contents;
     const TokenType type;

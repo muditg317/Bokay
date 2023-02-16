@@ -30,7 +30,7 @@ Also 2 to 3am
 - Parse tree to AST if needed
   - The AST is where we do a lot of the type-checking business.
   - The tree is built top down. Each leaf-node must have a defined type (either a variable with a known type or a literal).
-    - If the variable's type is unknown, that's another error. -- A smart compiler might notice an assignment expression missing a type name or infer it's use and then, suggest a type to use.
+    - If the variable's type is unknown, that's another error. -- A smart compiler might notice an assignment expression missing a type name or infer its use and then, suggest a type to use.
   - Once the tree is built, type-checking bubble from the bottom up.
     - When a method is called with mismatching args, then the compiler will flag that operation as invalid.
       - (Maybe it assumes which signature was desired for further bubbling?)
