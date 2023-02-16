@@ -4,8 +4,8 @@
 [ args-parser.cpp: 102] INFO    - Input source file: tests/annoying-comments.bokay
 [ args-parser.cpp: 105] INFO    - Output path: tests/build/annoying-comments
 [ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
-[    compiler.cpp:  95] INFO    - Writing tokens to temp file: "tests/build/annoying-comments.tok"
-[    compiler.cpp: 114] INFO    - Writing parse tree to temp file: "tests/build/annoying-comments.ptree"
+[    compiler.cpp:  96] INFO    - Writing tokens to temp file: "tests/build/annoying-comments.tok"
+[    compiler.cpp: 115] INFO    - Writing parse tree to temp file: "tests/build/annoying-comments.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
