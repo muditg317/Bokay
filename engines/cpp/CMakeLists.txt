@@ -28,6 +28,9 @@ find_package(fmt CONFIG REQUIRED)
 message(STATUS "fmt::fmt version: ${fmt_VERSION}")
 
 # Adds glog::glog
+## enable custom prefixes
+set(GLOG_CUSTOM_PREFIX_SUPPORT ON)
+set(WITH_CUSTOM_PREFIX ON)
 find_package(glog CONFIG REQUIRED)
 message(STATUS "glog::glog version: ${glog_VERSION}")
 

@@ -21,6 +21,8 @@ Also 2/16: 1:30am-4:30am - semi-distracted/just slow since getting into it
 - Some Boost changes/deprecations made things annoying
 - Generic `ASTNode` class caused a lot of issues with vectors/iterators/pairs etc
   - Especially complicated implementation of `ASTNode::toTabbedString()`
+- Testing is broken -- getting weird `undefined reference to google::InitGoogleLogging(char const*, void (*)(std::ostream&, google::LogMessageInfo const&, void*), void*)` errors
+  - Tried some stuff with `CMakeLists.txt` options but no luck
 
 ## Notes
 - CMake 3.24.2 solves the silly "Boost new versions dependencies may be included..." warning
@@ -29,6 +31,7 @@ Also 2/16: 1:30am-4:30am - semi-distracted/just slow since getting into it
 - `std::vector` must have non-const non-reference type
   - Learned this many times over
   - Can somewhat get around this with `std::vector<std::reference_wrapper<T>>`
+- Looked a lot into build process of vcpkg libraries to try understanding why glog compiled with no custom prefix support -- too complex and abstracted :(
 
 ## Log
 - Reconfigure VSCode cmake settings
@@ -44,6 +47,8 @@ Also 2/16: 1:30am-4:30am - semi-distracted/just slow since getting into it
 1. Look into `export` block for `bokay` source code
 2. Start implementing AST generation
   1. NEED to refactor away the `children` member-field of `ASTNode` (causes huge headaches with abstract class etc -- `dynamic_cast(subclass)` may be even worse unfortunately)
+3. Testing is broken because custom prefixes for GLOG is broken
+  1. Need to fix this ASAP
 
 ## Language Status/Changes
 - Maybe prefer slower compilation in exchange for smaller binaries

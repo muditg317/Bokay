@@ -5,32 +5,38 @@
 #include <iostream>
 #include <iomanip>
 
-// #define GLOG_CUSTOM_PREFIX_SUPPORT
+#define CUSTOM_PREFIX_SUPPORT
+#ifdef CUSTOM_PREFIX_SUPPORT
+#define GLOG_CUSTOM_PREFIX_SUPPORT
+#define WITH_CUSTOM_PREFIX
+#endif
 #include <glog/logging.h>
 // potential missing log detection regex: (?<!LOG.*)<<(?!.*<<)
 
-// /* This function writes a prefix that matches glog's default format.
-//  * (The third parameter can be used to receive user-supplied data, and is
-//  * NULL by default.)
-//  */
-// void CustomPrefix(std::ostream &s, const google::LogMessageInfo &l, void* userData) {
-//   // bool testing = *((bool *) userData);
-//   // if (testing) {
-//   //   return;
-//   // }
-//   s 
-//    << "["
-//    << std::setfill(' ') << std::setw(16) << l.filename;
-//   // if (!testing) {
-//     s
-//      << ':'
-//      << std::setw(4) << l.line_number;
-//   // }
-//   s
-//    << "] "
-//    << std::setw(7) << std::left << l.severity
-//    << " -";
-// }
+#ifdef CUSTOM_PREFIX_SUPPORT
+/* This function writes a prefix that matches glog's default format.
+ * (The third parameter can be used to receive user-supplied data, and is
+ * NULL by default.)
+ */
+void CustomPrefix(std::ostream &s, const google::LogMessageInfo &l, void* userData) {
+  // bool testing = *((bool *) userData);
+  // if (testing) {
+  //   return;
+  // }
+  s 
+   << "["
+   << std::setfill(' ') << std::setw(16) << l.filename;
+  // if (!testing) {
+    s
+     << ':'
+     << std::setw(4) << l.line_number;
+  // }
+  s
+   << "] "
+   << std::setw(7) << std::left << l.severity
+   << " -";
+}
+#endif
 
 // #define TESTING
 #ifdef TESTING
@@ -64,7 +70,11 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  google::InitGoogleLogging(argv[0]);//, &CustomPrefix, &testing);
+#ifdef CUSTOM_PREFIX_SUPPORT
+  google::InitGoogleLogging(argv[0], &CustomPrefix, &testing);
+#else
+  google::InitGoogleLogging(argv[0]);
+#endif
   google::InstallFailureSignalHandler();
   FLAGS_logtostderr = true;
   // FLAGS_colorlogtostderr = true;
@@ -78,15 +88,10 @@ int main(int argc, char *argv[]) {
 
   Compiler compiler(options);
 
-  // try {
-    CompilerResult result = compiler.run();
-    // if (result != COMPILATION_SUCCESS) {
-    return static_cast<int>(result);
-    // }
-  // } catch (std::exception &e) {
-  //   LOG(ERROR) << "Compiler error!\n\tError: " << e.what();
-  //   throw e;
-  //   // return 1;
-  // }
+  CompilerResult result = compiler.run();
+
+  google::ShutdownGoogleLogging();
+
+  return static_cast<int>(result);
 }
 #endif
