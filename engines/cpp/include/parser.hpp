@@ -84,7 +84,7 @@ struct ParsingState {
   ParseNodeType nextUnmatchedAsNonTerminal() const {return std::get<ParseNodeType>(nextUnmatchedComponent());};
   TokenType nextUnmatchedAsTerminal() const {return std::get<TokenType>(nextUnmatchedComponent());};
   bool nextComponentIsTerminal() const {return nextUnmatchedComponent().index() == TOKEN_TYPE_INDEX;};
-  bool operator==(ParsingState &other) const {
+  bool operator==(const ParsingState &other) const {
     if (ruleType != other.ruleType) return false;
     if (!(currentProduction == other.currentProduction)) return false;
     if (matchOrigin != other.matchOrigin) return false;
@@ -102,9 +102,9 @@ struct ParsingStateSet {
   size_t size() const {return states.size();};
 };
 
-static auto ParserName = make_string("Parser");
-static auto ParserTmpOutExt = make_string("ptree");
-using ParserBase = CompilerStage<std::vector<Token>, ParseTree, ParserResult, decltype(ParserName), decltype(ParserTmpOutExt)>;
+// static auto ParserName = make_string("Parser");
+// static auto ParserTmpOutExt = make_string("ptree");
+using ParserBase = CompilerStage<std::vector<Token>, ParseTree, ParserResult, "Parser", "ptree">;
 class Parser : public ParserBase {
  public:
   using Base = ParserBase;

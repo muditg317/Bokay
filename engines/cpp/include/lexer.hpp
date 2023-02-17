@@ -103,13 +103,13 @@ std::ostream& operator<<(std::ostream& out, const Token& tok);
 
 
 // make_string(Lexer);
-static auto LexerName = make_string("Lexer");
-static auto LexerTmpOutExt = make_string("tok");
+// static auto LexerName = make_string("Lexer");
+// static auto LexerTmpOutExt = make_string("tok");
 
 // constexpr str_const lexer{"Lexer"};
 // using lexer_t = string_const_to_type<lexer>;
 
-using LexerBase = CompilerStage<std::string, std::vector<Token>, LexerResult, decltype(LexerName), decltype(LexerTmpOutExt)>;
+using LexerBase = CompilerStage<std::string, std::vector<Token>, LexerResult, "Lexer", "tok">;
 class Lexer : public LexerBase {
   public:
     using Base = LexerBase;

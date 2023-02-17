@@ -79,9 +79,9 @@ struct ASTRootNode : public ASTNonLeafNode {
 };
 
 
-static auto ASTBuilderName = make_string("AST Builder");
-static auto ASTBuilderTmpOutExt = make_string("ast");
-using ASTBuilderBase = CompilerStage<ParseTree, ASTRootNode, ASTBuilderResult, decltype(ASTBuilderName), decltype(ASTBuilderTmpOutExt)>;
+// static auto ASTBuilderName = make_string("AST Builder");
+// static auto ASTBuilderTmpOutExt = make_string("ast");
+using ASTBuilderBase = CompilerStage<ParseTree, ASTRootNode, ASTBuilderResult, "ASTBuilder", "ast">;
 class ASTBuilder : public ASTBuilderBase {
  public:
   using Base = ASTBuilderBase;

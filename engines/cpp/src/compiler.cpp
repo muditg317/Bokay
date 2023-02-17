@@ -82,7 +82,7 @@ typename Stage::Base::OutputType &Compiler::runStage(
   typename Stage::Base::OutputType *output = nullptr;
   typename Stage::Base::ErrorType errorCode = stage(input, output);
   if (errorCode != Stage::Base::SUCCESS_CODE) {
-    LOG(ERROR) << "Stage " << Stage::Base::name() << " failed with error code " << static_cast<int>(errorCode) ;
+    LOG(ERROR) << "Stage " << Stage::Base::NAME << " failed with error code " << static_cast<int>(errorCode) ;
     throw FailureCode;
   }
   #ifdef DEBUG
@@ -90,8 +90,8 @@ typename Stage::Base::OutputType &Compiler::runStage(
   #endif
 
   if (outputTemps) {
-    boost::filesystem::path tempFile = tempFileDir / fmt::format("{}.{}", sourceName, Stage::Base::tmpOutExt());
-    LOG(INFO) << "Writing " << Stage::Base::name() << " outputs to temp file: " << tempFile;
+    boost::filesystem::path tempFile = tempFileDir / fmt::format("{}.{}", sourceName, Stage::Base::TMP_OUT_EXT);
+    LOG(INFO) << "Writing " << Stage::Base::NAME << " outputs to temp file: " << tempFile;
     stage.writeOutput(*output, tempFile);
   }
 
