@@ -4,7 +4,7 @@ February 17th, 2023
 
 Sign on: 4:45pm\
 Sign off: 7:00pm
-Also 9:45 - 10:15pm
+Also 9:45 - 10:45pm
 </div>
 
 ## Goals
@@ -28,6 +28,7 @@ Also 9:45 - 10:15pm
   - Convert lexer,parser,ast-builder to inherit from this base class
 - Work on templated c_str for `CompilerStage` names
   - Used compile-time string template support based on C++20 standard
+- Migrate `compiler.cpp` logic to use the new `CompilerStage` logic for each substep of compilation
 
 ## TODO
 - Actually do AST building (keep getting side-tracked)

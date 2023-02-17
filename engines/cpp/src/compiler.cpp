@@ -122,57 +122,24 @@ CompilerResult Compiler::run(void) {
     }
     #endif
     );
+
+    ParseTree ptree = runStage<Parser, CompilerResult::FAILED_PARSING>(parser, tokens
+    #ifdef DEBUG
+    , [](ParseTree &ptree) {
+      DLOG(INFO) << "Generated parse tree for tokens" ;
+    }
+    #endif
+    );
+
+    ASTRootNode astRoot = runStage<ASTBuilder, CompilerResult::FAILED_AST_BUILDING>(astBuilder, ptree
+    #ifdef DEBUG
+    , [](ASTRootNode &astRoot) {
+      DLOG(INFO) << "Generated AST from parse tree" ;
+    }
+    #endif
+    );
   } catch (CompilerResult e) {
     return e;
-  }
-
-  std::vector<Token> *tokensPtr = nullptr;
-  LexerResult lexerResult = lexer(fileContents, tokensPtr);
-  if (lexerResult != LexerResult::LEXING_SUCCESS) {
-    LOG(ERROR) << "Lexing has failed! Code: " << static_cast<int>(lexerResult);
-    return CompilerResult::FAILED_LEXING;
-  }
-
-  DLOG(INFO) << "Found " << tokensPtr->size() << " tokens!" ;
-
-  if (outputTemps) {
-    boost::filesystem::path tokenFile = tempFileDir / fmt::format("{}.tok", sourceName);
-    LOG(INFO) << "Writing tokens to temp file: " << tokenFile;
-    lexer.writeOutput(*tokensPtr, tokenFile);
-  }
-
-  std::for_each(tokensPtr->begin(), tokensPtr->end(), [](Token tok) {
-    DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" ;
-  });
-
-  ParseTree *ptreePtr = nullptr;
-  ParserResult parserResult = parser(*tokensPtr, ptreePtr);
-  if (parserResult != ParserResult::PARSING_SUCCESS) {
-    LOG(ERROR) << "Parsing has failed! Code: " << static_cast<int>(parserResult);
-    return CompilerResult::FAILED_PARSING;
-  }
-
-  DLOG(INFO) << "Generated parse tree for tokens";
-
-  if (outputTemps) {
-    boost::filesystem::path ptreeFile = tempFileDir / fmt::format("{}.ptree", sourceName);
-    LOG(INFO) << "Writing parse tree to temp file: " << ptreeFile;
-    parser.writeOutput(*ptreePtr, ptreeFile);
-  }
-
-  ASTRootNode *astRoot = nullptr;
-  ASTBuilderResult astBuilderResult = astBuilder(*ptreePtr, astRoot);
-  if (astBuilderResult != ASTBuilderResult::AST_BUILDING_SUCCESS) {
-    LOG(ERROR) << "AST building has failed! Code: " << static_cast<int>(astBuilderResult);
-    return CompilerResult::FAILED_AST_BUILDING;
-  }
-
-  DLOG(INFO) << "Generated AST from parse tree";
-
-  if (outputTemps) {
-    boost::filesystem::path astFile = tempFileDir / fmt::format("{}.ast", sourceName);
-    LOG(INFO) << "Writing AST to temp file: " << astFile;
-    astBuilder.writeOutput(*astRoot, astFile);
   }
 
   return CompilerResult::COMPILATION_SUCCESS;
