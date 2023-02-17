@@ -19,12 +19,14 @@ Also 5:30am - 7:00am
 - Updating grammar requires quite a few other changes (initially forgot to actually include reference to `LOOP` productions from the `statement` production)
 
 ## Notes
+### `vcpkg` inner workings
 - `vcpkg` log files revealed a lot about the inner process
-  1. packages are downloaded into `$VCPKG_ROOT/buildtrees/<package-name>/src/`
-  2. packages are configured into `$VCPKG_ROOT/buildtrees/<package-name>/<triplet>-[rel|dbg]/` via command in `config-<triplet>-out.log` -- change this command as necessary
-  3. packages are built -- no log file: I used command `cmake --build . --config [Debug|Release] --target install --` to build
-  4. packages are installed into `$VCPKG_ROOT/packages/<package-name>_<triplet>/[debug]?` via command in `install-<triplet>-[rel|dbg]-out.log` -- installs the headers + compiled lib
-  5. compiled lib (`lib<package>.a`) is saved into installation directory (default= `$VCPKG_ROOT/installed/<triplet>/[debug]?/lib` -- no logs here, simply used `cp` based on code seen in [vcpkg-tool source](https://github.com/microsoft/vcpkg-tool/blob/3e20dcc195bfa7d6c204f95c60c496d33d629eb5/src/vcpkg/install.cpp#L115)
+#### `vcpkg` compilation process
+1. packages are downloaded into `$VCPKG_ROOT/buildtrees/<package-name>/src/`
+2. packages are configured into `$VCPKG_ROOT/buildtrees/<package-name>/<triplet>-[rel|dbg]/` via command in `config-<triplet>-out.log` -- change this command as necessary
+3. packages are built -- no log file: I used command `cmake --build . --config [Debug|Release] --target install --` to build
+4. packages are installed into `$VCPKG_ROOT/packages/<package-name>_<triplet>/[debug]?` via command in `install-<triplet>-[rel|dbg]-out.log` -- installs the headers + compiled lib
+5. compiled lib (`lib<package>.a`) is saved into installation directory (default= `$VCPKG_ROOT/installed/<triplet>/[debug]?/lib` -- no logs here, simply used `cp` based on code seen in [vcpkg-tool source](https://github.com/microsoft/vcpkg-tool/blob/3e20dcc195bfa7d6c204f95c60c496d33d629eb5/src/vcpkg/install.cpp#L115)
 
 ## Log
 - Dug through vcpkg log files to figure out how exactly libraries were configured/built/installed

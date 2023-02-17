@@ -25,13 +25,14 @@ Also 2/16: 1:30am-4:30am - semi-distracted/just slow since getting into it
   - Tried some stuff with `CMakeLists.txt` options but no luck
 
 ## Notes
+### CMake and vcpkg
 - CMake 3.24.2 solves the silly "Boost new versions dependencies may be included..." warning
   - apt repository outdated -- still at 3.22.1
-- Got some AST inspiration from [stack-overflow AST post](https://stackoverflow.com/questions/28530284/generate-an-ast-in-c)
+- Looked a lot into build process of vcpkg libraries to try understanding why glog compiled with no custom prefix support -- too complex and abstracted :(
+### C++ language understanding 
 - `std::vector` must have non-const non-reference type
   - Learned this many times over
   - Can somewhat get around this with `std::vector<std::reference_wrapper<T>>`
-- Looked a lot into build process of vcpkg libraries to try understanding why glog compiled with no custom prefix support -- too complex and abstracted :(
 
 ## Log
 - Reconfigure VSCode cmake settings
@@ -55,4 +56,4 @@ Also 2/16: 1:30am-4:30am - semi-distracted/just slow since getting into it
   - very forward thought -- recompile any imported symbols iff used in code body
 
 ## Unorganized thoughts as they came
-- None so far!
+- Got some AST inspiration from [stack-overflow AST post](https://stackoverflow.com/questions/28530284/generate-an-ast-in-c)

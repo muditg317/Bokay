@@ -1,4 +1,4 @@
-# DevLog 021 - Import-Export Syntax + Abstractions + ASTs
+# DevLog 021 - Import-Export Syntax + Abstractions
 <div align="right">
 February 17th, 2023
 
@@ -18,6 +18,7 @@ Also 9:45 - 10:45pm
   - Finally made it work with C++20 based compile-time string literals
 
 ## Notes
+### Compile time strings for templates
 - Found some good reference for compile-time strings on [this stack overflow post](https://stackoverflow.com/questions/15858141/conveniently-declaring-compile-time-strings-in-c/15863804#15863804)
 - C++20 standard is so good, wow -- allows for compile-time string literals in templates as described in [this blog](https://ctrpeach.io/posts/cpp20-string-literal-template-parameters/)
 
