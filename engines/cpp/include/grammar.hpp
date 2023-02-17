@@ -38,22 +38,30 @@ enum class ParseNodeType {
   // param lists
   PARAM_LIST, // [param_list],[param_item] | [param_item]
   PARAM_ITEM, // [func_type_decl]
-  
-  // FUNCTIONS
-  FUNC_TYPE_DECL, // [decl_specifier] [no_ptr_decl]
+
+  // functions
+  FUNC_TYPE_DECL, // [decl_specifier] [declarator]
   FUNCTION_IMPL, // [func_type_decl] ( [func_args] ) [code_block]
   FUNCTION_ARGUMENTS, // [func_args],[func_arg] | [func_arg]
   FUNCTION_ARGUMENT, // [func_type_decl] = [default_func_arg_value] | [func_type_decl]
   DEFAULT_FUNC_ARG_VALUE, // [expression] // TODO: type checking for const stuff
   RETURN_STMT, // return [expression] ;
 
-  // TODO: CONDITIONALS, LOOPS,
+  // conditionals
   CONDITION_CHAIN, // [if_condition] [conditional_blocks]
   IF_CONDITION, // if ( [expression] )
   CONDITIONAL_BLOCKS, // [conditional_blocks] [conditional_block_connector] [code_block] | [code_block]
   CONDITIONAL_BLOCK_CONNECTOR, // [else_connector] | [elseif_connector]
   ELSE_CONNECTOR, // else
   ELSEIF_CONNECTOR, // else [if_condition]
+
+  // loops - while/do-while //TODO: for
+  WHILE_EXPR, // while ( [expression] )
+  WHILE_BODY, // [code_block] | ;
+  WHILE_LOOP, // [while_expr] [while_body]
+  DO_WHILE_LOOP, // do [while_body] [while_expr] ;
+  BREAK_STMT, // break ;
+  CONTINUE_STMT, // continue ;
 
   // TODO: STRUCT_DEF, UNION_DEF,
 

@@ -37,6 +37,36 @@ DECIMAL_LITERAL at [Line:    6, Column:  12]: `1`
      WHITESPACE at [Line:    6, Column:  14]: `\n`
     CLOSE_BRACE at [Line:    7, Column:   1]: `}`
      WHITESPACE at [Line:    7, Column:   2]: `\n`
+        COMMENT at [Line:    8, Column:   1]: `// TODO: implement inplace-incr/decr\n`
+        COMMENT at [Line:    9, Column:   1]: `/*\nwhile (weird-- >= 0);\n*/`
+     WHITESPACE at [Line:   10, Column:  25]: `\n`
+     WHITESPACE at [Line:   11, Column:   1]: `\n`
+        COMMENT at [Line:   12, Column:   1]: `// do-while loops:\n`
+          KW_DO at [Line:   13, Column:   1]: `do`
+     WHITESPACE at [Line:   13, Column:   3]: ` `
+     OPEN_BRACE at [Line:   13, Column:   4]: `{`
+     WHITESPACE at [Line:   13, Column:   5]: `\n`
+     WHITESPACE at [Line:   14, Column:   1]: `  `
+           WORD at [Line:   14, Column:   3]: `weird`
+     WHITESPACE at [Line:   14, Column:   8]: ` `
+        PLUS_EQ at [Line:   14, Column:   9]: `+=`
+     WHITESPACE at [Line:   14, Column:  11]: ` `
+DECIMAL_LITERAL at [Line:   14, Column:  12]: `1`
+      SEMICOLON at [Line:   14, Column:  13]: `;`
+     WHITESPACE at [Line:   14, Column:  14]: `\n`
+    CLOSE_BRACE at [Line:   15, Column:   1]: `}`
+     WHITESPACE at [Line:   15, Column:   2]: ` `
+       KW_WHILE at [Line:   15, Column:   3]: `while`
+     WHITESPACE at [Line:   15, Column:   8]: ` `
+     OPEN_PAREN at [Line:   15, Column:   9]: `(`
+           WORD at [Line:   15, Column:  10]: `weird`
+     WHITESPACE at [Line:   15, Column:  15]: ` `
+            LSS at [Line:   15, Column:  16]: `<`
+     WHITESPACE at [Line:   15, Column:  17]: ` `
+DECIMAL_LITERAL at [Line:   15, Column:  18]: `50`
+    CLOSE_PAREN at [Line:   15, Column:  20]: `)`
+      SEMICOLON at [Line:   15, Column:  21]: `;`
+     WHITESPACE at [Line:   15, Column:  22]: `\n`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 Parse tree(tests/build/loops.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

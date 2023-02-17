@@ -5,3 +5,12 @@
 while (weird < -300) {
   weird += 1;
 }
+// TODO: implement inplace-incr/decr
+/*
+while (weird-- >= 0);
+*/
+
+// do-while loops:
+do {
+  weird += 1;
+} while (weird < 50);

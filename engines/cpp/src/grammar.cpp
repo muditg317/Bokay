@@ -194,7 +194,7 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
   { ParseNodeType::FUNC_TYPE_DECL, {
     Production{ {
       ParseNodeType::DECL_SPECIFIER,
-      ParseNodeType::NO_PTR_DECL,
+      ParseNodeType::DECLARATOR,
     } },
   } },
   { ParseNodeType::FUNCTION_IMPL, {
@@ -279,6 +279,48 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     Production{ {
       TokenType::KW_ELSE,
       ParseNodeType::IF_CONDITION,
+    } },
+  } },
+  { ParseNodeType::WHILE_EXPR, {
+    Production{ {
+      TokenType::KW_WHILE,
+      TokenType::OPEN_PAREN,
+      ParseNodeType::EXPRESSION,
+      TokenType::CLOSE_PAREN,
+    } },
+  } },
+  { ParseNodeType::WHILE_BODY, {
+    Production{ {
+      ParseNodeType::CODE_BLOCK,
+    } },
+    Production{ {
+      TokenType::SEMICOLON,
+    } },
+  } },
+  { ParseNodeType::WHILE_LOOP, {
+    Production{ {
+      ParseNodeType::WHILE_EXPR,
+      ParseNodeType::WHILE_BODY,
+    } },
+  } },
+  { ParseNodeType::DO_WHILE_LOOP, {
+    Production{ {
+      TokenType::KW_DO,
+      ParseNodeType::WHILE_BODY,
+      ParseNodeType::WHILE_EXPR,
+      TokenType::SEMICOLON,
+    } },
+  } },
+  { ParseNodeType::BREAK_STMT, {
+    Production{ {
+      TokenType::KW_BREAK,
+      TokenType::SEMICOLON,
+    } },
+  } },
+  { ParseNodeType::CONTINUE_STMT, {
+    Production{ {
+      TokenType::KW_CONTINUE,
+      TokenType::SEMICOLON,
     } },
   } },
   { ParseNodeType::EXPRESSION, {

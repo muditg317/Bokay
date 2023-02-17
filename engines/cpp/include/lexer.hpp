@@ -49,6 +49,9 @@ enum class TokenType : char {
   KW_IF,
   KW_ELSE,
   KW_WHILE,
+  KW_DO,
+  KW_BREAK,
+  KW_CONTINUE,
   DOUBLE_EQ,     //  ==
   NOT_EQ,        //. !=
   TRIPLE_EQ,     //  ===

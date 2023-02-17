@@ -55,6 +55,9 @@ const std::map<TokenType, std::regex> tokenRegexMap {
   { TokenType::KW_IF, std::regex("(\\bif\\b)") },
   { TokenType::KW_ELSE, std::regex("(\\belse\\b)") },
   { TokenType::KW_WHILE, std::regex("(\\bwhile\\b)") },
+  { TokenType::KW_DO, std::regex("(\\bdo\\b)") },
+  { TokenType::KW_BREAK, std::regex("(\\bbreak\\b)") },
+  { TokenType::KW_CONTINUE, std::regex("(\\bcontinue\\b)") },
   { TokenType::DOUBLE_EQ, std::regex("(==)") },
   { TokenType::NOT_EQ, std::regex("(!=)") },
   { TokenType::TRIPLE_EQ, std::regex("(===)") },
@@ -116,6 +119,9 @@ std::string typeToString(const TokenType& type) {
     case TokenType::KW_IF: return "KW_IF";
     case TokenType::KW_ELSE: return "KW_ELSE";
     case TokenType::KW_WHILE: return "KW_WHILE";
+    case TokenType::KW_DO: return "KW_DO";
+    case TokenType::KW_BREAK: return "KW_BREAK";
+    case TokenType::KW_CONTINUE: return "KW_CONTINUE";
     case TokenType::DOUBLE_EQ: return "DOUBLE_EQ";
     case TokenType::NOT_EQ: return "NOT_EQ";
     case TokenType::TRIPLE_EQ: return "TRIPLE_EQ";

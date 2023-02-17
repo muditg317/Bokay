@@ -10,6 +10,7 @@
 #include <array>
 #include <fstream>
 
+#include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
 
 #include "test-utils.hpp"
@@ -78,7 +79,7 @@ TEST_CASE(#testCase ".bokay", "[main]") {                                       
   }                                                                                     \
 }
 
-#define TEST_AS_STRING_WITH_COMMA(testCase) #testCase,
+#define TEST_AS_STRING_WITH_COMMA(testCase) boost::trim_copy(std::string{#testCase}),
 
 #define ALL_TESTS     \
 TEST_MACRO(one-comment) \
@@ -90,6 +91,9 @@ TEST_MACRO(conditionals) \
 TEST_MACRO(loops) \
 TEST_MACRO(structs-unions) \
 TEST_MACRO(full-design) \
+
+#define ALL_TESTS     \
+TEST_MACRO(loops) \
 
 
 #define TEST_MACRO(testCase) ENGINE_TEST(testCase)
