@@ -1,0 +1,214 @@
+--STDOUT:
+
+--STDOUT-END--#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&--STDERR:
+[ args-parser.cpp: 102] INFO    - Input source file: tests/import-export.bokay
+[ args-parser.cpp: 105] INFO    - Output path: tests/build/import-export
+[ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
+[    compiler.cpp:  96] INFO    - Writing tokens to temp file: "tests/build/import-export.tok"
+[    compiler.cpp: 115] INFO    - Writing parse tree to temp file: "tests/build/import-export.ptree"
+
+--STDERR-END
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+        COMMENT at [Line:    1, Column:   1]: `// imports:\n`
+        COMMENT at [Line:    2, Column:   1]: `//  import WholeLib, {oneMethod, SomeClass, anotherMethod} from "file/to/import.bokay"\n`
+        COMMENT at [Line:    3, Column:   1]: `//    should be similar to JS/TS style\n`
+        COMMENT at [Line:    4, Column:   1]: `//    extracts only certain symbols into the current context or all symbols under the WholeLib namespace\n`
+        COMMENT at [Line:    5, Column:   1]: `//    access with WholeLib::oneMethod(...)\n`
+      KW_IMPORT at [Line:    6, Column:   1]: `import`
+     WHITESPACE at [Line:    6, Column:   7]: ` `
+           WORD at [Line:    6, Column:   8]: `WholeLib`
+          COMMA at [Line:    6, Column:  16]: `,`
+     WHITESPACE at [Line:    6, Column:  17]: ` `
+     OPEN_BRACE at [Line:    6, Column:  18]: `{`
+           WORD at [Line:    6, Column:  19]: `oneMethod`
+          COMMA at [Line:    6, Column:  28]: `,`
+     WHITESPACE at [Line:    6, Column:  29]: ` `
+           WORD at [Line:    6, Column:  30]: `aField`
+          COMMA at [Line:    6, Column:  36]: `,`
+     WHITESPACE at [Line:    6, Column:  37]: ` `
+           WORD at [Line:    6, Column:  38]: `anotherMethod`
+    CLOSE_BRACE at [Line:    6, Column:  51]: `}`
+     WHITESPACE at [Line:    6, Column:  52]: ` `
+        KW_FROM at [Line:    6, Column:  53]: `from`
+     WHITESPACE at [Line:    6, Column:  57]: ` `
+         STRING at [Line:    6, Column:  58]: `"./export-stuff.bokay"`
+      SEMICOLON at [Line:    6, Column:  80]: `;`
+     WHITESPACE at [Line:    6, Column:  81]: `\n`
+     WHITESPACE at [Line:    7, Column:   1]: `\n`
+      BASE_TYPE at [Line:    8, Column:   1]: `u8`
+     WHITESPACE at [Line:    8, Column:   3]: ` `
+           WORD at [Line:    8, Column:   4]: `hello`
+     WHITESPACE at [Line:    8, Column:   9]: ` `
+         EQUALS at [Line:    8, Column:  10]: `=`
+     WHITESPACE at [Line:    8, Column:  11]: ` `
+           WORD at [Line:    8, Column:  12]: `aField`
+     WHITESPACE at [Line:    8, Column:  18]: ` `
+           PLUS at [Line:    8, Column:  19]: `+`
+     WHITESPACE at [Line:    8, Column:  20]: ` `
+DECIMAL_LITERAL at [Line:    8, Column:  21]: `2`
+      SEMICOLON at [Line:    8, Column:  22]: `;`
+     WHITESPACE at [Line:    8, Column:  23]: `\n`
+      BASE_TYPE at [Line:    9, Column:   1]: `s16`
+     WHITESPACE at [Line:    9, Column:   4]: ` `
+           WORD at [Line:    9, Column:   5]: `doThing`
+     OPEN_PAREN at [Line:    9, Column:  12]: `(`
+      BASE_TYPE at [Line:    9, Column:  13]: `u8`
+     WHITESPACE at [Line:    9, Column:  15]: ` `
+           WORD at [Line:    9, Column:  16]: `a`
+          COMMA at [Line:    9, Column:  17]: `,`
+     WHITESPACE at [Line:    9, Column:  18]: ` `
+      BASE_TYPE at [Line:    9, Column:  19]: `u8`
+     WHITESPACE at [Line:    9, Column:  21]: ` `
+           WORD at [Line:    9, Column:  22]: `b`
+    CLOSE_PAREN at [Line:    9, Column:  23]: `)`
+     WHITESPACE at [Line:    9, Column:  24]: ` `
+     OPEN_BRACE at [Line:    9, Column:  25]: `{`
+     WHITESPACE at [Line:    9, Column:  26]: `\n`
+     WHITESPACE at [Line:   10, Column:   1]: `  `
+      KW_RETURN at [Line:   10, Column:   3]: `return`
+     WHITESPACE at [Line:   10, Column:   9]: ` `
+           WORD at [Line:   10, Column:  10]: `a`
+     WHITESPACE at [Line:   10, Column:  11]: ` `
+           PLUS at [Line:   10, Column:  12]: `+`
+     WHITESPACE at [Line:   10, Column:  13]: ` `
+           WORD at [Line:   10, Column:  14]: `b`
+      SEMICOLON at [Line:   10, Column:  15]: `;`
+     WHITESPACE at [Line:   10, Column:  16]: `\n`
+    CLOSE_BRACE at [Line:   11, Column:   1]: `}`
+     WHITESPACE at [Line:   11, Column:   2]: `\n`
+      BASE_TYPE at [Line:   12, Column:   1]: `f32`
+     WHITESPACE at [Line:   12, Column:   4]: ` `
+           WORD at [Line:   12, Column:   5]: `result`
+     WHITESPACE at [Line:   12, Column:  11]: ` `
+         EQUALS at [Line:   12, Column:  12]: `=`
+     WHITESPACE at [Line:   12, Column:  13]: ` `
+           WORD at [Line:   12, Column:  14]: `doThing`
+     OPEN_PAREN at [Line:   12, Column:  21]: `(`
+           WORD at [Line:   12, Column:  22]: `WholeLib`
+          COLON at [Line:   12, Column:  30]: `:`
+          COLON at [Line:   12, Column:  31]: `:`
+           WORD at [Line:   12, Column:  32]: `indirectMethod`
+     OPEN_PAREN at [Line:   12, Column:  46]: `(`
+           WORD at [Line:   12, Column:  47]: `hello`
+    CLOSE_PAREN at [Line:   12, Column:  52]: `)`
+          COMMA at [Line:   12, Column:  53]: `,`
+     WHITESPACE at [Line:   12, Column:  54]: ` `
+           WORD at [Line:   12, Column:  55]: `oneMethod`
+     OPEN_PAREN at [Line:   12, Column:  64]: `(`
+           WORD at [Line:   12, Column:  65]: `hello`
+    CLOSE_PAREN at [Line:   12, Column:  70]: `)`
+    CLOSE_PAREN at [Line:   12, Column:  71]: `)`
+      SEMICOLON at [Line:   12, Column:  72]: `;`
+     WHITESPACE at [Line:   12, Column:  73]: `\n`
+     WHITESPACE at [Line:   13, Column:   1]: `\n`
+        COMMENT at [Line:   14, Column:   1]: `// TODO: exports:\n`
+        COMMENT at [Line:   15, Column:   1]: `//  export { method, someField, anotherMethod };\n`
+        COMMENT at [Line:   16, Column:   1]: `//    should be similar to JS/TS style\n`
+        COMMENT at [Line:   17, Column:   1]: `//    exported fields are exported as copies, not the same reference\n`
+        COMMENT at [Line:   18, Column:   1]: `//    WholeLib import only captures the exported symbols and not the rest of the file\n`
+     WHITESPACE at [Line:   19, Column:   1]: `\n`
+        COMMENT at [Line:   20, Column:   1]: `// export { hello, doThing };\n`
+
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+SOURCE > SOURCE_BODY
+	IMPORT_GROUP > IMPORT_STATEMENT
+		KW_IMPORT(`import`)
+		IMPORT_CONTENTS
+			IMPORT_LIB_NAME > IMPORT_ITEM
+				ID - WORD(`WholeLib`)
+			COMMA(`,`)
+			IMPORT_ITEM_GROUP
+				OPEN_BRACE(`{`)
+				IMPORT_ITEMS
+					IMPORT_ITEMS
+						IMPORT_ITEMS > IMPORT_ITEM
+							ID - WORD(`oneMethod`)
+						COMMA(`,`)
+						IMPORT_ITEM - WORD(`aField`)
+					COMMA(`,`)
+					IMPORT_ITEM - WORD(`anotherMethod`)
+				CLOSE_BRACE(`}`)
+		KW_FROM(`from`)
+		STRING(`"./export-stuff.bokay"`)
+		SEMICOLON(`;`)
+	STATEMENTS
+		STATEMENTS
+			STATEMENTS > STATEMENT
+				STATEMENT_BODY > DECLARATION
+					DECL_SPECIFIER - BASE_TYPE(`u8`)
+					DECL_LIST > DECL_ITEM
+						DECLARATOR - WORD(`hello`)
+						EQUALS(`=`)
+						INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR
+							ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								ID - WORD(`aField`)
+							ADDITIVE_OP - PLUS(`+`)
+							MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`2`)
+				SEMICOLON(`;`)
+			STATEMENT > FUNCTION_IMPL
+				FUNC_TYPE_DECL
+					DECL_SPECIFIER - BASE_TYPE(`s16`)
+					DECLARATOR - WORD(`doThing`)
+				OPEN_PAREN(`(`)
+				FUNCTION_ARGUMENTS
+					FUNCTION_ARGUMENTS > FUNCTION_ARGUMENT > FUNC_TYPE_DECL
+						DECL_SPECIFIER - BASE_TYPE(`u8`)
+						DECLARATOR - WORD(`a`)
+					COMMA(`,`)
+					FUNCTION_ARGUMENT > FUNC_TYPE_DECL
+						DECL_SPECIFIER - BASE_TYPE(`u8`)
+						DECLARATOR - WORD(`b`)
+				CLOSE_PAREN(`)`)
+				CODE_BLOCK
+					OPEN_BRACE(`{`)
+					STATEMENTS > STATEMENT > RETURN_STMT
+						KW_RETURN(`return`)
+						EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR
+							ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								ID - WORD(`a`)
+							ADDITIVE_OP - PLUS(`+`)
+							MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								ID - WORD(`b`)
+						SEMICOLON(`;`)
+					CLOSE_BRACE(`}`)
+		STATEMENT
+			STATEMENT_BODY > DECLARATION
+				DECL_SPECIFIER - BASE_TYPE(`f32`)
+				DECL_LIST > DECL_ITEM
+					DECLARATOR - WORD(`result`)
+					EQUALS(`=`)
+					INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > FUNCTION_CALL_EXPR
+						VARUSE_EXPR > VAR_EXPR
+							ID - WORD(`doThing`)
+						OPEN_PAREN(`(`)
+						ARG_LIST
+							ARG_LIST > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > FUNCTION_CALL_EXPR
+								VARUSE_EXPR > VAR_EXPR > LIB_ACCESS
+									IMPORT_LIB_NAME > IMPORT_ITEM
+										ID - WORD(`WholeLib`)
+									LIB_ACCESSOR
+										COLON(`:`)
+										COLON(`:`)
+									ID - WORD(`indirectMethod`)
+								OPEN_PAREN(`(`)
+								ARG_LIST > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+									ID - WORD(`hello`)
+								CLOSE_PAREN(`)`)
+							COMMA(`,`)
+							ARG_LIST > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > FUNCTION_CALL_EXPR
+								VARUSE_EXPR > VAR_EXPR
+									ID - WORD(`oneMethod`)
+								OPEN_PAREN(`(`)
+								ARG_LIST > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+									ID - WORD(`hello`)
+								CLOSE_PAREN(`)`)
+						CLOSE_PAREN(`)`)
+			SEMICOLON(`;`)
+
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+AST(tests/build/import-export.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+Blocks w/ control flow(tests/build/import-export.blk)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+=================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
+executable FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&

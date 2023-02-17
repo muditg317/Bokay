@@ -1,0 +1,20 @@
+// imports:
+//  import WholeLib, {oneMethod, SomeClass, anotherMethod} from "file/to/import.bokay"
+//    should be similar to JS/TS style
+//    extracts only certain symbols into the current context or all symbols under the WholeLib namespace
+//    access with WholeLib::oneMethod(...)
+import WholeLib, {oneMethod, aField, anotherMethod} from "./export-stuff.bokay";
+
+u8 hello = aField + 2;
+s16 doThing(u8 a, u8 b) {
+  return a + b;
+}
+f32 result = doThing(WholeLib::indirectMethod(hello), oneMethod(hello));
+
+// TODO: exports:
+//  export { method, someField, anotherMethod };
+//    should be similar to JS/TS style
+//    exported fields are exported as copies, not the same reference
+//    WholeLib import only captures the exported symbols and not the rest of the file
+
+// export { hello, doThing };

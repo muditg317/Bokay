@@ -90,6 +90,7 @@ TEST_MACRO(functions) \
 TEST_MACRO(conditionals) \
 TEST_MACRO(loops) \
 TEST_MACRO(structs-unions) \
+TEST_MACRO(import-export) \
 TEST_MACRO(full-design) \
 
 // #define ALL_TESTS     \
