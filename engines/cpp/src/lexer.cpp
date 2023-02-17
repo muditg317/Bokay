@@ -232,7 +232,7 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
         match_result, regex, // save result based on applied regex
         std::regex_constants::match_continuous); // ensure match starts at `sourceBegin`
       if (!hasMatch) { // no match_result found for this regex
-        DLOG(INFO) << "\tNo match for type: " << tokenRegex.first ;
+        // DLOG(INFO) << "\tNo match for type: " << tokenRegex.first ;
         continue;
       }
       lexing_match match = match_result[0];

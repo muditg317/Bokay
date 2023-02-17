@@ -92,8 +92,8 @@ TEST_MACRO(loops) \
 TEST_MACRO(structs-unions) \
 TEST_MACRO(full-design) \
 
-#define ALL_TESTS     \
-TEST_MACRO(loops) \
+// #define ALL_TESTS     \
+// TEST_MACRO() \
 
 
 #define TEST_MACRO(testCase) ENGINE_TEST(testCase)

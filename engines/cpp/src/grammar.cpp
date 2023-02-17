@@ -64,6 +64,9 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     Production{ {
       ParseNodeType::CONDITION_CHAIN,
     } },
+    Production{ {
+      ParseNodeType::LOOP,
+    } },
   } },
   { ParseNodeType::STATEMENT_BODY, {
     Production{ {
@@ -279,6 +282,14 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     Production{ {
       TokenType::KW_ELSE,
       ParseNodeType::IF_CONDITION,
+    } },
+  } },
+  { ParseNodeType::LOOP, {
+    Production{ {
+      ParseNodeType::WHILE_LOOP,
+    } },
+    Production{ {
+      ParseNodeType::DO_WHILE_LOOP,
     } },
   } },
   { ParseNodeType::WHILE_EXPR, {
@@ -633,6 +644,13 @@ std::string typeToString(const ParseNodeType& type) {
     case ParseNodeType::CONDITIONAL_BLOCK_CONNECTOR: return "CONDITIONAL_BLOCK_CONNECTOR";
     case ParseNodeType::ELSE_CONNECTOR: return "ELSE_CONNECTOR";
     case ParseNodeType::ELSEIF_CONNECTOR: return "ELSEIF_CONNECTOR";
+    case ParseNodeType::LOOP: return "LOOP";
+    case ParseNodeType::WHILE_EXPR: return "WHILE_EXPR";
+    case ParseNodeType::WHILE_BODY: return "WHILE_BODY";
+    case ParseNodeType::WHILE_LOOP: return "WHILE_LOOP";
+    case ParseNodeType::DO_WHILE_LOOP: return "DO_WHILE_LOOP";
+    case ParseNodeType::BREAK_STMT: return "BREAK_STMT";
+    case ParseNodeType::CONTINUE_STMT: return "CONTINUE_STMT";
     case ParseNodeType::EXPRESSION: return "EXPRESSION";
     case ParseNodeType::ASSIGNMENT_EXPR: return "ASSIGNMENT_EXPR";
     case ParseNodeType::ASSIGNMENT_OP: return "ASSIGNMENT_OP";

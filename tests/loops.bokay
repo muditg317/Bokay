@@ -2,6 +2,7 @@
 //  while ({condition}) {
 //    // code...
 //  }
+s16 weird = -400;
 while (weird < -300) {
   weird += 1;
 }

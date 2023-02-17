@@ -17,7 +17,7 @@ enum class ParseNodeType {
   LIB_NAME, // [id]
 
   STATEMENTS, // [statements] [statement] | [statement]
-  STATEMENT, // [stmt_body] ; | [function_impl] | [return_stmt] | [condition_chain] // TODO: | [while_loop]
+  STATEMENT, // [stmt_body] ; | [function_impl] | [return_stmt] | [condition_chain] | [loop]
   STATEMENT_BODY, // [declaration] | [expression]
   CODE_BLOCK, // { [statements] }
 
@@ -56,6 +56,7 @@ enum class ParseNodeType {
   ELSEIF_CONNECTOR, // else [if_condition]
 
   // loops - while/do-while //TODO: for
+  LOOP, // [while_loop] | [do_while_loop]
   WHILE_EXPR, // while ( [expression] )
   WHILE_BODY, // [code_block] | ;
   WHILE_LOOP, // [while_expr] [while_body]

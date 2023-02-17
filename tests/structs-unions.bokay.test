@@ -5,7 +5,7 @@
 [ args-parser.cpp: 105] INFO    - Output path: tests/build/structs-unions
 [ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
 [    compiler.cpp:  96] INFO    - Writing tokens to temp file: "tests/build/structs-unions.tok"
-[      parser.cpp: 161] ERROR   - Parsing failed to recognize source from grammar!
+[      parser.cpp: 165] ERROR   - Parsing failed to recognize source from grammar!
 [    compiler.cpp: 107] ERROR   - Parsing has failed! Code: 2
 
 --STDERR-END

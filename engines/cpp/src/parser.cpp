@@ -143,7 +143,8 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree *&resultTree) c
     DLOG(INFO) << "----";
   }
 
-  ParsingState *successfulParseState = nullptr;
+  ParsingState *sourceRootParseState = nullptr;
+  bool fullyMatched = false;
 
   DLOG(INFO) << "Last state states:";
   for (size_t i = 0; i < stateSets.back().size(); i++) {
@@ -151,21 +152,41 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree *&resultTree) c
     DLOG(INFO) << "\t" << state.ruleType << "[" << state.matchOrigin << "] - " << state.currentProduction;
     DLOG(INFO) << "\t\tCompleted: " << state.numMatchedComponents << "/" << state.currentProduction.length();
     DLOG(INFO) << "\t----";
-    if (state.ruleType == ParseNodeType::SOURCE && state.isFullyMatched()) {
-      successfulParseState = &state;
-      break; // accept first one because other ones may be unmatched
+    if (state.ruleType == ParseNodeType::SOURCE) {
+      sourceRootParseState = &state;
+      if (state.isFullyMatched()) {
+        fullyMatched = true;
+        break; // accept first one because other ones may be unmatched
+      }
     }
   }
 
-  if (!successfulParseState) {
+  if (!fullyMatched) {
     LOG(ERROR) << "Parsing failed to recognize source from grammar!";
     // TODO: provide info about longest match seen or something
+    #ifdef DEBUG
+    DLOG(INFO) << "Last state states:";
+    for (size_t i = 0; i < stateSets.back().size(); i++) {
+      auto &state = stateSets.back().states[i];
+      DLOG(INFO) << "\t" << state.ruleType << "[" << state.matchOrigin << "] - " << state.currentProduction;
+      DLOG(INFO) << "\t\tCompleted: " << state.numMatchedComponents << "/" << state.currentProduction.length();
+      DLOG(INFO) << "\t----";
+    }
+    #endif
+    if (sourceRootParseState) {
+      ParsingTree finalTree = sourceRootParseState->matchedTree;
+      LOG(INFO) << "Printing final tree:\n" << finalTree.toTabbedString();
+    #ifdef DEBUG
+    } else {
+      DLOG(INFO) << "No source root parse state found!";
+    #endif
+    }
     return ParserResult::FAILED_RECOGNITION;
   }
 
   // if reached: parsing finished successfully!
   DLOG(INFO) << "Parsing succeeded! Printing tree...";
-  ParsingTree finalTree = successfulParseState->matchedTree;
+  ParsingTree finalTree = sourceRootParseState->matchedTree;
   std::deque<std::pair<ParseTreeChild,size_t>> treeNodeQueue{}; // node,depth queue
   treeNodeQueue.push_front(std::make_pair(finalTree, 0));
   while (!treeNodeQueue.empty()) {

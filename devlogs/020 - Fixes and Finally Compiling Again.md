@@ -4,6 +4,7 @@ February 16th, 2023
 
 Sign on: 5:15pm\
 Sign off: 7:00pm
+Also 5:30am - 6:30am
 </div>
 
 ## Goals
@@ -16,6 +17,7 @@ Sign off: 7:00pm
 
 ## Struggles
 - Understanding the inner workings of `vcpkg` took a good bit of digging and debugging.
+- Updating grammar requires quite a few other changes (initially forgot to actually include reference to `LOOP` productions from the `statement` production)
 
 ## Notes
 - `vcpkg` log files revealed a lot about the inner process
@@ -35,6 +37,7 @@ Sign off: 7:00pm
   - Add grammar rules for while/do-while loops
 - Allow functions to take any type of declarator as return type / parameter type
   - Required test updates for `functions.bokay`
+- Update `loops` tests to include correct output for `ParseTree` generation
 
 ## TODO
 1. Finish parsing errors before moving to AST generation
