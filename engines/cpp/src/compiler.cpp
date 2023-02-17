@@ -83,27 +83,27 @@ CompilerResult Compiler::run(void) {
   int ind = fileContents.find('\n');
   DLOG(INFO) << "Line 1: " << fileContents.substr(0, ind != std::string::npos ? ind : fileContents.size()) ;
 
-  std::vector<Token> tokens;
-  LexerResult lexerResult = lexer.run(fileContents, tokens);
+  std::vector<Token> *tokensPtr = nullptr;
+  LexerResult lexerResult = lexer(fileContents, tokensPtr);
   if (lexerResult != LexerResult::LEXING_SUCCESS) {
     LOG(ERROR) << "Lexing has failed! Code: " << static_cast<int>(lexerResult);
     return CompilerResult::FAILED_LEXING;
   }
 
-  DLOG(INFO) << "Found " << tokens.size() << " tokens!" ;
+  DLOG(INFO) << "Found " << tokensPtr->size() << " tokens!" ;
 
   if (outputTemps) {
     boost::filesystem::path tokenFile = tempFileDir / fmt::format("{}.tok", sourceName);
     LOG(INFO) << "Writing tokens to temp file: " << tokenFile;
-    lexer.writeTokens(tokens, tokenFile);
+    lexer.writeOutput(*tokensPtr, tokenFile);
   }
 
-  std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
+  std::for_each(tokensPtr->begin(), tokensPtr->end(), [](Token tok) {
     DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" ;
   });
 
   ParseTree *ptreePtr = nullptr;
-  ParserResult parserResult = parser.run(tokens, ptreePtr);
+  ParserResult parserResult = parser.run(*tokensPtr, ptreePtr);
   if (parserResult != ParserResult::PARSING_SUCCESS) {
     LOG(ERROR) << "Parsing has failed! Code: " << static_cast<int>(parserResult);
     return CompilerResult::FAILED_PARSING;

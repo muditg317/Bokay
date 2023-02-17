@@ -180,7 +180,7 @@ std::ostream& operator<<(std::ostream& out, const Token& tok) {
 //    (\s(?!(?<="((\\[^\n]|[^"\\\n])*))((\\[^\n]|[^"\\\n])*)"))
 // const std::regex NON_STRING_SPACE_REGEX
 
-Lexer::Lexer(void) {
+Lexer::Lexer(void) : Lexer::Base() {
   assert(tokenRegexMap.size() == static_cast<size_t>(TokenType::NUM_TOKEN_TYPES) && "Must define regex for every token type!");
 }
 
@@ -201,11 +201,12 @@ std::string Lexer::preprocessSource(std::string processed) {
 
 typedef std::match_results<std::string::iterator>::value_type lexing_match;
 
-LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens) {
+LexerResult Lexer::operator()(Lexer::Base::InputType &sourceCode, Lexer::Base::OutputType *&resultTokens) {
   if (!validateOptionsAndSource(sourceCode)) {
     return LexerResult::INVALID_LEXING_OPTIONS;
   }
 
+  resultTokens = new Lexer::Base::OutputType;
   std::string processedSource = preprocessSource(sourceCode);
 
   auto sourceBegin = processedSource.begin();
@@ -257,8 +258,8 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
       return LexerResult::INVALID_TOKENS;
     }
 
-    resultTokens.push_back(Token{longestMatch.str(), longestMatchType, lineNum, colNum});
-    DLOG(INFO) << "Register token: " << resultTokens.back() ;
+    resultTokens->push_back(Token{longestMatch.str(), longestMatchType, lineNum, colNum});
+    DLOG(INFO) << "Register token: " << resultTokens->back();
     sourceBegin += longestMatch.length();
 
     // update linenum and colnum based on captured token
@@ -269,7 +270,7 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
       size_t extraLines = match_result.size();
       if (extraLines) { // newlines found, add lineNum and update colNum
         DLOG(INFO) << "New line found in whitespace/comment!\n";
-        DLOG(INFO) << "\t" << resultTokens.back() ;
+        DLOG(INFO) << "\t" << resultTokens->back();
         DLOG(INFO) << "\t" << extraLines ;
         linesAdded = true;
         lineNum += extraLines;
@@ -284,7 +285,7 @@ LexerResult Lexer::run(std::string sourceCode, std::vector<Token> &resultTokens)
   return LexerResult::LEXING_SUCCESS;
 }
 
-bool Lexer::writeTokens(std::vector<Token> &tokens, boost::filesystem::path filePath) {
+bool Lexer::writeOutput(Lexer::Base::OutputType &tokens, boost::filesystem::path filePath) {
   if (!boost::filesystem::exists(filePath.parent_path())) {
     LOG(ERROR) << "Cannot write tokens to " << filePath << " because parent dir does not exist!" ;
     return false;

@@ -19,12 +19,13 @@ Sign off: 6:30pm
 ## Log
 - Create test for import/export syntax
   - Only testing import currently, export not yet implemented
+- Add abstract base class for compiler stages to adhere to (not sure this is beneficial but maybe it'll help with code consistency)
 
 ## TODO
-
+- None today!
 
 ## Language Status/Changes
 - None today!
 
 ## Unorganized thoughts as they came
-- 
+- None today!

@@ -1,6 +1,7 @@
 #ifndef LEXER_HPP
 #define LEXER_HPP
 
+#include "utilities.hpp"
 #include "args-parser.hpp"
 
 #include <iostream>
@@ -100,11 +101,13 @@ class Token {
 boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const Token& tok);
 std::ostream& operator<<(std::ostream& out, const Token& tok);
 
-class Lexer {
+class Lexer : public CompilerStage<std::string, std::vector<Token>, LexerResult> {
   public:
+    using Base = CompilerStage<std::string, std::vector<Token>, LexerResult>;
+
     Lexer(void);
-    LexerResult run(std::string sourceCode, std::vector<Token> &resultTokens);
-    bool writeTokens(std::vector<Token> &tokens, boost::filesystem::path filePath);
+    Base::ErrorType operator()(Base::InputType &sourceCode, Base::OutputType *&resultTokens) override;
+    bool writeOutput(Base::OutputType &tokens, boost::filesystem::path filePath) override;
   private:
     bool validateOptionsAndSource(std::string sourceCode);
     std::string preprocessSource(std::string sourceCode);
