@@ -106,11 +106,11 @@ class Lexer : public CompilerStage<std::string, std::vector<Token>, LexerResult>
     using Base = CompilerStage<std::string, std::vector<Token>, LexerResult>;
 
     Lexer(void);
-    Base::ErrorType operator()(Base::InputType &sourceCode, Base::OutputType *&resultTokens) override;
-    bool writeOutput(Base::OutputType &tokens, boost::filesystem::path filePath) override;
+    Base::ErrorType operator()(Base::InputType &sourceCode, Base::OutputType *&resultTokens) const override;
+    bool writeOutput(Base::OutputType &tokens, boost::filesystem::path filePath) const override;
   private:
-    bool validateOptionsAndSource(std::string sourceCode);
-    std::string preprocessSource(std::string sourceCode);
+    bool validateOptionsAndSource(std::string sourceCode) const;
+    std::string preprocessSource(std::string sourceCode) const;
 };
 
 #endif

@@ -14,8 +14,8 @@ class CompilerStage {
   using ErrorType = ErrorCode;
 
   CompilerStage(void) {};
-  virtual ErrorCode operator()(Input_t &input, Output_t *&output) = 0;
-  virtual bool writeOutput(Output_t &output, boost::filesystem::path path) = 0;
+  virtual ErrorCode operator()(Input_t &input, Output_t *&output) const = 0;
+  virtual bool writeOutput(Output_t &output, boost::filesystem::path path) const = 0;
 };
 
 #endif

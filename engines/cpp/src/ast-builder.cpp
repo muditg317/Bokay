@@ -73,9 +73,9 @@ const ASTNode &ASTNode::recursivelyPrintDegenerateSubtrees(std::ostream &stream,
 
 
 
-ASTBuilder::ASTBuilder(void) {}
+ASTBuilder::ASTBuilder(void) : Base() {}
 
-ASTBuilderResult ASTBuilder::run(input_t &parseTree, output_t *&resultTree) const {
+ASTBuilder::Base::ErrorType ASTBuilder::operator()(Base::InputType &parseTree, Base::OutputType *&resultTree) const {
   DLOG(INFO) << "Begin AST reduction on parse tree";
 
   // if reached: parsing finished successfully!
@@ -92,7 +92,7 @@ bool ASTBuilder::reduce(ASTNode &astNode, ASTNode &result) const {
   return false;
 }
 
-bool ASTBuilder::writeTree(output_t &astRoot, boost::filesystem::path filePath) const {
+bool ASTBuilder::writeOutput(Base::OutputType &astRoot, boost::filesystem::path filePath) const {
   if (!boost::filesystem::exists(filePath.parent_path())) {
     LOG(ERROR) << "Cannot write ptree to " << filePath << " because parent dir does not exist!" ;
     return false;

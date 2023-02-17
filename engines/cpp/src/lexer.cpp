@@ -180,11 +180,11 @@ std::ostream& operator<<(std::ostream& out, const Token& tok) {
 //    (\s(?!(?<="((\\[^\n]|[^"\\\n])*))((\\[^\n]|[^"\\\n])*)"))
 // const std::regex NON_STRING_SPACE_REGEX
 
-Lexer::Lexer(void) : Lexer::Base() {
+Lexer::Lexer(void) : Base() {
   assert(tokenRegexMap.size() == static_cast<size_t>(TokenType::NUM_TOKEN_TYPES) && "Must define regex for every token type!");
 }
 
-bool Lexer::validateOptionsAndSource(std::string sourceCode) {
+bool Lexer::validateOptionsAndSource(std::string sourceCode) const {
   if (sourceCode.empty()) {
     LOG(ERROR) << "Cannot lex empty file!" ;
     return false;
@@ -192,7 +192,7 @@ bool Lexer::validateOptionsAndSource(std::string sourceCode) {
   return true;
 }
 
-std::string Lexer::preprocessSource(std::string processed) {
+std::string Lexer::preprocessSource(std::string processed) const {
   // these would mess up line numbers! consider adding a token to account for this.
   // processed = std::regex_replace(processed, std::regex{"\\\\[^\\S\\n]*\\n"}, " "); // replace \\n with ` `
   // processed = std::regex_replace(processed, std::regex{"\\n+"}, "\n"); // replace multiple \n with single `\n`
@@ -201,12 +201,12 @@ std::string Lexer::preprocessSource(std::string processed) {
 
 typedef std::match_results<std::string::iterator>::value_type lexing_match;
 
-LexerResult Lexer::operator()(Lexer::Base::InputType &sourceCode, Lexer::Base::OutputType *&resultTokens) {
+Lexer::Base::ErrorType Lexer::operator()(Base::InputType &sourceCode, Base::OutputType *&resultTokens) const {
   if (!validateOptionsAndSource(sourceCode)) {
     return LexerResult::INVALID_LEXING_OPTIONS;
   }
 
-  resultTokens = new Lexer::Base::OutputType;
+  resultTokens = new Base::OutputType;
   std::string processedSource = preprocessSource(sourceCode);
 
   auto sourceBegin = processedSource.begin();
@@ -285,7 +285,7 @@ LexerResult Lexer::operator()(Lexer::Base::InputType &sourceCode, Lexer::Base::O
   return LexerResult::LEXING_SUCCESS;
 }
 
-bool Lexer::writeOutput(Lexer::Base::OutputType &tokens, boost::filesystem::path filePath) {
+bool Lexer::writeOutput(Base::OutputType &tokens, boost::filesystem::path filePath) const {
   if (!boost::filesystem::exists(filePath.parent_path())) {
     LOG(ERROR) << "Cannot write tokens to " << filePath << " because parent dir does not exist!" ;
     return false;

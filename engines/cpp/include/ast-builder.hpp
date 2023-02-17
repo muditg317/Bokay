@@ -1,6 +1,7 @@
 #ifndef AST_BUILDER_HPP
 #define AST_BUILDER_HPP
 
+#include "utilities.hpp"
 #include "grammar.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -77,13 +78,13 @@ struct ASTRootNode : public ASTNonLeafNode {
   inline std::string getName(void) const override {return "ASTRootNode";};
 };
 
-class ASTBuilder {
-  using input_t = ParsingTree;
-  using output_t = ASTRootNode;
+class ASTBuilder : public CompilerStage<ParseTree, ASTRootNode, ASTBuilderResult> {
  public:
+  using Base = CompilerStage<ParseTree, ASTRootNode, ASTBuilderResult>;
+
   ASTBuilder(void);
-  ASTBuilderResult run(input_t &parseTree, output_t *&resultTree) const;
-  bool writeTree(output_t &astRoot, boost::filesystem::path filePath) const;
+  Base::ErrorType operator()(Base::InputType &input, Base::OutputType *&output) const override;
+  bool writeOutput(Base::OutputType &output, boost::filesystem::path path) const override;
  private:
   bool reduce(ASTNode &astNode, ASTNode &result) const;
 };

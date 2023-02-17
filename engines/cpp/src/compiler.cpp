@@ -103,7 +103,7 @@ CompilerResult Compiler::run(void) {
   });
 
   ParseTree *ptreePtr = nullptr;
-  ParserResult parserResult = parser.run(*tokensPtr, ptreePtr);
+  ParserResult parserResult = parser(*tokensPtr, ptreePtr);
   if (parserResult != ParserResult::PARSING_SUCCESS) {
     LOG(ERROR) << "Parsing has failed! Code: " << static_cast<int>(parserResult);
     return CompilerResult::FAILED_PARSING;
@@ -114,11 +114,11 @@ CompilerResult Compiler::run(void) {
   if (outputTemps) {
     boost::filesystem::path ptreeFile = tempFileDir / fmt::format("{}.ptree", sourceName);
     LOG(INFO) << "Writing parse tree to temp file: " << ptreeFile;
-    parser.writeTree(*ptreePtr, ptreeFile);
+    parser.writeOutput(*ptreePtr, ptreeFile);
   }
 
   ASTRootNode *astRoot = nullptr;
-  ASTBuilderResult astBuilderResult = astBuilder.run(*ptreePtr, astRoot);
+  ASTBuilderResult astBuilderResult = astBuilder(*ptreePtr, astRoot);
   if (astBuilderResult != ASTBuilderResult::AST_BUILDING_SUCCESS) {
     LOG(ERROR) << "AST building has failed! Code: " << static_cast<int>(astBuilderResult);
     return CompilerResult::FAILED_AST_BUILDING;
@@ -129,7 +129,7 @@ CompilerResult Compiler::run(void) {
   if (outputTemps) {
     boost::filesystem::path astFile = tempFileDir / fmt::format("{}.ast", sourceName);
     LOG(INFO) << "Writing AST to temp file: " << astFile;
-    astBuilder.writeTree(*astRoot, astFile);
+    astBuilder.writeOutput(*astRoot, astFile);
   }
 
   return CompilerResult::COMPILATION_SUCCESS;

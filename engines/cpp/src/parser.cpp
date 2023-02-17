@@ -68,7 +68,7 @@ ParsingTree ParsingTree::recursivelyPrintDegenerateSubtrees(std::ostream &stream
 
 
 
-Parser::Parser(void) {
+Parser::Parser(void) : Base() {
   CHECK(grammarRuleMap.size() == static_cast<size_t>(ParseNodeType::NUM_NODE_TYPES)) << "Must define rule for every parse node type!" << std::endl << "Rule types: " << static_cast<int>(ParseNodeType::NUM_NODE_TYPES) << std::endl << "Rule map size: " << grammarRuleMap.size();
 }
 
@@ -83,7 +83,7 @@ void filterTokens(std::vector<Token> &rawTokens, std::vector<Token> &outTokens) 
   });
 }
 
-ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree *&resultTree) const {
+Parser::Base::ErrorType Parser::operator()(Base::InputType &rawTokens, Base::OutputType *&resultTree) const {
   std::vector<Token> tokens;
   filterTokens(rawTokens, tokens);
 
@@ -213,7 +213,7 @@ ParserResult Parser::run(std::vector<Token> rawTokens, ParseTree *&resultTree) c
       }
     }
   }
-  resultTree = new ParseTree(finalTree.root);
+  resultTree = new Base::OutputType(finalTree.root);
 
   // resultTree = ParseTree{finalTree.root};
   // if (finalTree.root.index() == PARSE_NODE_TYPE_INDEX) { // ParseNodeType
@@ -331,7 +331,7 @@ ParsingState ParsingState::advanced(ParseTreeChild recognizedChild) const {
 //   });
 // };
 
-bool Parser::writeTree(ParseTree &ptree, boost::filesystem::path filePath) {
+bool Parser::writeOutput(Base::OutputType &ptree, boost::filesystem::path filePath) const {
   if (!boost::filesystem::exists(filePath.parent_path())) {
     LOG(ERROR) << "Cannot write ptree to " << filePath << " because parent dir does not exist!" ;
     return false;

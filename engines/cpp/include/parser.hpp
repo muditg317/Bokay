@@ -1,6 +1,7 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
 
+#include "utilities.hpp"
 #include "lexer.hpp"
 #include "grammar.hpp"
 
@@ -102,11 +103,13 @@ struct ParsingStateSet {
 };
 
 
-class Parser {
+class Parser : public CompilerStage<std::vector<Token>, ParseTree, ParserResult> {
  public:
+  using Base = CompilerStage<std::vector<Token>, ParseTree, ParserResult>;
+
   Parser(void);
-  ParserResult run(std::vector<Token> tokens, ParseTree *&resultTree) const;
-  bool writeTree(ParseTree &ptree, boost::filesystem::path filePath);
+  Base::ErrorType operator()(Base::InputType &input, Base::OutputType *&output) const override;
+  bool writeOutput(Base::OutputType &output, boost::filesystem::path path) const override;
  private:
   bool prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd) const; // run the predictor on this state
   bool scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd, std::vector<Token> &tokens) const; // run the scanner on this state
