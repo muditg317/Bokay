@@ -78,9 +78,13 @@ struct ASTRootNode : public ASTNonLeafNode {
   inline std::string getName(void) const override {return "ASTRootNode";};
 };
 
-class ASTBuilder : public CompilerStage<ParseTree, ASTRootNode, ASTBuilderResult> {
+
+static auto ASTBuilderName = make_string("AST Builder");
+static auto ASTBuilderTmpOutExt = make_string("ast");
+using ASTBuilderBase = CompilerStage<ParseTree, ASTRootNode, ASTBuilderResult, decltype(ASTBuilderName), decltype(ASTBuilderTmpOutExt)>;
+class ASTBuilder : public ASTBuilderBase {
  public:
-  using Base = CompilerStage<ParseTree, ASTRootNode, ASTBuilderResult>;
+  using Base = ASTBuilderBase;
 
   ASTBuilder(void);
   Base::ErrorType operator()(Base::InputType &input, Base::OutputType *&output) const override;

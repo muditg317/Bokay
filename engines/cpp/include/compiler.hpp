@@ -6,6 +6,7 @@
 #include "parser.hpp"
 #include "ast-builder.hpp"
 
+#include <functional>
 #include <string>
 
 #include <boost/filesystem/path.hpp>
@@ -27,6 +28,16 @@ class Compiler {
     Lexer lexer;
     Parser parser;
     ASTBuilder astBuilder;
+
+    template<class Stage, CompilerResult FailureCode>
+    typename Stage::Base::OutputType &runStage(
+      Stage &stage,
+      typename Stage::Base::InputType &input
+      #ifdef DEBUG
+      , std::function<void(typename Stage::Base::OutputType &)> debugCallback = [](typename Stage::Base::OutputType &output) {}
+      #endif
+    ) const;
+
     bool validate_options(void);
     bool outputTemps;
     std::string sourceName;

@@ -101,9 +101,18 @@ class Token {
 boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const Token& tok);
 std::ostream& operator<<(std::ostream& out, const Token& tok);
 
-class Lexer : public CompilerStage<std::string, std::vector<Token>, LexerResult> {
+
+// make_string(Lexer);
+static auto LexerName = make_string("Lexer");
+static auto LexerTmpOutExt = make_string("tok");
+
+// constexpr str_const lexer{"Lexer"};
+// using lexer_t = string_const_to_type<lexer>;
+
+using LexerBase = CompilerStage<std::string, std::vector<Token>, LexerResult, decltype(LexerName), decltype(LexerTmpOutExt)>;
+class Lexer : public LexerBase {
   public:
-    using Base = CompilerStage<std::string, std::vector<Token>, LexerResult>;
+    using Base = LexerBase;
 
     Lexer(void);
     Base::ErrorType operator()(Base::InputType &sourceCode, Base::OutputType *&resultTokens) const override;

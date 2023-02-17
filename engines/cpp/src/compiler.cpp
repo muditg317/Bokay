@@ -71,6 +71,33 @@ bool Compiler::validate_options(void) {
   return true;
 }
 
+template<class Stage, CompilerResult FailureCode>
+typename Stage::Base::OutputType &Compiler::runStage(
+    Stage &stage,
+    typename Stage::Base::InputType &input
+    #ifdef DEBUG
+    , std::function<void(typename Stage::Base::OutputType &)> debugCallback
+    #endif
+  ) const {
+  typename Stage::Base::OutputType *output = nullptr;
+  typename Stage::Base::ErrorType errorCode = stage(input, output);
+  if (errorCode != Stage::Base::SUCCESS_CODE) {
+    LOG(ERROR) << "Stage " << Stage::Base::name() << " failed with error code " << static_cast<int>(errorCode) ;
+    throw FailureCode;
+  }
+  #ifdef DEBUG
+  debugCallback(*output);
+  #endif
+
+  if (outputTemps) {
+    boost::filesystem::path tempFile = tempFileDir / fmt::format("{}.{}", sourceName, Stage::Base::tmpOutExt());
+    LOG(INFO) << "Writing " << Stage::Base::name() << " outputs to temp file: " << tempFile;
+    stage.writeOutput(*output, tempFile);
+  }
+
+  return *output;
+}
+
 CompilerResult Compiler::run(void) {
   if (!validate_options()) {
     return CompilerResult::INVALID_COMPILATION_OPTIONS;
@@ -82,6 +109,22 @@ CompilerResult Compiler::run(void) {
   DLOG(INFO) << "File contains " << lines << " lines." ;
   int ind = fileContents.find('\n');
   DLOG(INFO) << "Line 1: " << fileContents.substr(0, ind != std::string::npos ? ind : fileContents.size()) ;
+
+  
+  try {
+    std::vector<Token> tokens = runStage<Lexer, CompilerResult::FAILED_LEXING>(lexer, fileContents
+    #ifdef DEBUG
+    , [](std::vector<Token> &tokens) {
+      DLOG(INFO) << "Found " << tokens.size() << " tokens!" ;
+      std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
+        DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" ;
+      });
+    }
+    #endif
+    );
+  } catch (CompilerResult e) {
+    return e;
+  }
 
   std::vector<Token> *tokensPtr = nullptr;
   LexerResult lexerResult = lexer(fileContents, tokensPtr);

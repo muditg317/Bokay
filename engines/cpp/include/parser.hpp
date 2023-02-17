@@ -102,10 +102,12 @@ struct ParsingStateSet {
   size_t size() const {return states.size();};
 };
 
-
-class Parser : public CompilerStage<std::vector<Token>, ParseTree, ParserResult> {
+static auto ParserName = make_string("Parser");
+static auto ParserTmpOutExt = make_string("ptree");
+using ParserBase = CompilerStage<std::vector<Token>, ParseTree, ParserResult, decltype(ParserName), decltype(ParserTmpOutExt)>;
+class Parser : public ParserBase {
  public:
-  using Base = CompilerStage<std::vector<Token>, ParseTree, ParserResult>;
+  using Base = ParserBase;
 
   Parser(void);
   Base::ErrorType operator()(Base::InputType &input, Base::OutputType *&output) const override;
