@@ -2,6 +2,7 @@
 #include "args-parser.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
+#include "ast-builder.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -114,6 +115,21 @@ CompilerResult Compiler::run(void) {
     boost::filesystem::path ptreeFile = tempFileDir / fmt::format("{}.ptree", sourceName);
     LOG(INFO) << "Writing parse tree to temp file: " << ptreeFile;
     parser.writeTree(*ptreePtr, ptreeFile);
+  }
+
+  ASTRootNode *astRoot = nullptr;
+  ASTBuilderResult astBuilderResult = astBuilder.run(*ptreePtr, astRoot);
+  if (astBuilderResult != ASTBuilderResult::AST_BUILDING_SUCCESS) {
+    LOG(ERROR) << "AST building has failed! Code: " << static_cast<int>(astBuilderResult);
+    return CompilerResult::FAILED_AST_BUILDING;
+  }
+
+  DLOG(INFO) << "Generated AST from parse tree";
+
+  if (outputTemps) {
+    boost::filesystem::path astFile = tempFileDir / fmt::format("{}.ast", sourceName);
+    LOG(INFO) << "Writing AST to temp file: " << astFile;
+    astBuilder.writeTree(*astRoot, astFile);
   }
 
   return CompilerResult::COMPILATION_SUCCESS;

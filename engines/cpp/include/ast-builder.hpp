@@ -1,5 +1,5 @@
-#ifndef PARSER_HPP
-#define PARSER_HPP
+#ifndef AST_BUILDER_HPP
+#define AST_BUILDER_HPP
 
 #include "grammar.hpp"
 #include "lexer.hpp"
@@ -16,7 +16,7 @@
 
 
 enum class ASTBuilderResult {
-  AST_BUILD_SUCCESS,
+  AST_BUILDING_SUCCESS,
   FAILED_REDUCTION,
 };
 
@@ -78,14 +78,14 @@ struct ASTRootNode : public ASTNonLeafNode {
 };
 
 class ASTBuilder {
-  using input_t = struct ParsingTree;
+  using input_t = ParsingTree;
   using output_t = ASTRootNode;
  public:
   ASTBuilder(void);
   ASTBuilderResult run(input_t &parseTree, output_t *&resultTree) const;
-  bool writeTree(ASTRootNode &astRoot, boost::filesystem::path filePath) const;
+  bool writeTree(output_t &astRoot, boost::filesystem::path filePath) const;
  private:
   bool reduce(ASTNode &astNode, ASTNode &result) const;
 };
 
-#endif
+#endif // AST_BUILDER_HPP

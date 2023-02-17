@@ -4,6 +4,7 @@
 #include "args-parser.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
+#include "ast-builder.hpp"
 
 #include <string>
 
@@ -15,6 +16,7 @@ enum class CompilerResult {
   INVALID_COMPILATION_OPTIONS,
   FAILED_LEXING,
   FAILED_PARSING,
+  FAILED_AST_BUILDING,
 };
 
 class Compiler {
@@ -24,6 +26,7 @@ class Compiler {
   private:
     Lexer lexer;
     Parser parser;
+    ASTBuilder astBuilder;
     bool validate_options(void);
     bool outputTemps;
     std::string sourceName;

@@ -84,7 +84,7 @@ ASTBuilderResult ASTBuilder::run(input_t &parseTree, output_t *&resultTree) cons
   DLOG(INFO) << finalTree.toTabbedString();
   resultTree = new ASTRootNode(finalTree);
 
-  return ASTBuilderResult::AST_BUILD_SUCCESS;
+  return ASTBuilderResult::AST_BUILDING_SUCCESS;
 }
 
 bool ASTBuilder::reduce(ASTNode &astNode, ASTNode &result) const {
@@ -92,7 +92,7 @@ bool ASTBuilder::reduce(ASTNode &astNode, ASTNode &result) const {
   return false;
 }
 
-bool ASTBuilder::writeTree(ASTRootNode &astRoot, boost::filesystem::path filePath) const {
+bool ASTBuilder::writeTree(output_t &astRoot, boost::filesystem::path filePath) const {
   if (!boost::filesystem::exists(filePath.parent_path())) {
     LOG(ERROR) << "Cannot write ptree to " << filePath << " because parent dir does not exist!" ;
     return false;
