@@ -13,17 +13,21 @@ enum class ParseNodeType {
   SOURCE, // [imports] [statements]
   SOURCE_BODY, // [import_group] [statements]
   IMPORT_GROUP, // [import_group] [import_stmnt] | [import_stmnt]
-  IMPORT_STATEMENT, // import [lib_name] , { method, otherField }  from [string] ;
-  LIB_NAME, // [id]
+  IMPORT_STATEMENT, // import [import_contents] from [string] ;
+  IMPORT_CONTENTS, // [import_lib_name] | [import_item_group] | [import_lib_name] , [import_item_group]
+  IMPORT_LIB_NAME, // [import_item]
+  IMPORT_ITEM_GROUP, // { [import_items] }
+  IMPORT_ITEMS, // [import_items] , [import_item] | [import_item]
+  IMPORT_ITEM, // [id]
 
   STATEMENTS, // [statements] [statement] | [statement]
-  STATEMENT, // [stmt_body] ; | [function_impl] | [return_stmt] | [condition_chain] | [loop]
+  STATEMENT, // [stmt_body] ; | [function_impl] | [return_stmt] | [condition_chain] | [loop] | [struct_decl] | [union_decl]
   STATEMENT_BODY, // [declaration] | [expression]
   CODE_BLOCK, // { [statements] }
 
   // declarations - C/C++ style
   DECLARATION, // [decl_specifier] [decl_list]
-  DECL_SPECIFIER, // [base_type] // TODO: | [struct_decl] | [union_decl]
+  DECL_SPECIFIER, // [base_type] | [id] // id == name of struct/union
   DECL_LIST, // [decl_list],[decl_item] | [decl_item]
   DECL_ITEM, // [declarator] | [declarator] equals [initializer]
   INITIALIZER, // [expression]
@@ -64,7 +68,13 @@ enum class ParseNodeType {
   BREAK_STMT, // break ;
   CONTINUE_STMT, // continue ;
 
-  // TODO: STRUCT_DEF, UNION_DEF,
+  // structs/union defs
+  STRUCT_DECL, // struct [id] { [struct_body] } ;
+  UNION_DECL, // [base_type] union [id] { [union_body] } ;
+  STRUCT_BODY, // [struct_body] [struct_item] | [struct_item]
+  UNION_BODY, // [union_body] [union_item] | [union_item]
+  STRUCT_ITEM, // [declaration] ;
+  UNION_ITEM, // [declaration] ;
 
   EXPRESSION, // [assignment_expr]
   ASSIGNMENT_EXPR, // [logical_expr] [assignment_op] [assignment_expr] | [logical_expr]
@@ -89,7 +99,7 @@ enum class ParseNodeType {
   
   VAR_EXPR, // [paren_expr] | [lib_access] | [id] | [literal]
   PAREN_EXPR, // ( [expression] )
-  LIB_ACCESS, // [lib_name] [lib_accessor] [id]
+  LIB_ACCESS, // [import_lib_name] [lib_accessor] [id]
   LIB_ACCESSOR, // ::
   ID, // variable // [word]
 

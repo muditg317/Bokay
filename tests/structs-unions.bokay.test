@@ -5,8 +5,7 @@
 [ args-parser.cpp: 105] INFO    - Output path: tests/build/structs-unions
 [ args-parser.cpp: 113] INFO    - Temp file output to: tests/build
 [    compiler.cpp:  96] INFO    - Writing tokens to temp file: "tests/build/structs-unions.tok"
-[      parser.cpp: 165] ERROR   - Parsing failed to recognize source from grammar!
-[    compiler.cpp: 107] ERROR   - Parsing has failed! Code: 2
+[    compiler.cpp: 115] INFO    - Writing parse tree to temp file: "tests/build/structs-unions.ptree"
 
 --STDERR-END
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
@@ -142,7 +141,146 @@ DECIMAL_LITERAL at [Line:   23, Column:  34]: `0`
         COMMENT at [Line:   23, Column:  37]: ` // must specify which type to use when extracting value\n`
 
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
-Parse tree(tests/build/structs-unions.ptree)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
+SOURCE > SOURCE_BODY > STATEMENTS
+	STATEMENTS
+		STATEMENTS
+			STATEMENTS
+				STATEMENTS
+					STATEMENTS
+						STATEMENTS
+							STATEMENTS
+								STATEMENTS > STATEMENT > STRUCT_DECL
+									KW_STRUCT(`struct`)
+									ID - WORD(`my_struct`)
+									OPEN_BRACE(`{`)
+									STRUCT_BODY
+										STRUCT_BODY > STRUCT_ITEM
+											DECLARATION
+												DECL_SPECIFIER - BASE_TYPE(`u16`)
+												DECL_LIST > DECL_ITEM > DECLARATOR
+													ID - WORD(`unsigned16`)
+											SEMICOLON(`;`)
+										STRUCT_ITEM
+											DECLARATION
+												DECL_SPECIFIER - BASE_TYPE(`s32`)
+												DECL_LIST > DECL_ITEM > DECLARATOR
+													ID - WORD(`number`)
+											SEMICOLON(`;`)
+									CLOSE_BRACE(`}`)
+									SEMICOLON(`;`)
+								STATEMENT
+									STATEMENT_BODY > DECLARATION
+										DECL_SPECIFIER - WORD(`my_struct`)
+										DECL_LIST > DECL_ITEM > DECLARATOR
+											ID - WORD(`struct_var`)
+									SEMICOLON(`;`)
+							STATEMENT
+								STATEMENT_BODY > EXPRESSION > ASSIGNMENT_EXPR
+									LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > MEMBER_ACCESS_EXPR
+										VARUSE_EXPR > VAR_EXPR
+											ID - WORD(`struct_var`)
+										PERIOD(`.`)
+										VAR_EXPR - WORD(`unsigned16`)
+									ASSIGNMENT_OP - EQUALS(`=`)
+									ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										LITERAL - DECIMAL_LITERAL(`1452`)
+								SEMICOLON(`;`)
+						STATEMENT
+							STATEMENT_BODY > EXPRESSION > ASSIGNMENT_EXPR
+								LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > MEMBER_ACCESS_EXPR
+									VARUSE_EXPR > VAR_EXPR
+										ID - WORD(`struct_var`)
+									PERIOD(`.`)
+									VAR_EXPR - WORD(`number`)
+								ASSIGNMENT_OP - EQUALS(`=`)
+								ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR
+									UNARY_OP - MINUS(`-`)
+									UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+										LITERAL - DECIMAL_LITERAL(`23441`)
+							SEMICOLON(`;`)
+					STATEMENT > UNION_DECL
+						BASE_TYPE(`u64`)
+						KW_UNION(`union`)
+						ID - WORD(`my_union`)
+						OPEN_BRACE(`{`)
+						UNION_BODY
+							UNION_BODY
+								UNION_BODY > UNION_ITEM
+									DECLARATION
+										DECL_SPECIFIER - BASE_TYPE(`f32`)
+										DECL_LIST > DECL_ITEM > DECLARATOR
+											ID - WORD(`height`)
+									SEMICOLON(`;`)
+								UNION_ITEM
+									DECLARATION
+										DECL_SPECIFIER - BASE_TYPE(`u32`)
+										DECL_LIST > DECL_ITEM > DECLARATOR > ARRAY_DECL
+											NO_PTR_DECL - WORD(`chunks`)
+											OPEN_BRACKET(`[`)
+											EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+												LITERAL - DECIMAL_LITERAL(`2`)
+											CLOSE_BRACKET(`]`)
+									SEMICOLON(`;`)
+							UNION_ITEM
+								DECLARATION
+									DECL_SPECIFIER - BASE_TYPE(`u16`)
+									DECL_LIST > DECL_ITEM > DECLARATOR > ARRAY_DECL
+										NO_PTR_DECL - WORD(`small_chunks`)
+										OPEN_BRACKET(`[`)
+										EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+											LITERAL - DECIMAL_LITERAL(`4`)
+										CLOSE_BRACKET(`]`)
+								SEMICOLON(`;`)
+						CLOSE_BRACE(`}`)
+						SEMICOLON(`;`)
+				STATEMENT
+					STATEMENT_BODY > DECLARATION
+						DECL_SPECIFIER - WORD(`my_union`)
+						DECL_LIST > DECL_ITEM
+							DECLARATOR - WORD(`union_var`)
+							EQUALS(`=`)
+							INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+								LITERAL - DECIMAL_LITERAL(`100`)
+					SEMICOLON(`;`)
+			STATEMENT
+				STATEMENT_BODY > DECLARATION
+					DECL_SPECIFIER - BASE_TYPE(`u64`)
+					DECL_LIST > DECL_ITEM
+						DECLARATOR - WORD(`a_number`)
+						EQUALS(`=`)
+						INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+							ID - WORD(`union_var`)
+				SEMICOLON(`;`)
+		STATEMENT
+			STATEMENT_BODY > DECLARATION
+				DECL_SPECIFIER - BASE_TYPE(`f64`)
+				DECL_LIST > DECL_ITEM
+					DECLARATOR - WORD(`big_float`)
+					EQUALS(`=`)
+					INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > MEMBER_ACCESS_EXPR
+						VARUSE_EXPR > VAR_EXPR
+							ID - WORD(`union_var`)
+						PERIOD(`.`)
+						VAR_EXPR - WORD(`height`)
+			SEMICOLON(`;`)
+	STATEMENT
+		STATEMENT_BODY > DECLARATION
+			DECL_SPECIFIER - BASE_TYPE(`u32`)
+			DECL_LIST > DECL_ITEM
+				DECLARATOR - WORD(`small_num`)
+				EQUALS(`=`)
+				INITIALIZER > EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > SUBSCRIPT_EXPR
+					VARUSE_EXPR > MEMBER_ACCESS_EXPR
+						VARUSE_EXPR > VAR_EXPR
+							ID - WORD(`union_var`)
+						PERIOD(`.`)
+						VAR_EXPR - WORD(`chunks`)
+					OPEN_BRACKET(`[`)
+					EXPRESSION > ASSIGNMENT_EXPR > LOGICAL_EXPR > RELATIONAL_EQ_EXPR > RELATIONAL_COMP_EXPR > ADDITIVE_EXPR > MULTIPLICATIVE_EXPR > UNARY_EXPR > VARUSE_EXPR > VAR_EXPR
+						LITERAL - DECIMAL_LITERAL(`0`)
+					CLOSE_BRACKET(`]`)
+		SEMICOLON(`;`)
+
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================
 AST(tests/build/structs-unions.ast)  FILE NOT FOUND -- SECRET: #@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&
 =================#@$(^*)&%^*%#$&@$#%$^*&(^%*#&$#%^$*&==================

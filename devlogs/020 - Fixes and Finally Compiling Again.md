@@ -4,16 +4,15 @@ February 16th, 2023
 
 Sign on: 5:15pm\
 Sign off: 7:00pm
-Also 5:30am - 6:30am
+Also 5:30am - 7:00am
 </div>
 
 ## Goals
 - [x] Fix compilation errors with glog
-- [ ] Understand+Fix remianing parser failures
-  - [ ] loops
-  - [ ] structs/unions
-  - [ ] full design
-- [ ] Begin work on AST generation (essentially reduced/compressed representation of parsing-tree)
+- [x] Understand+Fix remianing parser failures
+  - [x] loops
+  - [x] structs/unions
+  - [x] full design
 
 ## Struggles
 - Understanding the inner workings of `vcpkg` took a good bit of digging and debugging.
@@ -38,15 +37,23 @@ Also 5:30am - 6:30am
 - Allow functions to take any type of declarator as return type / parameter type
   - Required test updates for `functions.bokay`
 - Update `loops` tests to include correct output for `ParseTree` generation
+- Add support for structs/unions
+  - Add grammar rules for struct/union declarations
+  - Update `structs-unions` tests accordingly
+- Fix grammar rules for import statements to enable `LibName, { method, otherField, anotherExport }` syntax
+  - Update `full-design` tests accordingly
 
 ## TODO
-1. Finish parsing errors before moving to AST generation
+2. Create isolated tests/logic for import/export statements -- Just this line is causing `full-design` to fail
+1. Start AST generation
 
 ## Language Status/Changes
 - Consider support for parameter groups -- untyped parameters inherit the type of the preceding parameter (e.g. `int a, b, c;`)
 - Functions previously only had `no_ptr_decl` parameters -- now can have any `declarator` parameter
   - not sure why it was `no_ptr_decl` initially
+- Consider adding support for `enum` statements (and also `goto` statements)
 
 ## Unorganized thoughts as they came
 - Wow, using `objdump -D` helped A LOT for determining if the second implementation of `google::InitGoogleLogging` was being compiled
   - Thank you to CS6035 (Info Sec) project 1 for teaching me about `objdump`!
+- Wow, GitHub Copilot gives great compiler feature suggestions :)

@@ -30,13 +30,48 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
   { ParseNodeType::IMPORT_STATEMENT, {
     Production{ {
       TokenType::KW_IMPORT,
-      ParseNodeType::LIB_NAME,
+      ParseNodeType::IMPORT_CONTENTS,
       TokenType::KW_FROM,
       TokenType::STRING,
       TokenType::SEMICOLON,
     } },
   } },
-  { ParseNodeType::LIB_NAME, {
+  { ParseNodeType::IMPORT_CONTENTS, {
+    Production{ {
+      ParseNodeType::IMPORT_LIB_NAME,
+    } },
+    Production{ {
+      ParseNodeType::IMPORT_ITEM_GROUP,
+    } },
+    Production{ {
+      ParseNodeType::IMPORT_LIB_NAME,
+      TokenType::COMMA,
+      ParseNodeType::IMPORT_ITEM_GROUP,
+    } },
+  } },
+  { ParseNodeType::IMPORT_LIB_NAME, {
+    Production{ {
+      ParseNodeType::IMPORT_ITEM,
+    } },
+  } },
+  { ParseNodeType::IMPORT_ITEM_GROUP, {
+    Production{ {
+      TokenType::OPEN_BRACE,
+      ParseNodeType::IMPORT_ITEMS,
+      TokenType::CLOSE_BRACE,
+    } },
+  } },
+  { ParseNodeType::IMPORT_ITEMS, {
+    Production{ {
+      ParseNodeType::IMPORT_ITEMS,
+      TokenType::COMMA,
+      ParseNodeType::IMPORT_ITEM,
+    } },
+    Production{ {
+      ParseNodeType::IMPORT_ITEM,
+    } },
+  } },
+  { ParseNodeType::IMPORT_ITEM, {
     Production{ {
       ParseNodeType::ID,
     } },
@@ -67,6 +102,12 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
     Production{ {
       ParseNodeType::LOOP,
     } },
+    Production{ {
+      ParseNodeType::STRUCT_DECL,
+    } },
+    Production{ {
+      ParseNodeType::UNION_DECL,
+    } },
   } },
   { ParseNodeType::STATEMENT_BODY, {
     Production{ {
@@ -92,6 +133,9 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
   { ParseNodeType::DECL_SPECIFIER, {
     Production{ {
       TokenType::BASE_TYPE,
+    } },
+    Production{ {
+      ParseNodeType::ID,
     } },
   } },
   { ParseNodeType::DECL_LIST, {
@@ -334,6 +378,57 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
       TokenType::SEMICOLON,
     } },
   } },
+  { ParseNodeType::STRUCT_DECL, {
+    Production{ {
+      TokenType::KW_STRUCT,
+      ParseNodeType::ID,
+      TokenType::OPEN_BRACE,
+      ParseNodeType::STRUCT_BODY,
+      TokenType::CLOSE_BRACE,
+      TokenType::SEMICOLON,
+    } },
+  } },
+  { ParseNodeType::UNION_DECL, {
+    Production{ {
+      TokenType::BASE_TYPE,
+      TokenType::KW_UNION,
+      ParseNodeType::ID,
+      TokenType::OPEN_BRACE,
+      ParseNodeType::UNION_BODY,
+      TokenType::CLOSE_BRACE,
+      TokenType::SEMICOLON,
+    } },
+  } },
+  { ParseNodeType::STRUCT_BODY, {
+    Production{ {
+      ParseNodeType::STRUCT_BODY,
+      ParseNodeType::STRUCT_ITEM,
+    } },
+    Production{ {
+      ParseNodeType::STRUCT_ITEM,
+    } },
+  } },
+  { ParseNodeType::UNION_BODY, {
+    Production{ {
+      ParseNodeType::UNION_BODY,
+      ParseNodeType::UNION_ITEM,
+    } },
+    Production{ {
+      ParseNodeType::UNION_ITEM,
+    } },
+  } },
+  { ParseNodeType::STRUCT_ITEM, {
+    Production{ {
+      ParseNodeType::DECLARATION,
+      TokenType::SEMICOLON,
+    } },
+  } },
+  { ParseNodeType::UNION_ITEM, {
+    Production{ {
+      ParseNodeType::DECLARATION,
+      TokenType::SEMICOLON,
+    } },
+  } },
   { ParseNodeType::EXPRESSION, {
     Production{ {
       ParseNodeType::ASSIGNMENT_EXPR,
@@ -568,7 +663,7 @@ const std::map<const ParseNodeType, const std::vector<Production>> grammarRuleMa
   } },
   { ParseNodeType::LIB_ACCESS, {
     Production{ {
-      ParseNodeType::LIB_NAME,
+      ParseNodeType::IMPORT_LIB_NAME,
       ParseNodeType::LIB_ACCESSOR,
       ParseNodeType::ID,
     } },
@@ -614,7 +709,11 @@ std::string typeToString(const ParseNodeType& type) {
     case ParseNodeType::SOURCE_BODY: return "SOURCE_BODY";
     case ParseNodeType::IMPORT_GROUP: return "IMPORT_GROUP";
     case ParseNodeType::IMPORT_STATEMENT: return "IMPORT_STATEMENT";
-    case ParseNodeType::LIB_NAME: return "LIB_NAME";
+    case ParseNodeType::IMPORT_CONTENTS: return "IMPORT_CONTENTS";
+    case ParseNodeType::IMPORT_LIB_NAME: return "IMPORT_LIB_NAME";
+    case ParseNodeType::IMPORT_ITEM_GROUP: return "IMPORT_ITEM_GROUP";
+    case ParseNodeType::IMPORT_ITEMS: return "IMPORT_ITEMS";
+    case ParseNodeType::IMPORT_ITEM: return "IMPORT_ITEM";
     case ParseNodeType::STATEMENTS: return "STATEMENTS";
     case ParseNodeType::STATEMENT: return "STATEMENT";
     case ParseNodeType::STATEMENT_BODY: return "STATEMENT_BODY";
@@ -651,6 +750,12 @@ std::string typeToString(const ParseNodeType& type) {
     case ParseNodeType::DO_WHILE_LOOP: return "DO_WHILE_LOOP";
     case ParseNodeType::BREAK_STMT: return "BREAK_STMT";
     case ParseNodeType::CONTINUE_STMT: return "CONTINUE_STMT";
+    case ParseNodeType::STRUCT_DECL: return "STRUCT_DECL";
+    case ParseNodeType::UNION_DECL: return "UNION_DECL";
+    case ParseNodeType::STRUCT_BODY: return "STRUCT_BODY";
+    case ParseNodeType::UNION_BODY: return "UNION_BODY";
+    case ParseNodeType::STRUCT_ITEM: return "STRUCT_ITEM";
+    case ParseNodeType::UNION_ITEM: return "UNION_ITEM";
     case ParseNodeType::EXPRESSION: return "EXPRESSION";
     case ParseNodeType::ASSIGNMENT_EXPR: return "ASSIGNMENT_EXPR";
     case ParseNodeType::ASSIGNMENT_OP: return "ASSIGNMENT_OP";
