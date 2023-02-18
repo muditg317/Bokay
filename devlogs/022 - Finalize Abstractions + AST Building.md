@@ -44,6 +44,7 @@ constexpr bool strings_equal(char const * a, char const * b) {
 - Create macros for generating the compile-time mappings -- easier extensibility with more stages
 - Cleanup include/header files + add `#pragma once` to all headers
   - Moved `CompilerStage` to separate header
+  - Migrate compile-time mapping templates/macros into `utilities.hpp` header
 
 ## TODO
 - 
