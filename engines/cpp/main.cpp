@@ -5,12 +5,7 @@
 #include <iostream>
 #include <iomanip>
 
-#define CUSTOM_PREFIX_SUPPORT
-#ifdef CUSTOM_PREFIX_SUPPORT
-#define GLOG_CUSTOM_PREFIX_SUPPORT
-#define WITH_CUSTOM_PREFIX
-#endif
-#include <glog/logging.h>
+#include "logging-inc.hpp"
 // potential missing log detection regex: (?<!LOG.*)<<(?!.*<<)
 
 #ifdef CUSTOM_PREFIX_SUPPORT

@@ -14,6 +14,8 @@ Pretty slow working -- lots of dead time
 
 ## Struggles
 - Playing with tuples and compile-time parameter packs and fold expressions -- very confusing and sad
+- Moving all the stage logic to generic `Pipeline` class proved quite difficult
+  - Building the `next_stage_for` map at compile time was quite a pain
 
 ## Notes
 ### Compile-time Macros / Template Quirks
@@ -45,6 +47,7 @@ constexpr bool strings_equal(char const * a, char const * b) {
 - Cleanup include/header files + add `#pragma once` to all headers
   - Moved `CompilerStage` to separate header
   - Migrate compile-time mapping templates/macros into `utilities.hpp` header
+- Extract `Pipeline` class to wrap logic of connected stages
 
 ## TODO
 - 

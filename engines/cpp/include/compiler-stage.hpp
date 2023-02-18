@@ -1,6 +1,6 @@
 #pragma once
 
-#include <utilities.hpp>
+#include "utilities.hpp"
 
 template <class Stage>
 using StageInputType = typename Stage::InputType;
@@ -18,6 +18,7 @@ class CompilerStage {
   constexpr static auto NAME = Name.value;
   constexpr static StringLiteral NAME_ = Name;
   constexpr static auto TMP_OUT_EXT = TmpOutExt.value;
+  constexpr static auto TMP_OUT_EXT_ = TmpOutExt;
 
   using InputType = Input_t;
   using OutputType = Output_t;
