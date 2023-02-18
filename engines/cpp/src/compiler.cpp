@@ -1,4 +1,5 @@
 #include "compiler.hpp"
+#include "utilities.hpp"
 #include "args-parser.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -8,6 +9,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <tuple>
+#include <vector>
 
 #include <boost/filesystem.hpp>
 #include <boost/range/algorithm/count.hpp>
@@ -71,18 +74,19 @@ bool Compiler::validate_options(void) {
   return true;
 }
 
-template<class Stage, CompilerResult FailureCode>
+template<class Stage>
 typename Stage::Base::OutputType &Compiler::runStage(
-    Stage &stage,
     typename Stage::Base::InputType &input
   ) const {
+
+  const Stage &stage = std::get<Stage>(stages);
 
   typename Stage::Base::OutputType *output = nullptr;
   typename Stage::Base::ErrorType errorCode = stage(input, output);
 
   if (errorCode != Stage::Base::SUCCESS_CODE) {
     LOG(ERROR) << "Stage " << Stage::Base::NAME << " failed with error code " << static_cast<int>(errorCode) ;
-    throw FailureCode;
+    throw ccode_ct_map::type<Stage::NAME_>;
   }
 
   #ifdef DEBUG
@@ -112,11 +116,19 @@ CompilerResult Compiler::run(void) {
 
   
   try {
-    std::vector<Token> tokens = runStage(lexer, fileContents);
+    std::vector<Token> tokens = runStage<Lexer>(fileContents);
+    ParseTree ptree = runStage<Parser>(tokens);
+    ASTRootNode astRoot = runStage<ASTBuilder>(ptree);
 
-    ParseTree ptree = runStage(parser, tokens);
+    // // tuple type for InputType of each compiler stage (from std::tuple stages)
+    // using InputPtrTuple = transform_tuple<StageInputTypeTransformer::transform<decltype(stages)>, std::add_pointer_t>;
+    // InputPtrTuple inputs;
 
-    ASTRootNode astRoot = runStage(astBuilder, ptree);
+    // std::get<TupleIndexOf<Lexer, decltype(stages)>>(inputs) = &fileContents;
+
+    
+
+
   } catch (CompilerResult e) {
     return e;
   }

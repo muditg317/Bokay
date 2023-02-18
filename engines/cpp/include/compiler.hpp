@@ -119,13 +119,13 @@ class Compiler {
     Compiler(Options &options);
     CompilerResult run(void);
   private:
-    Lexer lexer;
-    Parser parser;
-    ASTBuilder astBuilder;
+    std::tuple<Lexer, Parser, ASTBuilder> stages;
+    // Lexer lexer;
+    // Parser parser;
+    // ASTBuilder astBuilder;
 
-    template<class Stage, CompilerResult FailureCode = ccode_ct_map::type<Stage::NAME_>>
+    template<class Stage>
     typename Stage::Base::OutputType &runStage(
-      Stage &stage,
       typename Stage::Base::InputType &input
     ) const;
 
