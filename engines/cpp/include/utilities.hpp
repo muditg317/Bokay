@@ -25,7 +25,7 @@ struct TupleIndexOf;
 
 template <class T>
 struct TupleIndexOf<T, std::tuple<>> {
-  static_assert(always_false<T>, "T was not found in tuple");
+  // static_assert(always_false<T>, "T was not found in tuple");
   static const std::size_t value = 0;
 };
 

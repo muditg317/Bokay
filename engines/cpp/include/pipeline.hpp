@@ -1,6 +1,7 @@
 #pragma once
 
 #include "utilities.hpp"
+#include "compiler-stage.hpp"
 
 #include <tuple>
 #include <type_traits>
@@ -9,6 +10,9 @@
 
 template<class ... Stages>
 struct next_stage_helper {
+ private:
+  struct magic_type {};
+ public:
   using StagesTuple = std::tuple<Stages...>;
   constexpr static auto Count = sizeof...(Stages);
   template<class Stage>
@@ -16,70 +20,19 @@ struct next_stage_helper {
   template<size_t Ind>
   using StageAt = std::tuple_element_t<Ind, StagesTuple>;
 
-  using _Inds = std::make_index_sequence<Count-1>;
-
-  // template<class Stage>
-  // struct next_stage {
-  //   using type = StageAt<StageIndex<Stage>+1>;
-  // };
-
   template<size_t ... Inds>
   static constexpr auto next_stage_map_f(std::index_sequence<Inds...>)
       ->  TypeToType::map<
-            TypeToType::pair<StageAt<Inds>, StageAt<Inds+1>>...
+            TypeToType::pair<StageAt<Inds>, StageAt<Inds+1>>...,
+            TypeToType::pair<StageAt<Count-1>, magic_type>
           >;
   
-  using next_stage_map = decltype( next_stage_map_f(_Inds{}) );
-
-  // static constexpr next_stage_map foo = 5;
+  using next_stage_map = decltype( next_stage_map_f(
+      std::make_index_sequence<Count-1>{}
+    ) );
 
   template <class Stage>
   using next_t = typename next_stage_map::template value<Stage>;
-
-  // template<size_t ... Inds>
-  // struct next_stage_map_s : std::index_sequence<Inds...> {
-  //   using map = TypeToType::map<
-  //                 TypeToType::pair<StageAt<Inds>, StageAt<Inds+1>>...
-  //               >;
-
-  //   template<class Stage>
-  //   using value = typename map::template value<Stage>;
-  // };
-
-  // using next_stage_map_ = next_stage_map_s<_Inds{}>;
-
-  // template <class Stage>
-  // using next_t = typename next_stage_map_::map::template value<Stage>;
-
-  // static_assert( std::is_same_v<next_t<StageAt<0>>, StageAt<1>> );
-  // static_assert( std::is_same_v<next_t<StageAt<0>>, StageAt<2>> );
-
-  //      TypeToType::map<
-  //   TypeToType::pair<Stages, next_stage<Stages>>...
-  // >;
-
-  // template<class Stage>
-  // using next_t = typename next_stage<Stage>::type;
-
-  // template<class Stage, size_t ... Inds>
-  // static constexpr auto get_next_stage_helper(std::index_sequence<Inds...>) {
-  //   return std::array<std::tuple_element_t<Inds+1, StagesTuple>, Count-1>{};
-  // }
-
-  // template<class Stage>
-  // static constexpr auto get_next_stage() {
-  //   return get_next_stage_helper<Stage>(_Inds{});
-  // }
-
-  // template<class Stage, size_t ... Inds>
-  // static constexpr auto get_next_stage_index_helper(std::index_sequence<Inds...>) {
-  //   return std::array<size_t, Count-1>{TupleIndexOf_v<std::tuple_element_t<Inds+1, StagesTuple>, StagesTuple>...};
-  // }
-
-  // template<class Stage>
-  // static constexpr auto get_next_stage_index() {
-  //   return get_next_stage_index_helper<Stage>(_Inds{});
-  // }
 };
 
 template<class ... Stages>
@@ -97,9 +50,11 @@ class Pipeline {
   using LastStage = std::tuple_element_t<StageCount-1, StagesTuple>;
   template<class Stage>
   constexpr static auto StageIndex = TupleIndexOf_v<Stage, StagesTuple>;
+  template<size_t Ind>
+  using StageAt = std::tuple_element_t<Ind, StagesTuple>;
 
   template<class Stage>
-  using next_stage_for = typename next_stage_helper<Stages...>::template next_t<Stage>;
+  using next_stage = typename next_stage_helper<Stages...>::template next_t<Stage>;
 
  public:
   Pipeline() = default;

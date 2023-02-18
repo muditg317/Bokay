@@ -2,6 +2,9 @@
 
 #include "logging-inc.hpp"
 
+#include <tuple>
+#include <utility>
+
 #include <boost/filesystem/path.hpp>
 #include <fmt/format.h>
 
@@ -43,20 +46,24 @@ typename Pipeline<Stages...>::LastStage::Base::OutputType &Pipeline<Stages...>::
   PipelineOptions options
 ) const {
 
-  InputPtrTuple inputs;
-  std::get<StageIndex<FirstStage>>(inputs) = &input;
-  typename LastStage::Base::OutputType *output = nullptr;
+  using LastOutputPtrTuple = std::tuple<std::tuple_element_t<StageIndex<LastStage>, OutputPtrTuple>>;
+  using PipelineDataTuple = decltype(std::tuple_cat(std::declval<InputPtrTuple>(), std::declval<LastOutputPtrTuple>()));
+  PipelineDataTuple pipelineData;
+  std::get<StageIndex<FirstStage>>(pipelineData) = &input;
+
+  // typename LastStage::Base::OutputType *(&output) = std::get<StageIndex<next_stage<LastStage>>>(pipelineData);
 
   auto applyInputsFromOutputs = [&]<std::size_t... index_seq>(std::index_sequence<index_seq...>) {
-    (runStage<std::tuple_element_t<index_seq, StagesTuple>>(
-      *std::get<StageIndex<std::tuple_element_t<index_seq, StagesTuple>>>(inputs),
-      std::get<StageIndex<next_stage_for<std::tuple_element_t<index_seq, StagesTuple>>>>(inputs),
+    (runStage<StageAt<index_seq>>(
+      *std::get<StageIndex<StageAt<index_seq>>>(pipelineData),
+      std::get<StageIndex<next_stage<StageAt<index_seq>>>>(pipelineData),
       options
     ), ...);
   };
-  applyInputsFromOutputs(std::make_index_sequence<StageCount-1>{});
+  applyInputsFromOutputs(std::make_index_sequence<StageCount>{});
 
-  runStage<LastStage>(*std::get<StageIndex<LastStage>>(inputs), output, options);
+  // runStage<LastStage>(*std::get<StageIndex<LastStage>>(pipelineData), output, options);
 
-  return *output;
+  // return *output;
+  return *std::get<StageIndex<next_stage<LastStage>>>(pipelineData);
 }

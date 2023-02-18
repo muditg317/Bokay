@@ -25,7 +25,6 @@ enum class CompilerResult {
 };
 
 
-
 #define ALL_STAGES \
 X(Lexer, tok, FAILED_LEXING, Parser) X_delim \
 X(Parser, ptree, FAILED_PARSING, ASTBuilder) X_delim \
@@ -58,29 +57,8 @@ class Compiler {
   CompilerResult operator()(void);
  private:
   #define X(Stage, ext, compRes, next) Stage
-  // using StagesTuple = std::tuple<ALL_STAGES>;
   Pipeline<ALL_STAGES> pipeline;
   #undef X
-  // constexpr static auto StageCount = std::tuple_size_v<StagesTuple>;
-  // using FirstStage = std::tuple_element_t<0, StagesTuple>;
-  // using LastStage = std::tuple_element_t<StageCount-1, StagesTuple>;
-  // template<class Stage>
-  // constexpr static auto StageIndex = TupleIndexOf_v<Stage, StagesTuple>;
-
-  // StagesTuple stages;
-
-  // using OutputPtrTuple = transform_tuple_t<StageOutputTypeTransformer::transform<StagesTuple>, std::add_pointer_t>;
-  // using InputPtrTuple = transform_tuple_t<StageInputTypeTransformer::transform<StagesTuple>, std::add_pointer_t>;
-
-  // template<class Stage>
-  // typename Stage::Base::OutputType &runStage(
-  //   typename Stage::Base::InputType &input,
-  //   typename Stage::Base::OutputType *&output
-  // ) const;
-
-  // LastStage::Base::OutputType &runStages(
-  //   FirstStage::Base::InputType &input
-  // ) const;
 
   bool validate_options(void);
   bool outputTemps;
