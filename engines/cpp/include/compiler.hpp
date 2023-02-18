@@ -82,8 +82,6 @@ struct CompilerStageTypeMapping {
     -> decltype( std::get<0>( std::tuple_cat(
               std::declval<typename get_tuple<Stage, Stages, Ts>::type>()...)) );
 
-    // static constexpr auto find_type_func<void> () -> void;
-
     template <class Stage>
     using type
       = std::remove_reference_t<decltype( find_type_func<Stage>() )>;
@@ -122,19 +120,15 @@ class Compiler {
   using OutputPtrTuple = transform_tuple_t<StageOutputTypeTransformer::transform<StagesTuple>, std::add_pointer_t>;
   using InputPtrTuple = transform_tuple_t<StageInputTypeTransformer::transform<StagesTuple>, std::add_pointer_t>;
   using InputPtrRefTuple = transform_tuple_t<transform_tuple_t<InputPtrTuple, std::reference_wrapper>, std::type_identity_t>;
-  // Lexer lexer;
-  // Parser parser;
-  // ASTBuilder astBuilder;
 
   template<class Stage>
   typename Stage::Base::OutputType &runStage(
     typename Stage::Base::InputType &input,
-    typename Stage::Base::OutputType *&output// = static_cast<typename Stage::Base::OutputType *>(nullptr)
+    typename Stage::Base::OutputType *&output
   ) const;
 
-  template<class ... Stages>
-  typename std::tuple_element_t<sizeof...(Stages)-1, std::tuple<Stages...>>::Base::OutputType &runStages(
-    typename std::tuple_element_t<0, std::tuple<Stages...>>::Base::InputType &input
+  LastStage::Base::OutputType &runStages(
+    FirstStage::Base::InputType &input
   ) const;
 
   bool validate_options(void);
