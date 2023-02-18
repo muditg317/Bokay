@@ -76,12 +76,15 @@ typename Stage::Base::OutputType &Compiler::runStage(
     Stage &stage,
     typename Stage::Base::InputType &input
   ) const {
+
   typename Stage::Base::OutputType *output = nullptr;
   typename Stage::Base::ErrorType errorCode = stage(input, output);
+
   if (errorCode != Stage::Base::SUCCESS_CODE) {
     LOG(ERROR) << "Stage " << Stage::Base::NAME << " failed with error code " << static_cast<int>(errorCode) ;
     throw FailureCode;
   }
+
   #ifdef DEBUG
   stage.debugCallback(*output);
   #endif
@@ -109,11 +112,11 @@ CompilerResult Compiler::run(void) {
 
   
   try {
-    std::vector<Token> tokens = runStage<Lexer, CompilerResult::FAILED_LEXING>(lexer, fileContents);
+    std::vector<Token> tokens = runStage(lexer, fileContents);
 
-    ParseTree ptree = runStage<Parser, CompilerResult::FAILED_PARSING>(parser, tokens);
+    ParseTree ptree = runStage(parser, tokens);
 
-    ASTRootNode astRoot = runStage<ASTBuilder, CompilerResult::FAILED_AST_BUILDING>(astBuilder, ptree);
+    ASTRootNode astRoot = runStage(astBuilder, ptree);
   } catch (CompilerResult e) {
     return e;
   }

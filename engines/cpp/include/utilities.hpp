@@ -11,6 +11,9 @@ struct StringLiteral {
   constexpr StringLiteral(const char (&str)[N]) {
       std::copy_n(str, N, value);
   }
+  constexpr StringLiteral(const StringLiteral<N> &other) {
+      std::copy_n(other.value, N, value);
+  }
   char value[N];
 };
 
@@ -19,16 +22,17 @@ class CompilerStage {
   static_assert(std::is_enum<ErrorCode>::value, "ErrorCode must be an enum");
  public:
   constexpr static ErrorCode SUCCESS_CODE = static_cast<ErrorCode>(0);
-  // static const char *name(void) { return String_Name::chars; };
   constexpr static auto NAME = Name.value;
+  constexpr static auto NAME_LEN = sizeof(Name.value);
+  constexpr static StringLiteral NAME_ = Name;
   constexpr static auto TMP_OUT_EXT = TmpOutExt.value;
-  // static const char *name(void) { return Name.value; };
-  // static const char *tmpOutExt(void) { return TmpOutExt::chars; };
-  // constexpr static char NAME[] = Name::c_str();
 
   using InputType = Input_t;
   using OutputType = Output_t;
   using ErrorType = ErrorCode;
+
+  // using NameType = Name;
+  // using TmpOutExtType = TmpOutExt;
 
   CompilerStage(void) {};
   virtual ErrorCode operator()(Input_t &input, Output_t *&output) const = 0;
