@@ -1,7 +1,6 @@
-#ifndef PARSER_HPP
-#define PARSER_HPP
+#pragma once
 
-#include "utilities.hpp"
+#include "compiler-stage.hpp"
 #include "lexer.hpp"
 #include "grammar.hpp"
 
@@ -118,5 +117,3 @@ class Parser : public ParserBase {
   bool scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd, std::vector<Token> &tokens) const; // run the scanner on this state
   bool completion(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd) const; // run the completer on this state
 };
-
-#endif

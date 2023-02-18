@@ -42,6 +42,8 @@ constexpr bool strings_equal(char const * a, char const * b) {
   - This allows for cleaner usage of map lookup with just the `CompilerStage` typename
 - Implement automatic `runStages` function that can run the entire pipeline
 - Create macros for generating the compile-time mappings -- easier extensibility with more stages
+- Cleanup include/header files + add `#pragma once` to all headers
+  - Moved `CompilerStage` to separate header
 
 ## TODO
 - 

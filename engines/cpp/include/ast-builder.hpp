@@ -1,7 +1,6 @@
-#ifndef AST_BUILDER_HPP
-#define AST_BUILDER_HPP
+#pragma once
 
-#include "utilities.hpp"
+#include "compiler-stage.hpp"
 #include "grammar.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -93,5 +92,3 @@ class ASTBuilder : public ASTBuilderBase {
  private:
   bool reduce(ASTNode &astNode, ASTNode &result) const;
 };
-
-#endif // AST_BUILDER_HPP

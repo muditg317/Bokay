@@ -1,7 +1,6 @@
-#ifndef LEXER_HPP
-#define LEXER_HPP
+#pragma once
 
-#include "utilities.hpp"
+#include "compiler-stage.hpp"
 #include "args-parser.hpp"
 
 #include <iostream>
@@ -102,13 +101,6 @@ boost::filesystem::ofstream& operator<<(boost::filesystem::ofstream& ofs, const 
 std::ostream& operator<<(std::ostream& out, const Token& tok);
 
 
-// make_string(Lexer);
-// static auto LexerName = make_string("Lexer");
-// static auto LexerTmpOutExt = make_string("tok");
-
-// constexpr str_const lexer{"Lexer"};
-// using lexer_t = string_const_to_type<lexer>;
-
 using LexerBase = CompilerStage<std::string, std::vector<Token>, LexerResult, "Lexer", "tok">;
 class Lexer : public LexerBase {
   public:
@@ -122,5 +114,3 @@ class Lexer : public LexerBase {
     bool validateOptionsAndSource(std::string sourceCode) const;
     std::string preprocessSource(std::string sourceCode) const;
 };
-
-#endif

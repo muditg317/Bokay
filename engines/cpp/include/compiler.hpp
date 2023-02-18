@@ -2,6 +2,7 @@
 #define COMPILER_HPP
 
 #include "utilities.hpp"
+#include "compiler-stage.hpp"
 #include "args-parser.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -78,13 +79,12 @@ struct CompilerStageTypeMapping {
   struct map<pair<Stages, Ts>...>
   {
     template <class Stage>
-    static constexpr auto find_type_func ()
-    -> decltype( std::get<0>( std::tuple_cat(
-              std::declval<typename get_tuple<Stage, Stages, Ts>::type>()...)) );
+    static constexpr auto find_value_func ()
+        -> decltype( std::get<0>( std::tuple_cat(
+            std::declval<typename get_tuple<Stage, Stages, Ts>::type>()...)) );
 
     template <class Stage>
-    using type
-      = std::remove_reference_t<decltype( find_type_func<Stage>() )>;
+    using value = std::remove_reference_t<decltype( find_value_func<Stage>() )>;
   };
 };
 
@@ -135,90 +135,48 @@ struct CompilerStageStringMapping {
   };
 };
 
-#define LEXER X(Lexer, tok, FAILED_LEXING)
-#define PARSER X(Parser, ptree, FAILED_PARSING)
-#define AST_BUILDER X(ASTBuilder, ast, FAILED_AST_BUILDING)
+#define LEXER X(Lexer, tok, FAILED_LEXING, Parser)
+#define PARSER X(Parser, ptree, FAILED_PARSING, ASTBuilder)
+#define AST_BUILDER X(ASTBuilder, ast, FAILED_AST_BUILDING, void)
+
+#define X_delim , // must be reset to , after use (if changed)
 
 #define ALL_STAGES \
 LEXER X_delim \
 PARSER X_delim \
 AST_BUILDER
 
-// X should be just Stage
-// X_delim should be based on 
-#define CREATE_MAPPING(mapping_name, mapping_type) \
+#define CREATE_MAPPING(result_type, mapping_name, mapping_type) \
   using mapping_name##_map = mapping_type::map< \
     ALL_STAGES \
   >; \
   template<class Stage> \
-  constexpr auto mapping_name = mapping_name##_map::value<Stage>;
+  result_type mapping_name = mapping_name##_map::value<Stage>;
 #define MAPPING_ENTRY(mapping_type, Stage, value) \
     mapping_type::pair< \
       Stage, value \
     >
 
-
-// using CompilerCodeMapping = CompilerStageMapping<CompilerResult>;
-// using compiler_failure_code_map = CompilerCodeMapping::map<CompilerCodeMapping::pair<Lexer, CompilerResult::FAILED_LEXING>,
-//                                                                CompilerCodeMapping::pair<Parser, CompilerResult::FAILED_PARSING>,
-//                                                                CompilerCodeMapping::pair<ASTBuilder, CompilerResult::FAILED_AST_BUILDING>>;
-// template<class Stage>
-// constexpr CompilerResult failure_code_for = compiler_failure_code_map::value<Stage>;
-
-#define X(Stage, ext, compRes) MAPPING_ENTRY(CompilerStageMapping<CompilerResult>, Stage, CompilerResult::compRes)
-#define X_delim ,
-CREATE_MAPPING(failure_code_for, CompilerStageMapping<CompilerResult>)
+#define X(Stage, ext, compRes, next) MAPPING_ENTRY(CompilerStageMapping<CompilerResult>, Stage, CompilerResult::compRes)
+CREATE_MAPPING(constexpr auto, failure_code_for, CompilerStageMapping<CompilerResult>)
 #undef X
-#undef X_delim
 
-
-#define X(Stage, ext, compRes) MAPPING_ENTRY(CompilerStageStringMapping, Stage, #ext)
-#define X_delim ,
-CREATE_MAPPING(tmp_file_ext, CompilerStageStringMapping)
+#define X(Stage, ext, compRes, next) MAPPING_ENTRY(CompilerStageStringMapping, Stage, #ext)
+CREATE_MAPPING(constexpr auto, tmp_file_ext, CompilerStageStringMapping)
 #undef X
-#undef X_delim
 
-// using tmp_file_ext_map = CompilerStageMapping<StringLiteral<6>>::map<
-//   CompilerStageMapping<decltype(StringLiteral{StringLiteral{"tok"}})>::pair< Lexer, StringLiteral{"tok"} > ,
-//   CompilerStageMapping<decltype(StringLiteral{StringLiteral{"ptree"}})>::pair< Parser, StringLiteral{"ptree"} > ,
-//   CompilerStageMapping<decltype(StringLiteral{StringLiteral{"ast"}})>::pair< ASTBuilder, StringLiteral{"ast"} >
-// >;
-// using tmp_file_ext_map = CompilerStageStringMapping::map<
-//   CompilerStageStringMapping::pair< Lexer, "tok" > ,
-//   CompilerStageStringMapping::pair< Parser, "ptree" > ,
-//   CompilerStageStringMapping::pair< ASTBuilder, "ast" >
-// >;
-// template<class Stage>
-// constexpr auto tmp_file_ext = tmp_file_ext_map::value_string<Stage>;
-// constexpr static StringLiteral lexExt = tmp_file_ext_map::value<Lexer>;
-// using tmp_file_ext_map = CompilerStageMapping<StringLiteral>::map< CompilerStageMapping<StringLiteral>::pair< Lexer, StringLiteral{"tok"} > , CompilerStageMapping<StringLiteral>::pair< Parser, StringLiteral{"ptree"} > , CompilerStageMapping<StringLiteral>::pair< ASTBuilder, StringLiteral{"ast"} > >; template<class Stage> constexpr auto tmp_file_ext = tmp_file_ext_map::value<Stage>;
-
-constexpr bool strings_equal(char const * a, char const * b) {
-    return *a == *b && (*a == '\0' || strings_equal(a + 1, b + 1));
-}
-static_assert(strings_equal(tmp_file_ext<Lexer>, "tok"), "Lexer map failed");
-static_assert(strings_equal(tmp_file_ext_map::str_lit_value<Lexer>.value, "tok"), "Lexer str_lit value map failed");
-static_assert(strings_equal(tmp_file_ext_map::value<Lexer>, "tok"), "Lexer value map failed");
-// static_assert(strings_equal(lexExt.value, "tok"), "Lexer map failed");
-
-
-
-using CompilerNextStageMapping = CompilerStageTypeMapping::map<CompilerStageTypeMapping::pair<Lexer, Parser>,
-                                                                    CompilerStageTypeMapping::pair<Parser, ASTBuilder>,
-                                                                    CompilerStageTypeMapping::pair<ASTBuilder, void>>;
-template<class Stage>
-using next_stage_for = CompilerNextStageMapping::type<Stage>;
+#define X(Stage, ext, compRes, next) MAPPING_ENTRY(CompilerStageTypeMapping, Stage, next)
+CREATE_MAPPING(using, next_stage_for, CompilerStageTypeMapping)
+#undef X
 
 class Compiler {
  public:
   Compiler(Options &options);
   CompilerResult operator()(void);
  private:
-  #define X(Stage, extension, name) Stage
-  #define X_delim ,
+  #define X(Stage, ext, compRes, next) Stage
   using StagesTuple = std::tuple<ALL_STAGES>;
   #undef X
-  #undef X_delim
   constexpr static auto StageCount = std::tuple_size_v<StagesTuple>;
   using FirstStage = std::tuple_element_t<0, StagesTuple>;
   using LastStage = std::tuple_element_t<StageCount-1, StagesTuple>;
