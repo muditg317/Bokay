@@ -10,6 +10,8 @@
 #include <string>
 #include <sstream>
 #include <tuple>
+#include <type_traits>
+#include <utility>
 #include <vector>
 
 #include <boost/filesystem.hpp>
@@ -76,12 +78,12 @@ bool Compiler::validate_options(void) {
 
 template<class Stage>
 typename Stage::Base::OutputType &Compiler::runStage(
-    typename Stage::Base::InputType &input
+    typename Stage::Base::InputType &input,
+    typename Stage::Base::OutputType *&output
   ) const {
 
   const Stage &stage = std::get<Stage>(stages);
 
-  typename Stage::Base::OutputType *output = nullptr;
   typename Stage::Base::ErrorType errorCode = stage(input, output);
 
   if (errorCode != Stage::Base::SUCCESS_CODE) {
@@ -107,23 +109,47 @@ template<class ... Stages>
 typename std::tuple_element_t<sizeof...(Stages)-1, std::tuple<Stages...>>::Base::OutputType &Compiler::runStages(
   typename std::tuple_element_t<0, std::tuple<Stages...>>::Base::InputType &input
 ) const {
-  using StagesTuple = std::tuple<Stages...>;
-  static_assert(std::is_same_v<StagesTuple, decltype(stages)>, "Stages must be the same as the stages in the compiler!");
+  static_assert(std::is_same_v<std::tuple<Stages...>, StagesTuple>, "Stages must be the same as the stages in the compiler!");
 
-  OutputPtrTuple outputs;
+  InputPtrTuple inputs;
+  std::get<StageIndex<FirstStage>>(inputs) = &input;
+  LastStage::Base::OutputType *output = nullptr;
 
-  using InputPtrRefTuple = transform_tuple_t<InputPtrTuple, std::reference_wrapper>;
-  InputPtrRefTuple inputs = std::make_tuple(std::ref(&input));
-  // auto applyInputsFromOutputs = [&]<class S1, class S2, class ... Ss>() {
-  //   std::get<TupleIndexOf_v<S2, StagesTuple>>(inputs) = std::get<TupleIndexOf_v<S1, StagesTuple>>(outputs);
-  //   if constexpr (sizeof...(Ss) > 0) {
-  //     applyInputsFromOutputs.operator()<S2, Ss...>();
-  //   }
+  auto applyInputsFromOutputs = [&]<std::size_t... index_seq>(std::index_sequence<index_seq...>) {
+    (runStage<std::tuple_element_t<index_seq, StagesTuple>>(*std::get<StageIndex<std::tuple_element_t<index_seq, StagesTuple>>>(inputs), std::get<StageIndex<next_stage_for<std::tuple_element_t<index_seq, StagesTuple>>>>(inputs)), ...);
+  };
+  applyInputsFromOutputs(std::make_index_sequence<sizeof...(Stages)-1>{});
+
+  runStage<LastStage>(*std::get<StageIndex<LastStage>>(inputs), output);
+  // (runStage<Stages>(*std::get<StageIndex<Stages>>(inputs), std::is_same_v<Stages, LastStage> ? output : std::get<StageIndex<next_stage_for<Stages>>>(inputs)), ...);
+
+  return *output;
+
+  // OutputPtrTuple outputs;
+
+  // index_seq for all but last
+  // using stage_except_last_indices = std::make_index_sequence<sizeof...(Stages)-1>;
+  // auto index_seq = stage_except_last_indices{};
+
+  // InputPtrRefTuple inputs;// = std::make_tuple(std::ref(&input));
+
+  // auto applyInputsFromOutputs = [&]<std::size_t... index_seq>(std::index_sequence<index_seq...>){
+  //   ((std::get<TupleIndexOf_v<next_stage_for<std::tuple_element_t<index_seq, StagesTuple>>, StagesTuple>>(inputs) = std::ref(std::get<TupleIndexOf_v<std::tuple_element_t<index_seq, StagesTuple>, StagesTuple>>(outputs))), ...);
   // };
-  std::get<TupleIndexOf_v<Lexer, StagesTuple>>(inputs) = &input;
-  // (std::get<TupleIndexOf_v<Stages, StagesTuple>>(inputs) = std::get<TupleIndexOf_v<Stages, StagesTuple>>(outputs), ...
+  // applyInputsFromOutputs(stage_except_last_indices{}); // apply inputs from outputs
 
-  ((std::get<TupleIndexOf_v<Stages, StagesTuple>>(outputs) = runStage<Stages>(std::get<TupleIndexOf_v<Stages, StagesTuple>>(inputs))), ...);
+  // // ((std::get<TupleIndexOf_v<next_stage_for<std::tuple_element_t<index_seq, StagesTuple>>, StagesTuple>>(inputs) = std::ref(std::get<index_seq>(outputs))), ...);
+
+  // // auto applyInputsFromOutputs = [&]<class S1, class S2, class ... index_seq>() {
+  // //   std::get<TupleIndexOf_v<S2, StagesTuple>>(inputs) = std::get<TupleIndexOf_v<S1, StagesTuple>>(outputs);
+  // //   if constexpr (sizeof...(Ss) > 0) {
+  // //     applyInputsFromOutputs.operator()<S2, Ss...>();
+  // //   }
+  // // };
+  // // std::get<TupleIndexOf_v<Lexer, StagesTuple>>(inputs) = &input;
+  // // (std::get<TupleIndexOf_v<Stages, StagesTuple>>(inputs) = std::get<TupleIndexOf_v<Stages, StagesTuple>>(outputs), ...
+
+  // ((std::get<TupleIndexOf_v<Stages, StagesTuple>>(outputs) = runStage<Stages>(std::get<TupleIndexOf_v<Stages, StagesTuple>>(inputs))), ...);
 }
 
 CompilerResult Compiler::run(void) {
@@ -140,10 +166,14 @@ CompilerResult Compiler::run(void) {
 
   
   try {
-    std::vector<Token> tokens = runStage<Lexer>(fileContents);
-    ParseTree ptree = runStage<Parser>(tokens);
-    ASTRootNode astRoot = runStage<ASTBuilder>(ptree);
+    // std::vector<Token> *tokens_ptr;
+    // std::vector<Token> tokens = runStage<Lexer>(fileContents, tokens_ptr);
+    // ParseTree *ptree_ptr;
+    // ParseTree ptree = runStage<Parser>(tokens, ptree_ptr);
+    // ASTRootNode *astRoot_ptr;
+    // ASTRootNode astRoot = runStage<ASTBuilder>(ptree, astRoot_ptr);
 
+    runStages<Lexer, Parser, ASTBuilder>(fileContents);
 
   } catch (CompilerResult e) {
     return e;

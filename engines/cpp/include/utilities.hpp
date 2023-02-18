@@ -40,7 +40,7 @@ struct TupleIndexOf<T, std::tuple<U, Types...>> {
 };
 
 template <class T, class Tuple>
-constexpr std::size_t TupleIndexOf_v = TupleIndexOf<T, Tuple>::value;
+constexpr auto TupleIndexOf_v = TupleIndexOf<T, Tuple>::value;
 
 template <typename Tuple, template <typename...> typename Component>
 struct transform_tuple;

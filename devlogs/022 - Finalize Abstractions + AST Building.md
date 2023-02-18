@@ -13,7 +13,7 @@ Pretty slow working -- lots of dead time
 - [ ] Begin ParseTree -> AST reduction implementation
 
 ## Struggles
-- Nothing serious today!
+- Playing with tuples and compile-time parameter packs and fold expressions -- very confusing and sad
 
 ## Notes
 ### No major stuff
@@ -27,6 +27,7 @@ Pretty slow working -- lots of dead time
   - No longer need to pass in the `Stage` reference -- just `std::get` from the tuple
 - Configure compile-time mapping to use direct `CompilerStage` classes rather than `StringLiteral` references to `Stage::NAME`
   - This allows for cleaner usage of map lookup with just the `CompilerStage` typename
+- Implement automatic `runStages` function that can run the entire pipeline
 
 ## TODO
 - 
