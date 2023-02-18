@@ -51,8 +51,6 @@ typename Pipeline<Stages...>::LastStage::Base::OutputType &Pipeline<Stages...>::
   PipelineDataTuple pipelineData;
   std::get<StageIndex<FirstStage>>(pipelineData) = &input;
 
-  // typename LastStage::Base::OutputType *(&output) = std::get<StageIndex<next_stage<LastStage>>>(pipelineData);
-
   auto applyInputsFromOutputs = [&]<std::size_t... index_seq>(std::index_sequence<index_seq...>) {
     (runStage<StageAt<index_seq>>(
       *std::get<StageIndex<StageAt<index_seq>>>(pipelineData),
@@ -62,8 +60,5 @@ typename Pipeline<Stages...>::LastStage::Base::OutputType &Pipeline<Stages...>::
   };
   applyInputsFromOutputs(std::make_index_sequence<StageCount>{});
 
-  // runStage<LastStage>(*std::get<StageIndex<LastStage>>(pipelineData), output, options);
-
-  // return *output;
   return *std::get<StageIndex<next_stage<LastStage>>>(pipelineData);
 }

@@ -1,11 +1,11 @@
-# DevLog 022 - Finalize Abstractions + AST Building
+# DevLog 022 - Building Out the Compiler Pipeline
 <div align="right">
 February 18th, 2023
 
 Briefly at 4:45pm - 5:00pm
 Sign on: 8:30pm\
-Sign off: 3:30am
-Pretty slow working -- lots of dead time
+Sign off: 7:30am
+Pretty slow working in the first 6 hours -- lots of dead time
 </div>
 
 ## Goals
@@ -52,7 +52,10 @@ constexpr bool strings_equal(char const * a, char const * b) {
   - Add `PipelineDataTuple` to hold all inputs + final output --> more seamless `runStages` function
 
 ## TODO
-- 
+- Make the pipeline take template params for the first and last stage to be run
+  - This would allow more seamless subcalls to the pipeline (for compiling imported modules during base compilation)
+- Fix the compiler error code mapping for calls within `Pipeline`.
+- Still need to do ASTs
 
 ## Language Status/Changes
 - None today!
