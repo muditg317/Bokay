@@ -33,6 +33,7 @@ class CompilerStage {
   CompilerStage(void) {};
   virtual ErrorCode operator()(Input_t &input, Output_t *&output) const = 0;
   virtual bool writeOutput(Output_t &output, boost::filesystem::path path) const = 0;
+  virtual void debugCallback(Output_t &output) const = 0;
 };
 
 #endif

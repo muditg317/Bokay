@@ -344,3 +344,8 @@ bool Parser::writeOutput(Base::OutputType &ptree, boost::filesystem::path filePa
   ptreeFile.close();
   return true;
 }
+
+void Parser::debugCallback(Base::OutputType &ptree) const {
+  DLOG(INFO) << "Generated parse tree for tokens" ;
+  // DLOG(INFO) << ptree.toTabbedString();
+}

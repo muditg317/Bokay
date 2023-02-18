@@ -87,8 +87,9 @@ class ASTBuilder : public ASTBuilderBase {
   using Base = ASTBuilderBase;
 
   ASTBuilder(void);
-  Base::ErrorType operator()(Base::InputType &input, Base::OutputType *&output) const override;
-  bool writeOutput(Base::OutputType &output, boost::filesystem::path path) const override;
+  Base::ErrorType operator()(Base::InputType &parseTree, Base::OutputType *&resultTree) const override;
+  bool writeOutput(Base::OutputType &astRoot, boost::filesystem::path filePath) const override;
+  void debugCallback(Base::OutputType &astRoot) const override;
  private:
   bool reduce(ASTNode &astNode, ASTNode &result) const;
 };

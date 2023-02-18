@@ -300,3 +300,10 @@ bool Lexer::writeOutput(Base::OutputType &tokens, boost::filesystem::path filePa
   tokenFile.close();
   return true;
 }
+
+void Lexer::debugCallback(Base::OutputType &tokens) const {
+  DLOG(INFO) << "Found " << tokens.size() << " tokens!" ;
+  std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
+    DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`";
+  });
+}

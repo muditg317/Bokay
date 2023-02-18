@@ -105,3 +105,8 @@ bool ASTBuilder::writeOutput(Base::OutputType &astRoot, boost::filesystem::path 
   astFile.close();
   return true;
 }
+
+void ASTBuilder::debugCallback(Base::OutputType &astRoot) const {
+  DLOG(INFO) << "Generated AST from parse tree" ;
+  // DLOG(INFO) << astRoot.toTabbedString();
+}

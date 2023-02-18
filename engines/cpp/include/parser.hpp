@@ -110,8 +110,9 @@ class Parser : public ParserBase {
   using Base = ParserBase;
 
   Parser(void);
-  Base::ErrorType operator()(Base::InputType &input, Base::OutputType *&output) const override;
-  bool writeOutput(Base::OutputType &output, boost::filesystem::path path) const override;
+  Base::ErrorType operator()(Base::InputType &rawTokens, Base::OutputType *&resultTree) const override;
+  bool writeOutput(Base::OutputType &ptree, boost::filesystem::path filePath) const override;
+  void debugCallback(Base::OutputType &ptree) const override;
  private:
   bool prediction(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd) const; // run the predictor on this state
   bool scanning(std::vector<ParsingStateSet> &stateSets, ParsingState &state, size_t tokInd, std::vector<Token> &tokens) const; // run the scanner on this state

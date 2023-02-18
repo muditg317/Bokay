@@ -117,6 +117,7 @@ class Lexer : public LexerBase {
     Lexer(void);
     Base::ErrorType operator()(Base::InputType &sourceCode, Base::OutputType *&resultTokens) const override;
     bool writeOutput(Base::OutputType &tokens, boost::filesystem::path filePath) const override;
+    void debugCallback(Base::OutputType &tokens) const override;
   private:
     bool validateOptionsAndSource(std::string sourceCode) const;
     std::string preprocessSource(std::string sourceCode) const;

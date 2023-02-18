@@ -33,9 +33,6 @@ class Compiler {
     typename Stage::Base::OutputType &runStage(
       Stage &stage,
       typename Stage::Base::InputType &input
-      #ifdef DEBUG
-      , std::function<void(typename Stage::Base::OutputType &)> debugCallback = [](typename Stage::Base::OutputType &output) {}
-      #endif
     ) const;
 
     bool validate_options(void);

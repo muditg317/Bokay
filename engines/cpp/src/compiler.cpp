@@ -75,9 +75,6 @@ template<class Stage, CompilerResult FailureCode>
 typename Stage::Base::OutputType &Compiler::runStage(
     Stage &stage,
     typename Stage::Base::InputType &input
-    #ifdef DEBUG
-    , std::function<void(typename Stage::Base::OutputType &)> debugCallback
-    #endif
   ) const {
   typename Stage::Base::OutputType *output = nullptr;
   typename Stage::Base::ErrorType errorCode = stage(input, output);
@@ -86,7 +83,7 @@ typename Stage::Base::OutputType &Compiler::runStage(
     throw FailureCode;
   }
   #ifdef DEBUG
-  debugCallback(*output);
+  stage.debugCallback(*output);
   #endif
 
   if (outputTemps) {
@@ -112,32 +109,11 @@ CompilerResult Compiler::run(void) {
 
   
   try {
-    std::vector<Token> tokens = runStage<Lexer, CompilerResult::FAILED_LEXING>(lexer, fileContents
-    #ifdef DEBUG
-    , [](std::vector<Token> &tokens) {
-      DLOG(INFO) << "Found " << tokens.size() << " tokens!" ;
-      std::for_each(tokens.begin(), tokens.end(), [](Token tok) {
-        DLOG(INFO) << "Found token: {" << tok.getType() << "}: `" << tok.getContents() << "`" ;
-      });
-    }
-    #endif
-    );
+    std::vector<Token> tokens = runStage<Lexer, CompilerResult::FAILED_LEXING>(lexer, fileContents);
 
-    ParseTree ptree = runStage<Parser, CompilerResult::FAILED_PARSING>(parser, tokens
-    #ifdef DEBUG
-    , [](ParseTree &ptree) {
-      DLOG(INFO) << "Generated parse tree for tokens" ;
-    }
-    #endif
-    );
+    ParseTree ptree = runStage<Parser, CompilerResult::FAILED_PARSING>(parser, tokens);
 
-    ASTRootNode astRoot = runStage<ASTBuilder, CompilerResult::FAILED_AST_BUILDING>(astBuilder, ptree
-    #ifdef DEBUG
-    , [](ASTRootNode &astRoot) {
-      DLOG(INFO) << "Generated AST from parse tree" ;
-    }
-    #endif
-    );
+    ASTRootNode astRoot = runStage<ASTBuilder, CompilerResult::FAILED_AST_BUILDING>(astBuilder, ptree);
   } catch (CompilerResult e) {
     return e;
   }
