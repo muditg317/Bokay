@@ -56,7 +56,6 @@ typename Pipeline<Stages...>::LastStage::Base::OutputType &Pipeline<Stages...>::
   };
   applyInputsFromOutputs(std::make_index_sequence<StageCount-1>{});
 
-  // (runStage<Stages>(*std::get<StageIndex<Stages>>(inputs), std::is_same_v<Stages, LastStage> ? output : std::get<StageIndex<next_stage_for<Stages>>>(inputs)), ...);
   runStage<LastStage>(*std::get<StageIndex<LastStage>>(inputs), output, options);
 
   return *output;

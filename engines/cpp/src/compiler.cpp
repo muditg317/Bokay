@@ -29,8 +29,7 @@ static std::string readFile(boost::filesystem::path filePath) {
 
 Compiler::Compiler(Options &options) :
     sourceFile(options.sourceFile),
-    outputTemps(options.outputTemps),
-    pipeline(options.outputTemps),
+    outputTemps(options.outputTemps)
 {
   sourceName = sourceFile.stem().string();
   // validate(options);

@@ -48,6 +48,7 @@ constexpr bool strings_equal(char const * a, char const * b) {
   - Moved `CompilerStage` to separate header
   - Migrate compile-time mapping templates/macros into `utilities.hpp` header
 - Extract `Pipeline` class to wrap logic of connected stages
+  - Create compile-time generated mapping for `next_stage_for` based on `Stages...` template param
 
 ## TODO
 - 
