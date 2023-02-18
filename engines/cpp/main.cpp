@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
 
   Compiler compiler(options);
 
-  CompilerResult result = compiler.run();
+  CompilerResult result = compiler();
 
   google::ShutdownGoogleLogging();
 

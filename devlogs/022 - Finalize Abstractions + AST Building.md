@@ -4,7 +4,7 @@ February 18th, 2023
 
 Briefly at 4:45pm - 5:00pm
 Sign on: 8:30pm\
-Sign off: 2:30am
+Sign off: 3:30am
 Pretty slow working -- lots of dead time
 </div>
 
@@ -16,7 +16,20 @@ Pretty slow working -- lots of dead time
 - Playing with tuples and compile-time parameter packs and fold expressions -- very confusing and sad
 
 ## Notes
-### No major stuff
+### Compile-time Macros / Template Quirks
+- Run compiler with just preprocessor to debug macros working
+  - `clang++ -E <src>.hpp | test.hpp`
+- can't put `#define` inside another `#define`
+- compile-time string comparison:
+```cpp
+constexpr bool strings_equal(char const * a, char const * b) {
+    return *a == *b && (*a == '\0' || strings_equal(a + 1, b + 1));
+}
+```
+### C++ knowledge
+- `std::tuple_size_v` -- get number of elements of tuple
+- default capture-all by reference for lambdas -- only captures used variables
+  - no need to worry about "inefficiency" of capturing "everything"
 
 ## Log
 - Move debug callback logic to `CompilerStage` class
@@ -28,6 +41,7 @@ Pretty slow working -- lots of dead time
 - Configure compile-time mapping to use direct `CompilerStage` classes rather than `StringLiteral` references to `Stage::NAME`
   - This allows for cleaner usage of map lookup with just the `CompilerStage` typename
 - Implement automatic `runStages` function that can run the entire pipeline
+- Create macros for generating the compile-time mappings -- easier extensibility with more stages
 
 ## TODO
 - 

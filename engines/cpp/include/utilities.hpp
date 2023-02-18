@@ -6,8 +6,10 @@
 
 #include <boost/filesystem/path.hpp>
 
+struct StringLiteralBase {};
+
 template<size_t N>
-struct StringLiteral {
+struct StringLiteral : public StringLiteralBase {
   constexpr StringLiteral(const char (&str)[N]) {
       std::copy_n(str, N, value);
   }

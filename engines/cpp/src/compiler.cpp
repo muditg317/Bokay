@@ -124,7 +124,7 @@ Compiler::LastStage::Base::OutputType &Compiler::runStages(
   return *output;
 }
 
-CompilerResult Compiler::run(void) {
+CompilerResult Compiler::operator()(void) {
   if (!validate_options()) {
     return CompilerResult::INVALID_COMPILATION_OPTIONS;
   }
