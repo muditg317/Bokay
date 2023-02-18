@@ -86,7 +86,8 @@ typename Stage::Base::OutputType &Compiler::runStage(
 
   if (errorCode != Stage::Base::SUCCESS_CODE) {
     LOG(ERROR) << "Stage " << Stage::Base::NAME << " failed with error code " << static_cast<int>(errorCode) ;
-    throw ccode_ct_map::type<Stage::NAME_>;
+    // throw compiler_code_map::type<Stage::NAME_>;
+    throw failure_code_for<Stage>;
   }
 
   #ifdef DEBUG
@@ -100,6 +101,29 @@ typename Stage::Base::OutputType &Compiler::runStage(
   }
 
   return *output;
+}
+
+template<class ... Stages>
+typename std::tuple_element_t<sizeof...(Stages)-1, std::tuple<Stages...>>::Base::OutputType &Compiler::runStages(
+  typename std::tuple_element_t<0, std::tuple<Stages...>>::Base::InputType &input
+) const {
+  using StagesTuple = std::tuple<Stages...>;
+  static_assert(std::is_same_v<StagesTuple, decltype(stages)>, "Stages must be the same as the stages in the compiler!");
+
+  OutputPtrTuple outputs;
+
+  using InputPtrRefTuple = transform_tuple_t<InputPtrTuple, std::reference_wrapper>;
+  InputPtrRefTuple inputs = std::make_tuple(std::ref(&input));
+  // auto applyInputsFromOutputs = [&]<class S1, class S2, class ... Ss>() {
+  //   std::get<TupleIndexOf_v<S2, StagesTuple>>(inputs) = std::get<TupleIndexOf_v<S1, StagesTuple>>(outputs);
+  //   if constexpr (sizeof...(Ss) > 0) {
+  //     applyInputsFromOutputs.operator()<S2, Ss...>();
+  //   }
+  // };
+  std::get<TupleIndexOf_v<Lexer, StagesTuple>>(inputs) = &input;
+  // (std::get<TupleIndexOf_v<Stages, StagesTuple>>(inputs) = std::get<TupleIndexOf_v<Stages, StagesTuple>>(outputs), ...
+
+  ((std::get<TupleIndexOf_v<Stages, StagesTuple>>(outputs) = runStage<Stages>(std::get<TupleIndexOf_v<Stages, StagesTuple>>(inputs))), ...);
 }
 
 CompilerResult Compiler::run(void) {
@@ -119,14 +143,6 @@ CompilerResult Compiler::run(void) {
     std::vector<Token> tokens = runStage<Lexer>(fileContents);
     ParseTree ptree = runStage<Parser>(tokens);
     ASTRootNode astRoot = runStage<ASTBuilder>(ptree);
-
-    // // tuple type for InputType of each compiler stage (from std::tuple stages)
-    // using InputPtrTuple = transform_tuple<StageInputTypeTransformer::transform<decltype(stages)>, std::add_pointer_t>;
-    // InputPtrTuple inputs;
-
-    // std::get<TupleIndexOf<Lexer, decltype(stages)>>(inputs) = &fileContents;
-
-    
 
 
   } catch (CompilerResult e) {

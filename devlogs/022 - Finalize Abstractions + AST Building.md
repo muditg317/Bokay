@@ -25,7 +25,8 @@ Pretty slow working -- lots of dead time
   - Used `CompilerStage`->`CompilerResult` error-code mapping to replace template param for `runStage` function
 - Setup tuple of `CompilerStage` objects to be used in `Compiler` class
   - No longer need to pass in the `Stage` reference -- just `std::get` from the tuple
-
+- Configure compile-time mapping to use direct `CompilerStage` classes rather than `StringLiteral` references to `Stage::NAME`
+  - This allows for cleaner usage of map lookup with just the `CompilerStage` typename
 
 ## TODO
 - 
