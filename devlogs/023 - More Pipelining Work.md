@@ -3,8 +3,8 @@
 February 20th, 2023
 
 Sign on: 6:30pm\
-Sign off: 7:30am
-Very distracted work - with company
+Sign off: 8:45pm
+Very distracted work - with friends
 </div>
 
 ## Goals
@@ -13,7 +13,8 @@ Very distracted work - with company
   - [x] Fix the compiler error code mapping for calls within `Pipeline`.
 
 ## Struggles
-- Nothing serious today!
+- Playing around with templates became extremely confusing and hard to debug
+  - Implementing the `<StartStage, EndStage>` logic was very difficult
 
 ## Notes
 ### No major stuff
@@ -25,10 +26,12 @@ Very distracted work - with company
   - Allows for marginally "more-efficient" stream outputting since string literals get merged
 
 ## TODO
-- 
+- Properly implement/debug the `<StartStage, EndStage>` template params to `Pipeline` class
+- Move on to ASTs!!
 
 ## Language Status/Changes
 - None today!
 
 ## Unorganized thoughts as they came
 - None today!
+I try to keep these logs normal and "professional" for whatever reason. But today... L rizz day

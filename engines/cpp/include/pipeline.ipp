@@ -41,13 +41,15 @@ typename Stage::Base::OutputType &Pipeline<Stages...>::runStage(
 }
 
 template<class... Stages>
-typename Pipeline<Stages...>::LastStage::Base::OutputType &Pipeline<Stages...>::operator()(
-  typename FirstStage::Base::InputType &input,
+template<class StartStage, class EndStage>
+typename EndStage::Base::OutputType &Pipeline<Stages...>::operator()(
+  typename StartStage::Base::InputType &input,
   PipelineOptions options
 ) const {
 
   using LastOutputPtrTuple = std::tuple<std::tuple_element_t<StageIndex<LastStage>, OutputPtrTuple>>;
   using PipelineDataTuple = decltype(std::tuple_cat(std::declval<InputPtrTuple>(), std::declval<LastOutputPtrTuple>()));
+  // using PipelineDataTuple = PipelineDataTuple<StartStage, EndStage>;
   PipelineDataTuple pipelineData;
   std::get<StageIndex<FirstStage>>(pipelineData) = &input;
 

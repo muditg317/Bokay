@@ -79,6 +79,24 @@ struct tuple_transformer {
   using transform = transform_tuple_t<Tuple, Component>;
 };
 
+
+template<class add_type, class Tup2>
+struct tuple_add_helper;
+template<class add_type, class ... Tup2>
+struct tuple_add_helper<std::tuple<Tup2...>, add_type> {
+  using type = std::tuple<Tup2..., add_type>;
+};
+template<class add_type, class ... Tup2>
+struct tuple_add_helper<add_type, std::tuple<Tup2...>> {
+  using type = std::tuple<add_type, Tup2...>;
+};
+template<class Tup, class add_type>
+using tuple_post_add = typename tuple_add_helper<Tup, add_type>::type;
+template<class add_type, class Tup>
+using tuple_pre_add = typename tuple_add_helper<add_type, Tup>::type;
+
+
+
 constexpr bool strings_equal(char const * a, char const * b) {
     return *a == *b && (*a == '\0' || strings_equal(a + 1, b + 1));
 }
