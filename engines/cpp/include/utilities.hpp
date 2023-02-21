@@ -2,20 +2,40 @@
 #define UTILITIES_HPP
 
 #include <algorithm>
+#include <iostream>
 #include <type_traits>
 
 #include <boost/filesystem/path.hpp>
 
 template<size_t N>
 struct StringLiteral {
+  constexpr StringLiteral() {
+      std::fill_n(value, N, '\0');
+  }
   constexpr StringLiteral(const char (&str)[N]) {
       std::copy_n(str, N, value);
   }
   constexpr StringLiteral(const StringLiteral<N> &other) {
       std::copy_n(other.value, N, value);
   }
+  template<size_t M>
+  constexpr StringLiteral<N+M-1> operator+(const StringLiteral<M> &other) const {
+    StringLiteral<N+M-1> result;
+    std::copy_n(value, N-1, result.value);
+    std::copy_n(other.value, M, result.value+N-1);
+    return result;
+  }
+  template<size_t M>
+  constexpr StringLiteral<N+M-1> operator+(const char (&str)[M]) const {
+    return operator+(StringLiteral<M>{str});
+  }
   char value[N];
 };
+
+template<size_t N>
+constexpr std::ostream &operator<<(std::ostream &os, const StringLiteral<N> &str) {
+  return (os << str.value);
+}
 
 template<typename... T>
 constexpr bool always_false = false;

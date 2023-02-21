@@ -21,6 +21,8 @@ Very distracted work - with company
 ## Log
 - Add `ALL_STAGES` macro usage in `compiler.cpp` to catch `ErrorType` for any stage
   - This should enable future implementation of more complex (but still generic) error handling symantics
+- Add compile-time merging of string literals with `StringLiteral` compile-time objects
+  - Allows for marginally "more-efficient" stream outputting since string literals get merged
 
 ## TODO
 - 
