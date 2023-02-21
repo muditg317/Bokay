@@ -91,9 +91,17 @@ CompilerResult Compiler::operator()(void) {
 
   try {
     pipeline(fileContents, {outputTemps, tempFileDir, sourceName});
-  } catch (CompilerResult e) {
-    return e;
   }
+  #undef X_delim
+  #define X_delim  
+  #define X(Stage, ext, compRes, next) \
+  catch (Stage::ErrorType e) { \
+    return CompilerResult::compRes; \
+  }
+  ALL_STAGES
+  #undef X
+  #undef X_delim
+  #define X_delim ,
 
   return CompilerResult::COMPILATION_SUCCESS;
 }

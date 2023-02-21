@@ -18,7 +18,7 @@ class CompilerStage {
   constexpr static auto NAME = Name.value;
   constexpr static StringLiteral NAME_ = Name;
   constexpr static auto TMP_OUT_EXT = TmpOutExt.value;
-  constexpr static auto TMP_OUT_EXT_ = TmpOutExt;
+  constexpr static StringLiteral TMP_OUT_EXT_ = TmpOutExt;
 
   using InputType = Input_t;
   using OutputType = Output_t;

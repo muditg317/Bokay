@@ -21,10 +21,10 @@ typename Stage::Base::OutputType &Pipeline<Stages...>::runStage(
   typename Stage::Base::ErrorType errorCode = stage(input, output);
 
   if (errorCode != Stage::Base::SUCCESS_CODE) {
-    LOG(ERROR) << "Stage " << Stage::Base::NAME << " failed with error code " << static_cast<int>(errorCode) ;
+    LOG(ERROR) << Stage::Base::NAME << " stage failed with error code " << static_cast<int>(errorCode) ;
     // throw compiler_code_map::type<Stage::NAME_>;
     // throw failure_code_for<Stage>;
-    throw 0;
+    throw errorCode;
   }
 
   #ifdef DEBUG
