@@ -34,4 +34,3 @@ Very distracted work - with friends
 
 ## Unorganized thoughts as they came
 - None today!
-I try to keep these logs normal and "professional" for whatever reason. But today... L rizz day
